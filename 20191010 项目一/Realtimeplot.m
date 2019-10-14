@@ -1,11 +1,10 @@
-% This function addpoints to exsisted animation line, given by linehandles.
+% This function addpoints to exsisted animation line, given by linehandle.
 % I/O data is given by (position,data).
+% Editter: Yuncong Ran 2019/10/14
+% Create function.
 function Realtimeplot(position,data,linehandles)
-
-for j = 0:3
     
-    addpoints(linehandles(j+1),position,data)
+    addpoints(linehandles,position,data)
     drawnow limitrate
     
-end
 end

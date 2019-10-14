@@ -15,8 +15,22 @@
 %
 % I/O Connections Overview:
 %    Please refer to your hardware reference manual.
-
-function InstantAI_Project1(linehandles)
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% Editter : Yuncong Ran 2019/10/13
+%   Modified TimeCallBack function, added input linehandle, dataAI, dataNum.
+%     linehandle: Pass animation line handle to TimeCallBack,to draw the real-time signal.
+%     dataAI: Data storage in the Main function. 
+%     dataNum: Inidicate sample number, which is given by the timecallback
+%              function
+%   The funtion will display input signal in real-time in the axes area which are determined by linehandle, 
+%   and return dataAI& dataNum once finished. 
+%   
+%   Modified TimerCallBack Fcn termination mode, activition of "STOP"
+%   button in GUI is needed. If reaching the maximum of pre-assigned
+%   memeroy, Timer will terminate, too, reporting an Error.
+% 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+function [dataAI, dataNum] = InstantAI_Project1(linehandle)
 
 % Make Automation.BDaq assembly visible to MATLAB.
 BDaq = NET.addAssembly('Automation.BDaq');
@@ -27,6 +41,16 @@ BDaq = NET.addAssembly('Automation.BDaq');
 deviceDescription = 'USB-4704,BID#0'; 
 startChannel = int32(0);
 channelCount = int32(4);
+
+% Initial data number is 1.Run Initialization each time "BEGIN" is pressed.
+dataNum = 1;       
+dataAI = zeros(1024,4); 
+% Pre-assigned memeroy, Attention this might be insufficient.
+% Simultaneously change the value in "BEGIN" callback function and stop condition when change happens here.
+
+% get stop command via global varible.
+global stopflag;
+
 
 % Step 1: Create a 'InstantAiCtrl' for Instant AI function.
 instantAiCtrl = Automation.BDaq.InstantAiCtrl();
@@ -42,13 +66,34 @@ try
     
     % Step 3: Read samples and do post-process, we show data here.
     errorCode = Automation.BDaq.ErrorCode();
-    t = timer('TimerFcn', {@TimerCallback, instantAiCtrl, startChannel, ...
-        channelCount, data, linehandles}, 'period', 1, 'executionmode', 'fixedrate', ...
+    t = timer( 'period', 1, 'executionmode', 'fixedrate', ...
         'StartDelay', 1);
+    t.TimerFcn = @TimerCallback;
+    [dataAI,dataNum] = t.TimerFcn(instantAiCtrl, startChannel, ...
+        channelCount, data, dataAI, dataNum, linehandle);
+    % edittor: Ran, 2019/10/14
+    % Changed Time class Instantiation format.
+    % Added new varibles here: dataAI, dataNum,linehandles.  
+    
     start(t);
-    input('InstantAI is in progress...Press Enter key to quit!');
-    stop(t);
+%     input('InstantAI is in progress...Press Enter key to quit!');
+    while (dataNum < 1024) % Simultaneously change the value in "BEGIN" callback function and initilization when change happens here.
+        
+        if dataNum >= 1024;
+            stop(t);
+            fprintf('Error! Input data exceeds the memeroy distribution!');
+            break;
+        end
+        
+        if stopflag == -1
+            stop(t);
+            break;
+        end
+    end
+    
     delete(t);
+   
+    
 catch e
     % Something is wrong.
     if BioFailed(errorCode)    
@@ -72,10 +117,9 @@ result =  errorCode < Automation.BDaq.ErrorCode.Success && ...
 
 end
 
-function TimerCallback(obj, event, instantAiCtrl, startChannel, ...
-    channelCount, data,linehandles)
-global  dataAI;     % Convey AI data to main workspace, as a storage.
-global i;           % Indicate current sample amount.
+function [dataAI, dataNum] = TimerCallback(obj, event, instantAiCtrl, startChannel, ...
+    channelCount, data,dataAI,dataNum,linehandle)
+
 
 errorCode = instantAiCtrl.Read(startChannel, channelCount, data); 
 if BioFailed(errorCode)
@@ -87,11 +131,12 @@ fprintf('\n');
 for j=0:(channelCount - 1)
     temp = data.Get(j);
     fprintf('channel %d : %10f ', j, temp);
-    dataAI(i,j+1) = temp;
-    Realtimeplot(i,temp,linehandles);
+    
+    dataAI(dataNum,j+1) = temp;
+    Realtimeplot(dataNum,temp,linehandle);
     
 end
 
-i = i + 1;
+dataNum = dataNum + 1;
 
 end
