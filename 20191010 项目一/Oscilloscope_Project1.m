@@ -388,7 +388,7 @@ function pushbutton_save_Callback(hObject, eventdata, handles)
 
 datasave = handles.dataAI;
 savedialog(datasave); % call saving dialog;
-uiwait(handles.figure2);
+uiwait(handles.figure1);
 
 end
 

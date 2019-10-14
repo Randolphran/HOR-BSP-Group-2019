@@ -213,6 +213,7 @@ function edit1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 filename = get(hObject,'String');
+filename = char(filename);
 handles.filename = filename;
 guidata(hObject,handles);
 
@@ -238,7 +239,7 @@ function popupmenu1_Callback(hObject, eventdata, handles)
 % hObject    handle to popupmenu1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-contents = get(hObject,'Value');
+contents = get(hObject,'value');
 handles.contents = contents;
 guidata(hObject,handles);
 % Hints: contents = cellstr(get(hObject,'String')) returns popupmenu1 contents as cell array
@@ -271,21 +272,26 @@ data = handles.data;
 contentschar = char(contents);
 
 switch contentschar
-    case {'CSV(逗号分隔)(*.csv)'}
+    case 2 %{'CSV(逗号分隔)(*.csv)'}
         csvwrite([filename,'.csv'],data);
         fprintf('%s\n','Writting succeeded!');
-    case {'Unicode文本(*.txt)'}
+    case 3 %{'Unicode文本(*.txt)'}
         fid = fopen([filename,'.txt'],'wt');
         sz = size(data);
-        fprintf(fid,'%8.6f',data(1,:));
+        fprintf(fid,'%8.6f ',data(1,:));
+        fprintf(fid,'\n');
         if sz(1,1) >= 2
-            fprintf(fid,'\n%8.6f',data(2:end,:));
+            for i = 2:sz(1,1)
+                fprintf(fid,'%8.6f ',data(i,:));
+                fprintf(fid,'\n');
+            end
         end
         fprintf('%s\n','Writting succeeded!');
-    case {'MATLAB数据文件(*.mat)'}
+        fclose(fid);
+    case 4 %{'MATLAB数据文件(*.mat)'}
         save([filename,'.mat'],'data','-mat');
         fprintf('%s\n','Writting succeeded!');
-    case {'Excel 工作簿(*.xls)'}
+    case 5 %{'Excel 工作簿(*.xls)'}
         xlswrite([filename,'.xls'],data);
         fprintf('%s\n','Writting succeeded!');
     otherwise
