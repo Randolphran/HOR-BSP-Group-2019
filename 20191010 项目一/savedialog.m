@@ -269,18 +269,28 @@ filename = handles.filename;
 data = handles.data;
 
 contentschar = char(contents);
-filewrite = Signalwrite;
 
 switch contentschar
     case {'CSV(逗号分隔)(*.csv)'}
-        filewrite.csv(data,filename);
+        csvwrite([filename,'.csv'],data);
+        fprintf('%s\n','Writting succeeded!');
     case {'Unicode文本(*.txt)'}
-        filewrite.txt(data,filename);
+        fid = fopen([filename,'.txt'],'wt');
+        sz = size(data);
+        fprintf(fid,'%8.6f',data(1,:));
+        if sz(1,1) >= 2
+            fprintf(fid,'\n%8.6f',data(2:end,:));
+        end
+        fprintf('%s\n','Writting succeeded!');
     case {'MATLAB数据文件(*.mat)'}
-        filewrite.mat(data,filename);
+        save([filename,'.mat'],'data','-mat');
+        fprintf('%s\n','Writting succeeded!');
     case {'Excel 工作簿(*.xls)'}
-        filewrite.xls(data,filename);
+        xlswrite([filename,'.xls'],data);
+        fprintf('%s\n','Writting succeeded!');
     otherwise
+        fprintf('%s\n','Writting Failed!');
+        
 end
 
 uiresume(handles.figure1);

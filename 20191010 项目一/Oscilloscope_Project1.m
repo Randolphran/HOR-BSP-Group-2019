@@ -22,7 +22,7 @@ function varargout = Oscilloscope_Project1(varargin)
 
 % Edit the above text to modify the response to help Oscilloscope_Project1
 
-% Last Modified by GUIDE v2.5 14-Oct-2019 23:25:09
+% Last Modified by GUIDE v2.5 15-Oct-2019 01:05:17
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -388,7 +388,7 @@ function pushbutton_save_Callback(hObject, eventdata, handles)
 
 datasave = handles.dataAI;
 savedialog(datasave); % call saving dialog;
-uiwait(handles.figure1);
+uiwait(handles.figure2);
 
 end
 
