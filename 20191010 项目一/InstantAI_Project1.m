@@ -127,7 +127,7 @@ end
 function TimerCallback(obj, event, instantAiCtrl, startChannel, ...
     channelCount, data, hObject)
 
- handles = guidata(hObject);
+handles = guidata(hObject);
 
 dataAI = handles.dataAI; 
 dataNum = handles.dataNum;

@@ -139,56 +139,49 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 end
 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 % --- Executes on button press in pushbutton_begin.
+% Edittor:YCRan 2019/10/17
+% Button: Start Sampling
+% This function initilize the sampling process by reseting axes areas and
+% calling InstantAI_Project1.
+% 
+% InstantAI_Project1 calls a timer function that get data from AI Channel 0 ~
+% Channel 3 of Device USB-4704,BID#0, the outputs are dataAI, dataNum, and
+% Realtime Plots. dataAI and dataNum are stored in GUIDATA.
 function pushbutton_begin_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_begin (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-%convey input data
-%LineActivity = handles.LineActivity;
-AxeslHandles = handles.AxeslHandles;
-cla(AxeslHandles);
+% Initilization.
+AxesHandles = handles.AxesHandles;
+for i = 1:4
+    cla(AxesHandles(i)); % clear exsisted data in graphs.
+    line = animatedline(AxesHandles(i)); % build/re-build animatedline.
+    handles.LineHandles(i) = line;
+end
 
-% for i = 1:4
-    %     if LineActivity(i) == true % if the channel is switched on
-    %        [dataAI(:,i),dataNum(i)] = InstantAI_Project1(LineHandles(i)); % Error 要同时进行/YCRan
-    InstantAI_Project1(hObject,handles);
-    % Start sampling in corresponding axes area.
-%     test code:
-%  LineHandles = handles.LineHandles;
+guidata(hObject,handles);
+
+InstantAI_Project1(hObject,handles);% Start sampling in all axes areas.
+    
+% test code:
+% LineHandles = handles.LineHandles;
 %       for i = 1:4
 %             Realtimeplot_Project1(1:100,1:100,LineHandles(i));
 %       end
 % end
 
-% handles.dataAI = dataAI;
-% handles.dataNum = dataNum;
 guidata(hObject,handles);
 % submit new input signal to database.
 
 end
-
-
-
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
 
 
 % --- Executes during object creation, after setting all properties.
-function axes1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to axes1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-AxeslHandles(1) = hObject;
-handles.AxeslHandles(1) = AxeslHandles;
-
-line = animatedline(hObject);
-handles.LineHandles(1) = line;
-guidata(hObject,handles);
-% Hint: place code in OpeningFcn to populate axes1
-end
-% --- Executes during object creation, after setting all properties.
-
 function edit4_Callback(hObject, eventdata, handles)
 % hObject    handle to edit4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -358,6 +351,7 @@ function edit_sample_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+
 % Hints: get(hObject,'String') returns contents of edit_sample as text
 %        str2double(get(hObject,'String')) returns contents of edit_sample as a double
 end
@@ -367,7 +361,7 @@ function edit_sample_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to edit_sample (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-
+set(hObject,'string','100');
 % Hint: edit controls usually have a white background on Windows.
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
@@ -474,16 +468,30 @@ process=3;
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_fft
 end
 
+
+% --- Executes during object creation, after setting all properties.
+function axes1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to axes1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+AxesHandles = gca;
+handles.AxesHandles(1) = AxesHandles;
+
+
+guidata(hObject,handles);
+% Hint: place code in OpeningFcn to populate axes1
+end
+
+
 % --- Executes during object creation, after setting all properties.
 function axes2_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to axes2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-AxeslHandles(2) = hObject;
-handles.AxeslHandles(2) = AxeslHandles;
+AxesHandles = gca;
+handles.AxesHandles(2) = AxesHandles;
 
-line = animatedline(hObject);
-handles.LineHandles(2) = line;
+
 guidata(hObject,handles);
 % Hint: place code in OpeningFcn to populate axes2
 end
@@ -494,11 +502,10 @@ function axes3_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to axes3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-AxeslHandles(3) = hObject;
-handles.AxeslHandles(3) = AxeslHandles;
+AxesHandles = gca;
+handles.AxesHandles(3) = AxesHandles;
 
-line = animatedline(hObject);
-handles.LineHandles(3) = line;
+
 guidata(hObject,handles);
 % Hint: place code in OpeningFcn to populate axes3
 end
@@ -508,11 +515,10 @@ function axes4_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to axes4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-AxeslHandles(4) = hObject;
-handles.AxeslHandles(4) = AxeslHandles;
+AxesHandles = gca;
+handles.AxesHandles(4) = AxesHandles;
 
-line = animatedline(hObject);
-handles.LineHandles(4) = line;
+
 guidata(hObject,handles);
 end
 % Hint: place code in OpeningFcn to populate axes4
