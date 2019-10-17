@@ -1,3 +1,4 @@
+  
 function varargout = Oscilloscope_Project1(varargin)
 % OSCILLOSCOPE_PROJECT1 MATLAB code for Oscilloscope_Project1.fig
 %      OSCILLOSCOPE_PROJECT1, by itself, creates a new OSCILLOSCOPE_PROJECT1 or raises the existing
@@ -22,7 +23,7 @@ function varargout = Oscilloscope_Project1(varargin)
 
 % Edit the above text to modify the response to help Oscilloscope_Project1
 
-% Last Modified by GUIDE v2.5 15-Oct-2019 01:05:17
+% Last Modified by GUIDE v2.5 17-Oct-2019 15:46:33
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -58,26 +59,31 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-
-
 global filt
 filt=0;
 global process
 process=0;
-
+set(handles.radiobutton_fft,'value',0);
+set(handles.radiobutton_filter,'value',0);
+set(handles.radiobutton_highpass,'value',0);
+set(handles.radiobutton_lowpass,'value',0);
+set(handles.radiobutton_channel0,'value',0);
+set(handles.radiobutton_channel1,'value',0);
+set(handles.radiobutton_channel2,'value',0);
+set(handles.radiobutton_channel3,'value',0);
+y_high=1.5;
+y_low=-1.5;
+handles.y_high=y_high;
+handles.y_low=y_low;
+guidata(hObject,handles);
 % Edittor: Ran 2019/10/14
 dataAI = zeros(1024,4); 
-dataNum = 1;
 % Pre-assigned memeroy, Attention this might be insufficient.
 % Simultaneously change the value in "BEGIN" callback function when change happens here.
-% LineHandles = zeros(4,1);
+
 LineActivity = zeros(4,1);
-
 handles.LineActivity = LineActivity;
-% handles.LineHandles = LineHandles;
 handles.dataAI = dataAI;
-handles.dataNum = dataNum;
-
 guidata(hObject,handles);
 
 end
@@ -102,11 +108,12 @@ function edit_y_high_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_y_high (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global y_high
-global y_low
 y_high = str2double(get(handles.edit_y_high,'string'));  %为什么只能是str2double，而不能是str2num？
+handles.y_high=y_high;
+guidata(hObject,handles);
 axes(handles.axes1);
 %set(handles.axes1,'XLim',[0,10],'YLim',[y_low,y_high]);
+y_low=handles.y_low;
 set(handles.axes1,'YLim',[y_low,y_high]);
 
 % Hints: get(hObject,'String') returns contents of edit_y_high as text
@@ -121,23 +128,22 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 end
 
-
-function edit_y_low_Callback(hObject, eventdata, handles)
-
-global y_high
-global y_low
-y_low = str2double(get(handles.edit_y_low,'string'));  
-axes(handles.axes1);
-%set(handles.axes1,'XLim',[0,10],'YLim',[y_low,y_high]);
-set(handles.axes1,'YLim',[y_low,y_high]);
-end
-
 function edit_y_low_CreateFcn(hObject, eventdata, handles)
-
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
 end
+
+function edit_y_low_Callback(hObject, eventdata, handles)
+y_low = str2double(get(handles.edit_y_low,'string'));  
+handles.y_low=y_low;
+guidata(hObject,handles);
+axes(handles.axes1);
+%set(handles.axes1,'XLim',[0,10],'YLim',[y_low,y_high]);
+y_high=handles.y_high;
+set(handles.axes1,'YLim',[y_low,y_high]);
+end
+
 
 % --- Executes on button press in pushbutton_begin.
 function pushbutton_begin_Callback(hObject, eventdata, handles)
@@ -146,32 +152,23 @@ function pushbutton_begin_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 %convey input data
-%LineActivity = handles.LineActivity;
-AxeslHandles = handles.AxeslHandles;
-cla(AxeslHandles);
+LineActivity = handles.LineActivity;
+LineHandles = handles.LineHandles;
 
-% for i = 1:4
-    %     if LineActivity(i) == true % if the channel is switched on
-    %        [dataAI(:,i),dataNum(i)] = InstantAI_Project1(LineHandles(i)); % Error 要同时进行/YCRan
-    InstantAI_Project1(hObject,handles);
-    % Start sampling in corresponding axes area.
-%     test code:
-%  LineHandles = handles.LineHandles;
-%       for i = 1:4
-%             Realtimeplot_Project1(1:100,1:100,LineHandles(i));
-%       end
-% end
+for i = 1:4
+    if LineActivity(i) == true % if the channel is switched on
+    %    [dataAI(i),dataNum(i)] = InstantAI_Project1(LineHandles(i)); % Error 要同时进行/YCRan
+        % Start sampling in corresponding axes area.        
+        Realtimeplot(1:100,1:100,LineHandles(i));
+    end
+end
 
 % handles.dataAI = dataAI;
 % handles.dataNum = dataNum;
-guidata(hObject,handles);
+% guidata(hObject,handles);
 % submit new input signal to database.
 
 end
-
-
-
-
 
 
 % --- Executes during object creation, after setting all properties.
@@ -179,8 +176,6 @@ function axes1_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to axes1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-AxeslHandles(1) = hObject;
-handles.AxeslHandles(1) = AxeslHandles;
 
 line = animatedline(hObject);
 handles.LineHandles(1) = line;
@@ -257,6 +252,12 @@ function slider1_Callback(hObject, eventdata, handles)
 % hObject    handle to slider1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global v1
+v1 = get(hObject,'value');
+if v1>=20
+    set(handles.axes1,'XLim',[v1-20,v1]);
+else set(handles.axes1,'XLim',[0,v1]);
+end
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
@@ -275,44 +276,15 @@ end
 end
 
 % --- Executes on slider movement.
-function slider2_Callback(hObject, eventdata, handles)
-% hObject    handle to slider2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-end
-
-% --- Executes during object creation, after setting all properties.
-function slider2_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
-if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor',[.9 .9 .9]);
-end
-end
-
-function slider3_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
-if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor',[.9 .9 .9]);
-end
-end
-
-% --- Executes on slider movement.
 function slider4_Callback(hObject, eventdata, handles)
 % hObject    handle to slider2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+v4 = get(hObject,'value');
+if v4>=20
+    set(handles.axes1,'XLim',[v4-20,v4]);
+else set(handles.axes1,'XLim',[0,v4]);
+end
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 end
@@ -329,8 +301,71 @@ if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColo
 end
 end
 
+% --- Executes on slider movement.
+function slider2_Callback(hObject, eventdata, handles)
+% hObject    handle to slider2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+v2 = get(hObject,'value');
+if v2>=20
+    set(handles.axes1,'XLim',[v2-20,v2]);
+else set(handles.axes1,'XLim',[0,v2]);
+end
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+end
 
+% --- Executes during object creation, after setting all properties.
+function slider2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slider2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
 
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+end
+
+function slider3_Callback(hObject, eventdata, handles)
+% hObject    handle to slider2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+v3 = get(hObject,'value');
+if v3>=20
+    set(handles.axes1,'XLim',[v3-20,v3]);
+else set(handles.axes1,'XLim',[0,v3]);
+end
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+end
+
+% --- Executes during object creation, after setting all properties.
+function slider3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slider2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+end
+
+function slider5_Callback(hObject, eventdata, handles)
+% hObject    handle to slider2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global v1
+set(hObject,'max',300);
+set(hObject,'min',20);
+val=get(hObject,'value');
+set(handles.axes1,'XLim',[~,v1+val])
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+end
+
+% --- Executes during object creation, after setting all properties.
 function slider5_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to slider2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -342,14 +377,15 @@ if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColo
 end
 end
 
+
 % --- Executes on button press in pushbutton_stop.
 function pushbutton_stop_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_stop (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
-
-uiresume(handles.figure1);
+global stopflag;
+stopflag = -1;
+% fprintf('s',stopflag);
 end
 
 
@@ -357,7 +393,8 @@ function edit_sample_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_sample (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+global Fs
+Fs=str2num(get(handles.edit_sample,'string'));
 % Hints: get(hObject,'String') returns contents of edit_sample as text
 %        str2double(get(hObject,'String')) returns contents of edit_sample as a double
 end
@@ -380,6 +417,43 @@ function pushbutton_process_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_process (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global process
+global choose_channel
+global Fs
+global fc
+dataAI=handles.dataAI;
+x=dataAI(:,choose_channel);
+N=length(x);
+switch process
+    case 1
+       [n,y]=filter_highpass(Fs,x,fc);
+        axes(handles.axes5);plot(n/Fs,y);
+       xlabel('时间/s');ylabel('电压/V');grid on;
+       [f,yy]=signal_fft(y,Fs);
+       axes(handles.axes8);
+       % %单边显示格式
+       plot(f(1:N/2),yy(1:N/2)*2/N);
+       xlabel('频率/Hz');ylabel('振幅');grid on;   
+    case 2
+        [n,y]=filter_lowpass(Fs,x,fc);
+        axes(handles.axes5);plot(n/Fs,y);
+        xlabel('时间/s');ylabel('电压/V');grid on;
+       [f,yy]=signal_fft(y,Fs);
+       axes(handles.axes8);
+       % %单边显示格式
+       plot(f(1:N/2),yy(1:N/2)*2/N);
+       xlabel('频率/Hz');ylabel('振幅');grid on;  
+    case 3
+        [f,y]=signal_fft(x,Fs);
+        axes(handles.axes5);
+       %双边显示格式
+       plot(f,y/N);
+       xlabel('频率/Hz');ylabel('振幅');grid on;
+       %单边显示格式
+       axes(handles.axes8);
+       plot(f(1:N/2),y(1:N/2)*2/N);
+       xlabel('频率/Hz');ylabel('振幅');grid on;     
+end        
 end
 
 
@@ -409,59 +483,58 @@ end
 
 % --- Executes on button press in pushbutton_import.
 function pushbutton_import_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton_import (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+geshi={'*.csv';...
+       '*.xlsx'};
+[FileName, FilePath]=uigetfile(geshi,'导入信号数据','*.csv');
+if ~isequal([FileName,FilePath],[0,0])
+    FileFullName=strcat(FilePath,FileName);   
+else
+    return;
+end
+import_data=xlsread(FileFullName);            %这里只能读取表格，需要判断一下读取的文件格式再进行读取方式
+axes(handles.axes1);
+plot(import_data);
+y_high=handles.y_high;
+y_low=handles.y_low;
+set(handles.axes1,'YLim',[y_low,y_high]);
+dataAI(:,1)=import_data;
+handles.dataAI=dataAI;
+guidata(hObject,handles);
 end
 
 % --- Executes on button press in pushbutton_save.
 function pushbutton_save_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton_save (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
 datasave = handles.dataAI;
 savedialog(datasave); % call saving dialog;
-uiwait(handles.figure1);
+uiwait(handles.figure1);  %阻止程序执行并等待恢复
 
 end
 
 % --- Executes on button press in radiobutton_filter.
 function radiobutton_filter_Callback(hObject, eventdata, handles)
-% hObject    handle to radiobutton_filter (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 global filt
 filt=1;
-% Hint: get(hObject,'Value') returns toggle state of radiobutton_filter
 end
 
 % --- Executes on button press in radiobutton_highpass.
 function radiobutton_highpass_Callback(hObject, eventdata, handles)
-% hObject    handle to radiobutton_highpass (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 global filt
 global process
 process=1;
 if filt==0
     errordlg('未选择“滤波”操作方式');
 end
-% Hint: get(hObject,'Value') returns toggle state of radiobutton_highpass
 end
 
 % --- Executes on button press in radiobutton_lowpass.
 function radiobutton_lowpass_Callback(hObject, eventdata, handles)
-% hObject    handle to radiobutton_lowpass (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 global filt
 global process
 process=2;
 if filt==0
     errordlg('未选择“滤波”操作方式');
 end
-% Hint: get(hObject,'Value') returns toggle state of radiobutton_lowpass
 end
 
 % --- Executes on button press in radiobutton_fft.
@@ -479,9 +552,6 @@ function axes2_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to axes2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-AxeslHandles(2) = hObject;
-handles.AxeslHandles(2) = AxeslHandles;
-
 line = animatedline(hObject);
 handles.LineHandles(2) = line;
 guidata(hObject,handles);
@@ -494,9 +564,6 @@ function axes3_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to axes3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-AxeslHandles(3) = hObject;
-handles.AxeslHandles(3) = AxeslHandles;
-
 line = animatedline(hObject);
 handles.LineHandles(3) = line;
 guidata(hObject,handles);
@@ -505,17 +572,10 @@ end
 
 % --- Executes during object creation, after setting all properties.
 function axes4_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to axes4 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-AxeslHandles(4) = hObject;
-handles.AxeslHandles(4) = AxeslHandles;
-
 line = animatedline(hObject);
 handles.LineHandles(4) = line;
 guidata(hObject,handles);
 end
-% Hint: place code in OpeningFcn to populate axes4
 
 
 % --- Executes during object deletion, before destroying properties.
@@ -523,51 +583,61 @@ function pushbutton_stop_DeleteFcn(hObject, eventdata, handles)
 % hObject    handle to pushbutton_stop (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear global 
+clear global stopflag;
 end
 
+% 
+% % --- Executes on button press in checkbox4.
+% function checkbox4_Callback(hObject, eventdata, handles)
+% % hObject    handle to checkbox4 (see GCBO)
+% % eventdata  reserved - to be defined in a future version of MATLAB
+% % handles    structure with handles and user data (see GUIDATA)
+% LineActivity =  get(hObject,'Value'); 
+% handles.LineActivity(1) = LineActivity;
+% guidata(hObject,handles);
+% end
+% % Hint: get(hObject,'Value') returns toggle state of checkbox4
+% 
 
-% --- Executes on button press in checkbox4.
-function checkbox4_Callback(hObject, eventdata, handles)
-% hObject    handle to checkbox4 (see GCBO)
+
+% --- Executes during object creation, after setting all properties.
+function radiobutton_channel0_CreateFcn(hObject, eventdata, handles)
+end
+% --- Executes on button press in radiobutton_channel0.
+function radiobutton_channel0_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobutton_channel0 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-LineActivity =  get(hObject,'Value'); 
-handles.LineActivity(1) = LineActivity;
-guidata(hObject,handles);
-end
-% Hint: get(hObject,'Value') returns toggle state of checkbox4
-
-
-% --- Executes on button press in checkbox6.
-function checkbox6_Callback(hObject, eventdata, handles)
-% hObject    handle to checkbox6 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-LineActivity =  get(hObject,'Value'); 
-handles.LineActivity(2) = LineActivity;
-guidata(hObject,handles);
-% Hint: get(hObject,'Value') returns toggle state of checkbox6
+global choose_channel
+choose_channel=1;
+% Hint: get(hObject,'Value') returns toggle state of radiobutton_channel0
 end
 
-% --- Executes on button press in checkbox7.
-function checkbox7_Callback(hObject, eventdata, handles)
-% hObject    handle to checkbox7 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-LineActivity =  get(hObject,'Value'); 
-handles.LineActivity(3) = LineActivity;
-guidata(hObject,handles);
-% Hint: get(hObject,'Value') returns toggle state of checkbox7
+% --- Executes during object creation, after setting all properties.
+function radiobutton_channel1_CreateFcn(hObject, eventdata, handles)
+end
+% --- Executes on button press in radiobutton_channel1.
+function radiobutton_channel1_Callback(hObject, eventdata, handles)
+global choose_channel
+choose_channel=2;
+% Hint: get(hObject,'Value') returns toggle state of radiobutton_channel1
+end
+% --- Executes during object creation, after setting all properties.
+function radiobutton_channel2_CreateFcn(hObject, eventdata, handles)
+end
+% --- Executes on button press in radiobutton_channel2.
+function radiobutton_channel2_Callback(hObject, eventdata, handles)
+global choose_channel
+choose_channel=3;
+% Hint: get(hObject,'Value') returns toggle state of radiobutton_channel2
+end
+% --- Executes during object creation, after setting all properties.
+function radiobutton_channel3_CreateFcn(hObject, eventdata, handles)
+end
+% --- Executes on button press in radiobutton_channel3.
+function radiobutton_channel3_Callback(hObject, eventdata, handles)
+global choose_channel
+choose_channel=4;
 end
 
-% --- Executes on button press in checkbox8.
-function checkbox8_Callback(hObject, eventdata, handles)
-% hObject    handle to checkbox8 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-LineActivity =  get(hObject,'Value'); 
-handles.LineActivity(4) = LineActivity;
-guidata(hObject,handles);
-% Hint: get(hObject,'Value') returns toggle state of checkbox8
-end
+
