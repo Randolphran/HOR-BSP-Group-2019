@@ -30,7 +30,7 @@
 %   memeroy, Timer will terminate, too, reporting an Error.
 % 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-function InstantAI_Project1(hObject,handles)
+function InstantAI_Project1(hObject)
 
 % Make Automation.BDaq assembly visible to MATLAB.
 BDaq = NET.addAssembly('Automation.BDaq');
@@ -48,6 +48,7 @@ channelCount = int32(4);
 % Simultaneously change the value in "BEGIN" callback function and stop condition when change happens here.
 
 % get stop command via global varible.
+global stopflag;
 
 
 % Step 1: Create a 'InstantAiCtrl' for Instant AI function.
@@ -82,22 +83,22 @@ try
     i = 1;
     start(t);
 %     input('InstantAI is in progress...Press Enter key to quit!');
-%      while (i< 1024) % Simultaneously change the value in "BEGIN" callback function and initilization when change happens here.
-% %         
-% %         if dataNum >= 1024;
-% %             stop(t);
-% %             fprintf('Error! Input data exceeds the memeroy distribution!');
-% %             break;
-% %         end
-% %         
-%         if stopflag == -1
+     while (i< 1024) % Simultaneously change the value in "BEGIN" callback function and initilization when change happens here.
+%         
+%         if dataNum >= 1024;
 %             stop(t);
-%              break;
+%             fprintf('Error! Input data exceeds the memeroy distribution!');
+%             break;
 %         end
 %         
-%        i = 1 + i;
-%      end
-    uiwait(handles.figure1);
+        if stopflag == -1
+            stop(t);
+%             break;
+        end
+        
+       
+     end
+     uiwait(handles.figure1);
     delete(t);
    
     
@@ -127,7 +128,7 @@ end
 function TimerCallback(obj, event, instantAiCtrl, startChannel, ...
     channelCount, data, hObject)
 
- handles = guidata(hObject);
+handles = guidata(hObject);
 
 dataAI = handles.dataAI; 
 dataNum = handles.dataNum;
@@ -145,7 +146,7 @@ for j=0:(channelCount - 1)
     fprintf('channel %d : %10f ', j, temp);
     
     dataAI(dataNum,j+1) = temp;
-    Realtimeplot_Project1(dataNum,temp,LineHandles(1,j+1));
+    Realtimeplot(dataNum,temp,LineHandles(j+1));
     
 end
 

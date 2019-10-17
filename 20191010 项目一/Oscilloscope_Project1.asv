@@ -147,8 +147,8 @@ function pushbutton_begin_Callback(hObject, eventdata, handles)
 
 %convey input data
 %LineActivity = handles.LineActivity;
-AxeslHandles = handles.AxeslHandles;
-cla(AxeslHandles);
+ax
+cla(
 
 % for i = 1:4
     %     if LineActivity(i) == true % if the channel is switched on
@@ -179,9 +179,7 @@ function axes1_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to axes1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-AxeslHandles(1) = hObject;
-handles.AxeslHandles(1) = AxeslHandles;
-
+axesl
 line = animatedline(hObject);
 handles.LineHandles(1) = line;
 guidata(hObject,handles);
@@ -479,9 +477,6 @@ function axes2_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to axes2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-AxeslHandles(2) = hObject;
-handles.AxeslHandles(2) = AxeslHandles;
-
 line = animatedline(hObject);
 handles.LineHandles(2) = line;
 guidata(hObject,handles);
@@ -494,9 +489,6 @@ function axes3_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to axes3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-AxeslHandles(3) = hObject;
-handles.AxeslHandles(3) = AxeslHandles;
-
 line = animatedline(hObject);
 handles.LineHandles(3) = line;
 guidata(hObject,handles);
@@ -508,9 +500,6 @@ function axes4_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to axes4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-AxeslHandles(4) = hObject;
-handles.AxeslHandles(4) = AxeslHandles;
-
 line = animatedline(hObject);
 handles.LineHandles(4) = line;
 guidata(hObject,handles);
