@@ -420,6 +420,15 @@ end
 handles.dataread = dataread;
 guidata(hObject,handles);
 
+
+% display data read on axes areas.
+AxesHandles = handles.AxesHandles;
+for i = 1:4
+    cla(AxesHandles(i)); % clear exsisted data in graphs.
+    plot(AxesHandles(i),dataread(:,i));
+end
+
+
 end
 
 % --- Executes on button press in pushbutton_save.

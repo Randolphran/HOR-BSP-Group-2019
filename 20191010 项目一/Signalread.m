@@ -13,8 +13,13 @@ if filetype == 'csv'
 end
 
 if filetype == 'txt'
-    data = dlmread(filename,'\n');% default separator for .txt file is '\n'
+%     data(:,1) = dlmread(filename,'\n',[0 0 end 0]);% default separator for .txt file is '\n'
+%     data(:,2) = dlmread(filename,'\n',[0 1 end 1]);
+%     data(:,3) = dlmread(filename,'\n',[0 2 end 2]);
+%     data(:,4) = dlmread(filename,'\n',[0 3 end 3]);
+    data = dlmread(filename,'\n');
     flag = 1;
+    
 end
 
 if filetype == 'mat'
