@@ -18,7 +18,7 @@ if filetype == 'txt'
 end
 
 if filetype == 'mat'
-    data = load(filename,'data');
+    load(filename,'data');
     flag = 1;
 end
 

@@ -408,17 +408,11 @@ function pushbutton_import_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 [filename,pathname] = uigetfile;
-% call windows explorer to open the file.
-% if the explorer is closed without confirming import, filename will be 0.
 
-file = [pathname,filename];
+file = [filename,pathname];
 
-if ischar(filename)
-    dataread = Signalread(file); 
-end
+if 
 
-handles.dataread = dataread;
-guidata(hObject,handles);
 
 end
 
