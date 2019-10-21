@@ -59,10 +59,6 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-global filt
-filt=0;
-global process
-process=0;
 set(handles.radiobutton_fft,'value',0);
 set(handles.radiobutton_filter,'value',0);
 set(handles.radiobutton_highpass,'value',0);
@@ -79,14 +75,19 @@ guidata(hObject,handles);
 
 % Edittor: Ran 2019/10/14
 dataAI = zeros(1024,4); 
+dataNum=1;
+% Pre-assigned memeroy, Attention this might be insufficient.
+% Simultaneously change the value in "BEGIN" callback function when change happens here.
+% LineHandles = zeros(4,1);
 % Pre-assigned memeroy, Attention this might be insufficient.
 % Simultaneously change the value in "BEGIN" callback function when change happens here.
 LineActivity = zeros(4,1);
 handles.LineActivity = LineActivity;
 handles.dataAI = dataAI;
+handles.dataNum = dataNum;
 guidata(hObject,handles);
 
-val = zeros(4,1);
+val = zeros(4,1);  %滑动条的值
 handles.val = val;
 guidata(hObject,handles);
 end
@@ -148,30 +149,46 @@ set(handles.axes1,'YLim',[y_low,y_high]);
 end
 
 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 % --- Executes on button press in pushbutton_begin.
+% Edittor:YCRan 2019/10/17
+% Button: Start Sampling
+% This function initilize the sampling process by reseting axes areas and
+% calling InstantAI_Project1.
+% 
+% InstantAI_Project1 calls a timer function that get data from AI Channel 0 ~
+% Channel 3 of Device USB-4704,BID#0, the outputs are dataAI, dataNum, and
+% Realtime Plots. dataAI and dataNum are stored in GUIDATA.
 function pushbutton_begin_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_begin (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-%convey input data
-LineActivity = handles.LineActivity;
-LineHandles = handles.LineHandles;
-
+% Initilization.
+AxesHandles = handles.AxesHandles;
 for i = 1:4
-    if LineActivity(i) == true % if the channel is switched on
-    %    [dataAI(i),dataNum(i)] = InstantAI_Project1(LineHandles(i)); % Error 要同时进行/YCRan
-        % Start sampling in corresponding axes area.        
-        Realtimeplot(1:100,1:100,LineHandles(i));
-    end
+    cla(AxesHandles(i)); % clear exsisted data in graphs.
+    line = animatedline(AxesHandles(i)); % build/re-build animatedline.
+    handles.LineHandles(i) = line;
 end
 
-% handles.dataAI = dataAI;
-% handles.dataNum = dataNum;
-% guidata(hObject,handles);
+guidata(hObject,handles);
+
+InstantAI_Project1(hObject,handles);% Start sampling in all axes areas.
+    
+% test code:
+% LineHandles = handles.LineHandles;
+%       for i = 1:4
+%             Realtimeplot_Project1(1:100,1:100,LineHandles(i));
+%       end
+% end
+
+guidata(hObject,handles);
 % submit new input signal to database.
 
 end
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
 
 
 % --- Executes during object creation, after setting all properties.
@@ -179,9 +196,8 @@ function axes1_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to axes1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-
-line = animatedline(hObject);
-handles.LineHandles(1) = line;
+AxesHandles = gca;
+handles.AxesHandles(1) = AxesHandles;
 guidata(hObject,handles);
 % Hint: place code in OpeningFcn to populate axes1
 end
@@ -255,7 +271,7 @@ function slider1_Callback(hObject, eventdata, handles)
 % hObject    handle to slider1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-v1 = get(handles.slider1,'value');
+v1 = get(handles.slider1,'value');      %v1是滑动条的值，一开始是dataNum，横坐标的最大值是v1+50
 handles.val(1)=v1;
 guidata(hObject,handles);
 if v1>=150
@@ -291,7 +307,7 @@ end
 end
 
 % --- Executes on slider movement.
-50function slider2_Callback(hObject, eventdata, handles)
+function slider2_Callback(hObject, eventdata, handles)
 v2 = get(handles.slider2,'value');
 handles.val(2)=v2;
 guidata(hObject,handles);
@@ -327,10 +343,21 @@ end
 
 function slider5_Callback(hObject, eventdata, handles)
 v1=handles.val(1);
-set(handles.slider5,'max',300);
-set(handles.slider5,'min',20);
+set(handles.slider5,'max',200);
+set(handles.slider5,'min',0);
+if v1>=150
+    xmin=v1-150;xmax=v1+50;
+else xmin=0;xmax=200;
+end
 gainvalue=get(handles.slider5,'value');
-set(handles.axes1,'XLim',[~,v1+gainvalue]);
+xmax=xmax+50-gainvalue;
+xmin=xmin-50+gainvalue;
+N=handles.dataNum(1);
+if xmax>N+50
+    xmax=N+50;end
+if xmin<0
+    xmin=0;end
+set(handles.axes1,'XLim',[xmin,xmax]);
 end
 
 % --- Executes during object creation, after setting all properties.
@@ -343,10 +370,9 @@ end
 
 % --- Executes on button press in pushbutton_stop.
 function pushbutton_stop_Callback(hObject, eventdata, handles)
-stopflag = -1;
-handles.stopflag=stopflag;
-guidata(hObject,handles);
-Max=handles.datanumber;
+uiresume(handles.figure1);
+Max=handles.dataNum;
+set(handles.slider1,'min',0)
 set(handles.slider1,'max',Max);
 set(handles.slider1,'value',Max);
 dataAI=handles.dataAI;
@@ -362,7 +388,6 @@ plot(dataAI(:,3));
 axes(handles.axes4);
 set(handles.axes4,'XLim',[Max-150,Max+50]);
 plot(dataAI(:,4));
-% fprintf('s',stopflag);
 end
 
 
@@ -370,7 +395,7 @@ function edit_sample_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_sample (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-Fs=str2num(get(handles.edit_sample,'string'));
+Fs=str2double(get(handles.edit_sample,'string'));
 handles.Fs=Fs;
 guidata(hObject,handles);
 % Hints: get(hObject,'String') returns contents of edit_sample as text
@@ -382,7 +407,9 @@ function edit_sample_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to edit_sample (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-
+set(hObject,'string','1');
+handles.Fs = 1;
+guidata(hObject,handles);
 % Hint: edit controls usually have a white background on Windows.
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
@@ -462,32 +489,65 @@ end
 
 % --- Executes on button press in pushbutton_import.
 function pushbutton_import_Callback(hObject, eventdata, handles)
-geshi={'*.csv';...
-       '*.xlsx'};
-[FileName, FilePath]=uigetfile(geshi,'导入信号数据','*.csv');
-if ~isequal([FileName,FilePath],[0,0])
-    FileFullName=strcat(FilePath,FileName);   
-else
-    return;
+file = [pathname,filename];
+
+if ischar(filename)
+    dataAI = Signalread(file); 
+    handles.dataAI = dataAI;
+    guidata(hObject,handles);
 end
-import_data=xlsread(FileFullName);            %这里只能读取表格，需要判断一下读取的文件格式再进行读取方式
-axes(handles.axes1);
-plot(import_data);
+
+
+% display data read on axes areas.
+if ischar(filename)
+    AxesHandles = handles.AxesHandles;
+    for i = 1:4
+        cla(AxesHandles(i)); % clear exsisted data in graphs.
+        plot(AxesHandles(i),dataAI(:,i));
+    end
+end
+
 y_high=handles.y_high;
 y_low=handles.y_low;
 set(handles.axes1,'YLim',[y_low,y_high]);
-dataAI(:,1)=import_data;
-handles.dataAI=dataAI;
+
 guidata(hObject,handles);
 end
 
 % --- Executes on button press in pushbutton_save.
 function pushbutton_save_Callback(hObject, eventdata, handles)
-
 datasave = handles.dataAI;
-savedialog(datasave); % call saving dialog;
-uiwait(handles.figure1);  %阻止程序执行并等待恢复
+[filename, pathname, filterindex] = uiputfile( ...
+{'*.mat','MATLAB Data (*.m)';
+ '*.csv','CSV(逗号分隔)(*.csv)';...
+ '*.txt','Unicode文本(*.txt)';...
+ '*.xls','Excel 工作簿(*.xls)'});
+% call windows explorer to save the file.
+% if the explorer is closed without confirming save, filename will be 0.
 
+
+file = [pathname,filename];
+
+filesave = Signalwrite;
+% filesave = [filewrite,suffix(filterindex)];
+if ischar(filename)
+%     if explorer is closed without confirming save, filename will be 0.
+    switch filterindex
+        case 1 %.mat
+            filesave.mat(datasave,file);
+        case 2 %.csv
+            filesave.csv(datasave,file);
+        case 3 %.txt
+            filesave.txt(datasave,file);
+        case 4 %.xls
+            filesave.xls(datasave,file);
+        otherwise
+            fprintf('Save Failled! Unexpected erro occurred!');
+    end
+    
+    fprintf('Save Succeeded!');
+    
+end
 end
 
 % --- Executes on button press in radiobutton_filter.
@@ -535,8 +595,8 @@ function axes2_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to axes2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-line = animatedline(hObject);
-handles.LineHandles(2) = line;
+AxesHandles = gca;
+handles.AxesHandles(2) = AxesHandles;
 guidata(hObject,handles);
 % Hint: place code in OpeningFcn to populate axes2
 end
@@ -547,16 +607,16 @@ function axes3_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to axes3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-line = animatedline(hObject);
-handles.LineHandles(3) = line;
+AxesHandles = gca;
+handles.AxesHandles(3) = AxesHandles;
 guidata(hObject,handles);
 % Hint: place code in OpeningFcn to populate axes3
 end
 
 % --- Executes during object creation, after setting all properties.
 function axes4_CreateFcn(hObject, eventdata, handles)
-line = animatedline(hObject);
-handles.LineHandles(4) = line;
+AxesHandles = gca;
+handles.AxesHandles(4) = AxesHandles;
 guidata(hObject,handles);
 end
 
@@ -618,4 +678,10 @@ handles.choose_channel=choose_channel;
 guidata(hObject,handles);
 end
 
-
+% --- Executes during object deletion, before destroying properties.
+function pushbutton_stop_DeleteFcn(hObject, eventdata, handles)
+% hObject    handle to pushbutton_stop (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+clear global 
+end
