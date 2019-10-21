@@ -27,7 +27,6 @@ if ischar(filename)
 % Edittor: Yuncong Ran 2019/10/21
 % fprintf fill in data in column order, thus the matrix DATA is transferred to
 % fill in row order.
-    fprintf('%s\n','Writting succeeded!');
     fclose(fid);
 else
     fprintf('%s\n','Filename Error! Input filename must be char class.');

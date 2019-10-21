@@ -164,7 +164,7 @@ end
 
 guidata(hObject,handles);
 
-InstantAI_Project1(hObject,handles);% Start sampling in all axes areas.
+handles = InstantAI_Project1(hObject,handles);% Start sampling in all axes areas.
     
 % test code:
 % LineHandles = handles.LineHandles;
@@ -350,7 +350,10 @@ function edit_sample_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_sample (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+Samplingrate = get(hObject,'String');
+Samplingrate = str2double(Samplingrate);
+handles.Samplingrate = Samplingrate;
+guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_sample as text
 %        str2double(get(hObject,'String')) returns contents of edit_sample as a double
@@ -361,7 +364,9 @@ function edit_sample_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to edit_sample (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-set(hObject,'string','100');
+set(hObject,'string','1');
+handles.Samplingrate = 1;
+guidata(hObject,handles);
 % Hint: edit controls usually have a white background on Windows.
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))

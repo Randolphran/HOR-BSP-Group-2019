@@ -34,7 +34,7 @@
 %   button in GUI is needed. 
 % 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-function handles = InstantAI_Project1(hObject,handles)
+function InstantAI_Project1(hObject,handles)
 
 % Make Automation.BDaq assembly visible to MATLAB.
 BDaq = NET.addAssembly('Automation.BDaq');
@@ -77,7 +77,7 @@ try
 %         channelCount, data, dataAI, dataNum, linehandle);
  
       t  = timer('TimerFcn', {@TimerCallback, instantAiCtrl, startChannel, ...
-         channelCount, data,hObject}, 'period', period, 'executionmode', 'fixedrate', ...
+         channelCount, data,hObject,handles}, 'period', period, 'executionmode', 'fixedrate', ...
          'StartDelay', 1);
 %         dataAI, dataNum, LineHandles
 
@@ -105,7 +105,6 @@ try
 %      end
     uiwait(handles.figure1);
     stop(t);
-    guidata(hObject,handles);
     delete(t);
    
     
@@ -133,9 +132,7 @@ result =  errorCode < Automation.BDaq.ErrorCode.Success && ...
 end
 
 function TimerCallback(obj, event, instantAiCtrl, startChannel, ...
-    channelCount, data, hObject)
-
-handles = guidata(hObject);
+    channelCount, data, hObject,handles)
 
 dataAI = handles.dataAI; 
 dataNum = handles.dataNum;
@@ -155,18 +152,13 @@ for j=0:(channelCount - 1)
     
     dataAI(dataNum,j+1) = temp;
     Realtimeplot_Project1(dataNum,temp,LineHandles(1,j+1));
-    if dataNum > 100
-        set(AxesHandles(j+1),'XLim',[dataNum-100,dataNum+10]);
-    else 
-        set(AxesHandles(j+1),'XLim',[0,dataNum+10]);
-    end
+    set(AxesHandles(j+1),'XLim',)
 end
 
 dataNum = dataNum + 1;
 
 handles.dataAI = dataAI;
 handles.dataNum = dataNum;
-
+handles.LineHandles = LineHandles;
 guidata(hObject,handles);
-
 end
