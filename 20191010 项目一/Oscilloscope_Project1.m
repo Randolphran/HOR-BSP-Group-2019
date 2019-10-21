@@ -407,7 +407,12 @@ function pushbutton_import_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-[filename,pathname] = uigetfile;
+[filename,pathname] = uigetfile(...
+   {'*.*', 'All Files (*.*)';...
+    '*.m;*.mlx;*.fig;*.mat;*.slx;*.mdl','MATLAB Files (*.m,*.mlx,*.fig,*.mat,*.slx,*.mdl)';...
+    '*.csv','CSV(逗号分隔文件) (*.csv)'; ...
+    '*.txt','文本文档 (*.txt)'; ...
+    '*.xls','Excel电子文档 (*.xls)';});
 % call windows explorer to open the file.
 % if the explorer is closed without confirming import, filename will be 0.
 
@@ -415,19 +420,19 @@ file = [pathname,filename];
 
 if ischar(filename)
     dataread = Signalread(file); 
+    handles.dataread = dataread;
+    guidata(hObject,handles);
 end
-
-handles.dataread = dataread;
-guidata(hObject,handles);
 
 
 % display data read on axes areas.
-AxesHandles = handles.AxesHandles;
-for i = 1:4
-    cla(AxesHandles(i)); % clear exsisted data in graphs.
-    plot(AxesHandles(i),dataread(:,i));
+if ischar(filename)
+    AxesHandles = handles.AxesHandles;
+    for i = 1:4
+        cla(AxesHandles(i)); % clear exsisted data in graphs.
+        plot(AxesHandles(i),dataread(:,i));
+    end
 end
-
 
 end
 

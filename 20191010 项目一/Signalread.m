@@ -17,7 +17,7 @@ if filetype == 'txt'
 %     data(:,2) = dlmread(filename,'\n',[0 1 end 1]);
 %     data(:,3) = dlmread(filename,'\n',[0 2 end 2]);
 %     data(:,4) = dlmread(filename,'\n',[0 3 end 3]);
-    data = dlmread(filename,'\n');
+    data = dlmread(filename,'\t');
     flag = 1;
     
 end
