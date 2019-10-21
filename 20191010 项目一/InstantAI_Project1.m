@@ -16,21 +16,25 @@
 % I/O Connections Overview:
 %    Please refer to your hardware reference manual.
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-% Editter : Yuncong Ran 2019/10/13
-%   Modified TimeCallBack function, added input linehandle, dataAI, dataNum.
-%     linehandle: Pass animation line handle to TimeCallBack,to draw the real-time signal.
+% Editter : Yuncong Ran 2019/10/21
+%   Modified InstantAI& TimeCallBack function, added input hObjct & handles
+%   to convey parameters. Struct Handles consists of following vars:
+% 
+%     LineHandle: Convey animation line handle to TimeCallBack,to draw the real-time signal.
 %     dataAI: Data storage in the Main function. 
 %     dataNum: Inidicate sample number, which is given by the timecallback
 %              function
-%   The funtion will display input signal in real-time in the axes area which are determined by linehandle, 
-%   and return dataAI& dataNum once finished. 
+%     Samplingrate: Sampling Rate, known as the input para 'period' of
+%                   Timer object.
+% 
+%   The funtion will display input signal in real-time in the axes area which are determined by LineHandle, 
+%   and return dataAI& dataNum to handles struct once finished.
 %   
 %   Modified TimerCallBack Fcn termination mode, activition of "STOP"
-%   button in GUI is needed. If reaching the maximum of pre-assigned
-%   memeroy, Timer will terminate, too, reporting an Error.
+%   button in GUI is needed. 
 % 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-function [dataAI, dataNum] = InstantAI_Project1(linehandle)
+function handles = InstantAI_Project1(hObject,handles)
 
 % Make Automation.BDaq assembly visible to MATLAB.
 BDaq = NET.addAssembly('Automation.BDaq');
@@ -40,16 +44,16 @@ BDaq = NET.addAssembly('Automation.BDaq');
 % devices according to their needs. 
 deviceDescription = 'USB-4704,BID#0'; 
 startChannel = int32(0);
-channelCount = int32(4);
+channelCount = int32(4); %default channel number is 4.
 
+sr = handles.Samplingrate;
+period = 1/sr;
 % Initial data number is 1.Run Initialization each time "BEGIN" is pressed.
-dataNum = 1;       
-dataAI = zeros(1024,4); 
+
 % Pre-assigned memeroy, Attention this might be insufficient.
 % Simultaneously change the value in "BEGIN" callback function and stop condition when change happens here.
 
 % get stop command via global varible.
-global stopflag;
 
 
 % Step 1: Create a 'InstantAiCtrl' for Instant AI function.
@@ -66,31 +70,42 @@ try
     
     % Step 3: Read samples and do post-process, we show data here.
     errorCode = Automation.BDaq.ErrorCode();
-    t = timer( 'period', 1, 'executionmode', 'fixedrate', ...
-        'StartDelay', 1);
-    t.TimerFcn = @TimerCallback;
-    [dataAI,dataNum] = t.TimerFcn(instantAiCtrl, startChannel, ...
-        channelCount, data, dataAI, dataNum, linehandle);
+%     t = timer( 'period', 1, 'executionmode', 'fixedrate', ...
+%         'StartDelay', 1);
+%     t.TimerFcn = @TimerCallback;
+%     [dataAI,dataNum] = TimerFcn(t,instantAiCtrl, startChannel, ...
+%         channelCount, data, dataAI, dataNum, linehandle);
+ 
+      t  = timer('TimerFcn', {@TimerCallback, instantAiCtrl, startChannel, ...
+         channelCount, data,hObject}, 'period', period, 'executionmode', 'fixedrate', ...
+         'StartDelay', 1);
+%         dataAI, dataNum, LineHandles
+
+% 
     % edittor: Ran, 2019/10/14
     % Changed Time class Instantiation format.
     % Added new varibles here: dataAI, dataNum,linehandles.  
-    
+    i = 1;
     start(t);
 %     input('InstantAI is in progress...Press Enter key to quit!');
-    while (dataNum < 1024) % Simultaneously change the value in "BEGIN" callback function and initilization when change happens here.
-        
-        if dataNum >= 1024;
-            stop(t);
-            fprintf('Error! Input data exceeds the memeroy distribution!');
-            break;
-        end
-        
-        if stopflag == -1
-            stop(t);
-            break;
-        end
-    end
-    
+%      while (i< 1024) % Simultaneously change the value in "BEGIN" callback function and initilization when change happens here.
+% %         
+% %         if dataNum >= 1024;
+% %             stop(t);
+% %             fprintf('Error! Input data exceeds the memeroy distribution!');
+% %             break;
+% %         end
+% %         
+%         if stopflag == -1
+%             stop(t);
+%              break;
+%         end
+%         
+%        i = 1 + i;
+%      end
+    uiwait(handles.figure1);
+    stop(t);
+    guidata(hObject,handles);
     delete(t);
    
     
@@ -117,9 +132,15 @@ result =  errorCode < Automation.BDaq.ErrorCode.Success && ...
 
 end
 
-function [dataAI, dataNum] = TimerCallback(obj, event, instantAiCtrl, startChannel, ...
-    channelCount, data,dataAI,dataNum,linehandle)
+function TimerCallback(obj, event, instantAiCtrl, startChannel, ...
+    channelCount, data, hObject)
 
+handles = guidata(hObject);
+
+dataAI = handles.dataAI; 
+dataNum = handles.dataNum;
+LineHandles = handles.LineHandles;
+AxesHandles = handles.AxesHandles;
 
 errorCode = instantAiCtrl.Read(startChannel, channelCount, data); 
 if BioFailed(errorCode)
@@ -133,10 +154,19 @@ for j=0:(channelCount - 1)
     fprintf('channel %d : %10f ', j, temp);
     
     dataAI(dataNum,j+1) = temp;
-    Realtimeplot(dataNum,temp,linehandle);
-    
+    Realtimeplot_Project1(dataNum,temp,LineHandles(1,j+1));
+    if dataNum > 100
+        set(AxesHandles(j+1),'XLim',[dataNum-100,dataNum+10]);
+    else 
+        set(AxesHandles(j+1),'XLim',[0,dataNum+10]);
+    end
 end
 
 dataNum = dataNum + 1;
+
+handles.dataAI = dataAI;
+handles.dataNum = dataNum;
+
+guidata(hObject,handles);
 
 end
