@@ -46,7 +46,7 @@ deviceDescription = 'USB-4704,BID#0';
 startChannel = int32(0);
 channelCount = int32(4); %default channel number is 4.
 
-sr = handles.Samplingrate;
+sr = handles.Fs;
 period = 1/sr;
 % Initial data number is 1.Run Initialization each time "BEGIN" is pressed.
 

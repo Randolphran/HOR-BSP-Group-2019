@@ -1,4 +1,4 @@
-function[n,y]=filter_highpass(Fs,x,fc)
+function[n,y]=filter_lowpass(Fs,x,fc)
 % % 示例信号用于检测滤波器
 % Fs=200;N=256;fc=50;
 % n=0:N-1;
