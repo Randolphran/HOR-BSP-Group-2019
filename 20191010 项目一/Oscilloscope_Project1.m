@@ -174,7 +174,7 @@ end
 
 guidata(hObject,handles);
 
-InstantAI_Project1(hObject,handles);% Start sampling in all axes areas.
+handles = InstantAI_Project1(hObject,handles);% Start sampling in all axes areas.
     
 % test code:
 % LineHandles = handles.LineHandles;
@@ -370,24 +370,28 @@ end
 
 % --- Executes on button press in pushbutton_stop.
 function pushbutton_stop_Callback(hObject, eventdata, handles)
+global t
+stop(t);
+delete(t);
+clear global t;
 uiresume(handles.figure1);
-Max=handles.dataNum;
-set(handles.slider1,'min',0)
-set(handles.slider1,'max',Max);
-set(handles.slider1,'value',Max);
-dataAI=handles.dataAI;
-axes(handles.axes1);
-set(handles.axes1,'XLim',[Max-150,Max+50]);
-plot(dataAI(:,1));
-axes(handles.axes2);
-set(handles.axes2,'XLim',[Max-150,Max+50]);
-plot(dataAI(:,2));
-axes(handles.axes3);
-set(handles.axes4,'XLim',[Max-150,Max+50]);
-plot(dataAI(:,3));
-axes(handles.axes4);
-set(handles.axes4,'XLim',[Max-150,Max+50]);
-plot(dataAI(:,4));
+% Max=handles.dataNum;
+% set(handles.slider1,'min',0)
+% set(handles.slider1,'max',Max);
+% set(handles.slider1,'value',Max);
+% dataAI=handles.dataAI;
+% axes(handles.axes1);
+% set(handles.axes1,'XLim',[Max-150,Max+50]);
+% plot(dataAI(:,1));
+% axes(handles.axes2);
+% set(handles.axes2,'XLim',[Max-150,Max+50]);
+% plot(dataAI(:,2));
+% axes(handles.axes3);
+% set(handles.axes4,'XLim',[Max-150,Max+50]);
+% plot(dataAI(:,3));
+% axes(handles.axes4);
+% set(handles.axes4,'XLim',[Max-150,Max+50]);
+% plot(dataAI(:,4));
 end
 
 

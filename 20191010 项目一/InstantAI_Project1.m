@@ -34,7 +34,13 @@
 %   button in GUI is needed. 
 % 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-function handles = InstantAI_Project1(hObject,handles)
+function handlesret = InstantAI_Project1(hObject,handles)
+% 使用全局变量在InstantAI 和 TimerCallBack Fcn之间传递数据，因为未找到设置TimerCallBack
+% Fcn的返回值的方法；在TimerCallBack Fcn中调用的guidata不会将数据储存到Figure1的空间中，
+% 而是另开一个空间，即使传入了参数hObject。
+global handlesconvey 
+global t
+handlesconvey = handles;
 
 % Make Automation.BDaq assembly visible to MATLAB.
 BDaq = NET.addAssembly('Automation.BDaq');
@@ -79,7 +85,7 @@ try
       t  = timer('TimerFcn', {@TimerCallback, instantAiCtrl, startChannel, ...
          channelCount, data,hObject}, 'period', period, 'executionmode', 'fixedrate', ...
          'StartDelay', 1);
-%         dataAI, dataNum, LineHandles
+
 
 % 
     % edittor: Ran, 2019/10/14
@@ -87,26 +93,12 @@ try
     % Added new varibles here: dataAI, dataNum,linehandles.  
     i = 1;
     start(t);
-%     input('InstantAI is in progress...Press Enter key to quit!');
-%      while (i< 1024) % Simultaneously change the value in "BEGIN" callback function and initilization when change happens here.
-% %         
-% %         if dataNum >= 1024;
-% %             stop(t);
-% %             fprintf('Error! Input data exceeds the memeroy distribution!');
-% %             break;
-% %         end
-% %         
-%         if stopflag == -1
-%             stop(t);
-%              break;
-%         end
-%         
-%        i = 1 + i;
-%      end
-    uiwait(handles.figure1);
-    stop(t);
+
+     uiwait(handles.figure1);
+%     stop(t);
     guidata(hObject,handles);
-    delete(t);
+    
+   
    
     
 catch e
@@ -120,9 +112,13 @@ catch e
     disp(errStr); 
 end
 
+
+
 % Step 4: Close device and release any allocated resource.
 instantAiCtrl.Dispose();
+handlesret = handlesconvey;
 
+clear global handlesconvey
 end
 
 function result = BioFailed(errorCode)
@@ -134,8 +130,11 @@ end
 
 function TimerCallback(obj, event, instantAiCtrl, startChannel, ...
     channelCount, data, hObject)
+% 由于使用了全局变量，hObject不再有必要。
+global handlesconvey
+handles = handlesconvey;
 
-handles = guidata(hObject);
+% handles = guidata(hObject);
 
 dataAI = handles.dataAI; 
 dataNum = handles.dataNum;
@@ -154,6 +153,7 @@ for j=0:(channelCount - 1)
     fprintf('channel %d : %10f ', j, temp);
     
     dataAI(dataNum,j+1) = temp;
+    
     Realtimeplot_Project1(dataNum,temp,LineHandles(1,j+1));
     if dataNum > 100
         set(AxesHandles(j+1),'XLim',[dataNum-100,dataNum+10]);
@@ -167,6 +167,7 @@ dataNum = dataNum + 1;
 handles.dataAI = dataAI;
 handles.dataNum = dataNum;
 
-guidata(hObject,handles);
+handlesconvey = handles;
+% guidata(hObject,handles);  % useless
 
 end
