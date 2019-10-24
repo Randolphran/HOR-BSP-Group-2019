@@ -313,7 +313,7 @@ gainvalue = get(handles.slider5,'value');   %得到缩放滑动条的值
 Fs=handles.Fs;
 x=handles.dataAI(:,1);
 N=length(x);
-xmin=v1-100+(5-gainvalue)*10;
+xmin=v1-100-(5-gainvalue)*10;
 xmax=v1+15-gainvalue;
 if xmax>N+10
     xmax=N+10;end
@@ -392,7 +392,7 @@ Fs=handles.Fs;
 if N<=100
     xmin=0;xmax=110+(5-gainvalue)*10;
 else
-    xmin=v1-100+(5-gainvalue)*10;
+    xmin=v1-100-(5-gainvalue)*10;
     xmax=v1+15-gainvalue;
         if xmax>N+10
             xmax=N+10;end
