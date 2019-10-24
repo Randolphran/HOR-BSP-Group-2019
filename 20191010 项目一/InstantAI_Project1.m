@@ -169,6 +169,6 @@ handles.dataAI = dataAI;
 handles.dataNum = dataNum;
 
 handlesconvey = handles;
-% guidata(hObject,handles);  % useless
+guidata(gcf,handles);  % useless
 
 end
