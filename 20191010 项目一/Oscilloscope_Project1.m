@@ -23,7 +23,7 @@ function varargout = Oscilloscope_Project1(varargin)
 
 % Edit the above text to modify the response to help Oscilloscope_Project1
 
-% Last Modified by GUIDE v2.5 17-Oct-2019 15:46:33
+% Last Modified by GUIDE v2.5 23-Oct-2019 21:41:50
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -119,6 +119,9 @@ axes(handles.axes1);
 %set(handles.axes1,'XLim',[0,10],'YLim',[y_low,y_high]);
 y_low=handles.y_low;
 set(handles.axes1,'YLim',[y_low,y_high]);
+set(handles.axes2,'YLim',[y_low,y_high]);
+set(handles.axes3,'YLim',[y_low,y_high]);
+set(handles.axes4,'YLim',[y_low,y_high]);
 
 % Hints: get(hObject,'String') returns contents of edit_y_high as text
 %        str2double(get(hObject,'String')) returns contents of edit_y_high as a double
@@ -146,6 +149,9 @@ axes(handles.axes1);
 %set(handles.axes1,'XLim',[0,10],'YLim',[y_low,y_high]);
 y_high=handles.y_high;
 set(handles.axes1,'YLim',[y_low,y_high]);
+set(handles.axes2,'YLim',[y_low,y_high]);
+set(handles.axes3,'YLim',[y_low,y_high]);
+set(handles.axes4,'YLim',[y_low,y_high]);
 end
 
 
@@ -274,11 +280,21 @@ function slider1_Callback(hObject, eventdata, handles)
 v1 = get(handles.slider1,'value');      %v1是滑动条的值，一开始是dataNum，横坐标的最大值是v1+50
 handles.val(1)=v1;
 guidata(hObject,handles);
-if v1>=150
-    set(handles.axes1,'XLim',[v1-150,v1+50]);
-else set(handles.axes1,'XLim',[0,200]);
+gainvalue = get(handles.slider5,'value');   %得到缩放滑动条的值
+fileflag=handles.fileflag;
+Fs=handles.Fs;
+if fileflag
+    xmin=v1-100-gainvalue*10;
+    xmax=v1+10-gainvalue;
+else
+xmin=v1-100+(5-value)*10;
+xmax=v1+15-value;
+if xmax>N+10
+    xmax=N+10;end
+if xmin<0
+    xmin=0;end
 end
-
+set(handles.axes1,'XLim',[xmin/Fs,xmax/Fs]);
 end
 
 % --- Executes during object creation, after setting all properties.
@@ -293,9 +309,9 @@ function slider4_Callback(hObject, eventdata, handles)
 v4 = get(handles.slider4,'value');
 handles.val(4)=v4;
 guidata(hObject,handles);
-if v4>=150
-    set(handles.axes1,'XLim',[v4-150,v4+50]);
-else set(handles.axes1,'XLim',[0,200]);
+if v4>=100
+    set(handles.axes4,'XLim',[v4-100,v4+10]);
+else set(handles.axes4,'XLim',[0,110]);
 end
 end
 
@@ -311,9 +327,9 @@ function slider2_Callback(hObject, eventdata, handles)
 v2 = get(handles.slider2,'value');
 handles.val(2)=v2;
 guidata(hObject,handles);
-if v2>=150
-    set(handles.axes1,'XLim',[v2-150,v2+50]);
-else set(handles.axes1,'XLim',[0,200]);
+if v2>=100
+    set(handles.axes2,'XLim',[v2-100,v2+10]);
+else set(handles.axes2,'XLim',[0,110]);
 end
 end
 
@@ -328,9 +344,9 @@ function slider3_Callback(hObject, eventdata, handles)
 v3 = get(handles.slider3,'value');
 handles.val(3)=v3;
 guidata(hObject,handles);
-if v3>=150
-    set(handles.axes1,'XLim',[v3-150,v3+50]);
-else set(handles.axes1,'XLim',[0,200]);
+if v3>=100
+    set(handles.axes3,'XLim',[v3-100,v3+10]);
+else set(handles.axes3,'XLim',[0,110]);
 end
 end
 
@@ -343,21 +359,24 @@ end
 
 function slider5_Callback(hObject, eventdata, handles)
 v1=handles.val(1);
-set(handles.slider5,'max',200);
-set(handles.slider5,'min',0);
-if v1>=150
-    xmin=v1-150;xmax=v1+50;
-else xmin=0;xmax=200;
-end
-gainvalue=get(handles.slider5,'value');
-xmax=xmax+50-gainvalue;
-xmin=xmin-50+gainvalue;
 N=handles.dataNum(1);
-if xmax>N+50
-    xmax=N+50;end
+gainvalue=get(handles.slider5,'value');
+Fs=handles.Fs;
+if N<=100
+xmin=0;xmax=110+(5-gainvalue)*10;    
+else if fileflag
+        xmin=v1-100-gainvalue*10;
+        xmax=v1+10-gainvalue;
+    else
+xmax=v1+15-gainvalue;
+xmin=v1-100-(5-gainvalue)*10;
+if xmax>N+10
+    xmax=N+10;end
 if xmin<0
     xmin=0;end
-set(handles.axes1,'XLim',[xmin,xmax]);
+    end
+end
+set(handles.axes1,'XLim',[xmin/Fs,xmax/Fs]);
 end
 
 % --- Executes during object creation, after setting all properties.
@@ -375,23 +394,73 @@ stop(t);
 delete(t);
 clear global t;
 uiresume(handles.figure1);
-% Max=handles.dataNum;
-% set(handles.slider1,'min',0)
-% set(handles.slider1,'max',Max);
-% set(handles.slider1,'value',Max);
-% dataAI=handles.dataAI;
-% axes(handles.axes1);
-% set(handles.axes1,'XLim',[Max-150,Max+50]);
-% plot(dataAI(:,1));
-% axes(handles.axes2);
-% set(handles.axes2,'XLim',[Max-150,Max+50]);
-% plot(dataAI(:,2));
-% axes(handles.axes3);
-% set(handles.axes4,'XLim',[Max-150,Max+50]);
-% plot(dataAI(:,3));
-% axes(handles.axes4);
-% set(handles.axes4,'XLim',[Max-150,Max+50]);
-% plot(dataAI(:,4));
+Max=handles.dataNum;
+Fs=handles.Fs;
+if Max<=100;
+    set(handles.slider1,'visible','off');
+    set(handles.slider2,'visible','off');
+    set(handles.slider3,'visible','off');
+    set(handles.slider4,'visible','off');
+else
+%slider初始值赋值
+val=handles.val
+val=val+Max*ones(4,1);
+handles.val=val;
+guidata(hObject,handles);
+%channel 1的滑动条初始化
+set(handles.slider1,'min',100);
+set(handles.slider1,'max',Max);
+set(handles.slider1,'value',Max);
+%channel 2的滑动条初始化
+set(handles.slider2,'min',100);
+set(handles.slider2,'max',Max);
+set(handles.slider2,'value',Max);
+%channel 3的滑动条初始化
+set(handles.slider3,'min',100);
+set(handles.slider3,'max',Max);
+set(handles.slider3,'value',Max);
+%channel 4的滑动条初始化
+set(handles.slider4,'min',100);
+set(handles.slider4,'max',Max);
+set(handles.slider4,'value',Max);
+%channel 1的收缩滑动条初始化
+set(handles.slider5,'min',0);
+set(handles.slider5,'max',10);
+set(handles.slider5,'value',5);
+%采集结束后刷新
+dataAI=handles.dataAI;
+%channel 1刷新
+axes(handles.axes1);
+set(handles.axes1,'XLim',[Max-100,Max+10]);
+plot(1/Fs:1/Fs:length(dataAI(:,1))/Fs,dataAI(:,1));
+xlabel('时间/s');ylabel('电压/V');
+%channel 2刷新
+axes(handles.axes2);
+set(handles.axes2,'XLim',[Max-100,Max+10]);
+plot(1/Fs:1/Fs:length(dataAI(:,2))/Fs,dataAI(:,2));
+xlabel('时间/s');ylabel('电压/V');
+%channel 3刷新
+axes(handles.axes3);
+set(handles.axes4,'XLim',[Max-100,Max+10]);
+plot(1/Fs:1/Fs:length(dataAI(:,3))/Fs,dataAI(:,3));
+xlabel('时间/s');ylabel('电压/V');
+%channel 4刷新
+axes(handles.axes4);
+set(handles.axes4,'XLim',[Max-100,Max+10]);
+plot(1/Fs:1/Fs:length(dataAI(:,4))/Fs,dataAI(:,4));
+xlabel('时间/s');ylabel('电压/V');
+end
+%设置电压轴范围
+y_high=handles.y_high;
+y_low=handles.y_low;
+set(handles.axes1,'YLim',[y_low,y_high]);
+set(handles.axes2,'YLim',[y_low,y_high]);
+set(handles.axes3,'YLim',[y_low,y_high]);
+set(handles.axes4,'YLim',[y_low,y_high]);
+%设置fileflag
+fileflag=0;
+handles.fileflag=fileflag;
+guidata(hObject,handles);
 end
 
 
@@ -509,19 +578,75 @@ if ischar(filename)
     guidata(hObject,handles);
 end
 
+%设置横坐标和滑动条的初始化
+%channel 1
+N1=length(dataAI(:,1));
+if N1<=100
+set(handles.slider1,'visible','off');
+else
+set(handles.axes1,'XLim',[0,N1*1.1]);
+set(handles.slider1,'min',100)
+set(handles.slider1,'max',N1);
+set(handles.slider1,'value',N1);
+end
+%channel 2
+N2=length(dataAI(:,2));
+if N2<=100
+set(handles.slider2,'visible','off');
+else
+set(handles.axes2,'XLim',[0,N2*1.1]);
+set(handles.slider2,'min',100)
+set(handles.slider2,'max',N2);
+set(handles.slider2,'value',N2);
+end
+%channel 3
+N3=length(dataAI(:,3));
+if N3<=100
+set(handles.slider3,'visible','off');
+else
+set(handles.axes3,'XLim',[0,N3*1.1]);
+set(handles.slider3,'min',100)
+set(handles.slider3,'max',N3);
+set(handles.slider3,'value',N3);
+end
+%channel 4
+N4=length(dataAI(:,4));
+if N4<=100
+set(handles.slider1,'visible','off');
+else
+set(handles.axes1,'XLim',[0,N4*1.1]);
+set(handles.slider4,'min',100)
+set(handles.slider4,'max',N4);
+set(handles.slider4,'value',N4);
+end
+%channel 1的收缩滑动条初始化-只有放大没有缩小
+set(handles.slider5,'min',0)
+set(handles.slider5,'max',10);
+set(handles.slider5,'value',0);
+%设置fileflag
+fileflag=1;
+handles.fileflag=fileflag;
+guidata(hObject,handles);
 
+Fs=handles.Fs;
 % display data read on axes areas.
 if ischar(filename)
     AxesHandles = handles.AxesHandles;
     for i = 1:4
         cla(AxesHandles(i)); % clear exsisted data in graphs.
-        plot(AxesHandles(i),dataAI(:,i));
+        %plot(AxesHandles(i),dataAI(:,i));
+        plot(AxesHandles(i),1/Fs:1/Fs:length(dataAI(:,i))/Fs,dataAI(:,i));
+        xlabel('时间/s');ylabel('电压/V');
     end
 end
 
+%设置电压轴范围
 y_high=handles.y_high;
 y_low=handles.y_low;
 set(handles.axes1,'YLim',[y_low,y_high]);
+set(handles.axes2,'YLim',[y_low,y_high]);
+set(handles.axes3,'YLim',[y_low,y_high]);
+set(handles.axes4,'YLim',[y_low,y_high]);
 
 guidata(hObject,handles);
 end
@@ -702,3 +827,7 @@ function pushbutton_stop_DeleteFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 clear global 
 end
+
+function pushbutton_stop_CreateFcn(hObject, eventdata, handles)
+end
+
