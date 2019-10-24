@@ -205,7 +205,7 @@ for i = 1:4
 end
 
 handles.dataNum = 1;
-handles.dataAI = zeros(1024,4);
+handles.dataAI = zeros(100,4);
 guidata(hObject,handles);
 
 handles = InstantAI_Project1(hObject,handles);% Start sampling in all axes areas.
