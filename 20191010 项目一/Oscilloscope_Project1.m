@@ -310,19 +310,15 @@ v1 = get(handles.slider1,'value');      %v1是滑动条的值，一开始是dataNum，横坐标
 handles.val(1)=v1;
 guidata(hObject,handles);
 gainvalue = get(handles.slider5,'value');   %得到缩放滑动条的值
-fileflag=handles.fileflag;
 Fs=handles.Fs;
-if fileflag
-    xmin=v1-100-gainvalue*10;
-    xmax=v1+10-gainvalue;
-else
-    xmin=v1-100+(5-value)*10;
-    xmax=v1+15-value;
-    if xmax>N+10
-        xmax=N+10;end
-    if xmin<0
-        xmin=0;end
-end
+x=handles.dataAI(1);
+N=length(x);
+xmin=v1-100+(5-gainvalue)*10;
+xmax=v1+15-gainvalue;
+if xmax>N+10
+    xmax=N+10;end
+if xmin<0
+    xmin=0;end
 set(handles.axes1,'XLim',[xmin/Fs,xmax/Fs]);
 end
 
@@ -388,22 +384,19 @@ end
 
 function slider5_Callback(hObject, eventdata, handles)
 v1=handles.val(1);
-N=handles.dataNum(1);
+x=handles.dataAI(1);
+N=length(x);
 gainvalue=get(handles.slider5,'value');
 Fs=handles.Fs;
 if N<=100
     xmin=0;xmax=110+(5-gainvalue)*10;
-else if fileflag
-        xmin=v1-100-gainvalue*10;
-        xmax=v1+10-gainvalue;
-    else
-        xmax=v1+15-gainvalue;
-        xmin=v1-100-(5-gainvalue)*10;
+else
+    xmin=v1-100+(5-gainvalue)*10;
+    xmax=v1+15-gainvalue;
         if xmax>N+10
             xmax=N+10;end
         if xmin<0
             xmin=0;end
-    end
 end
 set(handles.axes1,'XLim',[xmin/Fs,xmax/Fs]);
 end
@@ -494,11 +487,6 @@ end
 % set(handles.axes2,'YLim',[y_low,y_high]);
 % set(handles.axes3,'YLim',[y_low,y_high]);
 % set(handles.axes4,'YLim',[y_low,y_high]);
-
-%设置fileflag
-fileflag = 0;
-handles.fileflag = fileflag;
-guidata(hObject,handles);
 
 end
 
@@ -613,59 +601,83 @@ file = [pathname,filename];
 
 if ischar(filename)
     dataAI = Signalread(file);
+    dataNum = length(dataAI(:,1));
+    handles.dataNum = dataNum;
     handles.dataAI = dataAI;
     guidata(hObject,handles);
 end
 
+% Initilization.
+AxesHandles = handles.AxesHandles;
+% Aviod calling axes() within a loop, which will bring extra cost of time.
+axes(AxesHandles(1));
+xlim auto
+ylim auto
+xlabel('Samples');ylabel('电压/V');
+axes(AxesHandles(2));
+xlim auto
+ylim auto
+xlabel('Samples');ylabel('电压/V');
+axes(AxesHandles(3));
+xlim auto
+ylim auto
+xlabel('Samples');ylabel('电压/V');
+axes(AxesHandles(4));
+xlim auto
+ylim auto
+xlabel('Samples');ylabel('电压/V');
+
+% hide sliders when initilizing.
+set(handles.slider1,'visible','off');
+set(handles.slider2,'visible','off');
+set(handles.slider3,'visible','off');
+set(handles.slider4,'visible','off');
+
 %设置横坐标和滑动条的初始化
 %channel 1
 N1=length(dataAI(:,1));
-if N1<=100
-    set(handles.slider1,'visible','off');
-else
+if N1 > 100
+    set(handles.slider1,'visible','on');
+end
     set(handles.axes1,'XLim',[0,N1*1.1]);
     set(handles.slider1,'min',100)
     set(handles.slider1,'max',N1);
     set(handles.slider1,'value',N1);
-end
+
 %channel 2
-N2=length(dataAI(:,2));
-if N2<=100
-    set(handles.slider2,'visible','off');
-else
+N2 = length(dataAI(:,2));
+if N2 > 100
+    set(handles.slider2,'visible','on');
+end
     set(handles.axes2,'XLim',[0,N2*1.1]);
     set(handles.slider2,'min',100)
     set(handles.slider2,'max',N2);
     set(handles.slider2,'value',N2);
-end
+
 %channel 3
-N3=length(dataAI(:,3));
-if N3<=100
-    set(handles.slider3,'visible','off');
-else
+N3 = length(dataAI(:,3));
+if N3 > 100
+    set(handles.slider3,'visible','on');
+end
     set(handles.axes3,'XLim',[0,N3*1.1]);
     set(handles.slider3,'min',100)
     set(handles.slider3,'max',N3);
     set(handles.slider3,'value',N3);
-end
+
 %channel 4
 N4=length(dataAI(:,4));
-if N4<=100
-    set(handles.slider1,'visible','off');
-else
+if N4 > 100
+    set(handles.slider1,'visible','on');
+end
     set(handles.axes1,'XLim',[0,N4*1.1]);
     set(handles.slider4,'min',100)
     set(handles.slider4,'max',N4);
     set(handles.slider4,'value',N4);
-end
+
 %channel 1的收缩滑动条初始化-只有放大没有缩小
 set(handles.slider5,'min',0)
 set(handles.slider5,'max',10);
-set(handles.slider5,'value',0);
-%设置fileflag
-fileflag=1;
-handles.fileflag=fileflag;
-guidata(hObject,handles);
+set(handles.slider5,'value',5);
 
 Fs=handles.Fs;
 % display data read on axes areas.
@@ -680,12 +692,12 @@ if ischar(filename)
 end
 
 %设置电压轴范围
-y_high=handles.y_high;
-y_low=handles.y_low;
-set(handles.axes1,'YLim',[y_low,y_high]);
-set(handles.axes2,'YLim',[y_low,y_high]);
-set(handles.axes3,'YLim',[y_low,y_high]);
-set(handles.axes4,'YLim',[y_low,y_high]);
+% y_high=handles.y_high;
+% y_low=handles.y_low;
+% set(handles.axes1,'YLim',[y_low,y_high]);
+% set(handles.axes2,'YLim',[y_low,y_high]);
+% set(handles.axes3,'YLim',[y_low,y_high]);
+% set(handles.axes4,'YLim',[y_low,y_high]);
 
 guidata(hObject,handles);
 end
