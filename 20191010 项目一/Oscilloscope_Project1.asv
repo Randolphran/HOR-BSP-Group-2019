@@ -424,8 +424,7 @@ uiresume(handles.figure1);
 
 %initilize sliders and axes-zoom control.
 Max= handles.dataNum;
-% Fs = handles.Fs;
-
+Fs = handles.Fs;
 if Max > 100
    
     %slider初始值赋值
@@ -465,32 +464,28 @@ if Max > 100
     dataAI=handles.dataAI;
     %channel 1刷新
     axes(handles.axes1);
-    plot(dataAI(:,1));
     set(handles.axes1,'XLim',[Max-100,Max+10]);
     %     plot(1/Fs:1/Fs:length(dataAI(:,1))/Fs,dataAI(:,1));
-    
+    plot(dataAI(:,1));
     %     xlabel('时间/s');ylabel('电压/V');
     %channel 2刷新
     axes(handles.axes2);
-    plot(dataAI(:,2));
     set(handles.axes2,'XLim',[Max-100,Max+10]);
-    %     plot(1/Fs:1/Fs:length(dataAI(:,2))/Fs,dataAI(:,2));
-    
-    %     xlabel('时间/s');ylabel('电压/V');
+%     plot(1/Fs:1/Fs:length(dataAI(:,2))/Fs,dataAI(:,2));
+    plot(dataAI(:,2));
+%     xlabel('时间/s');ylabel('电压/V');
     %channel 3刷新
     axes(handles.axes3);
-    plot(dataAI(:,3));
     set(handles.axes4,'XLim',[Max-100,Max+10]);
-    %     plot(1/Fs:1/Fs:length(dataAI(:,3))/Fs,dataAI(:,3));
-    
-    %     xlabel('时间/s');ylabel('电压/V');
+%     plot(1/Fs:1/Fs:length(dataAI(:,3))/Fs,dataAI(:,3));
+    plot(dataAI(:,3));
+%     xlabel('时间/s');ylabel('电压/V');
     %channel 4刷新
     axes(handles.axes4);
     set(handles.axes4,'XLim',[Max-100,Max+10]);
+%     plot(1/Fs:1/Fs:length(dataAI(:,4))/Fs,dataAI(:,4));
     plot(dataAI(:,4));
-    
-    %     plot(1/Fs:1/Fs:length(dataAI(:,4))/Fs,dataAI(:,4));
-    %     xlabel('时间/s');ylabel('电压/V');
+%     xlabel('时间/s');ylabel('电压/V');
 end
 % %设置电压轴范围
 % y_high=handles.y_high;
