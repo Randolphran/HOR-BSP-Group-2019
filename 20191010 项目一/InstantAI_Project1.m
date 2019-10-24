@@ -76,6 +76,7 @@ try
     
     % Step 3: Read samples and do post-process, we show data here.
     errorCode = Automation.BDaq.ErrorCode();
+%     Try to assign an output for TimerFcn:
 %     t = timer( 'period', 1, 'executionmode', 'fixedrate', ...
 %         'StartDelay', 1);
 %     t.TimerFcn = @TimerCallback;

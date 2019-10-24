@@ -1,4 +1,4 @@
-  
+
 function varargout = Oscilloscope_Project1(varargin)
 % OSCILLOSCOPE_PROJECT1 MATLAB code for Oscilloscope_Project1.fig
 %      OSCILLOSCOPE_PROJECT1, by itself, creates a new OSCILLOSCOPE_PROJECT1 or raises the existing
@@ -28,11 +28,11 @@ function varargout = Oscilloscope_Project1(varargin)
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
-                   'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @Oscilloscope_Project1_OpeningFcn, ...
-                   'gui_OutputFcn',  @Oscilloscope_Project1_OutputFcn, ...
-                   'gui_LayoutFcn',  [] , ...
-                   'gui_Callback',   []);
+    'gui_Singleton',  gui_Singleton, ...
+    'gui_OpeningFcn', @Oscilloscope_Project1_OpeningFcn, ...
+    'gui_OutputFcn',  @Oscilloscope_Project1_OutputFcn, ...
+    'gui_LayoutFcn',  [] , ...
+    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
     gui_State.gui_Callback = str2func(varargin{1});
 end
@@ -74,7 +74,7 @@ handles.y_low=y_low;
 guidata(hObject,handles);
 
 % Edittor: Ran 2019/10/14
-dataAI = zeros(1024,4); 
+dataAI = zeros(1024,4);
 dataNum=1;
 % Pre-assigned memeroy, Attention this might be insufficient.
 % Simultaneously change the value in "BEGIN" callback function when change happens here.
@@ -97,7 +97,7 @@ end
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = Oscilloscope_Project1_OutputFcn(hObject, eventdata, handles) 
+function varargout = Oscilloscope_Project1_OutputFcn(hObject, eventdata, handles)
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -142,7 +142,7 @@ end
 end
 
 function edit_y_low_Callback(hObject, eventdata, handles)
-y_low = str2double(get(handles.edit_y_low,'string'));  
+y_low = str2double(get(handles.edit_y_low,'string'));
 handles.y_low=y_low;
 guidata(hObject,handles);
 axes(handles.axes1);
@@ -155,13 +155,13 @@ set(handles.axes4,'YLim',[y_low,y_high]);
 end
 
 
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % --- Executes on button press in pushbutton_begin.
 % Edittor:YCRan 2019/10/17
 % Button: Start Sampling
 % This function initilize the sampling process by reseting axes areas and
 % calling InstantAI_Project1.
-% 
+%
 % InstantAI_Project1 calls a timer function that get data from AI Channel 0 ~
 % Channel 3 of Device USB-4704,BID#0, the outputs are dataAI, dataNum, and
 % Realtime Plots. dataAI and dataNum are stored in GUIDATA.
@@ -172,16 +172,45 @@ function pushbutton_begin_Callback(hObject, eventdata, handles)
 
 % Initilization.
 AxesHandles = handles.AxesHandles;
+% Aviod calling axes() within a loop, which will bring extra cost of time.
+axes(AxesHandles(1));
+xlim auto
+ylim auto
+xlabel('Samples');ylabel('电压/V');
+axes(AxesHandles(2));
+xlim auto
+ylim auto
+xlabel('Samples');ylabel('电压/V');
+axes(AxesHandles(3));
+xlim auto
+ylim auto
+xlabel('Samples');ylabel('电压/V');
+axes(AxesHandles(4));
+xlim auto
+ylim auto
+xlabel('Samples');ylabel('电压/V');
+
+% hide sliders when initilizing.
+set(handles.slider1,'visible','off');
+set(handles.slider2,'visible','off');
+set(handles.slider3,'visible','off');
+set(handles.slider4,'visible','off');
+
+
 for i = 1:4
     cla(AxesHandles(i)); % clear exsisted data in graphs.
     line = animatedline(AxesHandles(i)); % build/re-build animatedline.
+    
     handles.LineHandles(i) = line;
+    
 end
 
+handles.dataNum = 1;
+handles.dataAI = zeros(1024,4);
 guidata(hObject,handles);
 
 handles = InstantAI_Project1(hObject,handles);% Start sampling in all axes areas.
-    
+
 % test code:
 % LineHandles = handles.LineHandles;
 %       for i = 1:4
@@ -287,12 +316,12 @@ if fileflag
     xmin=v1-100-gainvalue*10;
     xmax=v1+10-gainvalue;
 else
-xmin=v1-100+(5-value)*10;
-xmax=v1+15-value;
-if xmax>N+10
-    xmax=N+10;end
-if xmin<0
-    xmin=0;end
+    xmin=v1-100+(5-value)*10;
+    xmax=v1+15-value;
+    if xmax>N+10
+        xmax=N+10;end
+    if xmin<0
+        xmin=0;end
 end
 set(handles.axes1,'XLim',[xmin/Fs,xmax/Fs]);
 end
@@ -363,17 +392,17 @@ N=handles.dataNum(1);
 gainvalue=get(handles.slider5,'value');
 Fs=handles.Fs;
 if N<=100
-xmin=0;xmax=110+(5-gainvalue)*10;    
+    xmin=0;xmax=110+(5-gainvalue)*10;
 else if fileflag
         xmin=v1-100-gainvalue*10;
         xmax=v1+10-gainvalue;
     else
-xmax=v1+15-gainvalue;
-xmin=v1-100-(5-gainvalue)*10;
-if xmax>N+10
-    xmax=N+10;end
-if xmin<0
-    xmin=0;end
+        xmax=v1+15-gainvalue;
+        xmin=v1-100-(5-gainvalue)*10;
+        if xmax>N+10
+            xmax=N+10;end
+        if xmin<0
+            xmin=0;end
     end
 end
 set(handles.axes1,'XLim',[xmin/Fs,xmax/Fs]);
@@ -389,78 +418,88 @@ end
 
 % --- Executes on button press in pushbutton_stop.
 function pushbutton_stop_Callback(hObject, eventdata, handles)
+% Stop timer callback
 global t
-stop(t);
-delete(t);
-clear global t;
-uiresume(handles.figure1);
-Max=handles.dataNum;
-Fs=handles.Fs;
-if Max<=100;
-    set(handles.slider1,'visible','off');
-    set(handles.slider2,'visible','off');
-    set(handles.slider3,'visible','off');
-    set(handles.slider4,'visible','off');
-else
-%slider初始值赋值
-val=handles.val
-val=val+Max*ones(4,1);
-handles.val=val;
-guidata(hObject,handles);
-%channel 1的滑动条初始化
-set(handles.slider1,'min',100);
-set(handles.slider1,'max',Max);
-set(handles.slider1,'value',Max);
-%channel 2的滑动条初始化
-set(handles.slider2,'min',100);
-set(handles.slider2,'max',Max);
-set(handles.slider2,'value',Max);
-%channel 3的滑动条初始化
-set(handles.slider3,'min',100);
-set(handles.slider3,'max',Max);
-set(handles.slider3,'value',Max);
-%channel 4的滑动条初始化
-set(handles.slider4,'min',100);
-set(handles.slider4,'max',Max);
-set(handles.slider4,'value',Max);
-%channel 1的收缩滑动条初始化
-set(handles.slider5,'min',0);
-set(handles.slider5,'max',10);
-set(handles.slider5,'value',5);
-%采集结束后刷新
-dataAI=handles.dataAI;
-%channel 1刷新
-axes(handles.axes1);
-set(handles.axes1,'XLim',[Max-100,Max+10]);
-plot(1/Fs:1/Fs:length(dataAI(:,1))/Fs,dataAI(:,1));
-xlabel('时间/s');ylabel('电压/V');
-%channel 2刷新
-axes(handles.axes2);
-set(handles.axes2,'XLim',[Max-100,Max+10]);
-plot(1/Fs:1/Fs:length(dataAI(:,2))/Fs,dataAI(:,2));
-xlabel('时间/s');ylabel('电压/V');
-%channel 3刷新
-axes(handles.axes3);
-set(handles.axes4,'XLim',[Max-100,Max+10]);
-plot(1/Fs:1/Fs:length(dataAI(:,3))/Fs,dataAI(:,3));
-xlabel('时间/s');ylabel('电压/V');
-%channel 4刷新
-axes(handles.axes4);
-set(handles.axes4,'XLim',[Max-100,Max+10]);
-plot(1/Fs:1/Fs:length(dataAI(:,4))/Fs,dataAI(:,4));
-xlabel('时间/s');ylabel('电压/V');
+if isvalid(t)
+    stop(t);
+    delete(t);
+    clear global t;
 end
-%设置电压轴范围
-y_high=handles.y_high;
-y_low=handles.y_low;
-set(handles.axes1,'YLim',[y_low,y_high]);
-set(handles.axes2,'YLim',[y_low,y_high]);
-set(handles.axes3,'YLim',[y_low,y_high]);
-set(handles.axes4,'YLim',[y_low,y_high]);
+
+uiresume(handles.figure1);
+
+%initilize sliders and axes-zoom control.
+Max= handles.dataNum;
+Fs = handles.Fs;
+if Max > 100
+    set(handles.slider1,'visible','on');
+    set(handles.slider2,'visible','on');
+    set(handles.slider3,'visible','on');
+    set(handles.slider4,'visible','on');
+else
+    %slider初始值赋值
+    val=handles.val;
+    val=val+Max*ones(4,1);
+    handles.val=val;
+    guidata(hObject,handles);
+    %channel 1的滑动条初始化
+    set(handles.slider1,'min',100);
+    set(handles.slider1,'max',Max);
+    set(handles.slider1,'value',Max);
+    %channel 2的滑动条初始化
+    set(handles.slider2,'min',100);
+    set(handles.slider2,'max',Max);
+    set(handles.slider2,'value',Max);
+    %channel 3的滑动条初始化
+    set(handles.slider3,'min',100);
+    set(handles.slider3,'max',Max);
+    set(handles.slider3,'value',Max);
+    %channel 4的滑动条初始化
+    set(handles.slider4,'min',100);
+    set(handles.slider4,'max',Max);
+    set(handles.slider4,'value',Max);
+    %channel 1的收缩滑动条初始化
+    set(handles.slider5,'min',0);
+    set(handles.slider5,'max',10);
+    set(handles.slider5,'value',5);
+    
+    
+%     %采集结束后刷新
+%     dataAI=handles.dataAI;
+%     %channel 1刷新
+%     axes(handles.axes1);
+%     set(handles.axes1,'XLim',[Max-100,Max+10]);
+%     plot(1/Fs:1/Fs:length(dataAI(:,1))/Fs,dataAI(:,1));
+%     xlabel('时间/s');ylabel('电压/V');
+%     %channel 2刷新
+%     axes(handles.axes2);
+%     set(handles.axes2,'XLim',[Max-100,Max+10]);
+%     plot(1/Fs:1/Fs:length(dataAI(:,2))/Fs,dataAI(:,2));
+%     xlabel('时间/s');ylabel('电压/V');
+%     %channel 3刷新
+%     axes(handles.axes3);
+%     set(handles.axes4,'XLim',[Max-100,Max+10]);
+%     plot(1/Fs:1/Fs:length(dataAI(:,3))/Fs,dataAI(:,3));
+%     xlabel('时间/s');ylabel('电压/V');
+%     %channel 4刷新
+%     axes(handles.axes4);
+%     set(handles.axes4,'XLim',[Max-100,Max+10]);
+%     plot(1/Fs:1/Fs:length(dataAI(:,4))/Fs,dataAI(:,4));
+%     xlabel('时间/s');ylabel('电压/V');
+end
+% %设置电压轴范围
+% y_high=handles.y_high;
+% y_low=handles.y_low;
+% set(handles.axes1,'YLim',[y_low,y_high]);
+% set(handles.axes2,'YLim',[y_low,y_high]);
+% set(handles.axes3,'YLim',[y_low,y_high]);
+% set(handles.axes4,'YLim',[y_low,y_high]);
+
 %设置fileflag
-fileflag=0;
-handles.fileflag=fileflag;
+fileflag = 0;
+handles.fileflag = fileflag;
 guidata(hObject,handles);
+
 end
 
 
@@ -504,34 +543,34 @@ x=dataAI(:,choose_channel);
 N=length(x);
 switch process
     case 1
-       [n,y]=filter_highpass(Fs,x,fc);
+        [n,y]=filter_highpass(Fs,x,fc);
         axes(handles.axes5);plot(n/Fs,y);
-       xlabel('时间/s');ylabel('电压/V');grid on;
-       [f,yy]=signal_fft(y,Fs);
-       axes(handles.axes8);
-       % %单边显示格式
-       plot(f(1:N/2),yy(1:N/2)*2/N);
-       xlabel('频率/Hz');ylabel('振幅');grid on;   
+        xlabel('时间/s');ylabel('电压/V');grid on;
+        [f,yy]=signal_fft(y,Fs);
+        axes(handles.axes8);
+        % %单边显示格式
+        plot(f(1:N/2),yy(1:N/2)*2/N);
+        xlabel('频率/Hz');ylabel('振幅');grid on;
     case 2
         [n,y]=filter_lowpass(Fs,x,fc);
         axes(handles.axes5);plot(n/Fs,y);
         xlabel('时间/s');ylabel('电压/V');grid on;
-       [f,yy]=signal_fft(y,Fs);
-       axes(handles.axes8);
-       % %单边显示格式
-       plot(f(1:N/2),yy(1:N/2)*2/N);
-       xlabel('频率/Hz');ylabel('振幅');grid on;  
+        [f,yy]=signal_fft(y,Fs);
+        axes(handles.axes8);
+        % %单边显示格式
+        plot(f(1:N/2),yy(1:N/2)*2/N);
+        xlabel('频率/Hz');ylabel('振幅');grid on;
     case 3
         [f,y]=signal_fft(x,Fs);
         axes(handles.axes5);
-       %双边显示格式
-       plot(f,y/N);
-       xlabel('频率/Hz');ylabel('振幅');grid on;
-       %单边显示格式
-       axes(handles.axes8);
-       plot(f(1:N/2),y(1:N/2)*2/N);
-       xlabel('频率/Hz');ylabel('振幅');grid on;     
-end        
+        %双边显示格式
+        plot(f,y/N);
+        xlabel('频率/Hz');ylabel('振幅');grid on;
+        %单边显示格式
+        axes(handles.axes8);
+        plot(f(1:N/2),y(1:N/2)*2/N);
+        xlabel('频率/Hz');ylabel('振幅');grid on;
+end
 end
 
 
@@ -563,7 +602,7 @@ end
 % --- Executes on button press in pushbutton_import.
 function pushbutton_import_Callback(hObject, eventdata, handles)
 [filename,pathname] = uigetfile(...
-   {'*.*', 'All Files (*.*)';...
+    {'*.*', 'All Files (*.*)';...
     '*.m;*.mlx;*.fig;*.mat;*.slx;*.mdl','MATLAB Files (*.m,*.mlx,*.fig,*.mat,*.slx,*.mdl)';...
     '*.csv','CSV(逗号分隔文件) (*.csv)'; ...
     '*.txt','文本文档 (*.txt)'; ...
@@ -573,7 +612,7 @@ function pushbutton_import_Callback(hObject, eventdata, handles)
 file = [pathname,filename];
 
 if ischar(filename)
-    dataAI = Signalread(file); 
+    dataAI = Signalread(file);
     handles.dataAI = dataAI;
     guidata(hObject,handles);
 end
@@ -582,42 +621,42 @@ end
 %channel 1
 N1=length(dataAI(:,1));
 if N1<=100
-set(handles.slider1,'visible','off');
+    set(handles.slider1,'visible','off');
 else
-set(handles.axes1,'XLim',[0,N1*1.1]);
-set(handles.slider1,'min',100)
-set(handles.slider1,'max',N1);
-set(handles.slider1,'value',N1);
+    set(handles.axes1,'XLim',[0,N1*1.1]);
+    set(handles.slider1,'min',100)
+    set(handles.slider1,'max',N1);
+    set(handles.slider1,'value',N1);
 end
 %channel 2
 N2=length(dataAI(:,2));
 if N2<=100
-set(handles.slider2,'visible','off');
+    set(handles.slider2,'visible','off');
 else
-set(handles.axes2,'XLim',[0,N2*1.1]);
-set(handles.slider2,'min',100)
-set(handles.slider2,'max',N2);
-set(handles.slider2,'value',N2);
+    set(handles.axes2,'XLim',[0,N2*1.1]);
+    set(handles.slider2,'min',100)
+    set(handles.slider2,'max',N2);
+    set(handles.slider2,'value',N2);
 end
 %channel 3
 N3=length(dataAI(:,3));
 if N3<=100
-set(handles.slider3,'visible','off');
+    set(handles.slider3,'visible','off');
 else
-set(handles.axes3,'XLim',[0,N3*1.1]);
-set(handles.slider3,'min',100)
-set(handles.slider3,'max',N3);
-set(handles.slider3,'value',N3);
+    set(handles.axes3,'XLim',[0,N3*1.1]);
+    set(handles.slider3,'min',100)
+    set(handles.slider3,'max',N3);
+    set(handles.slider3,'value',N3);
 end
 %channel 4
 N4=length(dataAI(:,4));
 if N4<=100
-set(handles.slider1,'visible','off');
+    set(handles.slider1,'visible','off');
 else
-set(handles.axes1,'XLim',[0,N4*1.1]);
-set(handles.slider4,'min',100)
-set(handles.slider4,'max',N4);
-set(handles.slider4,'value',N4);
+    set(handles.axes1,'XLim',[0,N4*1.1]);
+    set(handles.slider4,'min',100)
+    set(handles.slider4,'max',N4);
+    set(handles.slider4,'value',N4);
 end
 %channel 1的收缩滑动条初始化-只有放大没有缩小
 set(handles.slider5,'min',0)
@@ -660,10 +699,10 @@ function pushbutton_save_Callback(hObject, eventdata, handles)
 datasave = handles.dataAI;
 
 [filename, pathname, filterindex] = uiputfile( ...
-{'*.mat','MATLAB Data (*.m)';
- '*.csv','CSV(逗号分隔)(*.csv)';...
- '*.txt','Unicode文本(*.txt)';...
- '*.xls','Excel 工作簿(*.xls)'});
+    {'*.mat','MATLAB Data (*.m)';
+    '*.csv','CSV(逗号分隔)(*.csv)';...
+    '*.txt','Unicode文本(*.txt)';...
+    '*.xls','Excel 工作簿(*.xls)'});
 % call windows explorer to save the file.
 % if the explorer is closed without confirming save, filename will be 0.
 
@@ -673,7 +712,7 @@ file = [pathname,filename];
 filesave = Signalwrite;
 % filesave = [filewrite,suffix(filterindex)];
 if ischar(filename)
-%     if explorer is closed without confirming save, filename will be 0.
+    %     if explorer is closed without confirming save, filename will be 0.
     switch filterindex
         case 1 %.mat
             filesave.mat(datasave,file);
@@ -762,18 +801,18 @@ handles.AxesHandles(4) = AxesHandles;
 guidata(hObject,handles);
 end
 
-% 
+%
 % % --- Executes on button press in checkbox4.
 % function checkbox4_Callback(hObject, eventdata, handles)
 % % hObject    handle to checkbox4 (see GCBO)
 % % eventdata  reserved - to be defined in a future version of MATLAB
 % % handles    structure with handles and user data (see GUIDATA)
-% LineActivity =  get(hObject,'Value'); 
+% LineActivity =  get(hObject,'Value');
 % handles.LineActivity(1) = LineActivity;
 % guidata(hObject,handles);
 % end
 % % Hint: get(hObject,'Value') returns toggle state of checkbox4
-% 
+%
 
 
 % --- Executes during object creation, after setting all properties.
@@ -825,7 +864,7 @@ function pushbutton_stop_DeleteFcn(hObject, eventdata, handles)
 % hObject    handle to pushbutton_stop (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear global 
+clear global
 end
 
 function pushbutton_stop_CreateFcn(hObject, eventdata, handles)
