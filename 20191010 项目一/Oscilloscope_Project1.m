@@ -426,11 +426,7 @@ uiresume(handles.figure1);
 Max= handles.dataNum;
 Fs = handles.Fs;
 if Max > 100
-    set(handles.slider1,'visible','on');
-    set(handles.slider2,'visible','on');
-    set(handles.slider3,'visible','on');
-    set(handles.slider4,'visible','on');
-else
+   
     %slider初始值赋值
     val=handles.val;
     val=val+Max*ones(4,1);
@@ -456,6 +452,12 @@ else
     set(handles.slider5,'min',0);
     set(handles.slider5,'max',10);
     set(handles.slider5,'value',5);
+    
+    set(handles.slider1,'visible','on');
+    set(handles.slider2,'visible','on');
+    set(handles.slider3,'visible','on');
+    set(handles.slider4,'visible','on');
+
     
     
 %     %采集结束后刷新
