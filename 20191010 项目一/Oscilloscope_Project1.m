@@ -74,15 +74,14 @@ handles.y_low=y_low;
 guidata(hObject,handles);
 
 % Edittor: Ran 2019/10/14
-dataAI = zeros(1024,4);
+dataAI = zeros(100,4);
 dataNum=1;
 % Pre-assigned memeroy, Attention this might be insufficient.
 % Simultaneously change the value in "BEGIN" callback function when change happens here.
 % LineHandles = zeros(4,1);
 % Pre-assigned memeroy, Attention this might be insufficient.
 % Simultaneously change the value in "BEGIN" callback function when change happens here.
-LineActivity = zeros(4,1);
-handles.LineActivity = LineActivity;
+
 handles.dataAI = dataAI;
 handles.dataNum = dataNum;
 guidata(hObject,handles);
@@ -265,8 +264,8 @@ function pushbutton_getcoordinate_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_getcoordinate (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-axes(handles.axes1)
-datacursormode on;
+datacursormode toggle;
+% set(dcm_obj,'Enable','
 % dcm_obj=datacursormode(gcf);
 % set(dcm_obj,'DisplayStyle','datatip','Enable','on')
 % for i=1:10
@@ -650,59 +649,59 @@ set(handles.slider4,'visible','off');
 %channel 1
 N1=length(dataAI(:,1));
 if N1 > 100
-    set(handles.slider1,'visible','on');
-
+   
     set(handles.axes1,'XLim',[0,N1*1.1]);
     set(handles.slider1,'min',100)
     set(handles.slider1,'max',N1);
     set(handles.slider1,'value',N1);
+    set(handles.slider1,'visible','on');
 end
 
 %channel 2
 N2 = length(dataAI(:,2));
 if N2 > 100
-    set(handles.slider2,'visible','on');
 
     set(handles.axes2,'XLim',[0,N2*1.1]);
     set(handles.slider2,'min',100)
     set(handles.slider2,'max',N2);
     set(handles.slider2,'value',N2);
+    set(handles.slider2,'visible','on');
 end
 
 %channel 3
 N3 = length(dataAI(:,3));
 if N3 > 100
-    set(handles.slider3,'visible','on');
-
+   
     set(handles.axes3,'XLim',[0,N3*1.1]);
     set(handles.slider3,'min',100)
     set(handles.slider3,'max',N3);
     set(handles.slider3,'value',N3);
+    set(handles.slider3,'visible','on');
 end
 
 %channel 4
 N4 = length(dataAI(:,4));
 if N4 > 100
-    set(handles.slider4,'visible','on');
 
     set(handles.axes1,'XLim',[0,N4*1.1]);
     set(handles.slider4,'min',100)
     set(handles.slider4,'max',N4);
     set(handles.slider4,'value',N4);
+    set(handles.slider4,'visible','on');
 end
 %channel 1的收缩滑动条初始化-只有放大没有缩小
 set(handles.slider5,'min',0)
 set(handles.slider5,'max',10);
 set(handles.slider5,'value',5);
 
-Fs=handles.Fs;
+% Fs=handles.Fs;
 % display data read on axes areas.
 if ischar(filename)
     AxesHandles = handles.AxesHandles;
     for i = 1:4
         cla(AxesHandles(i)); % clear exsisted data in graphs.
-        %plot(AxesHandles(i),dataAI(:,i));
-        plot(AxesHandles(i),1/Fs:1/Fs:length(dataAI(:,i))/Fs,dataAI(:,i));
+        plot(AxesHandles(i),dataAI(:,i),'-black');
+%         plot(AxesHandles(i),1/Fs:1/Fs:length(dataAI(:,i))/Fs,dataAI(:,i));
         xlabel('时间/s');ylabel('电压/V');
     end
 end
