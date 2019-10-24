@@ -95,7 +95,7 @@ try
     i = 1;
     start(t);
 
-     uiwait(handles.figure1);
+      uiwait(handles.figure1);
 %     stop(t);
     guidata(hObject,handles);
     
@@ -132,6 +132,7 @@ end
 function TimerCallback(obj, event, instantAiCtrl, startChannel, ...
     channelCount, data, hObject)
 % 由于使用了全局变量，hObject不再有必要。
+tic
 global handlesconvey
 handles = handlesconvey;
 
@@ -156,7 +157,7 @@ for j=0:(channelCount - 1)
     dataAI(dataNum,j+1) = temp;
     
     Realtimeplot_Project1(dataNum,temp,LineHandles(1,j+1));
-    if dataNum > 100
+    if dataNum > 300
         set(AxesHandles(j+1),'XLim',[dataNum-100,dataNum+10]);
     else 
         set(AxesHandles(j+1),'XLim',[0,dataNum+10]);
@@ -170,5 +171,5 @@ handles.dataNum = dataNum;
 
 handlesconvey = handles;
 guidata(gcf,handles);  
-
+toc
 end

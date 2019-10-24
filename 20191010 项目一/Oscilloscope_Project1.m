@@ -419,7 +419,7 @@ if isvalid(t)
     clear global t;
 end
 
-uiresume(handles.figure1);
+% uiresume(handles.figure1);
 
 %initilize sliders and axes-zoom control.
 Max= handles.dataNum;
