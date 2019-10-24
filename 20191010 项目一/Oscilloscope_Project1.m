@@ -311,7 +311,7 @@ handles.val(1)=v1;
 guidata(hObject,handles);
 gainvalue = get(handles.slider5,'value');   %得到缩放滑动条的值
 Fs=handles.Fs;
-x=handles.dataAI(1);
+x=handles.dataAI(:,1);
 N=length(x);
 xmin=v1-100+(5-gainvalue)*10;
 xmax=v1+15-gainvalue;
@@ -371,7 +371,8 @@ handles.val(3)=v3;
 guidata(hObject,handles);
 if v3>=100
     set(handles.axes3,'XLim',[v3-100,v3+10]);
-else set(handles.axes3,'XLim',[0,110]);
+else
+    set(handles.axes3,'XLim',[0,110]);
 end
 end
 
@@ -384,7 +385,7 @@ end
 
 function slider5_Callback(hObject, eventdata, handles)
 v1=handles.val(1);
-x=handles.dataAI(1);
+x=handles.dataAI(:,1);
 N=length(x);
 gainvalue=get(handles.slider5,'value');
 Fs=handles.Fs;
@@ -638,42 +639,45 @@ set(handles.slider4,'visible','off');
 N1=length(dataAI(:,1));
 if N1 > 100
     set(handles.slider1,'visible','on');
-end
+
     set(handles.axes1,'XLim',[0,N1*1.1]);
     set(handles.slider1,'min',100)
     set(handles.slider1,'max',N1);
     set(handles.slider1,'value',N1);
+end
 
 %channel 2
 N2 = length(dataAI(:,2));
 if N2 > 100
     set(handles.slider2,'visible','on');
-end
+
     set(handles.axes2,'XLim',[0,N2*1.1]);
     set(handles.slider2,'min',100)
     set(handles.slider2,'max',N2);
     set(handles.slider2,'value',N2);
+end
 
 %channel 3
 N3 = length(dataAI(:,3));
 if N3 > 100
     set(handles.slider3,'visible','on');
-end
+
     set(handles.axes3,'XLim',[0,N3*1.1]);
     set(handles.slider3,'min',100)
     set(handles.slider3,'max',N3);
     set(handles.slider3,'value',N3);
+end
 
 %channel 4
-N4=length(dataAI(:,4));
+N4 = length(dataAI(:,4));
 if N4 > 100
-    set(handles.slider1,'visible','on');
-end
+    set(handles.slider4,'visible','on');
+
     set(handles.axes1,'XLim',[0,N4*1.1]);
     set(handles.slider4,'min',100)
     set(handles.slider4,'max',N4);
     set(handles.slider4,'value',N4);
-
+end
 %channel 1的收缩滑动条初始化-只有放大没有缩小
 set(handles.slider5,'min',0)
 set(handles.slider5,'max',10);
