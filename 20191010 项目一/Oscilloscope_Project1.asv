@@ -211,7 +211,8 @@ guidata(hObject,handles);
 InstantAI_Project1(handles.figure1,handles);% Start sampling in all axes areas.
 
 
-% guidata(hObject,handles);
+guidata(hObject,handles);
+% submit new input signal to database.
 
 end
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %

@@ -34,13 +34,13 @@
 %   button in GUI is needed. 
 % 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-function handlesret = InstantAI_Project1(hObject,handles)
+function InstantAI_Project1(hObject,handles)
 % 使用全局变量在InstantAI 和 TimerCallBack Fcn之间传递数据，因为未找到设置TimerCallBack
 % Fcn的返回值的方法；在TimerCallBack Fcn中调用的guidata不会将数据储存到Figure1的空间中，
 % 而是另开一个空间，即使传入了参数hObject。
-global handlesconvey 
+% global handlesconvey 
 global t
-handlesconvey = handles;
+% handlesconvey = handles;
 
 % Make Automation.BDaq assembly visible to MATLAB.
 BDaq = NET.addAssembly('Automation.BDaq');
@@ -97,7 +97,7 @@ try
 
       uiwait(handles.figure1);
 %     stop(t);
-    guidata(hObject,handles);
+%     guidata(hObject,handles);
     
    
    
@@ -117,9 +117,9 @@ end
 
 % Step 4: Close device and release any allocated resource.
 instantAiCtrl.Dispose();
-handlesret = handlesconvey;
-
-clear global handlesconvey
+% handlesret = handlesconvey;
+% 
+% clear global handlesconvey
 end
 
 function result = BioFailed(errorCode)
@@ -132,10 +132,10 @@ end
 function TimerCallback(obj, event, instantAiCtrl, startChannel, ...
     channelCount, data, hObject)
 % 由于使用了全局变量，hObject不再有必要。
-tic
-global handlesconvey
-handles = handlesconvey;
+% global handlesconvey
+% handles = handlesconvey;
 
+handles = guidata(hObject);
 % handles = guidata(hObject);
 
 dataAI = handles.dataAI; 
@@ -157,7 +157,7 @@ for j=0:(channelCount - 1)
     dataAI(dataNum,j+1) = temp;
     
     Realtimeplot_Project1(dataNum,temp,LineHandles(1,j+1));
-    if dataNum > 300
+    if dataNum > 100 %300 2019/10/30
         set(AxesHandles(j+1),'XLim',[dataNum-100,dataNum+10]);
     else 
         set(AxesHandles(j+1),'XLim',[0,dataNum+10]);
@@ -169,7 +169,6 @@ dataNum = dataNum + 1;
 handles.dataAI = dataAI;
 handles.dataNum = dataNum;
 
-handlesconvey = handles;
-guidata(gcf,handles);  
-toc
+% handlesconvey = handles;
+guidata(hObject,handles);  
 end
