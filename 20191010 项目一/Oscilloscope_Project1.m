@@ -223,192 +223,6 @@ guidata(hObject,handles);
 end
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
-
-
-% --- Executes during object creation, after setting all properties.
-function axes1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to axes1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-AxesHandles = gca;
-handles.AxesHandles(1) = AxesHandles;
-guidata(hObject,handles);
-% Hint: place code in OpeningFcn to populate axes1
-end
-% --- Executes during object creation, after setting all properties.
-
-function edit4_Callback(hObject, eventdata, handles)
-% hObject    handle to edit4 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit4 as text
-%        str2double(get(hObject,'String')) returns contents of edit4 as a double
-end
-
-% --- Executes during object creation, after setting all properties.
-function edit4_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit4 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-end
-
-% --- Executes on button press in pushbutton_getcoordinate.
-function pushbutton_getcoordinate_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton_getcoordinate (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-datacursormode toggle;
-% set(dcm_obj,'Enable','
-% dcm_obj=datacursormode(gcf);
-% set(dcm_obj,'DisplayStyle','datatip','Enable','on')
-% for i=1:10
-%     disp('click')
-%     pause
-%     c_info=getCursorInfo(dcm_obj);
-%     pos=c_info.Position;
-%     set(handles.edit4,'string',pos(1));
-%     set(handles.edit5,'string',pos(2));
-% end
-end
-
-function edit5_Callback(hObject, eventdata, handles)
-% hObject    handle to edit5 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit5 as text
-%        str2double(get(hObject,'String')) returns contents of edit5 as a double
-end
-
-% --- Executes during object creation, after setting all properties.
-function edit5_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit5 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-end
-
-% --- Executes on slider movement.
-function slider1_Callback(hObject, eventdata, handles)
-% hObject    handle to slider1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-v1 = get(handles.slider1,'value');      %v1是滑动条的值，一开始是dataNum，横坐标的最大值是v1+50
-handles.val(1)=v1;
-guidata(hObject,handles);
-gainvalue = get(handles.slider5,'value');   %得到缩放滑动条的值
-Fs=handles.Fs;
-x=handles.dataAI(:,1);
-N=length(x);
-xmin=v1-100-(5-gainvalue)*10;
-xmax=v1+15-gainvalue;
-if xmax>N+10
-    xmax=N+10;end
-if xmin<0
-    xmin=0;end
-set(handles.axes1,'XLim',[xmin,xmax]);
-end
-
-% --- Executes during object creation, after setting all properties.
-function slider1_CreateFcn(hObject, eventdata, handles)
-if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor',[.9 .9 .9]);
-end
-end
-
-% --- Executes on slider movement.
-function slider4_Callback(hObject, eventdata, handles)
-v4 = get(handles.slider4,'value');
-handles.val(4)=v4;
-guidata(hObject,handles);
-if v4>=100
-    set(handles.axes4,'XLim',[v4-100,v4+10]);
-else set(handles.axes4,'XLim',[0,110]);
-end
-end
-
-% --- Executes during object creation, after setting all properties.
-function slider4_CreateFcn(hObject, eventdata, handles)
-if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor',[.9 .9 .9]);
-end
-end
-
-% --- Executes on slider movement.
-function slider2_Callback(hObject, eventdata, handles)
-v2 = get(handles.slider2,'value');
-handles.val(2)=v2;
-guidata(hObject,handles);
-if v2>=100
-    set(handles.axes2,'XLim',[v2-100,v2+10]);
-else set(handles.axes2,'XLim',[0,110]);
-end
-end
-
-% --- Executes during object creation, after setting all properties.
-function slider2_CreateFcn(hObject, eventdata, handles)
-if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor',[.9 .9 .9]);
-end
-end
-
-function slider3_Callback(hObject, eventdata, handles)
-v3 = get(handles.slider3,'value');
-handles.val(3)=v3;
-guidata(hObject,handles);
-if v3>=100
-    set(handles.axes3,'XLim',[v3-100,v3+10]);
-else
-    set(handles.axes3,'XLim',[0,110]);
-end
-end
-
-% --- Executes during object creation, after setting all properties.
-function slider3_CreateFcn(hObject, eventdata, handles)
-if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor',[.9 .9 .9]);
-end
-end
-
-function slider5_Callback(hObject, eventdata, handles)
-v1=handles.val(1);
-x=handles.dataAI(:,1);
-N=length(x);
-gainvalue=get(handles.slider5,'value');
-Fs=handles.Fs;
-if N<=100
-    xmin=0;xmax=110+(5-gainvalue)*10;
-else
-    xmin=v1-100-(5-gainvalue)*10;
-    xmax=v1+15-gainvalue;
-        if xmax>N+10
-            xmax=N+10;end
-        if xmin<0
-            xmin=0;end
-end
-set(handles.axes1,'XLim',[xmin,xmax]);
-end
-
-% --- Executes during object creation, after setting all properties.
-function slider5_CreateFcn(hObject, eventdata, handles)
-if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor',[.9 .9 .9]);
-end
-end
-
-
 % --- Executes on button press in pushbutton_stop.
 function pushbutton_stop_Callback(hObject, eventdata, handles)
 % Stop timer callback
@@ -501,6 +315,184 @@ end
 % set(handles.axes4,'YLim',[y_low,y_high]);
 
 end
+
+
+function edit4_Callback(hObject, eventdata, handles)
+% hObject    handle to edit4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit4 as text
+%        str2double(get(hObject,'String')) returns contents of edit4 as a double
+end
+
+% --- Executes during object creation, after setting all properties.
+function edit4_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+end
+
+% --- Executes on button press in pushbutton_getcoordinate.
+function pushbutton_getcoordinate_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_getcoordinate (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+datacursormode toggle;
+% set(dcm_obj,'Enable','
+% dcm_obj=datacursormode(gcf);
+% set(dcm_obj,'DisplayStyle','datatip','Enable','on')
+% for i=1:10
+%     disp('click')
+%     pause
+%     c_info=getCursorInfo(dcm_obj);
+%     pos=c_info.Position;
+%     set(handles.edit4,'string',pos(1));
+%     set(handles.edit5,'string',pos(2));
+% end
+end
+
+function edit5_Callback(hObject, eventdata, handles)
+% hObject    handle to edit5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit5 as text
+%        str2double(get(hObject,'String')) returns contents of edit5 as a double
+end
+
+% --- Executes during object creation, after setting all properties.
+function edit5_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+end
+
+% --- Executes on slider movement.
+function slider1_Callback(hObject, eventdata, handles)
+% hObject    handle to slider1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+v1 = get(handles.slider1,'value');      %v1是滑动条的值，一开始是dataNum，横坐标的最大值是v1+50
+handles.val(1)=v1;
+guidata(hObject,handles);
+gainvalue = get(handles.slider5,'value');   %得到缩放滑动条的值
+Fs=handles.Fs;
+x=handles.dataAI(:,1);
+N=length(x);
+xmin=v1-100-(5-gainvalue)*10;
+xmax=v1+15-gainvalue;
+if xmax>N+10
+    xmax=N+10;end
+if xmin<0
+    xmin=0;end
+set(handles.axes1,'XLim',[xmin,xmax]);
+end
+
+
+
+% --- Executes on slider movement.
+function slider2_Callback(hObject, eventdata, handles)
+v2 = get(handles.slider2,'value');
+handles.val(2)=v2;
+guidata(hObject,handles);
+if v2>=100
+    set(handles.axes2,'XLim',[v2-100,v2+10]);
+else set(handles.axes2,'XLim',[0,110]);
+end
+end
+
+% --- Executes during object creation, after setting all properties.
+function slider2_CreateFcn(hObject, eventdata, handles)
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+end
+
+function slider3_Callback(hObject, eventdata, handles)
+v3 = get(handles.slider3,'value');
+handles.val(3)=v3;
+guidata(hObject,handles);
+if v3>=100
+    set(handles.axes3,'XLim',[v3-100,v3+10]);
+else
+    set(handles.axes3,'XLim',[0,110]);
+end
+end
+
+% --- Executes during object creation, after setting all properties.
+function slider3_CreateFcn(hObject, eventdata, handles)
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+end
+
+% --- Executes during object creation, after setting all properties.
+function slider1_CreateFcn(hObject, eventdata, handles)
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+end
+
+% --- Executes on slider movement.
+function slider4_Callback(hObject, eventdata, handles)
+v4 = get(handles.slider4,'value');
+handles.val(4)=v4;
+guidata(hObject,handles);
+if v4>=100
+    set(handles.axes4,'XLim',[v4-100,v4+10]);
+else set(handles.axes4,'XLim',[0,110]);
+end
+end
+
+% --- Executes during object creation, after setting all properties.
+function slider4_CreateFcn(hObject, eventdata, handles)
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+end
+
+
+function slider5_Callback(hObject, eventdata, handles)
+v1=handles.val(1);
+x=handles.dataAI(:,1);
+N=length(x);
+gainvalue=get(handles.slider5,'value');
+Fs=handles.Fs;
+if N<=100
+    xmin=0;xmax=110+(5-gainvalue)*10;
+else
+    xmin=v1-100-(5-gainvalue)*10;
+    xmax=v1+15-gainvalue;
+        if xmax>N+10
+            xmax=N+10;end
+        if xmin<0
+            xmin=0;end
+end
+set(handles.axes1,'XLim',[xmin,xmax]);
+end
+
+% --- Executes during object creation, after setting all properties.
+function slider5_CreateFcn(hObject, eventdata, handles)
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+end
+
+
+
 
 
 function edit_sample_Callback(hObject, eventdata, handles)
@@ -797,6 +789,19 @@ handles.process=process;
 guidata(hObject,handles);
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_fft
 end
+
+% --- Executes during object creation, after setting all properties.
+function axes1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to axes1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+AxesHandles = gca;
+handles.AxesHandles(1) = AxesHandles;
+guidata(hObject,handles);
+% Hint: place code in OpeningFcn to populate axes1
+end
+% --- Executes during object creation, after setting all properties.
+
 
 % --- Executes during object creation, after setting all properties.
 function axes2_CreateFcn(hObject, eventdata, handles)
