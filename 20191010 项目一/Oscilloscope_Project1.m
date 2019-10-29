@@ -207,8 +207,12 @@ end
 handles.dataNum = 1;
 handles.dataAI = zeros(100,4);
 guidata(hObject,handles);
+% end initilization
 
-InstantAI_Project1(handles.figure1,handles);% Start sampling in all axes areas.
+
+
+InstantAI_Project1(handles.figure1,handles);
+% Sampling in all axes areas.
 
 
 % guidata(hObject,handles);
