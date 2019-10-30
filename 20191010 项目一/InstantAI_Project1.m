@@ -35,12 +35,16 @@
 % 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 function InstantAI_Project1(hObject,handles)
-% 使用全局变量在InstantAI 和 TimerCallBack Fcn之间传递数据，因为未找到设置TimerCallBack
-% Fcn的返回值的方法；在TimerCallBack Fcn中调用的guidata不会将数据储存到Figure1的空间中，
-% 而是另开一个空间，即使传入了参数hObject。
+% hObject should be the handles of main GUI figure,eg. handles.figure1, to
+% convey data between InstantAI and guidata.
+
+% % % % % % % % % % % % %another way % % % % % % % % % % % %
 % global handlesconvey 
-global t
 % handlesconvey = handles;
+
+% make timer object t global to realize timer stop in another function.
+global t;
+
 
 % Make Automation.BDaq assembly visible to MATLAB.
 BDaq = NET.addAssembly('Automation.BDaq');
@@ -50,7 +54,7 @@ BDaq = NET.addAssembly('Automation.BDaq');
 % devices according to their needs. 
 deviceDescription = 'USB-4704,BID#0'; 
 startChannel = int32(0);
-channelCount = int32(4); %default channel number is 4.
+channelCount = int32(handles.ChannelCount); %default channel number is 4.
 
 sr = handles.Fs;
 period = 1/sr;
@@ -131,12 +135,12 @@ end
 
 function TimerCallback(obj, event, instantAiCtrl, startChannel, ...
     channelCount, data, hObject)
-% 由于使用了全局变量，hObject不再有必要。
+% % % % % % % % % %another way % % % % % % % % % % %
 % global handlesconvey
 % handles = handlesconvey;
 
 handles = guidata(hObject);
-% handles = guidata(hObject);
+
 
 dataAI = handles.dataAI; 
 dataNum = handles.dataNum;
@@ -152,9 +156,9 @@ fprintf('\n');
 % get data
 for j=0:(channelCount - 1)
     temp = data.Get(j);
-    fprintf('channel %d : %10f ', j, temp);
-    
+    fprintf('channel %d : %10f ', j, temp);   
     dataAI(dataNum,j+1) = temp;
+    
     
     Realtimeplot_Project1(dataNum,temp,LineHandles(1,j+1));
     if dataNum > 100 %300 2019/10/30
@@ -162,13 +166,21 @@ for j=0:(channelCount - 1)
     else 
         set(AxesHandles(j+1),'XLim',[0,dataNum+10]);
     end
+    
+    
+    if channelCount < 4
+        for k = channelCount:4
+            dataAI(dataNum,j+1) = 0;
+        end
+    end
+    
 end
 
 dataNum = dataNum + 1;
 
 handles.dataAI = dataAI;
 handles.dataNum = dataNum;
-
 % handlesconvey = handles;
 guidata(hObject,handles);  
+
 end
