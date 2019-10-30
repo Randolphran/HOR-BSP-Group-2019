@@ -23,7 +23,7 @@ function varargout = Oscilloscope_Project1(varargin)
 
 % Edit the above text to modify the response to help Oscilloscope_Project1
 
-% Last Modified by GUIDE v2.5 23-Oct-2019 21:41:50
+% Last Modified by GUIDE v2.5 31-Oct-2019 00:05:45
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -893,9 +893,48 @@ function pushbutton_stop_DeleteFcn(hObject, eventdata, handles)
 % hObject    handle to pushbutton_stop (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-clear global
 end
 
+% --- Executes during object deletion, before destroying properties.
 function pushbutton_stop_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to pushbutton_stop (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
 end
 
+
+
+% --- Executes on button press in checkbox_Ch0.
+function checkbox_Ch0_Callback(hObject, eventdata, handles)
+% hObject    handle to checkbox_Ch0 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of checkbox_Ch0
+
+
+% --- Executes on button press in checkbox_Ch1.
+function checkbox_Ch1_Callback(hObject, eventdata, handles)
+% hObject    handle to checkbox_Ch1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of checkbox_Ch1
+
+
+% --- Executes on button press in checkbox_Ch2.
+function checkbox_Ch2_Callback(hObject, eventdata, handles)
+% hObject    handle to checkbox_Ch2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of checkbox_Ch2
+
+
+% --- Executes on button press in checkbox_Ch3.
+function checkbox_Ch3_Callback(hObject, eventdata, handles)
+% hObject    handle to checkbox_Ch3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of checkbox_Ch3
