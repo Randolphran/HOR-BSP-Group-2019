@@ -539,8 +539,10 @@ end
 
 
 function slider5_Callback(hObject, eventdata, handles)
-timeaxesflag=handles.timeaxesflag;
-gainvalue=get(handles.slider5,'value');
+timeaxesflag = handles.timeaxesflag;
+gainvalue = get(handles.slider5,'value');
+
+gainvalue = int32(round(gainvalue));
 
 if gainvalue<=1
     beishu=10;
@@ -604,7 +606,6 @@ if timeaxesflag == 1 % 停止采集后
         [num2str(timestep * xmin),' ms'],...
         [num2str(timestep * xmax),' ms']});
 end
-
 end
 
 % --- Executes during object creation, after setting all properties.
@@ -656,6 +657,9 @@ choose_channel=handles.choose_channel;
 process=handles.process;
 x=dataAI(:,choose_channel);
 N=length(x);
+
+round_1 = round(N/2);
+
 switch process
     case 1
         [n,y]=filter_highpass(Fs,x,fc);
@@ -664,7 +668,7 @@ switch process
         [f,yy]=signal_fft(y,Fs);
         axes(handles.axes8);
         % %单边显示格式
-        plot(f(1:N/2),yy(1:N/2)*2/N);
+        plot(f(1:round_1),yy(1:round_1)*2/N);
         xlabel('频率/Hz');ylabel('振幅');grid on;
     case 2
         [n,y]=filter_lowpass(Fs,x,fc);
@@ -673,7 +677,7 @@ switch process
         [f,yy]=signal_fft(y,Fs);
         axes(handles.axes8);
         % %单边显示格式
-        plot(f(1:N/2),yy(1:N/2)*2/N);
+        plot(f(1:round_1),yy(1:round_1)*2/N);
         xlabel('频率/Hz');ylabel('振幅');grid on;
     case 3
         [f,y]=signal_fft(x,Fs);
@@ -683,7 +687,7 @@ switch process
         xlabel('频率/Hz');ylabel('振幅');grid on;
         %单边显示格式
         axes(handles.axes8);
-        plot(f(1:N/2),y(1:N/2)*2/N);
+        plot(f(1:round_1),y(1:round_1)*2/N);
         xlabel('频率/Hz');ylabel('振幅');grid on;
 end
 end

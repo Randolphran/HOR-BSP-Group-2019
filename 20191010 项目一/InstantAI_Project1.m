@@ -151,7 +151,7 @@ function TimerCallback(obj, event, instantAiCtrl, startChannel, ...
 % % % % % % % % % %another way % % % % % % % % % % %
 % global handlesconvey
 % handles = handlesconvey;
-tic
+% tic
 handles = guidata(hObject);
 
 
@@ -166,12 +166,12 @@ errorCode = instantAiCtrl.Read(startChannel, channelCount, data);
 if BioFailed(errorCode)
     throw Exception();
 end
-fprintf('\n');
+% fprintf('\n');
 
 % get data
 for j=0:(channelCount - 1)
     temp = data.Get(j);
-    fprintf('channel %d : %10f ', j, temp);   
+%     fprintf('channel %d : %10f ', j, temp);   
     dataAI(dataNum,j+1) = temp;
     
 % plotting in axes areas.    
@@ -205,5 +205,5 @@ handles.dataAI = dataAI;
 handles.dataNum = dataNum;
 % handlesconvey = handles;
 guidata(hObject,handles);  
-toc
+% toc
 end
