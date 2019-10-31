@@ -64,7 +64,7 @@ period = 1/sr;
 timestep = 1000/handles.Fs; % unit: ms
 totallength = timestep * 100; % unit: ms %initial amount of displayed data is 100.
 for j = 0:channelCount-1
-    set(AxesHandles(j+1),'XLim',[0,100]);
+    set((j+1),'XLim',[0,100]);
     xticks(AxesHandles(j+1),[0 25 75 100]);
     xticklabels(AxesHandles(j+1),{'0',...
         [num2str(totallength*0.25),' ms'],...
@@ -180,14 +180,15 @@ for j=0:(channelCount - 1)
     % set axes pattern when necessary
     if dataNum > 100 % 2019/10/31
         timestep = 1000/handles.Fs; % unit: ms
+        totallength = timestep * dataNum; % unit: ms
+
         
         set(AxesHandles(j+1),'XLim',[dataNum-90,dataNum+10]);
-        xticks(AxesHandles(j+1),[dataNum-90 dataNum-65 dataNum-15 dataNum+10]);
-        xticklabels(AxesHandles(j+1),{...
-            [num2str(timestep * (dataNum-90)),' ms'],...
-            [num2str(timestep * (dataNum-65)),' ms'],...
-            [num2str(timestep * (dataNum-15)),' ms'],...
-            [num2str(timestep * (dataNum+10)),' ms']});    
+        xticks(AxesHandles(j+1),[0 dataNum*0.25 dataNum*0.75 dataNum]);
+        xticklabels(AxesHandles(j+1),{'0',...
+            [num2str(totallength*0.25),' ms'],...
+            [num2str(totallength*0.75),' ms'],...
+            [num2str(totallength),' ms']});    
     end
     
     % fill in disabled channel data with zeros.

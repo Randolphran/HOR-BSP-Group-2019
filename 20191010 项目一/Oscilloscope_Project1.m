@@ -236,32 +236,33 @@ global t
 uiresume(handles.figure1);
 
 %initilize sliders and axes-zoom control.
-Max= handles.dataNum;
+dataNum= handles.dataNum;
+timestep = 1000/handles.Fs; %unit:ms
 % Fs = handles.Fs;
 
-if Max > 100
+if dataNum > 100
    
     %slider初始值赋值
     val=handles.val;
-    val=val+Max*ones(4,1);
+    val=val+dataNum*ones(4,1);
     handles.val=val;
     guidata(hObject,handles);
     %channel 1的滑动条初始化
     set(handles.slider1,'min',100);
-    set(handles.slider1,'max',Max);
-    set(handles.slider1,'value',Max);
+    set(handles.slider1,'max',dataNum);
+    set(handles.slider1,'value',dataNum);
     %channel 2的滑动条初始化
     set(handles.slider2,'min',100);
-    set(handles.slider2,'max',Max);
-    set(handles.slider2,'value',Max);
+    set(handles.slider2,'max',dataNum);
+    set(handles.slider2,'value',dataNum);
     %channel 3的滑动条初始化
     set(handles.slider3,'min',100);
-    set(handles.slider3,'max',Max);
-    set(handles.slider3,'value',Max);
+    set(handles.slider3,'max',dataNum);
+    set(handles.slider3,'value',dataNum);
     %channel 4的滑动条初始化
     set(handles.slider4,'min',100);
-    set(handles.slider4,'max',Max);
-    set(handles.slider4,'value',Max);
+    set(handles.slider4,'max',dataNum);
+    set(handles.slider4,'value',dataNum);
     %channel 1的收缩滑动条初始化
     set(handles.slider5,'min',0);
     set(handles.slider5,'max',10);
@@ -280,7 +281,13 @@ if Max > 100
     if handles.ChannelCount >= 1
         axes(handles.axes1);
         plot(dataAI(:,1),'-black');
-        set(handles.axes1,'XLim',[Max-100,Max+10]);
+        set(handles.axes1,'XLim',[dataNum-90,dataNum+10]);
+        xticks(handles.axes1,[dataNum-90 dataNum-65 dataNum-15 dataNum+10]);
+        xticklabels(handles.axes1,{...
+            [num2str(timestep * (dataNum-90)),' ms'],...
+            [num2str(timestep * (dataNum-65)),' ms'],...
+            [num2str(timestep * (dataNum-15)),' ms'],...
+            [num2str(timestep * (dataNum+10)),' ms']});
     end
     %     plot(1/Fs:1/Fs:length(dataAI(:,1))/Fs,dataAI(:,1));
     
@@ -289,7 +296,13 @@ if Max > 100
     if handles.ChannelCount >= 2
         axes(handles.axes2);
         plot(dataAI(:,2),'-black');
-        set(handles.axes2,'XLim',[Max-100,Max+10]);
+        set(handles.axes2,'XLim',[dataNum-90,dataNum+10]);
+        xticks(handles.axes2,[dataNum-90 dataNum-65 dataNum-15 dataNum+10]);
+        xticklabels(handles.axes2,{...
+            [num2str(timestep * (dataNum-90)),' ms'],...
+            [num2str(timestep * (dataNum-65)),' ms'],...
+            [num2str(timestep * (dataNum-15)),' ms'],...
+            [num2str(timestep * (dataNum+10)),' ms']});
     end
     %     plot(1/Fs:1/Fs:length(dataAI(:,2))/Fs,dataAI(:,2));
     
@@ -298,7 +311,13 @@ if Max > 100
     if handles.ChannelCount >= 3
         axes(handles.axes3);
         plot(dataAI(:,3),'-black');
-        set(handles.axes3,'XLim',[Max-100,Max+10]);
+        set(handles.axes3,'XLim',[dataNum-90,dataNum+10]);
+        xticks(handles.axes3,[dataNum-90 dataNum-65 dataNum-15 dataNum+10]);
+        xticklabels(handles.axes3,{...
+            [num2str(timestep * (dataNum-90)),' ms'],...
+            [num2str(timestep * (dataNum-65)),' ms'],...
+            [num2str(timestep * (dataNum-15)),' ms'],...
+            [num2str(timestep * (dataNum+10)),' ms']});
     end
     %     plot(1/Fs:1/Fs:length(dataAI(:,3))/Fs,dataAI(:,3));
     
@@ -307,7 +326,13 @@ if Max > 100
     if handles.ChannelCount == 4
         axes(handles.axes4);
         plot(dataAI(:,4),'-black');
-        set(handles.axes4,'XLim',[Max-100,Max+10]);
+        set(handles.axes4,'XLim',[dataNum-90,dataNum+10]);
+        xticks(handles.axes4,[dataNum-90 dataNum-65 dataNum-15 dataNum+10]);
+        xticklabels(handles.axes4,{...
+            [num2str(timestep * (dataNum-90)),' ms'],...
+            [num2str(timestep * (dataNum-65)),' ms'],...
+            [num2str(timestep * (dataNum-15)),' ms'],...
+            [num2str(timestep * (dataNum+10)),' ms']});
     end
     
     
