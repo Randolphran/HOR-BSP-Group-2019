@@ -948,6 +948,7 @@ function checkbox_Ch0_Callback(hObject, eventdata, handles)
 flag = get(hObject,'Value');
 if flag
     set(handles.checkbox_Ch1,'Enable','on');
+    handles.ChannelSelect(1) = 1;
 else
     set(handles.checkbox_Ch1,'Enable','off');
     set(handles.checkbox_Ch2,'Enable','off');
@@ -961,7 +962,7 @@ else
 end
 
 
-handles.ChannelSelect(1) = flag;
+
 guidata(hObject,handles);
 end
 % Hint: get(hObject,'Value') returns toggle state of checkbox_Ch0
@@ -975,16 +976,17 @@ function checkbox_Ch1_Callback(hObject, eventdata, handles)
 flag = get(hObject,'Value');
 if flag
     set(handles.checkbox_Ch2,'Enable','on');
+    set(handles.checkbox_Ch3,'Enable','on');
 else
     set(handles.checkbox_Ch2,'Enable','off');
     set(handles.checkbox_Ch3,'Enable','off');
     set(handles.checkbox_Ch2,'Value',0);
     set(handles.checkbox_Ch3,'Value',0);
-    handles.ChannelSelect(3) = 0;
-    handles.ChannelSelect(4) = 0;
 end
 
 handles.ChannelSelect(2) = flag;
+handles.ChannelSelect(3) = 0;
+handles.ChannelSelect(4) = 0;
 guidata(hObject,handles);
 end
 % Hint: get(hObject,'Value') returns toggle state of checkbox_Ch1
@@ -1001,10 +1003,10 @@ if flag
 else
     set(handles.checkbox_Ch3,'Enable','off');
     set(handles.checkbox_Ch3,'Value',0);
-    handles.ChannelSelect(4) = 0;
 end
 
 handles.ChannelSelect(3) = flag;
+handles.ChannelSelect(4) = 0;
 guidata(hObject,handles);
 end
 % Hint: get(hObject,'Value') returns toggle state of checkbox_Ch2
