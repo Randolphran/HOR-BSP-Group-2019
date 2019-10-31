@@ -146,7 +146,7 @@ dataAI = handles.dataAI;
 dataNum = handles.dataNum;
 LineHandles = handles.LineHandles;
 AxesHandles = handles.AxesHandles;
-% timescale = handles.timescale;
+timescale = han
 
 period = 1000/handles.Fs; % unit: ms
 totallength = period * 100; % unit: ms

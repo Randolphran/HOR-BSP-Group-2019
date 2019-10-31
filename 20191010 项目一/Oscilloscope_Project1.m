@@ -56,8 +56,7 @@ function Oscilloscope_Project1_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for Oscilloscope_Project1
 handles.output = hObject;
 
-% Update handles structure
-
+% initialize button& check box status.
 set(handles.radiobutton_fft,'value',0);
 set(handles.radiobutton_filter,'value',0);
 set(handles.radiobutton_highpass,'value',0);
@@ -71,30 +70,28 @@ set(handles.checkbox_Ch1,'value',1);
 set(handles.checkbox_Ch2,'value',1);
 set(handles.checkbox_Ch3,'value',1);
 
+% initial y-axes interval.
 y_high = 1.5;
 y_low = -1.5;
 handles.y_high = y_high;
 handles.y_low = y_low;
 
-% Edittor: Ran 2019/10/14
-dataAI = zeros(1,4);
+% Pre-assign value for data structure.
+dataAI = zeros(1,4);% Pre-assigned memeroy,Simultaneously change the value in "BEGIN" callback function when change happens here.
 dataNum=1;
 ChannelCount = 4;
-% Pre-assigned memeroy, Attention this might be insufficient.
-% Simultaneously change the value in "BEGIN" callback function when change happens here.
+ChannelSelect = [1,1,1,1];
 val = zeros(4,1);  %滑动条的值
 
 
 handles.ChannelCount = ChannelCount;
+handles.ChannelSelect = ChannelSelect;
 handles.dataAI = dataAI;
 handles.dataNum = dataNum;
 handles.val = val;
 
 guidata(hObject,handles);
 end
-
-% UIWAIT makes Oscilloscope_Project1 wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -177,19 +174,19 @@ AxesHandles = handles.AxesHandles;
 axes(AxesHandles(1));
 xlim auto
 ylim auto
-xlabel('Samples');ylabel('电压/V');
+xlabel('time');ylabel('voltage/V');
 axes(AxesHandles(2));
 xlim auto
 ylim auto
-xlabel('Samples');ylabel('电压/V');
+xlabel('time');ylabel('voltage/V');
 axes(AxesHandles(3));
 xlim auto
 ylim auto
-xlabel('Samples');ylabel('电压/V');
+xlabel('time');ylabel('voltage/V');
 axes(AxesHandles(4));
 xlim auto
 ylim auto
-xlabel('Samples');ylabel('电压/V');
+xlabel('time');ylabel('voltage/V');
 
 % hide sliders when initilizing.
 set(handles.slider1,'visible','off');
@@ -285,21 +282,21 @@ if Max > 100
     set(handles.axes1,'XLim',[Max-100,Max+10]);
     %     plot(1/Fs:1/Fs:length(dataAI(:,1))/Fs,dataAI(:,1));
     
-    %     xlabel('时间/s');ylabel('电压/V');
+    %     xlabel('时间/s');ylabel('voltage/V');
     %channel 2刷新
     axes(handles.axes2);
     plot(dataAI(:,2),'-black');
     set(handles.axes2,'XLim',[Max-100,Max+10]);
     %     plot(1/Fs:1/Fs:length(dataAI(:,2))/Fs,dataAI(:,2));
     
-    %     xlabel('时间/s');ylabel('电压/V');
+    %     xlabel('时间/s');ylabel('voltage/V');
     %channel 3刷新
     axes(handles.axes3);
     plot(dataAI(:,3),'-black');
     set(handles.axes3,'XLim',[Max-100,Max+10]);
     %     plot(1/Fs:1/Fs:length(dataAI(:,3))/Fs,dataAI(:,3));
     
-    %     xlabel('时间/s');ylabel('电压/V');
+    %     xlabel('时间/s');ylabel('voltage/V');
     %channel 4刷新
     axes(handles.axes4);
     plot(dataAI(:,4),'-black');
@@ -307,9 +304,9 @@ if Max > 100
     
     
     %     plot(1/Fs:1/Fs:length(dataAI(:,4))/Fs,dataAI(:,4));
-    %     xlabel('时间/s');ylabel('电压/V');
+    %     xlabel('时间/s');ylabel('voltage/V');
 end
-% %设置电压轴范围
+% %设置voltage轴范围
 % y_high=handles.y_high;
 % y_low=handles.y_low;
 % set(handles.axes1,'YLim',[y_low,y_high]);
@@ -540,7 +537,7 @@ switch process
     case 1
         [n,y]=filter_highpass(Fs,x,fc);
         axes(handles.axes5);plot(n/Fs,y);
-        xlabel('时间/s');ylabel('电压/V');grid on;
+        xlabel('时间/s');ylabel('voltage/V');grid on;
         [f,yy]=signal_fft(y,Fs);
         axes(handles.axes8);
         % %单边显示格式
@@ -549,7 +546,7 @@ switch process
     case 2
         [n,y]=filter_lowpass(Fs,x,fc);
         axes(handles.axes5);plot(n/Fs,y);
-        xlabel('时间/s');ylabel('电压/V');grid on;
+        xlabel('时间/s');ylabel('voltage/V');grid on;
         [f,yy]=signal_fft(y,Fs);
         axes(handles.axes8);
         % %单边显示格式
@@ -620,19 +617,19 @@ AxesHandles = handles.AxesHandles;
 axes(AxesHandles(1));
 xlim auto
 ylim auto
-xlabel('Samples');ylabel('电压/V');
+xlabel('Samples');ylabel('voltage/V');
 axes(AxesHandles(2));
 xlim auto
 ylim auto
-xlabel('Samples');ylabel('电压/V');
+xlabel('Samples');ylabel('voltage/V');
 axes(AxesHandles(3));
 xlim auto
 ylim auto
-xlabel('Samples');ylabel('电压/V');
+xlabel('Samples');ylabel('voltage/V');
 axes(AxesHandles(4));
 xlim auto
 ylim auto
-xlabel('Samples');ylabel('电压/V');
+xlabel('Samples');ylabel('voltage/V');
 
 % hide sliders when initilizing.
 set(handles.slider1,'visible','off');
@@ -697,11 +694,11 @@ if ischar(filename)
         cla(AxesHandles(i)); % clear exsisted data in graphs.
         plot(AxesHandles(i),dataAI(:,i),'-black');
 %         plot(AxesHandles(i),1/Fs:1/Fs:length(dataAI(:,i))/Fs,dataAI(:,i));
-        xlabel('时间/s');ylabel('电压/V');
+        xlabel('时间/s');ylabel('voltage/V');
     end
 end
 
-%设置电压轴范围
+%设置voltage轴范围
 % y_high=handles.y_high;
 % y_low=handles.y_low;
 % set(handles.axes1,'YLim',[y_low,y_high]);
@@ -930,6 +927,9 @@ else
 end
 
 handles.ChannelSelect(1) = flag;
+handles.ChannelSelect(2) = 0;
+handles.ChannelSelect(3) = 0;
+handles.ChannelSelect(4) = 0;
 guidata(hObject,handles);
 end
 % Hint: get(hObject,'Value') returns toggle state of checkbox_Ch0
@@ -952,6 +952,8 @@ else
 end
 
 handles.ChannelSelect(2) = flag;
+handles.ChannelSelect(3) = 0;
+handles.ChannelSelect(4) = 0;
 guidata(hObject,handles);
 end
 % Hint: get(hObject,'Value') returns toggle state of checkbox_Ch1
@@ -971,6 +973,7 @@ else
 end
 
 handles.ChannelSelect(3) = flag;
+handles.ChannelSelect(4) = 0;
 guidata(hObject,handles);
 end
 % Hint: get(hObject,'Value') returns toggle state of checkbox_Ch2
