@@ -449,9 +449,9 @@ function slider2_Callback(hObject, eventdata, handles)
 v2 = get(handles.slider2,'value');
 handles.val(2)=v2;
 guidata(hObject,handles);
-if v2>=100
-    set(handles.axes2,'XLim',[v2-100,v2+10]);
-else set(handles.axes2,'XLim',[0,110]);
+if v2>=90
+    set(handles.axes2,'XLim',[v2-90,v2+10]);
+else set(handles.axes2,'XLim',[0,100]);
 end
 end
 
@@ -466,10 +466,10 @@ function slider3_Callback(hObject, eventdata, handles)
 v3 = get(handles.slider3,'value');
 handles.val(3)=v3;
 guidata(hObject,handles);
-if v3>=100
-    set(handles.axes3,'XLim',[v3-100,v3+10]);
+if v3>=90
+    set(handles.axes3,'XLim',[v3-90,v3+10]);
 else
-    set(handles.axes3,'XLim',[0,110]);
+    set(handles.axes3,'XLim',[0,100]);
 end
 end
 
@@ -492,9 +492,9 @@ function slider4_Callback(hObject, eventdata, handles)
 v4 = get(handles.slider4,'value');
 handles.val(4)=v4;
 guidata(hObject,handles);
-if v4>=100
-    set(handles.axes4,'XLim',[v4-100,v4+10]);
-else set(handles.axes4,'XLim',[0,110]);
+if v4>=90
+    set(handles.axes4,'XLim',[v4-90,v4+10]);
+else set(handles.axes4,'XLim',[0,100]);
 end
 end
 
