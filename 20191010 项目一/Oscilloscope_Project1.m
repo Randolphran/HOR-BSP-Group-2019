@@ -197,6 +197,10 @@ xlim auto
 ylim auto
 xlabel('time');ylabel('voltage/V');
 
+% x-axes zooming reset
+set(handles.slider5,'Value',5);
+handles.beishu = 1;
+
 % hide sliders when initilizing.
 set(handles.slider1,'visible','off');
 set(handles.slider2,'visible','off');
