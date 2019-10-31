@@ -180,8 +180,8 @@ for j=0:(channelCount - 1)
     
     % fill in disabled channel data with zeros.
     if channelCount < 4
-        for k = channelCount:4
-            dataAI(dataNum,j+1) = 0;
+        for k = channelCount+1 : 4
+            dataAI(dataNum,k) = 0;
         end
     end
     

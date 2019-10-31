@@ -277,30 +277,38 @@ if Max > 100
     %采集结束后刷新
     dataAI=handles.dataAI;
     %channel 1刷新
-    axes(handles.axes1);
-    plot(dataAI(:,1),'-black');
-    set(handles.axes1,'XLim',[Max-100,Max+10]);
+    if handles.ChannelCount >= 1
+        axes(handles.axes1);
+        plot(dataAI(:,1),'-black');
+        set(handles.axes1,'XLim',[Max-100,Max+10]);
+    end
     %     plot(1/Fs:1/Fs:length(dataAI(:,1))/Fs,dataAI(:,1));
     
     %     xlabel('时间/s');ylabel('voltage/V');
     %channel 2刷新
-    axes(handles.axes2);
-    plot(dataAI(:,2),'-black');
-    set(handles.axes2,'XLim',[Max-100,Max+10]);
+    if handles.ChannelCount >= 2
+        axes(handles.axes2);
+        plot(dataAI(:,2),'-black');
+        set(handles.axes2,'XLim',[Max-100,Max+10]);
+    end
     %     plot(1/Fs:1/Fs:length(dataAI(:,2))/Fs,dataAI(:,2));
     
     %     xlabel('时间/s');ylabel('voltage/V');
     %channel 3刷新
-    axes(handles.axes3);
-    plot(dataAI(:,3),'-black');
-    set(handles.axes3,'XLim',[Max-100,Max+10]);
+    if handles.ChannelCount >= 3
+        axes(handles.axes3);
+        plot(dataAI(:,3),'-black');
+        set(handles.axes3,'XLim',[Max-100,Max+10]);
+    end
     %     plot(1/Fs:1/Fs:length(dataAI(:,3))/Fs,dataAI(:,3));
     
     %     xlabel('时间/s');ylabel('voltage/V');
     %channel 4刷新
-    axes(handles.axes4);
-    plot(dataAI(:,4),'-black');
-    set(handles.axes4,'XLim',[Max-100,Max+10]);
+    if handles.ChannelCount == 4
+        axes(handles.axes4);
+        plot(dataAI(:,4),'-black');
+        set(handles.axes4,'XLim',[Max-100,Max+10]);
+    end
     
     
     %     plot(1/Fs:1/Fs:length(dataAI(:,4))/Fs,dataAI(:,4));
