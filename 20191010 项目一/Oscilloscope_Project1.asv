@@ -76,14 +76,23 @@ y_low = -1.5;
 handles.y_high = y_high;
 handles.y_low = y_low;
 
+%Slider5 的滑动条初始化
+set(handles.slider5,'min',0);
+set(handles.slider5,'max',10);
+set(handles.slider5,'value',5);
+
 % Pre-assign value for data structure.
 dataAI = zeros(1,4);% Pre-assigned memeroy,Simultaneously change the value in "BEGIN" callback function when change happens here.
 dataNum=1;
 ChannelCount = 4;
 ChannelSelect = [1,1,1,1];
 val = zeros(4,1);  %滑动条的值
+timeaxesflag = 0;
+beishu = 1;
 
 
+handles.timeaxesflag = timeaxesflag;
+handles.beishu = beishu;
 handles.ChannelCount = ChannelCount;
 handles.ChannelSelect = ChannelSelect;
 handles.dataAI = dataAI;
@@ -207,6 +216,7 @@ end
 handles.dataNum = 1;
 handles.dataAI = zeros(1,4);
 handles.ChannelCount = length(find(handles.ChannelSelect == 1));
+handles.timeaxesflag=0;
 
 
 % end initilization
@@ -263,11 +273,8 @@ if dataNum > 100
     set(handles.slider4,'min',100);
     set(handles.slider4,'max',dataNum);
     set(handles.slider4,'value',dataNum);
-    %channel 1的收缩滑动条初始化
-    set(handles.slider5,'min',0);
-    set(handles.slider5,'max',10);
-    set(handles.slider5,'value',5);
-    
+  
+    % Sliders visiblity set
     set(handles.slider1,'visible','on');
     set(handles.slider2,'visible','on');
     set(handles.slider3,'visible','on');
@@ -346,7 +353,8 @@ end
 % set(handles.axes2,'YLim',[y_low,y_high]);
 % set(handles.axes3,'YLim',[y_low,y_high]);
 % set(handles.axes4,'YLim',[y_low,y_high]);
-
+handles.timeaxesflag = 1;
+guidata(hObject,handles);
 end
 
 
@@ -499,22 +507,54 @@ end
 
 
 function slider5_Callback(hObject, eventdata, handles)
-v1=handles.val(1);
-x=handles.dataAI(:,1);
-N=length(x);
+timeaxesflag=hanldes.timeaxesflag;
 gainvalue=get(handles.slider5,'value');
 Fs=handles.Fs;
-if N<=100
-    xmin=0;xmax=110+(5-gainvalue)*10;
+if gainvalue<=1
+    beishu=10;
 else
-    xmin=v1-100-(5-gainvalue)*10;
-    xmax=v1+15-gainvalue;
+    if gainvalue<=3
+        beishu = 5;
+    else
+        if gainvalue<5
+            beishu = 2;
+        else
+            if gainvalue == 5
+                beishu = 1;
+            else
+                if gainvalue<=7
+                    beishu = 0.5;
+                else
+                    if gainvalue<=9
+                        beishu = 0.2;
+                    else
+                        if gainvalue<=10
+                            beishu = 0.1;
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+handles.beishu=beishu;
+guidata(hObject,handles);
+if timeaxesflag == 1
+    v1=handles.val(1);
+    N=handles.dataNum;
+    if N<=90
+        xmin=0;xmax=100*beishu;
+    else
+        xmin=v1-90*beishu;
+        xmax=v1+10*beishu;
         if xmax>N+10
             xmax=N+10;end
         if xmin<0
             xmin=0;end
-end
-set(handles.axes1,'XLim',[xmin,xmax]);
+    end
+    %时间轴待设置
+    set(handles.axes1,'XLim',[xmin,xmax]);
 end
 
 % --- Executes during object creation, after setting all properties.
@@ -948,7 +988,6 @@ function checkbox_Ch0_Callback(hObject, eventdata, handles)
 flag = get(hObject,'Value');
 if flag
     set(handles.checkbox_Ch1,'Enable','on');
-    handles.ChannelSelect(1) = 1;
 else
     set(handles.checkbox_Ch1,'Enable','off');
     set(handles.checkbox_Ch2,'Enable','off');
@@ -962,7 +1001,7 @@ else
 end
 
 
-
+handles.ChannelSelect(1) = flag;
 guidata(hObject,handles);
 end
 % Hint: get(hObject,'Value') returns toggle state of checkbox_Ch0
@@ -976,17 +1015,16 @@ function checkbox_Ch1_Callback(hObject, eventdata, handles)
 flag = get(hObject,'Value');
 if flag
     set(handles.checkbox_Ch2,'Enable','on');
-    set(handles.checkbox_Ch3,'Enable','on');
 else
     set(handles.checkbox_Ch2,'Enable','off');
     set(handles.checkbox_Ch3,'Enable','off');
     set(handles.checkbox_Ch2,'Value',0);
     set(handles.checkbox_Ch3,'Value',0);
+    handles.ChannelSelect(3) = 0;
+    handles.ChannelSelect(4) = 0;
 end
 
 handles.ChannelSelect(2) = flag;
-handles.ChannelSelect(3) = 0;
-handles.ChannelSelect(4) = 0;
 guidata(hObject,handles);
 end
 % Hint: get(hObject,'Value') returns toggle state of checkbox_Ch1
@@ -1003,10 +1041,10 @@ if flag
 else
     set(handles.checkbox_Ch3,'Enable','off');
     set(handles.checkbox_Ch3,'Value',0);
+    handles.ChannelSelect(4) = 0;
 end
 
 handles.ChannelSelect(3) = flag;
-handles.ChannelSelect(4) = 0;
 guidata(hObject,handles);
 end
 % Hint: get(hObject,'Value') returns toggle state of checkbox_Ch2

@@ -159,6 +159,7 @@ dataAI = handles.dataAI;
 dataNum = handles.dataNum;
 LineHandles = handles.LineHandles;
 AxesHandles = handles.AxesHandles;
+beishu = handles.beishu;
 % timescale = handles.timescale;
 
 errorCode = instantAiCtrl.Read(startChannel, channelCount, data); 
@@ -181,13 +182,13 @@ for j=0:(channelCount - 1)
     if dataNum > 100 % 2019/10/31
         timestep = 1000/handles.Fs; % unit: ms
         
-        set(AxesHandles(j+1),'XLim',[dataNum-90,dataNum+10]);
-        xticks(AxesHandles(j+1),[dataNum-90 dataNum-65 dataNum-15 dataNum+10]);
+        set(AxesHandles(j+1),'XLim',[dataNum-90*beishu,dataNum+10*beishu]);
+        xticks(AxesHandles(j+1),[dataNum-90*beishu dataNum-65*beishu dataNum-15*beishu dataNum+10*beishu]);
         xticklabels(AxesHandles(j+1),{...
-            [num2str(timestep * (dataNum-90)),' ms'],...
-            [num2str(timestep * (dataNum-65)),' ms'],...
-            [num2str(timestep * (dataNum-15)),' ms'],...
-            [num2str(timestep * (dataNum+10)),' ms']});    
+            [num2str(timestep * (dataNum-90*beishu)),' ms'],...
+            [num2str(timestep * (dataNum-65*beishu)),' ms'],...
+            [num2str(timestep * (dataNum-15*beishu)),' ms'],...
+            [num2str(timestep * (dataNum+10*beishu)),' ms']});    
     end
     
     % fill in disabled channel data with zeros.
