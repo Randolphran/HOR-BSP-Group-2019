@@ -179,16 +179,14 @@ for j=0:(channelCount - 1)
     drawnow limitrate
     
     % set axes pattern when necessary
-    if dataNum > 100 % 2019/10/31
+    if dataNum > (100*beishu) % 2019/10/31
         timestep = 1000/handles.Fs; % unit: ms
         
-        set(AxesHandles(j+1),'XLim',[dataNum-90*beishu,dataNum+10*beishu]);
-        xticks(AxesHandles(j+1),[dataNum-90*beishu dataNum-65*beishu dataNum-15*beishu dataNum+10*beishu]);
+        set(AxesHandles(j+1),'XLim',[dataNum-90*beishu,dataNum+10]);
+        xticks(AxesHandles(j+1),[dataNum-90*beishu dataNum+10]);
         xticklabels(AxesHandles(j+1),{...
             [num2str(timestep * (dataNum-90*beishu)),' ms'],...
-            [num2str(timestep * (dataNum-65*beishu)),' ms'],...
-            [num2str(timestep * (dataNum-15*beishu)),' ms'],...
-            [num2str(timestep * (dataNum+10*beishu)),' ms']});    
+            [num2str(timestep * (dataNum+10)),' ms']});    
     end
     
     % fill in disabled channel data with zeros.

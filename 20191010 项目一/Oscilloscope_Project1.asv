@@ -247,10 +247,12 @@ uiresume(handles.figure1);
 
 %initilize sliders and axes-zoom control.
 dataNum= handles.dataNum;
+dataAI = handles.dataAI;
 timestep = 1000/handles.Fs; %unit:ms
+beishu = handles.beishu;
 % Fs = handles.Fs;
 
-if dataNum > 100
+if dataNum > 100*beishu
    
     %slider初始值赋值
     val=handles.val;
@@ -283,17 +285,16 @@ if dataNum > 100
     
     
     %采集结束后刷新
-    dataAI=handles.dataAI;
+    
+    
     %channel 1刷新
     if handles.ChannelCount >= 1
         axes(handles.axes1);
         plot(dataAI(:,1),'-black');
-        set(handles.axes1,'XLim',[dataNum-90,dataNum+10]);
-        xticks(handles.axes1,[dataNum-90 dataNum-65 dataNum-15 dataNum+10]);
+        set(handles.axes1,'XLim',[dataNum-90*beishu,dataNum+10]);
+        xticks(handles.axes1,[dataNum-90*beishu dataNum+10]);
         xticklabels(handles.axes1,{...
-            [num2str(timestep * (dataNum-90)),' ms'],...
-            [num2str(timestep * (dataNum-65)),' ms'],...
-            [num2str(timestep * (dataNum-15)),' ms'],...
+            [num2str(timestep * (dataNum-90*beishu)),' ms'],...
             [num2str(timestep * (dataNum+10)),' ms']});
     end
     %     plot(1/Fs:1/Fs:length(dataAI(:,1))/Fs,dataAI(:,1));
@@ -303,12 +304,10 @@ if dataNum > 100
     if handles.ChannelCount >= 2
         axes(handles.axes2);
         plot(dataAI(:,2),'-black');
-        set(handles.axes2,'XLim',[dataNum-90,dataNum+10]);
-        xticks(handles.axes2,[dataNum-90 dataNum-65 dataNum-15 dataNum+10]);
+        set(handles.axes2,'XLim',[dataNum-90*beishu,dataNum+10]);
+        xticks(handles.axes2,[dataNum-90*beishu dataNum+10]);
         xticklabels(handles.axes2,{...
-            [num2str(timestep * (dataNum-90)),' ms'],...
-            [num2str(timestep * (dataNum-65)),' ms'],...
-            [num2str(timestep * (dataNum-15)),' ms'],...
+            [num2str(timestep * (dataNum-90*beishu)),' ms']...
             [num2str(timestep * (dataNum+10)),' ms']});
     end
     %     plot(1/Fs:1/Fs:length(dataAI(:,2))/Fs,dataAI(:,2));
@@ -318,12 +317,10 @@ if dataNum > 100
     if handles.ChannelCount >= 3
         axes(handles.axes3);
         plot(dataAI(:,3),'-black');
-        set(handles.axes3,'XLim',[dataNum-90,dataNum+10]);
-        xticks(handles.axes3,[dataNum-90 dataNum-65 dataNum-15 dataNum+10]);
+        set(handles.axes3,'XLim',[dataNum-90*beishu,dataNum+10]);
+        xticks(handles.axes3,[dataNum-90*beishu dataNum+10]);
         xticklabels(handles.axes3,{...
-            [num2str(timestep * (dataNum-90)),' ms'],...
-            [num2str(timestep * (dataNum-65)),' ms'],...
-            [num2str(timestep * (dataNum-15)),' ms'],...
+            [num2str(timestep * (dataNum-90*beishu)),' ms'],...
             [num2str(timestep * (dataNum+10)),' ms']});
     end
     %     plot(1/Fs:1/Fs:length(dataAI(:,3))/Fs,dataAI(:,3));
@@ -333,12 +330,10 @@ if dataNum > 100
     if handles.ChannelCount == 4
         axes(handles.axes4);
         plot(dataAI(:,4),'-black');
-        set(handles.axes4,'XLim',[dataNum-90,dataNum+10]);
-        xticks(handles.axes4,[dataNum-90 dataNum-65 dataNum-15 dataNum+10]);
+        set(handles.axes4,'XLim',[dataNum-90*beishu,dataNum+10]);
+        xticks(handles.axes4,[dataNum-90*beishu dataNum+10]);
         xticklabels(handles.axes4,{...
-            [num2str(timestep * (dataNum-90)),' ms'],...
-            [num2str(timestep * (dataNum-65)),' ms'],...
-            [num2str(timestep * (dataNum-15)),' ms'],...
+            [num2str(timestep * (dataNum-90*beishu)),' ms'],...
             [num2str(timestep * (dataNum+10)),' ms']});
     end
     
@@ -429,16 +424,19 @@ function slider1_Callback(hObject, eventdata, handles)
 v1 = get(handles.slider1,'value');      %v1是滑动条的值，一开始是dataNum，横坐标的最大值是v1+50
 handles.val(1)=v1;
 guidata(hObject,handles);
-gainvalue = get(handles.slider5,'value');   %得到缩放滑动条的值
+
+beishu=handles.beishu;   %得到缩放滑动条的值
 Fs=handles.Fs;
-x=handles.dataAI(:,1);
-N=length(x);
-xmin=v1-100-(5-gainvalue)*10;
-xmax=v1+15-gainvalue;
+N=handles.dataNum;
+
+xmin=v1-90*beishu;
+xmax=v1+10*beishu;
+
 if xmax>N+10
     xmax=N+10;end
 if xmin<0
     xmin=0;end
+
 set(handles.axes1,'XLim',[xmin,xmax]);
 end
 
@@ -449,9 +447,9 @@ function slider2_Callback(hObject, eventdata, handles)
 v2 = get(handles.slider2,'value');
 handles.val(2)=v2;
 guidata(hObject,handles);
-if v2>=100
-    set(handles.axes2,'XLim',[v2-100,v2+10]);
-else set(handles.axes2,'XLim',[0,110]);
+if v2>=90
+    set(handles.axes2,'XLim',[v2-90,v2+10]);
+else set(handles.axes2,'XLim',[0,100]);
 end
 end
 
@@ -466,10 +464,10 @@ function slider3_Callback(hObject, eventdata, handles)
 v3 = get(handles.slider3,'value');
 handles.val(3)=v3;
 guidata(hObject,handles);
-if v3>=100
-    set(handles.axes3,'XLim',[v3-100,v3+10]);
+if v3>=90
+    set(handles.axes3,'XLim',[v3-90,v3+10]);
 else
-    set(handles.axes3,'XLim',[0,110]);
+    set(handles.axes3,'XLim',[0,100]);
 end
 end
 
@@ -492,9 +490,18 @@ function slider4_Callback(hObject, eventdata, handles)
 v4 = get(handles.slider4,'value');
 handles.val(4)=v4;
 guidata(hObject,handles);
-if v4>=100
-    set(handles.axes4,'XLim',[v4-100,v4+10]);
-else set(handles.axes4,'XLim',[0,110]);
+
+timestep = 1000/handles.Fs;
+
+if v4>=90
+    set(handles.axes4,'XLim',[v4-90,v4+10]);
+    xticks(handles.axes4,[v4-90,v4+10]);
+    xticklabels(handles.axes1,{...
+        [num2str(timestep * (v4-90)),' ms'],...
+        [num2str(timestep * (v4+10)),' ms']});
+    
+else
+    set(handles.axes4,'XLim',[0,100]);
 end
 end
 
@@ -507,29 +514,36 @@ end
 
 
 function slider5_Callback(hObject, eventdata, handles)
-timeaxesflag=hanldes.timeaxesflag;
+timeaxesflag=handles.timeaxesflag;
 gainvalue=get(handles.slider5,'value');
-Fs=handles.Fs;
+
 if gainvalue<=1
     beishu=10;
+    set(handles.slider5,'value',0);
 else
     if gainvalue<=3
         beishu = 5;
+        set(handles.slider5,'value',2);
     else
         if gainvalue<5
             beishu = 2;
+            set(handles.slider5,'value',4);
         else
             if gainvalue == 5
                 beishu = 1;
+                 set(handles.slider5,'value',5);
             else
                 if gainvalue<=7
                     beishu = 0.5;
+                    set(handles.slider5,'value',6);
                 else
                     if gainvalue<=9
                         beishu = 0.2;
+                        set(handles.slider5,'value',8);
                     else
                         if gainvalue<=10
                             beishu = 0.1;
+                            set(handles.slider5,'value',10);
                         end
                     end
                 end
@@ -540,11 +554,16 @@ end
 
 handles.beishu=beishu;
 guidata(hObject,handles);
-if timeaxesflag == 1
+
+if timeaxesflag == 1 % 停止采集后
+    
     v1=handles.val(1);
     N=handles.dataNum;
-    if N<=90
-        xmin=0;xmax=100*beishu;
+    timestep = 1000/handles.Fs;
+    
+    if N<=90*beishu
+        xmin=0;
+        xmax=100*beishu;
     else
         xmin=v1-90*beishu;
         xmax=v1+10*beishu;
@@ -555,6 +574,12 @@ if timeaxesflag == 1
     end
     %时间轴待设置
     set(handles.axes1,'XLim',[xmin,xmax]);
+    xticks(handles.axes1,[xmin xmax]);
+    xticklabels(handles.axes1,{...
+        [num2str(timestep * xmin),' ms'],...
+        [num2str(timestep * xmax),' ms']});
+end
+
 end
 
 % --- Executes during object creation, after setting all properties.
