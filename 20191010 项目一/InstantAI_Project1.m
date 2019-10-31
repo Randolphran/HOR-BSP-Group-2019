@@ -138,7 +138,7 @@ function TimerCallback(obj, event, instantAiCtrl, startChannel, ...
 % % % % % % % % % %another way % % % % % % % % % % %
 % global handlesconvey
 % handles = handlesconvey;
-
+tic
 handles = guidata(hObject);
 
 
@@ -194,5 +194,5 @@ handles.dataAI = dataAI;
 handles.dataNum = dataNum;
 % handlesconvey = handles;
 guidata(hObject,handles);  
-
+toc
 end
