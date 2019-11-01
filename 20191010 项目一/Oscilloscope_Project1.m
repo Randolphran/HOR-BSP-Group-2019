@@ -61,6 +61,8 @@ set(handles.radiobutton_fft,'value',0);
 set(handles.radiobutton_filter,'value',0);
 set(handles.radiobutton_highpass,'value',0);
 set(handles.radiobutton_lowpass,'value',0);
+set(handles.radiobutton_highpass,'Enable','off');
+set(handles.radiobutton_lowpass,'Enable','off');
 set(handles.radiobutton_channel0,'value',0);
 set(handles.radiobutton_channel1,'value',0);
 set(handles.radiobutton_channel2,'value',0);
@@ -77,6 +79,11 @@ set(handles.edit_sample,'string','1');
 set(handles.edit_fc,'string','1');
 Fs = 1; % Sampling rate
 fc = 1; % Cut-off frequncy
+
+
+% initialize pushbutton status.
+set(handles.pushbutton_process,'Enable','off');
+
 
 % initial y-axes interval.
 y_high = 1.5;
@@ -665,13 +672,13 @@ function pushbutton_process_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_process (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-dataAI=handles.dataAI;
-Fs=handles.Fs;
-fc=handles.fc;
-choose_channel=handles.choose_channel;
-process=handles.process;
-x=dataAI(:,choose_channel);
-N=length(x);
+dataAI = handles.dataAI;
+Fs = handles.Fs;
+fc = handles.fc;
+choose_channel = handles.choose_channel;
+process = handles.process;
+x = dataAI(:,choose_channel);
+N = length(x);
 
 round_1 = round(N/2);
 
@@ -716,7 +723,7 @@ function edit_fc_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of edit_fc as text
 %        str2double(get(hObject,'String')) returns contents of edit_fc as a double
 fc = str2double(get(handles.edit_fc,'string'));
-handles.fc=fc;
+handles.fc = fc;
 guidata(hObject,handles);
 end
 
@@ -919,31 +926,43 @@ end
 
 % --- Executes on button press in radiobutton_filter.
 function radiobutton_filter_Callback(hObject, eventdata, handles)
-filt=1;
-handles.filt=filt;
-guidata(hObject,handles);
+
+if get(hObject,'Value')
+    set(handles.radiobutton_highpass,'Enable','on');
+    set(handles.radiobutton_lowpass,'Enable','on');
+else
+    set(handles.radiobutton_highpass,'Enable','off');
+    set(handles.radiobutton_lowpass,'Enable','off');
+end
+
 end
 
 % --- Executes on button press in radiobutton_highpass.
 function radiobutton_highpass_Callback(hObject, eventdata, handles)
-filt=handles.filt;
+
 process=1;
 handles.process=process;
-guidata(hObject,handles);
-if filt==0
-    errordlg('未选择“滤波”操作方式');
+
+if handles.choose_channel && process 
+    set(handles.pushbutton_process,'Enable','on');
 end
+
+guidata(hObject,handles);
+
 end
 
 % --- Executes on button press in radiobutton_lowpass.
 function radiobutton_lowpass_Callback(hObject, eventdata, handles)
-filt=handles.filt;
+
 process=2;
 handles.process=process;
-guidata(hObject,handles);
-if filt==0
-    errordlg('未选择“滤波”操作方式');
+
+if handles.choose_channel && process 
+    set(handles.pushbutton_process,'Enable','on');
 end
+
+
+guidata(hObject,handles);
 end
 
 % --- Executes on button press in radiobutton_fft.
@@ -953,6 +972,14 @@ function radiobutton_fft_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 process=3;
 handles.process=process;
+
+if handles.choose_channel && process 
+    set(handles.pushbutton_process,'Enable','on');
+end
+
+set(handles.radiobutton_highpass,'Enable','off');
+set(handles.radiobutton_lowpass,'Enable','off');
+
 guidata(hObject,handles);
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_fft
 end
@@ -1022,8 +1049,13 @@ function radiobutton_channel0_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton_channel0 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-choose_channel=1;
-handles.choose_channel=choose_channel;
+choose_channel = 1;
+handles.choose_channel = handles.choose_channel;
+
+
+if choose_channel && handles.process 
+    set(handles.pushbutton_process,'Enable','on');
+end
 guidata(hObject,handles);
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_channel0
 end
@@ -1035,6 +1067,11 @@ end
 function radiobutton_channel1_Callback(hObject, eventdata, handles)
 choose_channel=2;
 handles.choose_channel=choose_channel;
+
+if choose_channel && handles.process 
+    set(handles.pushbutton_process,'Enable','on');
+end
+
 guidata(hObject,handles);
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_channel1
 end
@@ -1045,6 +1082,11 @@ end
 function radiobutton_channel2_Callback(hObject, eventdata, handles)
 choose_channel=3;
 handles.choose_channel=choose_channel;
+
+if choose_channel && handles.process 
+    set(handles.pushbutton_process,'Enable','on');
+end
+
 guidata(hObject,handles);
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_channel2
 end
@@ -1055,6 +1097,11 @@ end
 function radiobutton_channel3_Callback(hObject, eventdata, handles)
 choose_channel=4;
 handles.choose_channel=choose_channel;
+
+if choose_channel && handles.process 
+    set(handles.pushbutton_process,'Enable','on');
+end
+
 guidata(hObject,handles);
 end
 
