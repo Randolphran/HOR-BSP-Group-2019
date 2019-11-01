@@ -1059,7 +1059,7 @@ function radiobutton_channel0_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 choose_channel = 1;
-handles.choose_channel = handles.choose_channel;
+handles.choose_channel = choose_channel;
 
 
 if choose_channel && handles.process 
@@ -1075,7 +1075,7 @@ end
 % --- Executes on button press in radiobutton_channel1.
 function radiobutton_channel1_Callback(hObject, eventdata, handles)
 choose_channel=2;
-handles.choose_channel=choose_channel;
+handles.choose_channel = choose_channel;
 
 if choose_channel && handles.process 
     set(handles.pushbutton_process,'Enable','on');
@@ -1090,7 +1090,7 @@ end
 % --- Executes on button press in radiobutton_channel2.
 function radiobutton_channel2_Callback(hObject, eventdata, handles)
 choose_channel=3;
-handles.choose_channel=choose_channel;
+handles.choose_channel = choose_channel;
 
 if choose_channel && handles.process 
     set(handles.pushbutton_process,'Enable','on');
@@ -1105,7 +1105,7 @@ end
 % --- Executes on button press in radiobutton_channel3.
 function radiobutton_channel3_Callback(hObject, eventdata, handles)
 choose_channel=4;
-handles.choose_channel=choose_channel;
+handles.choose_channel = choose_channel;
 
 if choose_channel && handles.process 
     set(handles.pushbutton_process,'Enable','on');
