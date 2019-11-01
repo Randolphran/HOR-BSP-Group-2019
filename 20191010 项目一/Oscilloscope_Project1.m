@@ -753,50 +753,51 @@ function pushbutton_import_Callback(hObject, eventdata, handles)
 file = [pathname,filename];
 file_info = [pathname,filename,'_info.txt'];
 
-isexist = exist(file_info,'file');
-
-if isexist == 0
-    fprintf('Import Erro! Can not find data informative document');
-    return
-end
-
-dataAI = Signalread(file);
-dataNum = length(dataAI(:,1));
-
-% get data information, namely sampling rate, and have it display in edit box
-fid = fopen(file_info,'r');
-
-
-for i = 1:3
-    data_info = fgetl(fid); % get the third line.
-end
-
-Fs_info = data_info;
-Fs = Fs_info(strfind(Fs_info,':')+1:end);
-Fs = str2double(Fs);
-set(handles.edit_sample,'Value',Fs);
-fclose(fid);
-
-% upload import data file to workspace
-handles.dataNum = dataNum;
-handles.dataAI = dataAI;
-handles.data_info = data_info;
-handles.Fs = Fs;
-guidata(hObject,handles);
-
-
-% Initilizatio for plotting 
-AxesHandles = handles.AxesHandles;
-timestep = 1000/Fs; % unit: ms
-totallength = timestep * dataNum;
-
-% Fs=handles.Fs;
-% display data read on axes areas.
 if ischar(filename)
+    isexist = exist(file_info,'file');
+    
+    if isexist == 0
+        fprintf('Import Erro! Can not find data informative document');
+        return
+    end
+    
+    dataAI = Signalread(file);
+    dataNum = length(dataAI(:,1));
+    
+    % get data information, namely sampling rate, and have it display in edit box
+    fid = fopen(file_info,'r');
+    
+    
+    for i = 1:3
+        data_info = fgetl(fid); % get the third line.
+    end
+    
+    Fs_info = data_info;
+    Fs = Fs_info(strfind(Fs_info,':')+1:end);
+    Fs = str2double(Fs);
+    set(handles.edit_sample,'Value',Fs);
+    fclose(fid);
+    
+    % upload import data file to workspace
+    handles.dataNum = dataNum;
+    handles.dataAI = dataAI;
+    handles.data_info = data_info;
+    handles.Fs = Fs;
+    guidata(hObject,handles);
+    
+    
+    % Initilizatio for plotting
+    AxesHandles = handles.AxesHandles;
+    timestep = 1000/Fs; % unit: ms
+    totallength = timestep * dataNum;
+    
+    % Fs=handles.Fs;
+    % display data read on axes areas.
+    
     for i = 1:4
         cla(AxesHandles(i)); % clear exsisted data in graphs.
         plot(AxesHandles(i),dataAI(:,i),'-black');
-
+        
         set(AxesHandles(i),'XLim',[0 dataNum]);
         xlabel(AxesHandles(i),'time');
         ylabel(AxesHandles(i),'voltage/V');
@@ -821,7 +822,7 @@ set(handles.slider4,'visible','off');
 %channel 1
 N1=length(dataAI(:,1));
 if N1 > 100
-   
+    
     set(handles.axes1,'XLim',[0,N1]);
     set(handles.slider1,'min',100)
     set(handles.slider1,'max',N1);
@@ -832,7 +833,7 @@ end
 %channel 2
 N2 = length(dataAI(:,2));
 if N2 > 100
-
+    
     set(handles.axes2,'XLim',[0,N2]);
     set(handles.slider2,'min',100)
     set(handles.slider2,'max',N2);
@@ -843,7 +844,7 @@ end
 %channel 3
 N3 = length(dataAI(:,3));
 if N3 > 100
-   
+    
     set(handles.axes3,'XLim',[0,N3]);
     set(handles.slider3,'min',100)
     set(handles.slider3,'max',N3);
@@ -854,7 +855,7 @@ end
 %channel 4
 N4 = length(dataAI(:,4));
 if N4 > 100
-
+    
     set(handles.axes1,'XLim',[0,N4]);
     set(handles.slider4,'min',100)
     set(handles.slider4,'max',N4);
