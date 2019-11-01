@@ -1,0 +1,3 @@
+time:	2019-11-01 17:00:50
+ChannelCount:	4
+SamplingRate:	1
