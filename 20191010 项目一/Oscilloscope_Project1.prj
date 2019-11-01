@@ -1,17 +1,21 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration file="C:\Users\RanYC\Documents\GitHub\HOR-BSP-Group-2019\20191010 项目一\Oscilloscope_Project1.prj" location="C:\Users\RanYC\Documents\GitHub\HOR-BSP-Group-2019\20191010 项目一" name="Oscilloscope_Project1" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="1255278821" file="C:\Users\RanYC\Documents\GitHub\HOR-BSP-Group-2019\20191010 项目一\Oscilloscope_Project1.prj" location="C:\Users\RanYC\Documents\GitHub\HOR-BSP-Group-2019\20191010 项目一" name="Oscilloscope_Project1" preferred-package-location="C:\Users\RanYC\Documents\GitHub\HOR-BSP-Group-2019\20191010 项目一\Oscilloscope_Project1\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>Oscilloscope_Project1</param.appname>
     <param.icon />
     <param.icons />
-    <param.version>1.0</param.version>
-    <param.authnamewatermark>YC Ran, Ruizhe Hou, Hengyue Ou</param.authnamewatermark>
+    <param.version>2.0</param.version>
+    <param.authnamewatermark>Hengyue Ou, Ruizhe Hou, Yuncong Ran</param.authnamewatermark>
     <param.email />
-    <param.company />
+    <param.company>SJTU</param.company>
     <param.summary />
-    <param.description />
-    <param.screenshot />
+    <param.description>This is a group project for BME course Biomecical Signal Processing, created by Group HOR. 
+
+The project aim to acquire the signal via acquirism device USB-4704 into a self-made Oscilloscope. Functions of the project inculdes displaying signal acquired in real-time, scale switch for display, data processing(filter&amp; FFT), and data I/O based on local files. 
+
+Reviewers might find more information in our project report.</param.description>
+    <param.screenshot>${PROJECT_ROOT}\icon.jpg</param.screenshot>
     <param.guid />
-    <param.installpath.string>\Oscilloscope_Project1\</param.installpath.string>
+    <param.installpath.string>\SJTU\Oscilloscope_Project1\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
     <param.logo />
     <param.install.notes />
@@ -40,12 +44,8 @@
     <unset>
       <param.icon />
       <param.icons />
-      <param.version />
       <param.email />
-      <param.company />
       <param.summary />
-      <param.description />
-      <param.screenshot />
       <param.guid />
       <param.installpath.string />
       <param.installpath.combo />
@@ -77,7 +77,9 @@
     <fileset.main>
       <file>${PROJECT_ROOT}\Oscilloscope_Project1.m</file>
     </fileset.main>
-    <fileset.resources />
+    <fileset.resources>
+      <file>${PROJECT_ROOT}\Oscilloscope_Project1.fig</file>
+    </fileset.resources>
     <fileset.package />
     <fileset.depfun>
       <file>${PROJECT_ROOT}\filter_highpass.m</file>
