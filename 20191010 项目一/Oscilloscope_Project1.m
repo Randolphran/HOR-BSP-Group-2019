@@ -790,43 +790,26 @@ AxesHandles = handles.AxesHandles;
 timestep = 1000/Fs; % unit: ms
 totallength = timestep * dataNum;
 
-% Aviod calling axes() within a loop, which will bring extra cost of time.
-axes(AxesHandles(1));
-xlim auto
-ylim auto
-xlabel('time');ylabel('voltage/V');
-xticks([0 dataNum*0.25 dataNum*0.75 dataNum])
-xticklables({'0',...
-    [num2str(totallength*0.25),' ms'],...
-    [num2str(totallength*0.75),' ms'],...
-    [num2str(totallength),' ms']});
-axes(AxesHandles(2));
-xlim auto
-ylim auto
-xlabel('time');ylabel('voltage/V');
-xticks([0 dataNum*0.25 dataNum*0.75 dataNum])
-xticklables({'0',...
-    [num2str(totallength*0.25),' ms'],...
-    [num2str(totallength*0.75),' ms'],...
-    [num2str(totallength),' ms']});
-axes(AxesHandles(3));
-xlim auto
-ylim auto
-xlabel('time');ylabel('voltage/V');
-xticks([0 dataNum*0.25 dataNum*0.75 dataNum])
-xticklables({'0',...
-    [num2str(totallength*0.25),' ms'],...
-    [num2str(totallength*0.75),' ms'],...
-    [num2str(totallength),' ms']});
-axes(AxesHandles(4));
-xlim auto
-ylim auto
-xlabel('time');ylabel('voltage/V');
-xticks([0 dataNum*0.25 dataNum*0.75 dataNum])
-xticklables({'0',...
-    [num2str(totallength*0.25),' ms'],...
-    [num2str(totallength*0.75),' ms'],...
-    [num2str(totallength),' ms']});
+% Fs=handles.Fs;
+% display data read on axes areas.
+if ischar(filename)
+    for i = 1:4
+        cla(AxesHandles(i)); % clear exsisted data in graphs.
+        plot(AxesHandles(i),dataAI(:,i),'-black');
+
+        set(AxesHandles(i),'XLim',[0 dataNum]);
+        xlabel(AxesHandles(i),'time');
+        ylabel(AxesHandles(i),'voltage/V');
+        set(AxesHandles(i),'XTick',[0 dataNum*0.25 dataNum*0.75 dataNum]);
+        set(AxesHandles(i),'XTickLabel',{'0',...
+            [num2str(totallength*0.25),' ms'],...
+            [num2str(totallength*0.75),' ms'],...
+            [num2str(totallength),' ms']});
+    end
+else
+    return; %when file open dialog is closed.
+end
+
 
 % hide sliders when initilizing.
 set(handles.slider1,'visible','off');
@@ -878,23 +861,12 @@ if N4 > 100
     set(handles.slider4,'value',N4);
     set(handles.slider4,'visible','on');
 end
+
 %channel 1的收缩滑动条初始化-只有放大没有缩小
 set(handles.slider5,'min',0)
 set(handles.slider5,'max',10);
 set(handles.slider5,'value',5);
 
-% Fs=handles.Fs;
-% display data read on axes areas.
-if ischar(filename)
-    AxesHandles = handles.AxesHandles;
-    for i = 1:4
-        cla(AxesHandles(i)); % clear exsisted data in graphs.
-        plot(AxesHandles(i),dataAI(:,i),'-black');
-%       plot(AxesHandles(i),1/Fs:1/Fs:length(dataAI(:,i))/Fs,dataAI(:,i));
-    end
-end
-
-guidata(hObject,handles);
 end
 
 % --- Executes on button press in pushbutton_save.
