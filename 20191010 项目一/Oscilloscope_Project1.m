@@ -787,23 +787,46 @@ guidata(hObject,handles);
 
 % Initilizatio for plotting 
 AxesHandles = handles.AxesHandles;
+timestep = 1000/Fs; % unit: ms
+totallength = timestep * dataNum;
+
 % Aviod calling axes() within a loop, which will bring extra cost of time.
 axes(AxesHandles(1));
 xlim auto
 ylim auto
 xlabel('time');ylabel('voltage/V');
+xticks([0 dataNum*0.25 dataNum*0.75 dataNum])
+xticklables({'0',...
+    [num2str(totallength*0.25),' ms'],...
+    [num2str(totallength*0.75),' ms'],...
+    [num2str(totallength),' ms']});
 axes(AxesHandles(2));
 xlim auto
 ylim auto
 xlabel('time');ylabel('voltage/V');
+xticks([0 dataNum*0.25 dataNum*0.75 dataNum])
+xticklables({'0',...
+    [num2str(totallength*0.25),' ms'],...
+    [num2str(totallength*0.75),' ms'],...
+    [num2str(totallength),' ms']});
 axes(AxesHandles(3));
 xlim auto
 ylim auto
 xlabel('time');ylabel('voltage/V');
+xticks([0 dataNum*0.25 dataNum*0.75 dataNum])
+xticklables({'0',...
+    [num2str(totallength*0.25),' ms'],...
+    [num2str(totallength*0.75),' ms'],...
+    [num2str(totallength),' ms']});
 axes(AxesHandles(4));
 xlim auto
 ylim auto
 xlabel('time');ylabel('voltage/V');
+xticks([0 dataNum*0.25 dataNum*0.75 dataNum])
+xticklables({'0',...
+    [num2str(totallength*0.25),' ms'],...
+    [num2str(totallength*0.75),' ms'],...
+    [num2str(totallength),' ms']});
 
 % hide sliders when initilizing.
 set(handles.slider1,'visible','off');
@@ -816,7 +839,7 @@ set(handles.slider4,'visible','off');
 N1=length(dataAI(:,1));
 if N1 > 100
    
-    set(handles.axes1,'XLim',[0,N1*1.1]);
+    set(handles.axes1,'XLim',[0,N1]);
     set(handles.slider1,'min',100)
     set(handles.slider1,'max',N1);
     set(handles.slider1,'value',N1);
@@ -827,7 +850,7 @@ end
 N2 = length(dataAI(:,2));
 if N2 > 100
 
-    set(handles.axes2,'XLim',[0,N2*1.1]);
+    set(handles.axes2,'XLim',[0,N2]);
     set(handles.slider2,'min',100)
     set(handles.slider2,'max',N2);
     set(handles.slider2,'value',N2);
@@ -838,7 +861,7 @@ end
 N3 = length(dataAI(:,3));
 if N3 > 100
    
-    set(handles.axes3,'XLim',[0,N3*1.1]);
+    set(handles.axes3,'XLim',[0,N3]);
     set(handles.slider3,'min',100)
     set(handles.slider3,'max',N3);
     set(handles.slider3,'value',N3);
@@ -849,7 +872,7 @@ end
 N4 = length(dataAI(:,4));
 if N4 > 100
 
-    set(handles.axes1,'XLim',[0,N4*1.1]);
+    set(handles.axes1,'XLim',[0,N4]);
     set(handles.slider4,'min',100)
     set(handles.slider4,'max',N4);
     set(handles.slider4,'value',N4);
@@ -867,8 +890,7 @@ if ischar(filename)
     for i = 1:4
         cla(AxesHandles(i)); % clear exsisted data in graphs.
         plot(AxesHandles(i),dataAI(:,i),'-black');
-%         plot(AxesHandles(i),1/Fs:1/Fs:length(dataAI(:,i))/Fs,dataAI(:,i));
-        xlabel('Ê±¼ä/s');ylabel('voltage/V');
+%       plot(AxesHandles(i),1/Fs:1/Fs:length(dataAI(:,i))/Fs,dataAI(:,i));
     end
 end
 

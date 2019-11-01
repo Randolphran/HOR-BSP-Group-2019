@@ -61,6 +61,8 @@ set(handles.radiobutton_fft,'value',0);
 set(handles.radiobutton_filter,'value',0);
 set(handles.radiobutton_highpass,'value',0);
 set(handles.radiobutton_lowpass,'value',0);
+set(handles.radiobutton_highpass,'Enable','off');
+set(handles.radiobutton_lowpass,'Enable','off');
 set(handles.radiobutton_channel0,'value',0);
 set(handles.radiobutton_channel1,'value',0);
 set(handles.radiobutton_channel2,'value',0);
@@ -77,6 +79,11 @@ set(handles.edit_sample,'string','1');
 set(handles.edit_fc,'string','1');
 Fs = 1; % Sampling rate
 fc = 1; % Cut-off frequncy
+
+
+% initialize pushbutton status.
+set(handles.pushbutton_process,'Enable','off');
+
 
 % initial y-axes interval.
 y_high = 1.5;
@@ -665,13 +672,13 @@ function pushbutton_process_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_process (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-dataAI=handles.dataAI;
-Fs=handles.Fs;
-fc=handles.fc;
-choose_channel=handles.choose_channel;
-process=handles.process;
-x=dataAI(:,choose_channel);
-N=length(x);
+dataAI = handles.dataAI;
+Fs = handles.Fs;
+fc = handles.fc;
+choose_channel = handles.choose_channel;
+process = handles.process;
+x = dataAI(:,choose_channel);
+N = length(x);
 
 round_1 = round(N/2);
 
@@ -716,7 +723,7 @@ function edit_fc_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of edit_fc as text
 %        str2double(get(hObject,'String')) returns contents of edit_fc as a double
 fc = str2double(get(handles.edit_fc,'string'));
-handles.fc=fc;
+handles.fc = fc;
 guidata(hObject,handles);
 end
 
@@ -780,19 +787,37 @@ guidata(hObject,handles);
 
 % Initilizatio for plotting 
 AxesHandles = handles.AxesHandles;
+timestep = 1000/Fs; % unit: ms
+totallength = timestep * dataNum;
+
 % Aviod calling axes() within a loop, which will bring extra cost of time.
 axes(AxesHandles(1));
 xlim auto
 ylim auto
 xlabel('time');ylabel('voltage/V');
+xticks([0 dataNum*0.25 dataNum*0.75 dataNum])
+xticklables({'0',...
+    [num2str(totallength*0.25),' ms'],...
+    [num2str(totallength*0.75),' ms'],...
+    [num2str(totallength),' ms']});
 axes(AxesHandles(2));
 xlim auto
 ylim auto
 xlabel('time');ylabel('voltage/V');
+xticks([0 dataNum*0.25 dataNum*0.75 dataNum])
+xticklables({'0',...
+    [num2str(totallength*0.25),' ms'],...
+    [num2str(totallength*0.75),' ms'],...
+    [num2str(totallength),' ms']});
 axes(AxesHandles(3));
 xlim auto
 ylim auto
 xlabel('time');ylabel('voltage/V');
+xticks([0 dataNum*0.25 dataNum*0.75 dataNum])
+xticklables({'0',...
+    [num2str(totallength*0.25),' ms'],...
+    [num2str(totallength*0.75),' ms'],...
+    [num2str(totallength),' ms']});
 axes(AxesHandles(4));
 xlim auto
 ylim auto
@@ -809,7 +834,7 @@ set(handles.slider4,'visible','off');
 N1=length(dataAI(:,1));
 if N1 > 100
    
-    set(handles.axes1,'XLim',[0,N1*1.1]);
+    set(handles.axes1,'XLim',[0,N1]);
     set(handles.slider1,'min',100)
     set(handles.slider1,'max',N1);
     set(handles.slider1,'value',N1);
@@ -820,7 +845,7 @@ end
 N2 = length(dataAI(:,2));
 if N2 > 100
 
-    set(handles.axes2,'XLim',[0,N2*1.1]);
+    set(handles.axes2,'XLim',[0,N2]);
     set(handles.slider2,'min',100)
     set(handles.slider2,'max',N2);
     set(handles.slider2,'value',N2);
@@ -831,7 +856,7 @@ end
 N3 = length(dataAI(:,3));
 if N3 > 100
    
-    set(handles.axes3,'XLim',[0,N3*1.1]);
+    set(handles.axes3,'XLim',[0,N3]);
     set(handles.slider3,'min',100)
     set(handles.slider3,'max',N3);
     set(handles.slider3,'value',N3);
@@ -842,7 +867,7 @@ end
 N4 = length(dataAI(:,4));
 if N4 > 100
 
-    set(handles.axes1,'XLim',[0,N4*1.1]);
+    set(handles.axes1,'XLim',[0,N4]);
     set(handles.slider4,'min',100)
     set(handles.slider4,'max',N4);
     set(handles.slider4,'value',N4);
@@ -860,8 +885,7 @@ if ischar(filename)
     for i = 1:4
         cla(AxesHandles(i)); % clear exsisted data in graphs.
         plot(AxesHandles(i),dataAI(:,i),'-black');
-%         plot(AxesHandles(i),1/Fs:1/Fs:length(dataAI(:,i))/Fs,dataAI(:,i));
-        xlabel('时间/s');ylabel('voltage/V');
+%       plot(AxesHandles(i),1/Fs:1/Fs:length(dataAI(:,i))/Fs,dataAI(:,i));
     end
 end
 
@@ -919,34 +943,43 @@ end
 
 % --- Executes on button press in radiobutton_filter.
 function radiobutton_filter_Callback(hObject, eventdata, handles)
-filt=1;
-handles.filt=filt;
-guidata(hObject,handles);
+
+if get(hObject,'Value')
+    set(handles.radiobutton_highpass,'Enable','on');
+    set(handles.radiobutton_lowpass,'Enable','on');
+else
+    set(handles.radiobutton_highpass,'Enable','off');
+    set(handles.radiobutton_lowpass,'Enable','off');
+end
+
 end
 
 % --- Executes on button press in radiobutton_highpass.
 function radiobutton_highpass_Callback(hObject, eventdata, handles)
-filt=handles.filt;
+
 process=1;
 handles.process=process;
 
-
+if handles.choose_channel && process 
+    set(handles.pushbutton_process,'Enable','on');
+end
 
 guidata(hObject,handles);
-if filt==0
-    errordlg('未选择“滤波”操作方式');
-end
+
 end
 
 % --- Executes on button press in radiobutton_lowpass.
 function radiobutton_lowpass_Callback(hObject, eventdata, handles)
-filt=handles.filt;
+
 process=2;
 handles.process=process;
-guidata(hObject,handles);
-if filt==0
-    errordlg('未选择“滤波”操作方式');
+
+if handles.choose_channel && process 
+    set(handles.pushbutton_process,'Enable','on');
 end
+
+
+guidata(hObject,handles);
 end
 
 % --- Executes on button press in radiobutton_fft.
@@ -956,6 +989,14 @@ function radiobutton_fft_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 process=3;
 handles.process=process;
+
+if handles.choose_channel && process 
+    set(handles.pushbutton_process,'Enable','on');
+end
+
+set(handles.radiobutton_highpass,'Enable','off');
+set(handles.radiobutton_lowpass,'Enable','off');
+
 guidata(hObject,handles);
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_fft
 end
@@ -1029,7 +1070,7 @@ choose_channel = 1;
 handles.choose_channel = handles.choose_channel;
 
 
-if choose_channel && process 
+if choose_channel && handles.process 
     set(handles.pushbutton_process,'Enable','on');
 end
 guidata(hObject,handles);

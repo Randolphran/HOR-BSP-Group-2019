@@ -180,6 +180,7 @@ for j=0:(channelCount - 1)
     
     % set axes pattern when necessary
     if dataNum > (100*beishu) % 2019/10/31
+        
         timestep = 1000/handles.Fs; % unit: ms
         
         set(AxesHandles(j+1),'XLim',[dataNum-90*beishu,dataNum+10]);
