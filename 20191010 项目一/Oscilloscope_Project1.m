@@ -672,6 +672,9 @@ function pushbutton_process_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_process (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+set(gcf, 'Name', '正在处理......');
+
 dataAI = handles.dataAI;
 Fs = handles.Fs;
 fc = handles.fc;
@@ -712,6 +715,9 @@ switch process
         plot(f(1:round_1),y(1:round_1)*2/N);
         xlabel('频率/Hz');ylabel('振幅');grid on;
 end
+
+set(gcf, 'Name', 'Oscilloscope_Project1.fig');
+
 end
 
 
@@ -761,6 +767,8 @@ if ischar(filename)
         return
     end
     
+    set(gcf, 'Name', '正在导入......');
+
     dataAI = Signalread(file);
     dataNum = length(dataAI(:,1));
     
@@ -868,6 +876,8 @@ set(handles.slider5,'min',0)
 set(handles.slider5,'max',10);
 set(handles.slider5,'value',5);
 
+
+    set(gcf, 'Name', 'Oscilloscope_Project1.fig');
 end
 
 % --- Executes on button press in pushbutton_save.
@@ -893,6 +903,9 @@ filesave = Signalwrite;
 % filesave = [filewrite,suffix(filterindex)];
 if ischar(filename)
     % if explorer is closed without confirming save, filename will be 0.
+  
+    set(gcf, 'Name', '正在保存......');
+    
     switch filterindex
         case 1 %.mat
             filesave.mat(datasave,file);
@@ -916,6 +929,7 @@ if ischar(filename)
     fclose(fid);
     fprintf('\nSave Succeeded!');
     
+    set(gcf, 'Name', 'Oscilloscope_Project1.fig');
 end
 end
 
