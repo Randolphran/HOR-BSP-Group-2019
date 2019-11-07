@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="StaticAO">
+    <file>Resources/AO.png</file>
+    <file>Resources/manual.png</file>
+    <file>Resources/sine.png</file>
+    <file>Resources/sine_down.png</file>
+    <file>Resources/square.png</file>
+    <file>Resources/square_down.png</file>
+    <file>Resources/triangle.png</file>
+    <file>Resources/triangle_down.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,245 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\AsynOneBufferedAI_TDtr.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""     // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\AsynOneBufferedAI_TDtr.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ASYNCHRONOUSBUFFEREDAIWITHDELAYTOSTARTTRIGGER_DIALOG DIALOGEX 0, 0, 443, 275
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Asynchronous One Buffered AI with Trigger Delay to Start"
+FONT 9, "Microsoft Sans Serif", 400, 0, 0x0
+BEGIN
+    RTEXT           "10 V",IDC_STATIC_YRANGEMAX,4,18,35,9
+    RTEXT           "0",IDC_STATIC_YRANGEMID,28,116,9,9
+    RTEXT           "-10 V",IDC_STATIC_YRANGEMIN,9,188,30,9
+    LTEXT           "0 Sec",IDC_STATIC_STARTTIME,40,196,66,9
+    RTEXT           "10 sec",IDC_STATIC_ENDTIME,334,196,71,9
+    CONTROL         "",IDC_STATIC_GRAPH,"Static",SS_BLACKFRAME,40,20,366,176
+    PUSHBUTTON      "Configure...",IDC_BUTTON_CONFIG,357,217,53,15
+    CONTROL         "",IDC_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_NOLABELWRAP | LVS_NOSCROLL | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,73,211,274,27
+    LTEXT           "Color of \nchannels:",IDC_STATIC,39,217,35,17
+    PUSHBUTTON      "Get data",IDC_BUTTON_GETDATA,357,238,53,15
+    CONTROL         "",IDC_SLIDER_TIMEDIV,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,287,244,65,13
+    CONTROL         "",IDC_SLIDER_TIMESHIFT,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,144,245,65,13
+    RTEXT           "Shift:",IDC_STATIC,69,247,18,8
+    EDITTEXT        IDC_EDIT_TIMESHIFT,92,245,40,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "ms",IDC_STATIC_SHIFTUNIT,134,247,10,8
+    RTEXT           "Div:",IDC_STATIC,216,246,14,8
+    EDITTEXT        IDC_EDIT_TIMEDIV,234,244,40,14,ES_RIGHT | ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "ms",IDC_STATIC_DIVUNIT,276,246,10,8
+END
+
+IDD_CONFIGURATION DIALOGEX 0, 0, 343, 200
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION 
+"Asynchronous One Buffered AI with Trigger Delay to Start - Configuration"
+FONT 9, "Microsoft Sans Serif", 400, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,182,177,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,264,177,50,16
+    LTEXT           "Device:",IDC_STATIC,5,12,29,8
+    LTEXT           "Channel start:",IDC_STATIC,14,51,57,8
+    LTEXT           "Channel count:",IDC_STATIC,14,74,51,8
+    LTEXT           "Value range:",IDC_STATIC,14,96,57,8
+    COMBOBOX        IDC_COMBO_DEVICE,31,11,117,141,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_CHANSTART,73,49,65,232,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_CHANCOUNT,73,71,65,239,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_VALUERANGE,73,93,65,214,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Section Length:",IDC_STATIC,14,116,54,8
+    LTEXT           "Clock rate:",IDC_STATIC,14,138,57,8
+    LTEXT           "Hz",IDC_STATIC,141,139,9,8
+    GROUPBOX        "Buffered AI general settings",IDC_STATIC,9,32,144,123
+    GROUPBOX        "Trigger settings",IDC_STATIC,159,33,172,69
+    COMBOBOX        IDC_COMBO_SOURCE,213,44,104,128,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_EDGE,213,58,104,119,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_DELAYCOUNT,213,71,104,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_LEVEL,213,85,104,12,ES_AUTOHSCROLL
+    LTEXT           "Source",IDC_STATIC,167,43,23,8
+    LTEXT           "Edge",IDC_STATIC,167,58,18,8
+    LTEXT           "Delay Count",IDC_STATIC,167,73,38,8
+    LTEXT           "Trigger Level",IDC_STATIC,167,83,42,8
+    EDITTEXT        IDC_EDIT_SECTIONLENGTH,73,114,65,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CLOCKRATEPERCHAN,73,136,65,12,ES_AUTOHSCROLL
+    LTEXT           "V",IDC_STATIC,319,87,8,8
+    GROUPBOX        "Trigger1 settings",IDC_STATIC,159,103,172,69
+    COMBOBOX        IDC_COMBO_SOURCE2,213,115,104,128,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_EDGE2,213,129,104,119,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_DELAYCOUNT2,213,142,104,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_LEVEL2,213,156,104,12,ES_AUTOHSCROLL
+    LTEXT           "Source",IDC_STATIC,167,114,23,8
+    LTEXT           "Edge",IDC_STATIC,167,129,18,8
+    LTEXT           "Delay Count",IDC_STATIC,167,144,38,8
+    LTEXT           "Trigger Level",IDC_STATIC,167,154,42,8
+    LTEXT           "V",IDC_STATIC,319,158,8,8
+    LTEXT           "Profile:",IDC_STATIC,162,14,22,8
+    EDITTEXT        IDC_EDIT_PROFILE,188,11,112,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDBROWSE,308,11,27,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 3,0,1,0
+ PRODUCTVERSION 3,0,1,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "Advantech Co., Ltd."
+            VALUE "FileDescription", "Asynchronous Buffered AI with Delay to Start Trigger"
+            VALUE "FileVersion", "3, 0, 1, 0"
+            VALUE "InternalName", "AsynOneBufferedAI_TDtr.exe"
+            VALUE "LegalCopyright", "Copyright ?2012 Advantech Co., Ltd. All rights reserved."
+            VALUE "OriginalFilename", "AsynOneBufferedAI_TDtr.exe"
+            VALUE "ProductName", "AI_AsynchronousOneBufferedAIwithDelaytoStartTrigger"
+            VALUE "ProductVersion", "3, 0, 1, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ASYNCHRONOUSBUFFEREDAIWITHDELAYTOSTARTTRIGGER_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 436
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 268
+    END
+
+    IDD_CONFIGURATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 336
+        TOPMARGIN, 2
+        BOTTOMMARGIN, 193
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BACKGROUND          BITMAP                  "res\\background.bmp"
+IDB_BITMAP_LIST         BITMAP                  "res\\bitmapList.bmp"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\AsynOneBufferedAI_TDtr.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"     // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

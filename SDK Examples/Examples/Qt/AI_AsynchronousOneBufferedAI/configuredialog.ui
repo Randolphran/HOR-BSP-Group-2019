@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ConfigureDialog</class>
+ <widget class="QDialog" name="ConfigureDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>383</width>
+    <height>318</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Asynchronous One Buffered AI - Configuration</string>
+  </property>
+  <widget class="QComboBox" name="cmbDevice">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>20</y>
+     <width>251</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnOK">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>280</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblDevice">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>20</y>
+     <width>51</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>91</width>
+     <height>22</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>Device:</string>
+   </property>
+   <property name="buddy">
+    <cstring>cmbDevice</cstring>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCancel">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>280</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="grpAISetting">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>90</y>
+     <width>341</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Buffered AI general settings</string>
+   </property>
+   <widget class="QComboBox" name="cmbChannelCount">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>50</y>
+      <width>201</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblChannelCount">
+    <property name="geometry">
+     <rect>
+      <x>19</x>
+      <y>50</y>
+      <width>91</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="text">
+     <string>Channel count:</string>
+    </property>
+    <property name="buddy">
+     <cstring>cmbChannelCount</cstring>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblSectionLength">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>112</y>
+      <width>91</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="text">
+     <string>Section Length:</string>
+    </property>
+    <property name="buddy">
+     <cstring>cmbValueRange</cstring>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblRateUnit">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>140</y>
+      <width>16</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="text">
+     <string>Hz</string>
+    </property>
+    <property name="buddy">
+     <cstring>cmbValueRange</cstring>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cmbValueRange">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>82</y>
+      <width>201</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cmbChannelStart">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>18</y>
+      <width>201</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="edtClockRatePerChan">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>142</y>
+      <width>201</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1000</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblValueRange">
+    <property name="geometry">
+     <rect>
+      <x>19</x>
+      <y>82</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="text">
+     <string>Value range:</string>
+    </property>
+    <property name="buddy">
+     <cstring>cmbValueRange</cstring>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblClockRate">
+    <property name="geometry">
+     <rect>
+      <x>19</x>
+      <y>142</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="text">
+     <string>Clock rate:</string>
+    </property>
+    <property name="buddy">
+     <cstring>cmbValueRange</cstring>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="edtSectionLength">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>112</y>
+      <width>202</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1024</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblChannelStart">
+    <property name="geometry">
+     <rect>
+      <x>19</x>
+      <y>18</y>
+      <width>91</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>91</width>
+      <height>22</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Channel start:</string>
+    </property>
+    <property name="buddy">
+     <cstring>cmbChannelStart</cstring>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="lblDevice_2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>60</y>
+     <width>51</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>91</width>
+     <height>22</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>Profile:</string>
+   </property>
+   <property name="buddy">
+    <cstring>cmbDevice</cstring>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txtProfilePath">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>60</y>
+     <width>191</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnBrowse">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>60</y>
+     <width>51</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Browse</string>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>cmbDevice</tabstop>
+  <tabstop>cmbChannelStart</tabstop>
+  <tabstop>cmbChannelCount</tabstop>
+  <tabstop>cmbValueRange</tabstop>
+  <tabstop>edtSectionLength</tabstop>
+  <tabstop>edtClockRatePerChan</tabstop>
+  <tabstop>btnOK</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

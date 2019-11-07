@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/Counter_BufferedPulseWidthMeasurement">
+        <file>Resources/Background.png</file>
+    </qresource>
+</RCC>

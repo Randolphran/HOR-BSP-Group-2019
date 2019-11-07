@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="SnapCounter">
+    <file>Resources/Background.bmp</file>
+    </qresource>
+</RCC>

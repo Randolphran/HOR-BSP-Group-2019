@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Counter_BufferedUpDownCounter", "Counter_BufferedUpDownCounter.vcproj", "{ED38D05C-83EB-479C-BAE7-2AA898505D0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED38D05C-83EB-479C-BAE7-2AA898505D0A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{ED38D05C-83EB-479C-BAE7-2AA898505D0A}.Debug|Win32.Build.0 = Debug|Win32
+		{ED38D05C-83EB-479C-BAE7-2AA898505D0A}.Release|Win32.ActiveCfg = Release|Win32
+		{ED38D05C-83EB-479C-BAE7-2AA898505D0A}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

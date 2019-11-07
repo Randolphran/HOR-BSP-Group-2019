@@ -1,0 +1,242 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (Taiwan) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
+#pragma code_page(950)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\UpDownCounter.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""     // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\UpDownCounter.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About UpDownCounter"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "UpDownCounter Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2010",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
+END
+
+IDD_UPDOWNCNTR_DIALOG DIALOGEX 0, 0, 299, 151
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Counter_UpDownCounter"
+FONT 9, "Microsoft Sans Serif", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_CounterValue,144,39,79,15,ES_RIGHT | ES_AUTOHSCROLL
+    LISTBOX         IDC_CounterValueList,144,61,79,78,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP,WS_EX_RIGHT
+    PUSHBUTTON      "Stop",IDC_Stop,236,59,45,16
+    PUSHBUTTON      "Configure...",IDC_Configure,236,124,45,16
+    GROUPBOX        "",IDC_STATIC,136,29,153,116
+    PUSHBUTTON      "Start",IDC_Start,236,39,45,16
+    PUSHBUTTON      "ValueReset",IDC_BUTTON_VALUE_RESET,236,80,45,16
+    GROUPBOX        "Reset Value",IDC_STATIC,9,29,119,44
+    LTEXT           "Reset Value:",IDC_STATIC,17,42,40,8
+    COMBOBOX        IDC_COMBO_RESET_VALUE,63,41,55,110,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_RESET_VALUE,63,57,55,12,ES_AUTOHSCROLL | ES_NUMBER | WS_DISABLED
+    GROUPBOX        "Index Reset",IDC_STATIC,9,75,119,69
+    CONTROL         "Disable",IDC_RADIO_DISABLE,"Button",BS_AUTORADIOBUTTON | WS_GROUP,17,87,40,10
+    CONTROL         "Infinite",IDC_RADIO_INFINITE,"Button",BS_AUTORADIOBUTTON,17,99,37,10
+    CONTROL         "Finite",IDC_RADIO_FINITE,"Button",BS_AUTORADIOBUTTON,17,112,33,10
+    LTEXT           "Reset Times:",IDC_STATIC,17,127,42,8
+    EDITTEXT        IDC_EDIT_RESET_TIMES,63,124,55,12,ES_AUTOHSCROLL | ES_NUMBER
+END
+
+IDD_CONFIGURATION DIALOGEX 0, 0, 181, 119
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "UpDown Counter - Configuration"
+FONT 9, "Microsoft Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,51,95,42,16
+    PUSHBUTTON      "Cancel",IDCANCEL,122,95,42,16
+    LTEXT           "Device:",IDC_STATIC,5,7,28,8
+    COMBOBOX        IDC_Device,38,6,130,51,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Counter channel:",IDC_STATIC,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,5,54,57,12
+    COMBOBOX        IDC_CounterChannel,65,52,105,53,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Counting type:",IDC_STATIC,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,5,74,49,12
+    COMBOBOX        IDC_COMBO_COUNTING_TPYE,65,73,105,148,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Profile:",IDC_STATIC,5,33,28,8
+    EDITTEXT        IDC_EDIT_PROFILE,38,30,96,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDBROWSE,137,30,32,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 3,0,1,0
+ PRODUCTVERSION 3,0,1,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "Advantech Co., Ltd."
+            VALUE "FileDescription", "UpDown Counter"
+            VALUE "FileVersion", "3, 0, 1, 0"
+            VALUE "InternalName", "UpDownCounter.exe"
+            VALUE "LegalCopyright", "Copyright ?2013 Advantech Co., Ltd. All rights reserved."
+            VALUE "OriginalFilename", "UpDownCounter.exe"
+            VALUE "ProductName", "UpDownCounter"
+            VALUE "ProductVersion", "3, 0, 1, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_UPDOWNCNTR_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 297
+        BOTTOMMARGIN, 149
+    END
+
+    IDD_CONFIGURATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 174
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 113
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_Background          BITMAP                  "res\\Background.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About UpDownCounter..."
+END
+
+#endif    // Chinese (Taiwan) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\UpDownCounter.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"     // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

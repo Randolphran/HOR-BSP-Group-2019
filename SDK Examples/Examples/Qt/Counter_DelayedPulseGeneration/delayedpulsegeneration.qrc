@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="DelayedPulseGeneration">
+    <file>Resources/Background.png</file>
+    <file>Resources/OneShotStatus.gif</file>
+    </qresource>
+</RCC>

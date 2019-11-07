@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Counter_SnapCounter", "SnapCounter.vcproj", "{DFE06392-D021-4BB6-9E19-AE1A33D6AF93}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFE06392-D021-4BB6-9E19-AE1A33D6AF93}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DFE06392-D021-4BB6-9E19-AE1A33D6AF93}.Debug|Win32.Build.0 = Debug|Win32
+		{DFE06392-D021-4BB6-9E19-AE1A33D6AF93}.Release|Win32.ActiveCfg = Release|Win32
+		{DFE06392-D021-4BB6-9E19-AE1A33D6AF93}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

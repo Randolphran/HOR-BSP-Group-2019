@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Counter_FrequencyMeasurement", "FrequencyMeasurement.vcproj", "{AC52B138-746D-4DDA-8736-085244797841}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC52B138-746D-4DDA-8736-085244797841}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AC52B138-746D-4DDA-8736-085244797841}.Debug|Win32.Build.0 = Debug|Win32
+		{AC52B138-746D-4DDA-8736-085244797841}.Release|Win32.ActiveCfg = Release|Win32
+		{AC52B138-746D-4DDA-8736-085244797841}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

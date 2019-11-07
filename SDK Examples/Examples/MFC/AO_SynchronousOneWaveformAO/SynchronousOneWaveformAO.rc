@@ -1,0 +1,238 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (Taiwan) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
+#pragma code_page(950)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\SynchronousOneWaveformAO.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""     // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Chinese (Taiwan) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\SynchronousOneWaveformAO.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_AO_SYNCHRONOUSONEWAVEFORMAO_DIALOG DIALOGEX 0, 0, 236, 270
+STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "SynchronousOneWaveformAO"
+FONT 8, "Microsoft Sans Serif", 400, 0, 0x1
+BEGIN
+    CONTROL         129,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE,0,0,234,271
+    EDITTEXT        IDC_HighLevelA,53,53,55,16,ES_RIGHT | ES_AUTOHSCROLL
+    EDITTEXT        IDC_LowLevelA,127,53,56,16,ES_RIGHT | ES_AUTOHSCROLL
+    EDITTEXT        IDC_HighLevelB,52,167,57,16,ES_RIGHT | ES_AUTOHSCROLL
+    EDITTEXT        IDC_LowLevelB,127,167,57,16,ES_RIGHT | ES_AUTOHSCROLL
+    CONTROL         " 0",IDC_ChannelNoA,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,160,21,19,8
+    LTEXT           "1",IDC_ChannelNoB,163,135,19,9
+    PUSHBUTTON      "Configure...",IDC_Configure,38,241,64,17
+    PUSHBUTTON      "Start",IDC_Start,138,242,60,17
+    CONTROL         "",IDC_SineA,"Button",BS_AUTORADIOBUTTON | BS_BITMAP | BS_PUSHLIKE | WS_GROUP,55,73,34,26
+    CONTROL         "",IDC_SquareA,"Button",BS_AUTORADIOBUTTON | BS_BITMAP | BS_PUSHLIKE,97,74,33,26
+    CONTROL         "",IDC_TriangleA,"Button",BS_AUTORADIOBUTTON | BS_BITMAP | BS_PUSHLIKE,139,74,33,27
+    CONTROL         "",IDC_SineB,"Button",BS_AUTORADIOBUTTON | BS_BITMAP | BS_PUSHLIKE | WS_GROUP,54,187,34,26
+    CONTROL         "",IDC_SquareB,"Button",BS_AUTORADIOBUTTON | BS_BITMAP | BS_PUSHLIKE,97,187,34,27
+    CONTROL         "",IDC_TriangleB,"Button",BS_AUTORADIOBUTTON | BS_BITMAP | BS_PUSHLIKE,141,187,36,27
+END
+
+IDD_CONFIGURATION DIALOGEX 0, 0, 329, 125
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "SynchronousOneWaveformAO - Configuration"
+FONT 9, "Microsoft Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,183,99,42,16
+    PUSHBUTTON      "Cancel",IDCANCEL,260,99,43,16
+    LTEXT           "Device:",IDC_STATIC,9,14,22,8
+    COMBOBOX        IDC_Device,37,14,105,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Channel start:",IDC_STATIC,16,45,49,8
+    LTEXT           "Channel count:",IDC_STATIC,16,62,49,8
+    COMBOBOX        IDC_channelStart,70,43,72,70,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_channelCount,70,60,72,58,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Value range:",IDC_STATIC,16,79,49,8
+    COMBOBOX        IDC_valueRange,70,78,72,58,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "",IDC_STATIC,169,34,149,56
+    CONTROL         "Points for each waveform:",IDC_STATIC,"Static",SS_LEFTNOWORDWRAP | WS_GROUP,179,45,103,8
+    LTEXT           "Convert clock rate:",IDC_STATIC,16,96,57,12
+    LTEXT           "Hz",IDC_STATIC,144,98,11,11
+    LTEXT           "The data number of AO to form a waveform",IDC_STATIC,179,77,138,9
+    GROUPBOX        "Static",IDC_STATIC,6,35,155,85
+    EDITTEXT        IDC_PointsPerWave,179,59,81,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ConvertClockRatePerChannel,74,95,68,14,ES_AUTOHSCROLL
+    LTEXT           "Profile:",IDC_STATIC,165,14,23,9
+    EDITTEXT        IDC_EDIT_PROFILE,191,14,96,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDBROWSE,295,14,31,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 3,0,1,0
+ PRODUCTVERSION 3,0,1,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "Advantech Co., Ltd."
+            VALUE "FileDescription", "SynchronousOneWaveformAO"
+            VALUE "FileVersion", "3, 0, 1, 0"
+            VALUE "InternalName", "SynchronousOneWaveformAO.exe"
+            VALUE "LegalCopyright", "Copyright ?2012 Advantech Co., Ltd. All rights reserved."
+            VALUE "OriginalFilename", "SynchronousOneWaveformAO.exe"
+            VALUE "ProductName", "SynchronousOneWaveformAO"
+            VALUE "ProductVersion", "3, 0, 1, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_AO_SYNCHRONOUSONEWAVEFORMAO_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 233
+    END
+
+    IDD_CONFIGURATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 322
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 118
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_Background          BITMAP                  "res\\AO.bmp"
+IDB_TriangleDown        BITMAP                  "res\\triangle_down.bmp"
+IDB_Channel             BITMAP                  "res\\channel.bmp"
+IDB_Sine                BITMAP                  "res\\sine.bmp"
+IDB_SineDown            BITMAP                  "res\\sine_down.bmp"
+IDB_Square              BITMAP                  "res\\square.bmp"
+IDB_SquareDown          BITMAP                  "res\\square_down.bmp"
+IDB_Triangle            BITMAP                  "res\\triangle.bmp"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\SynchronousOneWaveformAO.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"     // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

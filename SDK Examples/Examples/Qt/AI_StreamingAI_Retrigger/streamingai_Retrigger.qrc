@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="StreamingAI_Retrigger">
+   <file>Resources/Background.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="PulseOutputwithTimerInterrupt">
+    <file>Resources/Background.png</file>
+    <file>Resources/TimerPulseStatus.gif</file>
+    </qresource>
+</RCC>

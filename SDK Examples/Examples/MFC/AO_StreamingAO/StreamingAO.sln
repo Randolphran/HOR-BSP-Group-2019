@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AO_StreamingAO", "StreamingAO.vcproj", "{C326B45E-6748-4E54-8053-9C30ADFB099F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C326B45E-6748-4E54-8053-9C30ADFB099F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C326B45E-6748-4E54-8053-9C30ADFB099F}.Debug|Win32.Build.0 = Debug|Win32
+		{C326B45E-6748-4E54-8053-9C30ADFB099F}.Release|Win32.ActiveCfg = Release|Win32
+		{C326B45E-6748-4E54-8053-9C30ADFB099F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

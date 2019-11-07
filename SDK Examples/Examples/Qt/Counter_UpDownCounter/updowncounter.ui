@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UpDownCounterClass</class>
+ <widget class="QDialog" name="UpDownCounterClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>530</width>
+    <height>311</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>530</width>
+    <height>311</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>530</width>
+    <height>311</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Counter_UpDownCounter</string>
+  </property>
+  <widget class="QFrame" name="background">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>0</y>
+     <width>531</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>531</width>
+     <height>311</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>531</width>
+     <height>311</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QFrame#background{background-image:url(:/UpDownCounter/Resources/Background.bmp)}</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QGroupBox" name="groupBox2">
+    <property name="geometry">
+     <rect>
+      <x>214</x>
+      <y>49</y>
+      <width>295</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>295</width>
+      <height>241</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>295</width>
+      <height>241</height>
+     </size>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLineEdit" name="txtCounterValue">
+     <property name="geometry">
+      <rect>
+       <x>24</x>
+       <y>10</y>
+       <width>155</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>155</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>155</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="CounterValueList">
+     <property name="geometry">
+      <rect>
+       <x>24</x>
+       <y>46</y>
+       <width>155</width>
+       <height>181</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>155</width>
+       <height>181</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>155</width>
+       <height>181</height>
+      </size>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnStart">
+     <property name="geometry">
+      <rect>
+       <x>203</x>
+       <y>20</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Start</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnStop">
+     <property name="geometry">
+      <rect>
+       <x>203</x>
+       <y>66</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Stop</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnConfig">
+     <property name="geometry">
+      <rect>
+       <x>203</x>
+       <y>184</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Configure...</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnValReset">
+     <property name="geometry">
+      <rect>
+       <x>203</x>
+       <y>110</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>75</width>
+       <height>23</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>ValueReset</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>44</y>
+      <width>191</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>191</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>191</width>
+      <height>81</height>
+     </size>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>Reset Value</string>
+    </property>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>71</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>71</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Reset Value:</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cmbResetValue">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>20</y>
+       <width>91</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>91</width>
+       <height>22</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>91</width>
+       <height>22</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="txtResetValue">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>50</y>
+       <width>91</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>91</width>
+       <height>22</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>91</width>
+       <height>22</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>131</y>
+      <width>191</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>191</width>
+      <height>150</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>191</width>
+      <height>150</height>
+     </size>
+    </property>
+    <property name="title">
+     <string>Index Reset</string>
+    </property>
+    <widget class="QRadioButton" name="radDisable">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>21</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>89</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>89</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Disable</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="raInfinite">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>51</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>89</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>89</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Infinite</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radFinite">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>81</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>89</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>89</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Finite</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>113</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>71</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>71</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Reset Times:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="txtResetTimes">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>111</y>
+       <width>91</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>91</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>91</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="updowncounter.qrc"/>
+ </resources>
+ <connections/>
+</ui>

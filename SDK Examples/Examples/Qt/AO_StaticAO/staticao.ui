@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StaticAOClass</class>
+ <widget class="QDialog" name="StaticAOClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>389</width>
+    <height>447</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>389</width>
+    <height>447</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>389</width>
+    <height>447</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Static AO</string>
+  </property>
+  <widget class="QFrame" name="background">
+   <property name="geometry">
+    <rect>
+     <x>-1</x>
+     <y>-3</y>
+     <width>391</width>
+     <height>451</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QFrame#background{background-image:url(:/StaticAO/Resources/AO.png)}</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QPushButton" name="BtnSineA">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>124</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:url(:/StaticAO/Resources/sine.png)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="BtnTriangleA">
+    <property name="geometry">
+     <rect>
+      <x>136</x>
+      <y>124</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:url(:/StaticAO/Resources/triangle.png)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="BtnSquareA">
+    <property name="geometry">
+     <rect>
+      <x>203</x>
+      <y>125</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:url(:/StaticAO/Resources/square.png)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="BtnSineB">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>301</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:url(:/StaticAO/Resources/sine.png)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="BtnTriangleB">
+    <property name="geometry">
+     <rect>
+      <x>139</x>
+      <y>302</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:url(:/StaticAO/Resources/triangle.png)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="BtnSquareB">
+    <property name="geometry">
+     <rect>
+      <x>207</x>
+      <y>303</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:url(:/StaticAO/Resources/square.png)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="BtnManualB">
+    <property name="geometry">
+     <rect>
+      <x>288</x>
+      <y>303</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:url(:/StaticAO/Resources/manual.png)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="BtnManualA">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>125</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>51</width>
+      <height>51</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:url(:/StaticAO/Resources/manual.png)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtboxHiLevelA">
+    <property name="geometry">
+     <rect>
+      <x>73</x>
+      <y>90</y>
+      <width>73</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>73</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>73</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>5</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtboxLoLevelA">
+    <property name="geometry">
+     <rect>
+      <x>165</x>
+      <y>90</y>
+      <width>73</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>73</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>73</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>-5</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtboxValueA">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>90</y>
+      <width>65</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>65</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>65</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>2.5</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtboxHiLevelB">
+    <property name="geometry">
+     <rect>
+      <x>73</x>
+      <y>269</y>
+      <width>73</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>73</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>73</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>5</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtboxLoLevelB">
+    <property name="geometry">
+     <rect>
+      <x>165</x>
+      <y>267</y>
+      <width>73</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>73</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>73</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>-5</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtboxValueB">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>267</y>
+      <width>65</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>65</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>65</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>2.5</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="chLabelA">
+    <property name="geometry">
+     <rect>
+      <x>268</x>
+      <y>34</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 170, 0)</string>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="chLabelB">
+    <property name="geometry">
+     <rect>
+      <x>271</x>
+      <y>211</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Shell Dlg 2</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 170, 0)</string>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QSlider" name="timerTrackBar">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>403</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>10</number>
+    </property>
+    <property name="maximum">
+     <number>1000</number>
+    </property>
+    <property name="value">
+     <number>50</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="timerFreqLabel">
+    <property name="geometry">
+     <rect>
+      <x>253</x>
+      <y>405</y>
+      <width>41</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>41</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>41</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>50ms</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnConfigure">
+    <property name="geometry">
+     <rect>
+      <x>298</x>
+      <y>401</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>75</width>
+      <height>23</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>75</width>
+      <height>23</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Configure</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

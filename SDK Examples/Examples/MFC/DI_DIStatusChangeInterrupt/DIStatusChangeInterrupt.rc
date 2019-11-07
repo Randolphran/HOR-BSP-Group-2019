@@ -1,0 +1,261 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\DIStatusChangeInterrupt.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""     // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About DIStatusChangeInterrupt"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "DIStatusChangeInterrupt Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2012",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
+END
+
+IDD_DISTATUSCHANGE_DIALOG DIALOGEX 0, 0, 246, 139
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "DIStatusChangeInterrupt"
+FONT 9, "Microsoft Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,8,19,173,109
+    CONTROL         "",IDC_GIF,"Static",SS_BLACKRECT,145,8,18,11
+    PUSHBUTTON      "Start",IDC_START,187,53,50,16
+    PUSHBUTTON      "Stop",IDC_STOP,188,74,50,16
+    PUSHBUTTON      "Configure...",IDC_CONFIG,188,102,50,16
+END
+
+IDD_CONFIGURATION DIALOGEX 0, 0, 199, 164
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "DIStatusChangeInterrupt - Configuration"
+FONT 9, "Microsoft Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         149,IDC_PIC7,"Static",SS_BITMAP | SS_NOTIFY,26,97,13,12
+    CONTROL         149,IDC_PIC6,"Static",SS_BITMAP | SS_NOTIFY,41,97,13,12
+    GROUPBOX        "",IDC_GROUPBOX2,25,93,58,18
+    LTEXT           "Enabled channels:",IDC_STATIC,18,81,71,11
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME,6,5,184,119
+    COMBOBOX        IDC_PORT,44,60,124,58,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         149,IDC_PIC1,"Static",SS_BITMAP | SS_NOTIFY,120,97,13,12
+    CONTROL         149,IDC_PIC0,"Static",SS_BITMAP | SS_NOTIFY,133,97,13,12
+    CONTROL         149,IDC_PIC2,"Static",SS_BITMAP | SS_NOTIFY,105,97,13,12
+    CTEXT           "",IDC_PORTVALUE,156,97,16,13,SS_CENTERIMAGE,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "OK",IDOK,41,137,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,112,137,50,16
+    LTEXT           "Device:",IDC_STATIC,17,15,24,8
+    LTEXT           "DI port:",IDC_STATIC,17,61,23,10
+    COMBOBOX        IDC_DEVICE,44,14,124,55,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         149,IDC_PIC3,"Static",SS_BITMAP | SS_NOTIFY,92,97,13,12
+    CONTROL         149,IDC_PIC5,"Static",SS_BITMAP | SS_NOTIFY,54,97,13,12
+    CONTROL         149,IDC_PIC4,"Static",SS_BITMAP | SS_NOTIFY,69,97,13,12
+    GROUPBOX        "",IDC_GROUPBOX1,90,93,57,18
+    EDITTEXT        IDC_EDIT_PROFILE,44,37,103,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDBROWSE,154,37,28,14
+    LTEXT           "Profile:",IDC_STATIC,17,39,23,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 3,0,1,0
+ PRODUCTVERSION 3,0,1,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "Advantech Co., Ltd."
+            VALUE "FileDescription", "DIStatusChangeInterrupt"
+            VALUE "FileVersion", "3, 0, 1, 0"
+            VALUE "InternalName", "DIStatusChangeInterrupt.exe"
+            VALUE "LegalCopyright", "Copyright ?2012 Advantech Co., Ltd. All rights reserved."
+            VALUE "OriginalFilename", "DIStatusChangeInterrupt.exe"
+            VALUE "ProductName", "DIStatusChangeInterrupt"
+            VALUE "ProductVersion", "3, 0, 1, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_DISTATUSCHANGE_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 245
+    END
+
+    IDD_CONFIGURATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 192
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 157
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// GAF
+//
+
+IDR_GIFPIC              GAF                     "res\\gu.gaf"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\DIStatusChangeInterrupt.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BACKGROUND          BITMAP                  "SCback.bmp"
+IDB_BUTTONUP            BITMAP                  "buttonup.bmp"
+IDB_BUTTONDOWN          BITMAP                  "buttondown.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About DIStatusChange..."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\DIStatusChangeInterrupt.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"     // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

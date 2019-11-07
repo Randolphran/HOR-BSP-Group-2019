@@ -1,0 +1,271 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\DIPatternMatchInterrupt.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""     // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 3,0,1,0
+ PRODUCTVERSION 3,0,1,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "Advantech Co., Ltd."
+            VALUE "FileDescription", "DIPatternMatchInterrupt"
+            VALUE "FileVersion", "3, 0, 1, 0"
+            VALUE "InternalName", "DIPatternMatchInterrupt.exe"
+            VALUE "LegalCopyright", "Copyright ?2012 Advantech Co., Ltd. All rights reserved."
+            VALUE "OriginalFilename", "DIPatternMatchInterrupt.exe"
+            VALUE "ProductName", "DIPatternMatchInterrupt"
+            VALUE "ProductVersion", "3, 0, 1, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\DIPatternMatchInterrupt.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 55
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About DIPatternMatchInterrupt"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "DIPatternMatchInterrupt Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2012",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,16,WS_GROUP
+END
+
+IDD_DIPATTERNMATCH_DIALOG DIALOGEX 0, 0, 247, 133
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "DIPatternMatchInterrupt"
+FONT 9, "Microsoft Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,9,14,173,109
+    PUSHBUTTON      "Start",IDC_START,189,35,52,16
+    PUSHBUTTON      "Stop",IDC_STOP,189,56,52,16
+    PUSHBUTTON      "Configure...",IDC_CONFIG,190,88,52,16
+    CONTROL         "",IDC_GIFPIC,"Static",SS_BLACKRECT,146,3,17,11
+END
+
+IDD_CONFIGURATION DIALOGEX 0, 0, 191, 174
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "DIPatternMatchInterrupt - Configuration"
+FONT 9, "Microsoft Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Device:",IDC_STATIC,19,19,25,8
+    COMBOBOX        IDC_DEVICE,45,18,124,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "DI port:",IDC_STATIC,20,62,23,8
+    COMBOBOX        IDC_PORT,49,62,124,60,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Enabled channels:",IDC_STATIC,19,79,59,8
+    GROUPBOX        "",IDC_GROUPBOX2,19,88,60,19
+    CONTROL         129,IDC_PIC7,"Static",SS_BITMAP | SS_NOTIFY,20,93,14,13
+    CONTROL         129,IDC_PIC6,"Static",SS_BITMAP | SS_NOTIFY,34,93,14,13
+    CONTROL         129,IDC_PIC5,"Static",SS_BITMAP | SS_NOTIFY,49,93,14,13
+    CONTROL         129,IDC_PIC4,"Static",SS_BITMAP | SS_NOTIFY,64,93,14,13
+    GROUPBOX        "",IDC_GROUPBOX1,87,88,60,19
+    CONTROL         129,IDC_PIC3,"Static",SS_BITMAP | SS_NOTIFY,88,93,14,13
+    CONTROL         129,IDC_PIC2,"Static",SS_BITMAP | SS_NOTIFY,102,93,14,13
+    CONTROL         129,IDC_PIC1,"Static",SS_BITMAP | SS_NOTIFY,117,93,14,13
+    CONTROL         129,IDC_PIC0,"Static",SS_BITMAP | SS_NOTIFY,132,93,14,13
+    CTEXT           "",IDC_PMCH,156,94,16,12,SS_CENTERIMAGE,WS_EX_CLIENTEDGE
+    CTEXT           "",IDC_PMVALUE,156,122,16,12,SS_CENTERIMAGE,WS_EX_CLIENTEDGE
+    CONTROL         129,IDC_PIC8,"Static",SS_BITMAP | SS_NOTIFY,132,122,14,13
+    CONTROL         129,IDC_PIC9,"Static",SS_BITMAP | SS_NOTIFY,117,122,14,13
+    CONTROL         129,IDC_PIC10,"Static",SS_BITMAP | SS_NOTIFY,102,122,14,13
+    CONTROL         129,IDC_PIC11,"Static",SS_BITMAP | SS_NOTIFY,88,122,14,13
+    CONTROL         129,IDC_PIC12,"Static",SS_BITMAP | SS_NOTIFY,63,122,14,13
+    CONTROL         129,IDC_PIC13,"Static",SS_BITMAP | SS_NOTIFY,49,122,14,13
+    CONTROL         129,IDC_PIC14,"Static",SS_BITMAP | SS_NOTIFY,34,122,14,13
+    CONTROL         129,IDC_PIC15,"Static",SS_BITMAP | SS_NOTIFY,19,122,14,13
+    LTEXT           "Matched value:",IDC_STATIC,18,110,48,8
+    DEFPUSHBUTTON   "OK",IDOK,54,146,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,116,146,50,16
+    GROUPBOX        "",IDC_GROUPBOX4,18,117,60,19
+    GROUPBOX        "",IDC_GROUPBOX3,87,117,60,19
+    LTEXT           "Profile:",IDC_STATIC,19,41,25,8
+    EDITTEXT        IDC_EDIT_PROFILE,44,39,110,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDBROWSE,157,39,26,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_DIPATTERNMATCH_DIALOG, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 132
+    END
+
+    IDD_CONFIGURATION, DIALOG
+    BEGIN
+        RIGHTMARGIN, 190
+        BOTTOMMARGIN, 172
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BUTTONUP            BITMAP                  "buttonup.bmp"
+IDB_BUTTONDOWN          BITMAP                  "buttondown.bmp"
+IDB_BACKRUN             BITMAP                  "bachground-run.bmp"
+IDC_CONFIG              BITMAP                  "bachground-configure.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// GAF
+//
+
+IDR_GIFPIC              GAF                     "res\\gu.gaf"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About DIPatternMatchInterrupt..."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\DIPatternMatchInterrupt.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"     // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

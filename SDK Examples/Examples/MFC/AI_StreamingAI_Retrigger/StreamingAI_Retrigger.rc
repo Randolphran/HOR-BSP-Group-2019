@@ -1,0 +1,245 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\StreamingAI_Retrigger.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""     // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\StreamingAI_Retrigger.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_STREAMINGAIWITHDELATTOSTARTTRIGGER_DIALOG DIALOGEX 0, 0, 443, 274
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Streaming AI with Retrigger"
+FONT 9, "Microsoft Sans Serif", 400, 0, 0x0
+BEGIN
+    RTEXT           "10 V",IDC_STATIC_YRANGEMAX,7,20,31,9,0,WS_EX_TRANSPARENT
+    RTEXT           "0",IDC_STATIC_YRANGEMID,25,110,9,9,0,WS_EX_TRANSPARENT
+    RTEXT           "-10 V",IDC_STATIC_YRANGEMIN,8,188,27,9,0,WS_EX_TRANSPARENT
+    LTEXT           "0 Sec",IDC_STATIC_STARTTIME,39,201,48,9,0,WS_EX_TRANSPARENT
+    RTEXT           "10 sec",IDC_STATIC_ENDTIME,374,202,36,9,0,WS_EX_TRANSPARENT
+    CONTROL         "",IDC_STATIC_GRAPH,"Static",SS_BLACKFRAME,38,21,372,176
+    CONTROL         "",IDC_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_NOLABELWRAP | LVS_NOSCROLL | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,75,214,232,27
+    LTEXT           "Color of \nchannels:",IDC_STATIC,37,218,31,21,0,WS_EX_TRANSPARENT
+    CONTROL         "",IDC_SLIDER_TIMEDIV,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,331,222,83,15
+    PUSHBUTTON      "Configure...",IDC_BUTTON_CONFIG,214,252,51,15
+    PUSHBUTTON      "Start",IDC_BUTTON_START,286,252,40,15
+    PUSHBUTTON      "Pause",IDC_BUTTON_PAUSE,330,252,40,15
+    PUSHBUTTON      "Stop",IDC_BUTTON_STOP,371,252,40,15
+    LTEXT           "Div:",IDC_STATIC,317,224,12,8
+END
+
+IDD_CONFIGURATION DIALOGEX 0, 0, 347, 200
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Streaming  AI with Retrigger - Configuration"
+FONT 9, "Microsoft Sans Serif", 400, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,186,176,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,266,176,50,16
+    LTEXT           "Device:",IDC_STATIC,12,9,29,8
+    LTEXT           "Channel start:",IDC_STATIC,19,41,57,8
+    LTEXT           "Channel count:",IDC_STATIC,19,61,57,8
+    LTEXT           "Value range:",IDC_STATIC,19,81,49,8
+    COMBOBOX        IDC_COMBO_DEVICE,38,8,105,227,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_CHANSTART,70,40,79,254,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_CHANCOUNT,70,59,79,262,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_VALUERANGE,71,79,78,241,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Waveform AI general settings",IDC_STATIC,10,23,154,141
+    LTEXT           "Hz",IDC_STATIC,151,104,9,8
+    GROUPBOX        "Trigger settings",IDC_GP_TRIGGER,171,23,169,68
+    LTEXT           "Source:",IDC_STATIC,179,33,43,8
+    LTEXT           "Delay count:",IDC_STATIC,179,59,43,8
+    LTEXT           "Trigger Level:",IDC_STATIC,179,74,43,8
+    LTEXT           "Edge:",IDC_STATIC,179,45,43,8
+    COMBOBOX        IDC_COMBO_SOURCE,223,32,105,109,CBS_DROPDOWNLIST | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_DELAYCOUNT,223,59,105,12,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    EDITTEXT        IDC_EDIT_LEVEL,223,74,105,12,ES_AUTOHSCROLL | WS_GROUP | NOT WS_TABSTOP
+    COMBOBOX        IDC_COMBO_EDGE,223,44,105,90,CBS_DROPDOWNLIST | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_CLOCKRATEPERCHAN,69,102,81,12,ES_AUTOHSCROLL
+    LTEXT           "V",IDC_STATIC,331,74,8,8
+    GROUPBOX        "Trigger1 settings",IDC_GP_TRIGGER2,171,94,169,70
+    LTEXT           "Source:",IDC_STATIC,178,105,43,8
+    LTEXT           "Delay count:",IDC_STATIC,178,134,43,8
+    LTEXT           "Trigger Level:",IDC_STATIC,178,148,43,8
+    LTEXT           "Edge:",IDC_STATIC,178,119,43,8
+    COMBOBOX        IDC_COMBO_SOURCE2,222,103,105,109,CBS_DROPDOWNLIST | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_DELAYCOUNT2,222,133,105,12,ES_AUTOHSCROLL | ES_NUMBER | WS_GROUP | NOT WS_TABSTOP
+    EDITTEXT        IDC_EDIT_LEVEL2,222,146,105,12,ES_AUTOHSCROLL | WS_GROUP | NOT WS_TABSTOP
+    COMBOBOX        IDC_COMBO_EDGE2,222,118,105,90,CBS_DROPDOWNLIST | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    LTEXT           "V",IDC_STATIC,330,148,8,8
+    LTEXT           "Section Length:",IDC_STATIC,19,126,53,8
+    EDITTEXT        IDC_EDIT_SECTIONLENGTH,70,125,81,12,ES_AUTOHSCROLL
+    LTEXT           "Cycles:",IDC_STATIC,19,145,40,8
+    EDITTEXT        IDC_EDIT_CYCLES,70,145,81,12,ES_AUTOHSCROLL
+    LTEXT           "Clock rate:",IDC_STATIC,19,104,47,8
+    EDITTEXT        IDC_EDIT_PROFILE,202,7,105,14,ES_AUTOHSCROLL
+    LTEXT           "Profile:",IDC_STATIC,175,9,27,8
+    PUSHBUTTON      "Browse",IDBROWSE,311,7,28,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 3,0,1,0
+ PRODUCTVERSION 3,0,1,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "Advantech Co., Ltd."
+            VALUE "FileDescription", "Streaming AI with Dealy to Start Trigger"
+            VALUE "FileVersion", "3, 0, 1, 0"
+            VALUE "InternalName", "StreamingAI_Retrigger.exe"
+            VALUE "LegalCopyright", "Copyright ?2012 Advantech Co., Ltd. All rights reserved."
+            VALUE "OriginalFilename", "StreamingAI_Retrigger.exe"
+            VALUE "ProductName", "StreamingAIwithDelaytoStartTrigger"
+            VALUE "ProductVersion", "3, 0, 1, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_STREAMINGAIWITHDELATTOSTARTTRIGGER_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 436
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 273
+    END
+
+    IDD_CONFIGURATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 4
+        RIGHTMARGIN, 343
+        VERTGUIDE, 70
+        VERTGUIDE, 151
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 193
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BACKGROUND          BITMAP                  "res\\background.bmp"
+IDB_BITMAP_LIST         BITMAP                  "res\\bitmapList.bmp"
+IDB_TRIGGERARROW        BITMAP                  "res\\Arrow.bmp"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\StreamingAI_Retrigger.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"     // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

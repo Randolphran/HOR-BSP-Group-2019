@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="AsynOneBufferedAI_TDtrtp">
+    <file>Resources/trigger.png</file>
+    <file>Resources/Background.png</file>
+  </qresource>
+</RCC>

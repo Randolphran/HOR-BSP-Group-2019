@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/Counter_BufferedPWMOutput">
+        <file>Resources/Background.png</file>
+        <file>Resources/BufferedPwModulatorStatus.gif</file>
+    </qresource>
+</RCC>
