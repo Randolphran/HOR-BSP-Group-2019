@@ -61,6 +61,8 @@ try
     errorCode = GenerateWaveform(instantAoCtrl, channelStart, ...
         channelCount, scaledWaveForm, channelCount * oneWavePointCount, ...
         H5T.enum_nameof(WaveStyle, int32(0)));
+        % here int32(0) defined the wavestyle, which is listed upward.
+        % oneWavePointCount is also an editable property.
     if BioFailed(errorCode)    
         throw Exception();
     end
@@ -70,7 +72,7 @@ try
     
     t = timer('TimerFcn',{@TimerCallback, instantAoCtrl, ...
         oneWavePointCount, scaleData, scaledWaveForm, channelStart, ...
-        channelCount}, 'period', 0.1, 'executionmode', 'fixedrate', ...
+        channelCount}, 'period', 0.01, 'executionmode', 'fixedrate', ...
         'StartDelay', 1);
     start(t);
     input('Outputting data...Press Enter key to quit!', 's');
@@ -232,6 +234,7 @@ function TimerCallback(obj, event, instantAoCtrl, oneWavePointCount, ...
     scaleData, scaledWaveForm, channelStart, channelCount)
 
 persistent i ;
+
 if isempty(i)
     i = 0;
 else
@@ -250,10 +253,13 @@ if i <= (oneWavePointCount - 1)
         end
     end
 else
+    clear i; % constant output mode
+    % one-shot output mode
+    %     clear functions;
+    %     stop(obj);
+    %     delete(obj);
+    
     fprintf('\nStaticAO is completed, and press Enter key to quit!');
-    clear functions;
-    stop(obj);
-    delete(obj);
 end
 
 end
