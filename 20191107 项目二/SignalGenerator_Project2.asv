@@ -67,12 +67,8 @@ guidata(hObject,handles);
 
 set(handles.listbox1,'value',1);
 
-set(handles.listbox1,'value',1);
-set(handles.text_dutycycle,'visible','off');
-set(handles.edit_dutycycle,'visible','off');
-set(handles.text9,'visible','off');
-set(handles.radiobutton_continuous,'value',0);
-set(handles.radiobutton_specified,'value',0);
+handles.ppp = 512;
+
 
 % Update handles structure
 guidata(hObject, handles);
@@ -102,8 +98,8 @@ handles.wavechoosen=wavechosen;
 guidata(hObject,handles);
 set(handles.edit_ppp,'enable','on');
 set(handles.edit_amplitude,'enable','on');
-set(handles.edit_frequency,'enable','on');
-set(handles.edit_offset,'enable','on');
+set(handles.edit_freque,'enable','on');
+set(handles.edit_amplitude,'enable','on');
 set(handles.edit_dutycycle,'enable','on');
 switch wavechosen
     case 1   %Sine
