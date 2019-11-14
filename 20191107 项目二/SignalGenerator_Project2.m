@@ -283,7 +283,7 @@ if ischar(filename)
         dataAO = temp(1:dataNum,4);        
     else
         ppp = dataNum;
-        set(handles.edit_ppp,'value',ppp);
+        set(handles.edit_ppp,'string',num2str(ppp));
     end
     
      set(handles.edit_ppp,'enable','off');
