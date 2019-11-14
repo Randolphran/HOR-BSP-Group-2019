@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="PWMOutput">
-    <file>Resources/Background.png</file>
-    <file>Resources/PwModulatorStatus.gif</file>
-    </qresource>
-</RCC>

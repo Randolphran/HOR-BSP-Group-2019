@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="FrequencyMeasurement">
-    <file>Resources/Background.png</file>
-    <file>Resources/Enlarge.png</file>
-    <file>Resources/Shorten.png</file>
-    </qresource>
-</RCC>

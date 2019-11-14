@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/AI_SynchronousOneBufferedAi">
-        <file>Resources/Background.png</file>
-    </qresource>
-</RCC>
