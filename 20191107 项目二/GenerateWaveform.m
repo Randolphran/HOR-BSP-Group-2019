@@ -1,4 +1,4 @@
-function waveBuffer = GenerateWaveform(amplitude, offset, datacycle, ...
+function waveBuffer = GenerateWaveform(amplitude, offset, dutycycle, ...
     oneWavePointCount, style)
 
 % errorcode = Automation.BDaq.ErrorCode.Success;
@@ -109,7 +109,7 @@ for i = 0:(oneWavePointCount - 1)
                     end
                 end
             case 3
-                if (i >= 0) && (i < (oneWavePointCount*datacycle))
+                if (i >= 0) && (i < (oneWavePointCount*dutycycle))
                     waveBuffer.Set(i,amplitude * 1.0 + offset);
                 else
                      waveBuffer.Set(i,amplitude * (-1.0) + offset);

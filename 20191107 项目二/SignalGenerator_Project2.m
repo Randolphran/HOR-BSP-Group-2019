@@ -61,7 +61,7 @@ handles.ppp=ppp;
 offset=0;
 handles.offset=offset;
 
-dataAO=zeros(512);
+dataAO=zeros(512,1);
 handles.dataAO=dataAO;
 guidata(hObject,handles);
 
@@ -166,6 +166,14 @@ function edit_amplitude_Callback(hObject, eventdata, handles)
 amplitude=str2double(get(handles.edit_amplitude,'String'));
 handles.amplitude=amplitude;
 guidata(hObject,handles);
+
+offset=handles.offset;
+dutycycle=handles.dutycycle;
+ppp=handles.ppp;
+style=handles.wavechosen;
+dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
+AxesHandle = handles.axes1;
+plot(AxesHandle,dataAO,'black');
 % Hints: get(hObject,'String') returns contents of edit_amplitude as text
 %        str2double(get(hObject,'String')) returns contents of edit_amplitude as a double
 
