@@ -192,8 +192,8 @@ if ischar(filename)
     
     set(gcf, 'Name', '正在导入......');
 
-    dataImport = Signalread(file);
-    dataNum = length(dataImport(:,1));
+    dataAO = Signalread(file);
+    dataNum = length(dataAO(:,1));
     
     % get data information, namely sampling rate, and have it display in edit box
     fid = fopen(file_info,'r');
@@ -224,15 +224,17 @@ if ischar(filename)
         [num2str(totallength),' ms']};
     
     data_to_plot = zeros(2*dataNum,1);
-    data_to_plot(1:dataNum,1) = dataImport(:,1);
-    data_to_plot(dataNum+1:2*dataNum,1) = dataImport(:,1);
+    data_to_plot(1:dataNum,1) = dataAO(:,1);
+    data_to_plot(dataNum+1:2*dataNum,1) = dataAO(:,1);
     
     plot(AxesHandle,data_to_plot,'black');
 % % % % % % % % % data plot complete % % % % % % % % % % % % % % % % % %
-    
-    % upload import data file to workspace
+    % set enable status TODO
+
+
+    % upload import data file to gui workspace
     handles.dataNum = dataNum;
-    handles.dataImport = dataImport;
+    handles.dataAO = dataAO;
     handles.data_info = data_info;
     handles.Fs = Fs;
     guidata(hObject,handles);
