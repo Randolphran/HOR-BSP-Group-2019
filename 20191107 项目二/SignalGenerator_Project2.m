@@ -393,7 +393,7 @@ function edit_datacycle_Callback(hObject, eventdata, handles)
 
 
 % --- Executes during object creation, after setting all properties.
-function edit_datacycle_CreateFcn(hObject, eventdata, handles)
+function edit_dutycycle_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to edit_datacycle (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
