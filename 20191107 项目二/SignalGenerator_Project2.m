@@ -257,7 +257,7 @@ if ischar(filename)
     
      set(handles.edit_ppp,'enable','off');
      set(handles.edit_amplitude,'enable','off');
-    
+     set(handles.edit_datacycle,'enable','off');
 % % % % % % % % % data import complete % % % % % % % % % % % % % % % % % %
     % start ploting. The first channel data in dataImport is seen as one
     % period integratedly. Two periods will be displayed in axes1 zone.
