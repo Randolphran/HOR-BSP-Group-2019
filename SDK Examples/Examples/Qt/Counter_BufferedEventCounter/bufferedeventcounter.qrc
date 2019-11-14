@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/BufferedEventCounter">
-        <file>Resources/Background.png</file>
-    </qresource>
-</RCC>

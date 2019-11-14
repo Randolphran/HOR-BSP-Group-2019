@@ -1,8 +1,0 @@
-<RCC>
-    <qresource prefix="DIPatternMatchInterrupt">
-    <file>Resources/DiBackground.png</file>
-    <file>Resources/ButtonUp.png</file>
-    <file>Resources/ButtonDown.png</file>
-    <file>Resources/tambour.gif</file>
-    </qresource>
-</RCC>

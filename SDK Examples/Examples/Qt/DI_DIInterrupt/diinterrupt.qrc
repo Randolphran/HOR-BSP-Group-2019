@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="DIInterrupt">
-    <file>Resources/Background.png</file>
-    <file>Resources/ButtonUp.png</file>
-    <file>Resources/ButtonDown.png</file>
-    <file>Resources/ButtonDisabled.png</file>
-    <file>Resources/tambour.gif</file>
-    </qresource>
-</RCC>
