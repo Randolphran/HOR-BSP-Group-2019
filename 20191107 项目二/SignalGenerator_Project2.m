@@ -61,6 +61,15 @@ handles.ppp=ppp;
 offset=0;
 handles.offset=offset;
 
+dutycycle=0.5;
+handles.dutycycle=dutycycle;
+
+frequency=10;
+handles.frequency=frequency;
+
+wavechosen=1;
+handles.wavechosen=wavechosen;
+
 dataAO=zeros(512,1);
 handles.dataAO=dataAO;
 guidata(hObject,handles);
@@ -98,7 +107,7 @@ function listbox1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 wavechosen=get(handles.listbox1,'value');
-handles.wavechoosen=wavechosen;
+handles.wavechosen=wavechosen;
 guidata(hObject,handles);
 set(handles.edit_ppp,'enable','on');
 set(handles.edit_amplitude,'enable','on');
@@ -109,26 +118,26 @@ switch wavechosen
     case 1   %Sine
         set(handles.text_dutycycle,'visible','off');
         set(handles.edit_dutycycle,'visible','off');
+        set(handles.text_amplitude,'visible','on');
+        set(handles.edit_amplitude,'visible','on');
         set(handles.text9,'visible','off');
-        set(handles.edit_offset,'visible','on');
-        set(handles.text_offset,'visible','on');
     case 2    %Sawtooth
         set(handles.text_dutycycle,'visible','off');
         set(handles.edit_dutycycle,'visible','off');
+        set(handles.text_amplitude,'visible','on');
+        set(handles.edit_amplitude,'visible','on');
         set(handles.text9,'visible','off');
-        set(handles.edit_offset,'visible','on');
-        set(handles.text_offset,'visible','on');
     case 3     %Square
-        set(handles.edit_offset,'visible','on');
-        set(handles.text_offset,'visible','on');  
         set(handles.text_dutycycle,'visible','on');
         set(handles.edit_dutycycle,'visible','on');
+        set(handles.text_amplitude,'visible','on');
+        set(handles.edit_amplitude,'visible','on');
         set(handles.text9,'visible','on');
     case 4     %Level
-        set(handles.edit_offset,'visible','off');
-        set(handles.text_offset,'visible','off');
         set(handles.text_dutycycle,'visible','off');
         set(handles.edit_dutycycle,'visible','off');
+        set(handles.text_amplitude,'visible','off');
+        set(handles.edit_amplitude,'visible','off');
         set(handles.text9,'visible','off');
 end    
 % Hints: contents = cellstr(get(hObject,'String')) returns listbox1 contents as cell array
@@ -180,16 +189,34 @@ amplitude=str2double(get(handles.edit_amplitude,'String'));
 handles.amplitude=amplitude;
 guidata(hObject,handles);
 
+%在画面上对信号进行两个周期的预览
 offset=handles.offset;
 dutycycle=handles.dutycycle;
 ppp=handles.ppp;
 style=handles.wavechosen;
+f=handles.frequency;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
+totallength=2*ppp;
 AxesHandle = handles.axes1;
-plot(AxesHandle,dataAO,'black');
+AxesHandle.XLim = [0 totallength];
+    AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
+    AxesHandle.XTickLabel = {'0',...
+        [num2str(round(ppp/2)/(f*2)),' s'],...
+        [num2str(ppp/f),' s'],...
+        [num2str(totallength*2/f),' s']};
+data_to_plot = zeros(2*ppp,1);
+data_to_plot(1:ppp,1) = dataAO;
+data_to_plot(ppp+1:2*ppp,1) = dataAO;    
+plot(AxesHandle,data_to_plot,'black');
+
 % Hints: get(hObject,'String') returns contents of edit_amplitude as text
 %        str2double(get(hObject,'String')) returns contents of edit_amplitude as a double
-
+ AxesHandle = handles.axes1;
+   
+    
+    
+    
+    plot(AxesHandle,data_to_plot,'black');
 
 % --- Executes during object creation, after setting all properties.
 function edit_amplitude_CreateFcn(hObject, eventdata, handles)
