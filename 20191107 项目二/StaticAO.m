@@ -65,7 +65,7 @@ try
 %         % oneWavePointCount is also an editable property.
 %     if BioFailed(errorCode)    
 %         throw Exception();
-    end
+%     end
 
     % Output data
     scaleData = NET.createArray('System.Double', int32(64));
