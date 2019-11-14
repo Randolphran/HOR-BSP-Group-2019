@@ -193,7 +193,7 @@ if ischar(filename)
     set(gcf, 'Name', '正在导入......');
 
     dataImport = Signalread(file);
-    dataNum = length(dataImport(:,1));
+    dataNum = length(dataAI(:,1));
     
     % get data information, namely sampling rate, and have it display in edit box
     fid = fopen(file_info,'r');
@@ -211,7 +211,7 @@ if ischar(filename)
     
     % upload import data file to workspace
     handles.dataNum = dataNum;
-    handles.dataAI = dataImport;
+    handles.dataAI = dataAI;
     handles.data_info = data_info;
     handles.Fs = Fs;
     guidata(hObject,handles);
@@ -227,7 +227,7 @@ if ischar(filename)
     
     for i = 1:4
         cla(AxesHandles(i)); % clear exsisted data in graphs.
-        plot(AxesHandles(i),dataImport(:,i),'-black');
+        plot(AxesHandles(i),dataAI(:,i),'-black');
         
         set(AxesHandles(i),'XLim',[0 dataNum]);
         xlabel(AxesHandles(i),'time');
