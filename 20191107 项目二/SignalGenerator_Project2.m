@@ -148,7 +148,7 @@ function edit_PPP_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_PPP (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-PPP=str2num(get(handles.edit_PPP,'String');
+PPP=str2num(get(handles.edit_PPP,'String'));
 % Hints: get(hObject,'String') returns contents of edit_PPP as text
 %        str2double(get(hObject,'String')) returns contents of edit_PPP as a double
 
@@ -206,38 +206,37 @@ if ischar(filename)
     Fs_info = data_info;
     Fs = Fs_info(strfind(Fs_info,':')+1:end);
     Fs = str2double(Fs);
-    set(handles.edit_sample,'Value',Fs);
+    
     fclose(fid);
+% % % % % % % % % data import complete.% % % % % % % % % % % % % % % % % %
+    % start ploting. The first channel data in dataImport is seen as one
+    % period integratedly. Two periods will be displayed in axes1 zone.
+    
+    period = round(1000/Fs); % unit: ms
+    totallength = period * dataNum * 2; % display two periods
+    
+    AxesHandle = handles.axes1;
+    AxesHandle.xlim = [0 totallength];
+    AxesHandle.xtick = [0 round(dataNum/2) dataNum totallength];
+    AxesHandle.xticklabel = {'0',...
+        [num2str(round(dataNum/2)),' ms'],...
+        [num2str(dataNum),' ms'],...
+        [num2str(totallength),' ms']};
+    
+    data_to_plot = zeros(2*dataNum,1);
+    data_to_plot(1:dataNum,1) = dataImport(:,1);
+    data_to_plot(dataNum+1:2*dataNum,1) = dataImport(:,1);
+    
+    plot(AxesHandle,data_to_plot,'black');
+    
     
     % upload import data file to workspace
     handles.dataNum = dataNum;
-    handles.dataAI = dataImport;
+    handles.dataImport = dataImport;
     handles.data_info = data_info;
     handles.Fs = Fs;
     guidata(hObject,handles);
     
-    
-    % Initilizatio for plotting
-    AxesHandles = handles.AxesHandles;
-    timestep = 1000/Fs; % unit: ms
-    totallength = timestep * dataNum;
-    
-    % Fs=handles.Fs;
-    % display data read on axes areas.
-    
-    for i = 1:4
-        cla(AxesHandles(i)); % clear exsisted data in graphs.
-        plot(AxesHandles(i),dataImport(:,i),'-black');
-        
-        set(AxesHandles(i),'XLim',[0 dataNum]);
-        xlabel(AxesHandles(i),'time');
-        ylabel(AxesHandles(i),'voltage/V');
-        set(AxesHandles(i),'XTick',[0 dataNum*0.25 dataNum*0.75 dataNum]);
-        set(AxesHandles(i),'XTickLabel',{'0',...
-            [num2str(totallength*0.25),' ms'],...
-            [num2str(totallength*0.75),' ms'],...
-            [num2str(totallength),' ms']});
-    end
 else
     return; %when file open dialog is closed.
 end
@@ -276,7 +275,7 @@ function edit_offset_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_offset (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-offset=str2num(get(handles.edit_offset,'String');
+offset=str2num(get(handles.edit_offset,'String'));
 % Hints: get(hObject,'String') returns contents of edit_offset as text
 %        str2double(get(hObject,'String')) returns contents of edit_offset as a double
 
@@ -299,7 +298,7 @@ function edit_PNum_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_PNum (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-pNum=str2num(get(handles.edit_pNum,'String');
+pNum=str2num(get(handles.edit_pNum,'String'));
 % Hints: get(hObject,'String') returns contents of edit_PNum as text
 %        str2double(get(hObject,'String')) returns contents of edit_PNum as a double
 
