@@ -56,16 +56,16 @@ try
     
     % Step 3: Output data. 
     % Generate waveform data.
-    scaledWaveForm = NET.createArray('System.Double', channelCount * ...
-        oneWavePointCount);
-    errorCode = GenerateWaveform(instantAoCtrl, channelStart, ...
-        channelCount, scaledWaveForm, channelCount * oneWavePointCount, ...
-        H5T.enum_nameof(WaveStyle, int32(0)));
-        % here int32(0) defined the wavestyle, which is listed upward.
-        % oneWavePointCount is also an editable property.
-    if BioFailed(errorCode)    
-        throw Exception();
-    end
+%     scaledWaveForm = NET.createArray('System.Double', channelCount * ...
+%         oneWavePointCount);
+%     errorCode = GenerateWaveform(instantAoCtrl, channelStart, ...
+%         channelCount, scaledWaveForm, channelCount * oneWavePointCount, ...
+%         H5T.enum_nameof(WaveStyle, int32(0)));
+%         % here int32(0) defined the wavestyle, which is listed upward.
+%         % oneWavePointCount is also an editable property.
+%     if BioFailed(errorCode)    
+%         throw Exception();
+%     end
 
     % Output data
     scaleData = NET.createArray('System.Double', int32(64));
@@ -95,131 +95,6 @@ end
 % Step 4: Close device and release any allocated resource.
 instantAoCtrl.Dispose();
 H5T.close(WaveStyle);
-
-end
-
-function errorcode = GenerateWaveform(instantAoCtrl, channelStart,...
-    channelCount, waveBuffer, SamplesCount, style)
-
-errorcode = Automation.BDaq.ErrorCode.Success;
-chanCountMax = int32(instantAoCtrl.Features.ChannelCountMax);
-oneWaveSamplesCount = int32(SamplesCount / channelCount);
-
-description = System.Text.StringBuilder();
-unit = Automation.BDaq.ValueUnit;
-ranges = NET.createArray('Automation.BDaq.MathInterval', chanCountMax); 
-
-% get every channel's value range ,include external reference voltage
-% value range which you should key it in manually.
-channels = instantAoCtrl.Channels;
-for i = 1:chanCountMax
-    channel = channels.Get(i - 1);
-    valRange = channel.ValueRange;
-    if Automation.BDaq.ValueRange.V_ExternalRefBipolar == valRange ...
-            || valRange == Automation.BDaq.ValueRange.V_ExternalRefUnipolar
-        if instantAoCtrl.Features.ExternalRefAntiPolar
-            if valRange == Automation.BDaq.ValueRange.V_ExternalRefBipolar
-                referenceValue = double(...
-                    instantAoCtrl.ExtRefValueForBipolar);
-                if referenceValue >= 0
-                    ranges(i).Max = referenceValue;
-                    ranges(i).Min = 0 - referenceValue;
-                else
-                    ranges(i).Max = 0 - referenceValue;
-                    ranges(i).Min = referenceValue;                    
-                end
-            else
-               referenceValue = double(...
-                   instantAoCtrl.ExtRefValueForUnipolar); 
-               if referenceValue >= 0
-                   ranges(i).Max = 0;
-                   ranges(i).Min = 0 - referenceValue;
-               else
-                   ranges(i).Max = 0 - referenceValue;
-                   ranges(i).Min = 0;
-               end 
-            end
-        else
-            if valRange == Automation.BDaq.ValueRange.V_ExternalRefBipolar
-                referenceValue = double(...
-                    instantAoCtrl.ExtRefValueForBipolar);
-                if referenceValue >= 0
-                    ranges(i).Max = referenceValue;
-                    ranges(i).Min = 0 - referenceValue;
-                else
-                    ranges(i).Max = 0 - referenceValue;
-                    ranges(i).Min = referenceValue;                    
-                end
-            else
-                referenceValue = double(...
-                    instantAoCtrl.ExtRefValueForUnipolar);
-                if referenceValue >= 0
-                    ranges(i).Max = referenceValue;
-                    ranges(i).Min = 0;
-                else
-                    ranges(i).Max = 0;
-                    ranges(i).Min = 0 - referenceValue;
-                end
-            end
-        end
-    else     
-        [errorcode, ranges(i), unit] = ...
-            Automation.BDaq.BDaqApi.AdxGetValueRangeInformation(...
-            valRange, int32(0), description);
-        if BioFailed(errorcode)
-            return
-        end
-    end
-end
-
-% generate waveform data and put them into the buffer which the parameter
-% 'waveBuffer' give in, the Amplitude these waveform
-for i = 0:(oneWaveSamplesCount - 1)
-    for j = channelStart:(channelStart + channelCount - 1)
-        % pay attention to channel rollback(when startChannel+
-        % channelCount>chanCountMax)
-        channel = int32(rem(j, chanCountMax));
-        
-        amplitude = double((ranges.Get(channel).Max -...
-            ranges.Get(channel).Min) / 2);
-        offset = double((ranges.Get(channel).Max + ...
-            ranges.Get(channel).Min) / 2);
-        switch style
-            case 'Sine'
-                waveBuffer.Set(i * channelCount + j - channelStart,...
-                    amplitude * sin(double(i) * 2.0 * pi / ...
-                    double(oneWaveSamplesCount)) + offset);
-            case 'Sawtooth'
-                if (i >= 0) && (i < (oneWaveSamplesCount / 4.0))
-                    waveBuffer.Set(i * channelCount + j - channelStart,...
-                        amplitude * (double(i) / ...
-                        (double(oneWaveSamplesCount) / 4.0)) + offset);
-                else
-                    if (i >= (oneWaveSamplesCount / 4.0)) && ...
-                            (i < 3 * (oneWaveSamplesCount / 4.0))
-                        waveBuffer.Set(i * channelCount + j - ...
-                            channelStart, amplitude * ((2.0 * ...
-                            (double(oneWaveSamplesCount) / 4.0) - ...
-                            double(i)) / (double(oneWaveSamplesCount) ...
-                            / 4.0)) + offset);
-                    else
-                        waveBuffer.Set(i * channelCount + j - ...
-                            channelStart, amplitude * ((double(i) - ...
-                            double(oneWaveSamplesCount)) / ...
-                            (double(oneWaveSamplesCount) / 4.0)) + offset);
-                    end
-                end
-            case 'Square'
-                if (i >= 0) && (i < (oneWaveSamplesCount / 2))
-                    waveBuffer.Set(i * channelCount + j - channelStart, ...
-                        amplitude * 1.0 + offset);
-                else
-                     waveBuffer.Set(i * channelCount + j - channelStart,...
-                         amplitude * (-1.0) + offset);
-                end
-        end
-    end
-end
 
 end
 
