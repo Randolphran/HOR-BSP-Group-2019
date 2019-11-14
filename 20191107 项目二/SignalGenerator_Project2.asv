@@ -250,9 +250,7 @@ if ischar(filename)
         
     else
         ppp = dataNum;
-        set(handles.edit_ppp,'value',num2str(ppp));
-        set(handles.edit_ppp,'enable','off');
-
+        
     end
     
     
