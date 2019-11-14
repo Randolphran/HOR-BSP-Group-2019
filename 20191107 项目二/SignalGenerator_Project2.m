@@ -22,7 +22,7 @@ function varargout = SignalGenerator_Project2(varargin)
 
 % Edit the above text to modify the response to help SignalGenerator_Project2
 
-% Last Modified by GUIDE v2.5 14-Nov-2019 16:29:45
+% Last Modified by GUIDE v2.5 14-Nov-2019 16:33:30
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
