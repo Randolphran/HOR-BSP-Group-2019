@@ -55,6 +55,8 @@ function SignalGenerator_Project2_OpeningFcn(hObject, eventdata, handles, vararg
 % Choose default command line output for SignalGenerator_Project2
 handles.output = hObject;
 
+PPP=
+
 set(handles.listbox1,'value',1);
 % Update handles structure
 guidata(hObject, handles);
@@ -165,7 +167,7 @@ function edit_amplitude_CreateFcn(hObject, eventdata, handles)
 % Hint: edit controls usually have a white background on Windows.
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
+    set(hObject,'BackgroundColor','white');    
 end
 
 
@@ -250,7 +252,9 @@ if ischar(filename)
         
     else
         ppp = dataNum;
-        
+        set(handles.edit_ppp,'value',num2str(ppp));
+        set(handles.edit_ppp,'enable','off');
+
     end
     
     
