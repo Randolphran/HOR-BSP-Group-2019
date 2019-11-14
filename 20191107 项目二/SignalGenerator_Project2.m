@@ -55,6 +55,16 @@ function SignalGenerator_Project2_OpeningFcn(hObject, eventdata, handles, vararg
 % Choose default command line output for SignalGenerator_Project2
 handles.output = hObject;
 
+ppp=512;
+handles.ppp=ppp;
+
+offset=0;
+handles.offset=offset;
+
+dataAO=zeros(512);
+handles.dataAO=dataAO;
+guidata(hObject,handles);
+
 set(handles.listbox1,'value',1);
 % Update handles structure
 guidata(hObject, handles);
