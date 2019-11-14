@@ -208,7 +208,7 @@ if ischar(filename)
     Fs = str2double(Fs);
     
     fclose(fid);
-% % % % % % % % % data import complete.% % % % % % % % % % % % % % % % % %
+% % % % % % % % % data import complete % % % % % % % % % % % % % % % % % %
     % start ploting. The first channel data in dataImport is seen as one
     % period integratedly. Two periods will be displayed in axes1 zone.
     
@@ -216,9 +216,9 @@ if ischar(filename)
     totallength = period * dataNum * 2; % display two periods
     
     AxesHandle = handles.axes1;
-    AxesHandle.xlim = [0 totallength];
-    AxesHandle.xtick = [0 round(dataNum/2) dataNum totallength];
-    AxesHandle.xticklabel = {'0',...
+    AxesHandle.XLim = [0 totallength];
+    AxesHandle.XTick = [0 round(dataNum/2) dataNum totallength];
+    AxesHandle.XTickLabel = {'0',...
         [num2str(round(dataNum/2)),' ms'],...
         [num2str(dataNum),' ms'],...
         [num2str(totallength),' ms']};
@@ -228,7 +228,7 @@ if ischar(filename)
     data_to_plot(dataNum+1:2*dataNum,1) = dataImport(:,1);
     
     plot(AxesHandle,data_to_plot,'black');
-    
+% % % % % % % % % data plot complete % % % % % % % % % % % % % % % % % %
     
     % upload import data file to workspace
     handles.dataNum = dataNum;
@@ -236,7 +236,7 @@ if ischar(filename)
     handles.data_info = data_info;
     handles.Fs = Fs;
     guidata(hObject,handles);
-    
+    set(gcf, 'Name', 'SignalGenerator_Project2');
 else
     return; %when file open dialog is closed.
 end
