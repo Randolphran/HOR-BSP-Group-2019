@@ -66,6 +66,10 @@ handles.dataAO=dataAO;
 guidata(hObject,handles);
 
 set(handles.listbox1,'value',1);
+
+handles.ppp = 512;
+
+
 % Update handles structure
 guidata(hObject, handles);
 
@@ -199,6 +203,7 @@ function edit_ppp_CreateFcn(hObject, eventdata, handles)
 
 % Hint: edit controls usually have a white background on Windows.
 %       See ISPC and COMPUTER.
+
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
@@ -254,23 +259,20 @@ if ischar(filename)
         dataNum = ppp;
         temp = dataAO;
         clear dataAO
-        dataAO = temp(1:dataNum,4);
-        
-        set(handles.edit_ppp,'enable','off');
-        
+        dataAO = temp(1:dataNum,4);        
     else
         ppp = dataNum;
-        set(handles.edit_ppp,'value',num2str(ppp));
-        set(handles.edit_ppp,'enable','off');
-
+        set(handles.edit_ppp,'value',ppp);
     end
     
+     set(handles.edit_ppp,'enable','off');
+     set(handles.edit_amplitude,'enable','off');
     
 % % % % % % % % % data import complete % % % % % % % % % % % % % % % % % %
     % start ploting. The first channel data in dataImport is seen as one
     % period integratedly. Two periods will be displayed in axes1 zone.
     
-    period = round(1000/Fs); % unit: ms
+    period = round(1000/Fs_in); % unit: ms
     totallength = period * dataNum * 2; % display two periods
     
     AxesHandle = handles.axes1;
