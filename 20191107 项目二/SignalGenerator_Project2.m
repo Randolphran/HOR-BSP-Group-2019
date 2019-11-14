@@ -22,7 +22,7 @@ function varargout = SignalGenerator_Project2(varargin)
 
 % Edit the above text to modify the response to help SignalGenerator_Project2
 
-% Last Modified by GUIDE v2.5 14-Nov-2019 14:03:15
+% Last Modified by GUIDE v2.5 14-Nov-2019 15:00:45
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -55,6 +55,7 @@ function SignalGenerator_Project2_OpeningFcn(hObject, eventdata, handles, vararg
 % Choose default command line output for SignalGenerator_Project2
 handles.output = hObject;
 
+set(handles.listbox1,'value',1);
 % Update handles structure
 guidata(hObject, handles);
 
@@ -78,8 +79,31 @@ function listbox1_Callback(hObject, eventdata, handles)
 % hObject    handle to listbox1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-wavechoose=get(handles.listbox1,'value');
-
+wavechoosen=get(handles.listbox1,'value');
+handles.wavechoosen=wavechoosen;
+guidata(hObject,handles);
+switch wavechoosen
+    case 1   %Sine
+        set(handles.text_datacycle,'visible','off');
+        set(handles.edit_datacycle,'visible','off');
+        set(handles.edit_offset,'visible','on');
+        set(handles.text_offset,'visible','on');
+    case 2    %Sawtooth
+        set(handles.text_datacycle,'visible','off');
+        set(handles.edit_datacycle,'visible','off');
+        set(handles.edit_offset,'visible','on');
+        set(handles.text_offset,'visible','on');
+    case 3     %Square
+        set(handles.edit_offset,'visible','on');
+        set(handles.text_offset,'visible','on');  
+        set(handles.text_datacycle,'visible','on');
+        set(handles.edit_datacycle,'visible','on');
+    case 4     %Level
+        set(handles.edit_offset,'visible','off');
+        set(handles.text_offset,'visible','off');
+        set(handles.text_datacycle,'visible','off');
+        set(handles.edit_datacycle,'visible','off');
+end    
 % Hints: contents = cellstr(get(hObject,'String')) returns listbox1 contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from listbox1
 
@@ -96,13 +120,13 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-
-
 function edit_frequency_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_frequency (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+frequency=str2double(get(handles.edit_frequency,'String'));
+handles.frequency=frequency;
+guidata(hObject,handles);
 % Hints: get(hObject,'String') returns contents of edit_frequency as text
 %        str2double(get(hObject,'String')) returns contents of edit_frequency as a double
 
@@ -125,7 +149,9 @@ function edit_amplitude_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_amplitude (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-amplitude = str2num(get(handles.edit_amplitude,'String'));
+amplitude=str2double(get(handles.edit_amplitude,'String'));
+handles.amplitude=amplitude;
+guidata(hObject,handles);
 % Hints: get(hObject,'String') returns contents of edit_amplitude as text
 %        str2double(get(hObject,'String')) returns contents of edit_amplitude as a double
 
@@ -144,18 +170,20 @@ end
 
 
 
-function edit_PPP_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_PPP (see GCBO)
+function edit_ppp_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_ppp (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-PPP=str2num(get(handles.edit_PPP,'String'));
-% Hints: get(hObject,'String') returns contents of edit_PPP as text
-%        str2double(get(hObject,'String')) returns contents of edit_PPP as a double
+ppp=str2double(get(handles.edit_ppp,'String'));
+handles.ppp=ppp;
+guidata(hObject,handles);
+% Hints: get(hObject,'String') returns contents of edit_ppp as text
+%        str2double(get(hObject,'String')) returns contents of edit_ppp as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit_PPP_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_PPP (see GCBO)
+function edit_ppp_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_ppp (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -243,7 +271,6 @@ else
     return; %when file open dialog is closed.
 end
 
-
 % --- Executes on button press in pushbutton_draw.
 function pushbutton_draw_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_draw (see GCBO)
@@ -270,14 +297,16 @@ function pushbutton_stop_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_stop (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+uiresume(handles.figure1);
 
 
 function edit_offset_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_offset (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-offset=str2num(get(handles.edit_offset,'String'));
+offset=str2double(get(handles.edit_offset,'String'));
+handles.offset=offset;
+guidata(hObject,handles);
 % Hints: get(hObject,'String') returns contents of edit_offset as text
 %        str2double(get(hObject,'String')) returns contents of edit_offset as a double
 
@@ -294,20 +323,20 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-
-
-function edit_PNum_Callback(hObject, eventdata, handles)
-% hObject    handle to edit_PNum (see GCBO)
+function edit_PeriodNum_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_PeriodNum (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-pNum=str2num(get(handles.edit_pNum,'String'));
-% Hints: get(hObject,'String') returns contents of edit_PNum as text
-%        str2double(get(hObject,'String')) returns contents of edit_PNum as a double
+periodNum=str2double(get(handles.edit_PeriodNum,'String'));
+handles.periodNum=periodNum;
+guidata(hObject,handles);
+% Hints: get(hObject,'String') returns contents of edit_PeriodNum as text
+%        str2double(get(hObject,'String')) returns contents of edit_PeriodNum as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit_PNum_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit_PNum (see GCBO)
+function edit_PeriodNum_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_PeriodNum (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -318,10 +347,24 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
+
+function edit_datacycle_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_datacycle (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit_datacycle as text
+%        str2double(get(hObject,'String')) returns contents of edit_datacycle as a double
+
+
 % --- Executes during object creation, after setting all properties.
-function axes1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to axes1 (see GCBO)
+function edit_datacycle_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_datacycle (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-% Hint: place code in OpeningFcn to populate axes1
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
