@@ -93,18 +93,22 @@ function listbox1_Callback(hObject, eventdata, handles)
 % hObject    handle to listbox1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-wavechoosen=get(handles.listbox1,'value');
-handles.wavechoosen=wavechoosen;
+wavechosen=get(handles.listbox1,'value');
+handles.wavechoosen=wavechosen;
 guidata(hObject,handles);
-switch wavechoosen
+set(handles.edit_ppp,'enable','on');
+set(handles.edit_amplitude,'enable','on');
+switch wavechosen
     case 1   %Sine
         set(handles.text_dutycycle,'visible','off');
         set(handles.edit_dutycycle,'visible','off');
+        set(handles.text9,'visible','off');
         set(handles.edit_offset,'visible','on');
         set(handles.text_offset,'visible','on');
     case 2    %Sawtooth
         set(handles.text_dutycycle,'visible','off');
         set(handles.edit_dutycycle,'visible','off');
+        set(handles.text9,'visible','off');
         set(handles.edit_offset,'visible','on');
         set(handles.text_offset,'visible','on');
     case 3     %Square
@@ -112,11 +116,13 @@ switch wavechoosen
         set(handles.text_offset,'visible','on');  
         set(handles.text_dutycycle,'visible','on');
         set(handles.edit_dutycycle,'visible','on');
+        set(handles.text9,'visible','on');
     case 4     %Level
         set(handles.edit_offset,'visible','off');
         set(handles.text_offset,'visible','off');
         set(handles.text_dutycycle,'visible','off');
         set(handles.edit_dutycycle,'visible','off');
+        set(handles.text9,'visible','off');
 end    
 % Hints: contents = cellstr(get(hObject,'String')) returns listbox1 contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from listbox1
