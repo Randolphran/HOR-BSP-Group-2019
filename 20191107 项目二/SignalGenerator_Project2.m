@@ -55,6 +55,9 @@ function SignalGenerator_Project2_OpeningFcn(hObject, eventdata, handles, vararg
 % Choose default command line output for SignalGenerator_Project2
 handles.output = hObject;
 
+amplitude=5;
+handles.amplitude=amplitude;
+
 ppp=512;
 handles.ppp=ppp;
 
