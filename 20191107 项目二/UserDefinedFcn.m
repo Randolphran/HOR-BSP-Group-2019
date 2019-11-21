@@ -239,6 +239,20 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+ppp = handles.ppp;
+
+if get(handles.radiobutton_input,'Value')
+    fcn_calc = handles.fcn_calc;
+    data_x = 1:1:ppp;
+    data_x = data_x';
+    dataAO = fcn_calc(data_x);
+    
+    handles.dataAO = dataAO;
+    guidata(hObject,handles);
+end
+
+
+
 
 
 % --- Executes on button press in pushbutton2.

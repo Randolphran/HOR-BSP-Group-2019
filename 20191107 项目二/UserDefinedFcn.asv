@@ -53,6 +53,7 @@ function UserDefinedFcn_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   command line arguments to UserDefinedFcn (see VARARGIN)
 
 % Choose default command line output for UserDefinedFcn
+handles = varargin;
 handles.output = hObject;
 
 handles.mouse_enable = 0;
@@ -79,6 +80,7 @@ function varargout = UserDefinedFcn_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
+varargout{2} = handles;
 
 
 % --- Executes on button press in radiobutton_input.
@@ -237,6 +239,12 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+ppp = handles.ppp;
+if get(handles.radiobutton_input,'Value')
+    fcn_calc = handles.fcn_calc;
+
+
+
 
 
 % --- Executes on button press in pushbutton2.

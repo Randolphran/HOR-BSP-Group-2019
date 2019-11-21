@@ -173,7 +173,8 @@ AxesHandle.XTickLabel = {'0',...
     [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
-data_to_plot(ppp+1:2*ppp,1) = dataAO;    
+data_to_plot(ppp+1:2*ppp,1) = dataAO;  
+handles.dataAO=dataAO;
 plot(AxesHandle,data_to_plot,'black');
 
 % Hints: get(hObject,'String') returns contents of edit_amplitude as text
@@ -223,6 +224,8 @@ data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
+handles.dataAO=dataAO;
+guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_frequency as text
 %        str2double(get(hObject,'String')) returns contents of edit_frequency as a double
@@ -269,6 +272,8 @@ data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
+handles.dataAO=dataAO;
+guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -310,6 +315,8 @@ data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
+handles.dataAO=dataAO;
+guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_ppp as text
 %        str2double(get(hObject,'String')) returns contents of edit_ppp as a double
@@ -432,6 +439,15 @@ function pushbutton_draw_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+[figure2,handles] = UserDefinedFcn(handles);
+
+guidata(hObject,handles)
+
+if any(dataAO) %any if any element in dataAO is nonzero, return 1.
+
+
+
+
 % --- Executes on button press in pushbutton_run.
 function pushbutton_run_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_run (see GCBO)
@@ -487,6 +503,8 @@ data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
+handles.dataAO=dataAO;
+guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_offset as text
 %        str2double(get(hObject,'String')) returns contents of edit_offset as a double
@@ -554,6 +572,8 @@ data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
+handles.dataAO=dataAO;
+guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_dutycycle as text
 %        str2double(get(hObject,'String')) returns contents of edit_dutycycle as a double
