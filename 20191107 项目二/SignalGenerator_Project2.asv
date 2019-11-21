@@ -124,7 +124,7 @@ function listbox1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 wavechosen=get(handles.listbox1,'value');
 handles.wavechosen=wavechosen;
-guidata(hObject,handles);
+
 set(handles.edit_ppp,'enable','on');
 set(handles.edit_amplitude,'enable','on');
 set(handles.edit_frequency,'enable','on');
@@ -163,23 +163,26 @@ ppp=handles.ppp;
 style=handles.wavechosen;
 frequency=handles.frequency;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
-%totallength=2*ppp;
-totallength=2/frequency;
-%AxesHandle = handles.axes1;
-%AxesHandle.XLim = [0 totallength];
-
-%AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
-%AxesHandle.XTick = [0 totallength/4 totallength/2 totallength];
-%AxesHandle.XTickLabel = {'0',...
-%    [num2str(round(ppp/2)/(frequency*2)),' s'],...
-%    [num2str(ppp/frequency),' s'],...
-%    [num2str(totallength*2/frequency),' s']};
+totallength=2*ppp;
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
-data_to_plot(ppp+1:2*ppp,1) = dataAO; 
-axes(handl
-plot(handles.axes1,data_to_plot,'black');
+data_to_plot(ppp+1:2*ppp,1) = dataAO;  
+handles.dataAO=dataAO;
+axes(handles.axes1);
+plot(data_to_plot,'black');
 set(handles.axes1,'XLim',[0,totallength]);
+xticks(handles.axes1,[0 totallength/8 totallength/4 totallength*3/8 totallength/2 totallength*5/8 totallength*3/4 totallength*7/8 totallength]);
+xticklabels(handles.axes1,{'0',...
+    [num2str(1/(frequency*4)),' s'],...
+    [num2str(1/(frequency*2)),' s'],...
+    [num2str(3/(frequency*4)),' s'],...
+    [num2str(1/(frequency)),' s'],...
+    [num2str(5/(frequency*4)),' s'],...
+    [num2str(2/(frequency*3)),' s'],...
+    [num2str(7/(frequency*4)),' s'],...
+    [num2str(2/frequency),' s']});
+guidata(hObject,handles);
+
 
 % Hints: contents = cellstr(get(hObject,'String')) returns listbox1 contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from listbox1
@@ -213,17 +216,24 @@ ppp=handles.ppp;
 style=handles.wavechosen;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
 totallength=2*ppp;
-AxesHandle = handles.axes1;
-AxesHandle.XLim = [0 totallength];
-AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
-AxesHandle.XTickLabel = {'0',...
-    [num2str(round(ppp/2)/(frequency*2)),' s'],...
-    [num2str(ppp/frequency),' s'],...
-    [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
-data_to_plot(ppp+1:2*ppp,1) = dataAO;    
-plot(AxesHandle,data_to_plot,'black');
+data_to_plot(ppp+1:2*ppp,1) = dataAO;  
+handles.dataAO=dataAO;
+axes(handles.axes1);
+plot(data_to_plot,'black');
+set(handles.axes1,'XLim',[0,totallength]);
+xticks(handles.axes1,[0 totallength/8 totallength/4 totallength*3/8 totallength/2 totallength*5/8 totallength*3/4 totallength*7/8 totallength]);
+xticklabels(handles.axes1,{'0',...
+    [num2str(1/(frequency*4)),' s'],...
+    [num2str(1/(frequency*2)),' s'],...
+    [num2str(3/(frequency*4)),' s'],...
+    [num2str(1/(frequency)),' s'],...
+    [num2str(5/(frequency*4)),' s'],...
+    [num2str(2/(frequency*3)),' s'],...
+    [num2str(7/(frequency*4)),' s'],...
+    [num2str(2/frequency),' s']});
+guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_frequency as text
 %        str2double(get(hObject,'String')) returns contents of edit_frequency as a double
@@ -259,17 +269,24 @@ style=handles.wavechosen;
 frequency=handles.frequency;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
 totallength=2*ppp;
-AxesHandle = handles.axes1;
-AxesHandle.XLim = [0 totallength];
-AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
-AxesHandle.XTickLabel = {'0',...
-    [num2str(round(ppp/2)/(frequency*2)),' s'],...
-    [num2str(ppp/frequency),' s'],...
-    [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
-data_to_plot(ppp+1:2*ppp,1) = dataAO;    
-plot(AxesHandle,data_to_plot,'black');
+data_to_plot(ppp+1:2*ppp,1) = dataAO;  
+handles.dataAO=dataAO;
+axes(handles.axes1);
+plot(data_to_plot,'black');
+set(handles.axes1,'XLim',[0,totallength]);
+xticks(handles.axes1,[0 totallength/8 totallength/4 totallength*3/8 totallength/2 totallength*5/8 totallength*3/4 totallength*7/8 totallength]);
+xticklabels(handles.axes1,{'0',...
+    [num2str(1/(frequency*4)),' s'],...
+    [num2str(1/(frequency*2)),' s'],...
+    [num2str(3/(frequency*4)),' s'],...
+    [num2str(1/(frequency)),' s'],...
+    [num2str(5/(frequency*4)),' s'],...
+    [num2str(2/(frequency*3)),' s'],...
+    [num2str(7/(frequency*4)),' s'],...
+    [num2str(2/frequency),' s']});
+guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -300,17 +317,24 @@ style=handles.wavechosen;
 frequency=handles.frequency;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
 totallength=2*ppp;
-AxesHandle = handles.axes1;
-AxesHandle.XLim = [0 totallength];
-AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
-AxesHandle.XTickLabel = {'0',...
-    [num2str(round(ppp/2)/(frequency*2)),' s'],...
-    [num2str(ppp/frequency),' s'],...
-    [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
-data_to_plot(ppp+1:2*ppp,1) = dataAO;    
-plot(AxesHandle,data_to_plot,'black');
+data_to_plot(ppp+1:2*ppp,1) = dataAO;  
+handles.dataAO=dataAO;
+axes(handles.axes1);
+plot(data_to_plot,'black');
+set(handles.axes1,'XLim',[0,totallength]);
+xticks(handles.axes1,[0 totallength/8 totallength/4 totallength*3/8 totallength/2 totallength*5/8 totallength*3/4 totallength*7/8 totallength]);
+xticklabels(handles.axes1,{'0',...
+    [num2str(1/(frequency*4)),' s'],...
+    [num2str(1/(frequency*2)),' s'],...
+    [num2str(3/(frequency*4)),' s'],...
+    [num2str(1/(frequency)),' s'],...
+    [num2str(5/(frequency*4)),' s'],...
+    [num2str(2/(frequency*3)),' s'],...
+    [num2str(7/(frequency*4)),' s'],...
+    [num2str(2/frequency),' s']});
+guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_ppp as text
 %        str2double(get(hObject,'String')) returns contents of edit_ppp as a double
@@ -456,7 +480,7 @@ function pushbutton_stop_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global t;
 stop(t);
-delete(t)
+delete(t);
 clear global t;
 
 uiresume(handles.figure1);
@@ -477,17 +501,24 @@ style=handles.wavechosen;
 frequency=handles.frequency;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
 totallength=2*ppp;
-AxesHandle = handles.axes1;
-AxesHandle.XLim = [0 totallength];
-AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
-AxesHandle.XTickLabel = {'0',...
-    [num2str(round(ppp/2)/(frequency*2)),' s'],...
-    [num2str(ppp/frequency),' s'],...
-    [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
-data_to_plot(ppp+1:2*ppp,1) = dataAO;    
-plot(AxesHandle,data_to_plot,'black');
+data_to_plot(ppp+1:2*ppp,1) = dataAO;  
+handles.dataAO=dataAO;
+axes(handles.axes1);
+plot(data_to_plot,'black');
+set(handles.axes1,'XLim',[0,totallength]);
+xticks(handles.axes1,[0 totallength/8 totallength/4 totallength*3/8 totallength/2 totallength*5/8 totallength*3/4 totallength*7/8 totallength]);
+xticklabels(handles.axes1,{'0',...
+    [num2str(1/(frequency*4)),' s'],...
+    [num2str(1/(frequency*2)),' s'],...
+    [num2str(3/(frequency*4)),' s'],...
+    [num2str(1/(frequency)),' s'],...
+    [num2str(5/(frequency*4)),' s'],...
+    [num2str(2/(frequency*3)),' s'],...
+    [num2str(7/(frequency*4)),' s'],...
+    [num2str(2/frequency),' s']});
+guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_offset as text
 %        str2double(get(hObject,'String')) returns contents of edit_offset as a double
@@ -544,17 +575,24 @@ style=handles.wavechosen;
 frequency=handles.frequency;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
 totallength=2*ppp;
-AxesHandle = handles.axes1;
-AxesHandle.XLim = [0 totallength];
-AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
-AxesHandle.XTickLabel = {'0',...
-    [num2str(round(ppp/2)/(frequency*2)),' s'],...
-    [num2str(ppp/frequency),' s'],...
-    [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
-data_to_plot(ppp+1:2*ppp,1) = dataAO;    
-plot(AxesHandle,data_to_plot,'black');
+data_to_plot(ppp+1:2*ppp,1) = dataAO;  
+handles.dataAO=dataAO;
+axes(handles.axes1);
+plot(data_to_plot,'black');
+set(handles.axes1,'XLim',[0,totallength]);
+xticks(handles.axes1,[0 totallength/8 totallength/4 totallength*3/8 totallength/2 totallength*5/8 totallength*3/4 totallength*7/8 totallength]);
+xticklabels(handles.axes1,{'0',...
+    [num2str(1/(frequency*4)),' s'],...
+    [num2str(1/(frequency*2)),' s'],...
+    [num2str(3/(frequency*4)),' s'],...
+    [num2str(1/(frequency)),' s'],...
+    [num2str(5/(frequency*4)),' s'],...
+    [num2str(2/(frequency*3)),' s'],...
+    [num2str(7/(frequency*4)),' s'],...
+    [num2str(2/frequency),' s']});
+guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_dutycycle as text
 %        str2double(get(hObject,'String')) returns contents of edit_dutycycle as a double
