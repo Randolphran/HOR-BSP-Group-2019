@@ -173,14 +173,10 @@ totallength=2/frequency;
 %    [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
-data_to_plot(ppp+1:2*ppp,1) = dataAO; 
-axes(handles.axes1);
-plot(data_to_plot,'black');     %一定要先plot，再设置横纵坐标的范围
-set(handles.axes1,'XLim',[0,totallength]);
-% xticks(handles.axes1,[0 totallength/4 totallength/2 totallength]);
-% xticklabels(handles.axes1,{'0',...
-%     [num2str(round(ppp/2)/(frequency*2)),' s'],...
-%     [num2str(totallength*2/frequency),' s']});
+data_to_plot(ppp+1:2*ppp,1) = dataAO;  
+handles.dataAO=dataAO;
+plot(AxesHandle,data_to_plot,'black');
+
 
 % Hints: contents = cellstr(get(hObject,'String')) returns listbox1 contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from listbox1
@@ -225,6 +221,8 @@ data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
+handles.dataAO=dataAO;
+guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_frequency as text
 %        str2double(get(hObject,'String')) returns contents of edit_frequency as a double
@@ -271,6 +269,8 @@ data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
+handles.dataAO=dataAO;
+guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -312,6 +312,8 @@ data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
+handles.dataAO=dataAO;
+guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_ppp as text
 %        str2double(get(hObject,'String')) returns contents of edit_ppp as a double
@@ -457,7 +459,7 @@ function pushbutton_stop_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global t;
 stop(t);
-delete(t)
+delete(t);
 clear global t;
 
 uiresume(handles.figure1);
@@ -489,6 +491,8 @@ data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
+handles.dataAO=dataAO;
+guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_offset as text
 %        str2double(get(hObject,'String')) returns contents of edit_offset as a double
@@ -556,6 +560,8 @@ data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
+handles.dataAO=dataAO;
+guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_dutycycle as text
 %        str2double(get(hObject,'String')) returns contents of edit_dutycycle as a double

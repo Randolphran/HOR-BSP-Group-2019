@@ -17,7 +17,7 @@
 % I/O Connections Overview:
 %    Please refer to your hardware reference manual.
 
-function StaticAO()
+function StaticAO(hObject,handles)
 
 % Make Automation.BDaq assembly visible to MATLAB.
 BDaq = NET.addAssembly('Automation.BDaq');
@@ -36,7 +36,7 @@ channelCount = int32(1);
 ppp=handles.ppp;
 f=handles.frequency;
 period=1/(f*ppp);
-scaledWaveForm=handles.dataAO(:,1);
+scaledWaveForm=handles.dataAO;
 
 % Declare the type of signal. If you want to specify the type of output 
 % signal, please change 'style' parameter in the GenerateWaveform function.
@@ -147,29 +147,9 @@ else if contiflag==1
         clear functions;
         stop(obj);
         delete(obj);
+       fprintf('\nStaticAO is completed, and press Enter key to quit!');
     end
     end
-%     fprintf('\nStaticAO is completed, and press Enter key to quit!');
 end
 guidata(hObject,handles);
 end
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -22,7 +22,7 @@ function varargout = UserDefinedFcn(varargin)
 
 % Edit the above text to modify the response to help UserDefinedFcn
 
-% Last Modified by GUIDE v2.5 21-Nov-2019 15:01:37
+% Last Modified by GUIDE v2.5 21-Nov-2019 15:40:35
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -78,7 +78,9 @@ function radiobutton_input_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton_input (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+set(handles.radiobutton2,'value',0);
+set(handles.edit1,'Enable','on');
+set(handles.axes3,'visible','off');
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_input
 
 
@@ -96,9 +98,28 @@ fcn_latex = latex(str2sym(fcn_in));
 
 % display latex input for user in axes area.
 axeshandles = handles.axes2;
-
-text(axeshandles,'Interpreter','latex','String',['$',fcn_latex,'$'],...
-    'Position',[0.2,0.7],'FontSize',26);
+cla(axeshandles);
+text('String','f(x) = ','Position',[0,0.8],'FontSize',26);
+len_txt = length(fcn_in);
+if len_txt < 25
+    
+    text(axeshandles,'Interpreter','latex','String',['$',fcn_latex,'$'],...
+        'Position',[0.2 0.7],'FontSize',26);
+else
+    if len_txt < 55
+        text(axeshandles,'Interpreter','latex','String',['$',latex(str2sym(fcn_in(1:24))),'$'],...
+            'Position',[0.2 0.7],'FontSize',26);
+        text(axeshandles,'Interpreter','latex','String',['$',latex(str2sym(fcn_in(24:end))),'$'],...
+            'Position',[0 0.4],'FontSize',26);
+    else
+        text(axeshandles,'Interpreter','latex','String',['$',latex(str2sym(fcn_in(1:24))),'$'],...
+            'Position',[0.2 0.7],'FontSize',26);
+        text(axeshandles,'Interpreter','latex','String',['$',latex(str2sym(fcn_in(24:54))),'$'],...
+            'Position',[0 0.4],'FontSize',26);
+        text(axeshandles,'Interpreter','latex','String',['$',latex(str2sym(fcn_in(55:end))),'$'],...
+            'Position',[0 0.1],'FontSize',26);
+    end
+end
 
 handles.fcn_calc = fcn_calc;
 handles.fcn_latex = fcn_latex;
@@ -129,7 +150,18 @@ function axes2_CreateFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 axis off;
-text('String','f(x) = ','Position',[0,0.8],'FontSize',30);
+text('String','f(x) = ','Position',[0,0.8],'FontSize',26);
 
 
 % Hint: place code in OpeningFcn to populate axes2
+
+
+% --- Executes on button press in radiobutton2.
+function radiobutton2_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+set(handles.radiobutton_input,'value',0);
+set(handles.edit1,'Enable','off');
+set(handles.axes3,'visible','on');
+% Hint: get(hObject,'Value') returns toggle state of radiobutton2

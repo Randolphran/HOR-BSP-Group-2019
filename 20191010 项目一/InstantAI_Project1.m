@@ -154,7 +154,6 @@ function TimerCallback(obj, event, instantAiCtrl, startChannel, ...
 % tic
 handles = guidata(hObject);
 
-
 dataAI = handles.dataAI; 
 dataNum = handles.dataNum;
 LineHandles = handles.LineHandles;
