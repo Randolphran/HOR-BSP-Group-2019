@@ -511,7 +511,6 @@ uiresume(handles.figure1);
 i=0;
 handles.i=i;
 guidata(hObject,handles);
-end
 
 function edit_offset_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_offset (see GCBO)
@@ -589,8 +588,8 @@ function edit_dutycycle_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 dutycycle=str2double(get(handles.edit_dutycycle,'String'));
-dutycycle=dutycycle*0.01;
 handles.dutycycle=dutycycle;
+dutycycle=dutycycle*0.01;
 guidata(hObject,handles);
 
 amplitude=handles.amplitude;
