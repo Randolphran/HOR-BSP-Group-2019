@@ -213,10 +213,6 @@ data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
 
-% Hints: get(hObject,'String') returns contents of edit_amplitude as text
-%        str2double(get(hObject,'String')) returns contents of edit_amplitude as a double
- AxesHandle = handles.axes1;
- plot(AxesHandle,data_to_plot,'black');
 % Hints: get(hObject,'String') returns contents of edit_frequency as text
 %        str2double(get(hObject,'String')) returns contents of edit_frequency as a double
 
@@ -263,10 +259,6 @@ data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
 
-% Hints: get(hObject,'String') returns contents of edit_amplitude as text
-%        str2double(get(hObject,'String')) returns contents of edit_amplitude as a double
- AxesHandle = handles.axes1;
- plot(AxesHandle,data_to_plot,'black');
 
 % --- Executes during object creation, after setting all properties.
 function edit_amplitude_CreateFcn(hObject, eventdata, handles)
@@ -279,7 +271,6 @@ function edit_amplitude_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');    
 end
-
 
 
 function edit_ppp_Callback(hObject, eventdata, handles)
@@ -309,10 +300,6 @@ data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
 
-% Hints: get(hObject,'String') returns contents of edit_amplitude as text
-%        str2double(get(hObject,'String')) returns contents of edit_amplitude as a double
-AxesHandle = handles.axes1;
-plot(AxesHandle,data_to_plot,'black');
 % Hints: get(hObject,'String') returns contents of edit_ppp as text
 %        str2double(get(hObject,'String')) returns contents of edit_ppp as a double
 
@@ -434,20 +421,17 @@ function pushbutton_draw_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-
 % --- Executes on button press in pushbutton_run.
 function pushbutton_run_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_run (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-
 % --- Executes on button press in pushbutton_pause.
 function pushbutton_pause_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_pause (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 
 % --- Executes on button press in pushbutton_stop.
 function pushbutton_stop_Callback(hObject, eventdata, handles)
@@ -484,10 +468,6 @@ data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
 
-% Hints: get(hObject,'String') returns contents of edit_amplitude as text
-%        str2double(get(hObject,'String')) returns contents of edit_amplitude as a double
-AxesHandle = handles.axes1;
-plot(AxesHandle,data_to_plot,'black');
 % Hints: get(hObject,'String') returns contents of edit_offset as text
 %        str2double(get(hObject,'String')) returns contents of edit_offset as a double
 
@@ -528,7 +508,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-
 function edit_dutycycle_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_dutycycle (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -536,7 +515,6 @@ function edit_dutycycle_Callback(hObject, eventdata, handles)
 dutycycle=str2double(get(handles.edit_dutycycle,'String'));
 handles.dutycycle=dutycycle;
 guidata(hObject,handles);
-
 
 amplitude=handles.amplitude;
 offset=handles.offset;
@@ -557,10 +535,6 @@ data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
 
-% Hints: get(hObject,'String') returns contents of edit_amplitude as text
-%        str2double(get(hObject,'String')) returns contents of edit_amplitude as a double
-AxesHandle = handles.axes1;
-plot(AxesHandle,data_to_plot,'black');
 % Hints: get(hObject,'String') returns contents of edit_dutycycle as text
 %        str2double(get(hObject,'String')) returns contents of edit_dutycycle as a double
 
