@@ -94,8 +94,6 @@ set(handles.listbox1,'value',1);
 set(handles.text_dutycycle,'visible','off');
 set(handles.edit_dutycycle,'visible','off');
 set(handles.text9,'visible','off');
-set(handles.text5,'visible','off');
-set(handles.edit_PeriodNum,'visible','off');
 set(handles.radiobutton_continuous,'value',1);
 set(handles.radiobutton_specified,'value',0);
 
