@@ -36,7 +36,7 @@ channelCount = int32(1);
 ppp=handles.ppp;
 f=handles.frequency;
 period=1/(f*ppp);
-scaledWaveForm=handles.dataAO(:,1);
+scaledWaveForm=handles.dataAO;
 
 % Declare the type of signal. If you want to specify the type of output 
 % signal, please change 'style' parameter in the GenerateWaveform function.
