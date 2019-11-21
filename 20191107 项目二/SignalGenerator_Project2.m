@@ -61,7 +61,7 @@ handles.amplitude=amplitude;
 ppp=512;
 handles.ppp=ppp;
 
-offset=0;
+offset=2.5;
 handles.offset=offset;
 
 dutycycle=0.5;
@@ -612,8 +612,6 @@ function radiobutton_specified_Callback(hObject, eventdata, handles)
 contiflag=0;
 handles.contiflag=contiflag;
 guidata(hObject,handles);
-set(handles.text5,'visible','on');
-set(handles.edit_PeriodNum,'visible','on');
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
 
@@ -625,8 +623,6 @@ function radiobutton_continuous_Callback(hObject, eventdata, handles)
 contiflag=1;
 handles.contiflag=contiflag;
 guidata(hObject,handles);
-set(handles.text5,'visible','off');
-set(handles.edit_PeriodNum,'visible','off');
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
 
 % --- Executes during object creation, after setting all properties.
