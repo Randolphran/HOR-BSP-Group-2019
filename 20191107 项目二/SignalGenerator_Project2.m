@@ -420,6 +420,7 @@ if ischar(filename)
     
     AxesHandle = handles.axes1;
     AxesHandle.XLim = [0 totallength];
+    AxesHandle.YLim = [0 inf];
     AxesHandle.XTick = [0 round(dataNum/2) dataNum totallength];
     AxesHandle.XTickLabel = {'0',...
         [num2str(round(dataNum/2)),' ms'],...
@@ -454,6 +455,13 @@ function pushbutton_draw_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_draw (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+[figure2,handles] = UserDefinedFcn(handles);
+
+guidata(hObject,handles)
+
+if any(dataAO) %any: if any element in dataAO is nonzero, return 1.
+    
+end
 
 % --- Executes on button press in pushbutton_run.
 function pushbutton_run_Callback(hObject, eventdata, handles)
