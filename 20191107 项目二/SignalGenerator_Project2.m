@@ -460,7 +460,27 @@ function pushbutton_draw_Callback(hObject, eventdata, handles)
 guidata(hObject,handles)
 
 if any(dataAO) %any: if any element in dataAO is nonzero, return 1.
+     % start ploting.dataAO is treated as one period.
+     % Two periods will be displayed in axes1 zone.
     
+    period = round(1000/Fs_in); % unit: ms
+    totallength = period * dataNum * 2; % display two periods
+    
+    AxesHandle = handles.axes1;
+    AxesHandle.XLim = [0 totallength];
+    AxesHandle.YLim = [0 inf];
+    AxesHandle.XTick = [0 round(dataNum/2) dataNum totallength];
+    AxesHandle.XTickLabel = {'0',...
+        [num2str(round(dataNum/2)),' ms'],...
+        [num2str(dataNum),' ms'],...
+        [num2str(totallength),' ms']};
+    
+    data_to_plot = zeros(2*dataNum,1);
+    data_to_plot(1:dataNum,1) = dataAO(:,1);
+    data_to_plot(dataNum+1:2*dataNum,1) = dataAO(:,1);
+    
+    plot(AxesHandle,data_to_plot,'black');
+% % % % % % % % % data plot complete % % % % % % % % % % % % % % % % % %
 end
 
 % --- Executes on button press in pushbutton_run.
