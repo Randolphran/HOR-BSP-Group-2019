@@ -91,6 +91,7 @@ handles.periodcount=periodcount;
 
 set(handles.listbox1,'value',1);
 
+set(handles.listbox1,'value',1);
 set(handles.text_dutycycle,'visible','off');
 set(handles.edit_dutycycle,'visible','off');
 set(handles.text9,'visible','off');
@@ -173,7 +174,7 @@ AxesHandle.XTickLabel = {'0',...
     [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
-data_to_plot(ppp+1:2*ppp,1) = dataAO; 
+data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
 
 % Hints: get(hObject,'String') returns contents of edit_amplitude as text
@@ -267,7 +268,7 @@ AxesHandle.XTickLabel = {'0',...
     [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
-data_to_plot(ppp+1:2*ppp,1) = dataAO; 
+data_to_plot(ppp+1:2*ppp,1) = dataAO;    
 plot(AxesHandle,data_to_plot,'black');
 
 
