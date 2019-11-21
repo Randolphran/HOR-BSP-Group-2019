@@ -472,7 +472,6 @@ function pushbutton_pause_Callback(hObject, eventdata, handles)
 global t;
 stop(t);
 
-
 % --- Executes on button press in pushbutton_stop.
 function pushbutton_stop_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_stop (see GCBO)
@@ -484,7 +483,6 @@ delete(t);
 clear global t;
 
 uiresume(handles.figure1);
-
 
 function edit_offset_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_offset (see GCBO)
@@ -523,7 +521,6 @@ guidata(hObject,handles);
 % Hints: get(hObject,'String') returns contents of edit_offset as text
 %        str2double(get(hObject,'String')) returns contents of edit_offset as a double
 
-
 % --- Executes during object creation, after setting all properties.
 function edit_offset_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to edit_offset (see GCBO)
@@ -546,7 +543,6 @@ guidata(hObject,handles);
 % Hints: get(hObject,'String') returns contents of edit_PeriodNum as text
 %        str2double(get(hObject,'String')) returns contents of edit_PeriodNum as a double
 
-
 % --- Executes during object creation, after setting all properties.
 function edit_PeriodNum_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to edit_PeriodNum (see GCBO)
@@ -558,7 +554,6 @@ function edit_PeriodNum_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
 
 function edit_dutycycle_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_dutycycle (see GCBO)
@@ -597,7 +592,6 @@ guidata(hObject,handles);
 % Hints: get(hObject,'String') returns contents of edit_dutycycle as text
 %        str2double(get(hObject,'String')) returns contents of edit_dutycycle as a double
 
-
 % --- Executes during object creation, after setting all properties.
 function edit_dutycycle_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to edit_dutycycle (see GCBO)
@@ -609,7 +603,6 @@ function edit_dutycycle_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
 
 % --- Executes on button press in radiobutton_specified.
 function radiobutton_specified_Callback(hObject, eventdata, handles)
@@ -624,8 +617,6 @@ set(handles.edit_PeriodNum,'visible','on');
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
 
-
-
 % --- Executes on button press in radiobutton_continuous.
 function radiobutton_continuous_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton_continuous (see GCBO)
@@ -637,7 +628,6 @@ guidata(hObject,handles);
 set(handles.text5,'visible','off');
 set(handles.edit_PeriodNum,'visible','off');
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
-
 
 % --- Executes during object creation, after setting all properties.
 function text5_CreateFcn(hObject, eventdata, handles)
