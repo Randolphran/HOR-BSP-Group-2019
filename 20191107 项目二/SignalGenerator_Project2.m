@@ -22,7 +22,7 @@ function varargout = SignalGenerator_Project2(varargin)
 
 % Edit the above text to modify the response to help SignalGenerator_Project2
 
-% Last Modified by GUIDE v2.5 21-Nov-2019 12:10:38
+% Last Modified by GUIDE v2.5 14-Nov-2019 16:33:30
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -366,16 +366,6 @@ function pushbutton_run_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_run (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-ppp=handles.ppp;
-f=handles,frequency;
-period=1/(ppp*f);
-scaledWaveForm=handles.dataAO(:,1);
-t = timer('TimerFcn',{@TimerCallback, instantAoCtrl, ...
-    ppp, scaleData, scaledWaveForm}, 'period', period, 'executionmode', 'fixedrate', ...
-    'StartDelay', 1);
-start(t);
-end
-%input('Outputting data...Press Enter key to quit!', 's');
 
 
 % --- Executes on button press in pushbutton_pause.
@@ -383,7 +373,7 @@ function pushbutton_pause_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_pause (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-stop(t);
+
 
 % --- Executes on button press in pushbutton_stop.
 function pushbutton_stop_Callback(hObject, eventdata, handles)
@@ -391,8 +381,6 @@ function pushbutton_stop_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 uiresume(handles.figure1);
-stop(t);
-delete(t); 
 
 
 function edit_offset_Callback(hObject, eventdata, handles)
@@ -465,29 +453,3 @@ function edit_dutycycle_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-
-
-% --- Executes on button press in radiobutton_continuous.
-function radiobutton_continuous_Callback(hObject, eventdata, handles)
-% hObject    handle to radiobutton_continuous (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-constantflag=1;
-handles.constantflag=constantflag;
-guidata(hObject,handles);
-%需要加上将周期数和edit框隐掉的代码
-end
-% Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
-
-
-% --- Executes on button press in radiobutton_specified.
-function radiobutton_specified_Callback(hObject, eventdata, handles)
-% hObject    handle to radiobutton_specified (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-constantflag=0;
-handles.constantflag=constantflag;
-guidata(hObject,handles);
-%加上将周期数和edit框显示出来
-end
-% Hint: get(hObject,'Value') returns toggle state of radiobutton_specified

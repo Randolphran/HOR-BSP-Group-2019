@@ -69,9 +69,18 @@ try
 
     % Output data
     scaleData = NET.createArray('System.Double', int32(64));
-%     if isvalid(t)
-%     disp('StaticAO is completed compulsorily!');    
-
+    
+    t = timer('TimerFcn',{@TimerCallback, instantAoCtrl, ...
+        oneWavePointCount, scaleData, scaledWaveForm, channelStart, ...
+        channelCount}, 'period', 0.01, 'executionmode', 'fixedrate', ...
+        'StartDelay', 1);
+    start(t);
+    input('Outputting data...Press Enter key to quit!', 's');
+    if isvalid(t)
+    disp('StaticAO is completed compulsorily!');    
+    stop(t);
+    delete(t); 
+    end
 catch e
     % Something is wrong. 
     if BioFailed(errorCode)    
@@ -97,7 +106,7 @@ result =  errorCode < Automation.BDaq.ErrorCode.Success && ...
 end
 
 function TimerCallback(obj, event, instantAoCtrl, oneWavePointCount, ...
-    scaleData, scaledWaveForm)
+    scaleData, scaledWaveForm, channelStart, channelCount)
 
 persistent i ;
 
@@ -108,7 +117,8 @@ else
 end
 j = 0;
 if i <= (oneWavePointCount - 1)
-        scaleData.Set(j, scaledWaveForm(i));
+    if j <= (channelCount - 1)
+        scaleData.Set(j, scaledWaveForm.Get(channelCount * i + j));
         errorCode = instantAoCtrl.Write(channelStart,...
             channelCount, scaleData);
         if BioFailed(errorCode)
@@ -116,6 +126,7 @@ if i <= (oneWavePointCount - 1)
                 'StaticAO is completed compulsorily!');
             throw (e);
         end
+    end
 else
     clear i; % constant output mode
     % one-shot output mode
