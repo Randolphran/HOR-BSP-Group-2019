@@ -22,7 +22,7 @@ function varargout = SignalGenerator_Project2(varargin)
 
 % Edit the above text to modify the response to help SignalGenerator_Project2
 
-% Last Modified by GUIDE v2.5 21-Nov-2019 14:05:07
+% Last Modified by GUIDE v2.5 21-Nov-2019 15:28:33
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -163,23 +163,25 @@ ppp=handles.ppp;
 style=handles.wavechosen;
 frequency=handles.frequency;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
-totallength=2*ppp;
-AxesHandle = handles.axes1;
-AxesHandle.XLim = [0 totallength];
-AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
-AxesHandle.XTickLabel = {'0',...
-    [num2str(round(ppp/2)/(frequency*2)),' s'],...
-    [num2str(ppp/frequency),' s'],...
-    [num2str(totallength*2/frequency),' s']};
+%totallength=2*ppp;
+totallength=2/frequency;
+%AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
+%AxesHandle.XTick = [0 totallength/4 totallength/2 totallength];
+%AxesHandle.XTickLabel = {'0',...
+%    [num2str(round(ppp/2)/(frequency*2)),' s'],...
+%    [num2str(ppp/frequency),' s'],...
+%    [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
-data_to_plot(ppp+1:2*ppp,1) = dataAO;    
-plot(AxesHandle,data_to_plot,'black');
+data_to_plot(ppp+1:2*ppp,1) = dataAO; 
+axes(handles.axes1);
+plot(data_to_plot,'black');     %一定要先plot，再设置横纵坐标的范围
+set(handles.axes1,'XLim',[0,totallength]);
+% xticks(handles.axes1,[0 totallength/4 totallength/2 totallength]);
+% xticklabels(handles.axes1,{'0',...
+%     [num2str(round(ppp/2)/(frequency*2)),' s'],...
+%     [num2str(totallength*2/frequency),' s']});
 
-% Hints: get(hObject,'String') returns contents of edit_amplitude as text
-%        str2double(get(hObject,'String')) returns contents of edit_amplitude as a double
- AxesHandle = handles.axes1;
-plot(AxesHandle,data_to_plot,'black');
 % Hints: contents = cellstr(get(hObject,'String')) returns listbox1 contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from listbox1
 
@@ -580,9 +582,9 @@ function radiobutton_specified_Callback(hObject, eventdata, handles)
 contiflag=0;
 handles.contiflag=contiflag;
 guidata(hObject,handles);
-
 set(handles.text5,'visible','on');
 set(handles.edit_PeriodNum,'visible','on');
+
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
 
 
@@ -599,3 +601,10 @@ guidata(hObject,handles);
 set(handles.text5,'visible','off');
 set(handles.edit_PeriodNum,'visible','off');
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
+
+
+% --- Executes during object creation, after setting all properties.
+function text5_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to text5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
