@@ -124,7 +124,7 @@ handles.i=i;
 j = 0;
 if i <=oneWavePointCount
     if j <= (channelCount - 1)
-        scaleData.Set(j, scaledWaveForm(channelCount * i + j));
+        scaleData.Set(j, scaledWaveForm(i));
         errorCode = instantAoCtrl.Write(channelStart,...
             channelCount, scaleData);
         if BioFailed(errorCode)
@@ -140,11 +140,11 @@ else if contiflag==1
     periodcount=handles.periodcount;
     periodcount=periodcount+1;% x-shot output mode
     handles.periodcount=periodcount;
-    if periodcount<=periodNum;
+    if periodcount<=periodNum
         i=0;
         handles.i=i;
     else
-        clear functions;
+%         clear functions;
         stop(obj);
         delete(obj);
        fprintf('\nStaticAO is completed, and press Enter key to quit!');
