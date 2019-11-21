@@ -22,7 +22,7 @@ function varargout = SignalGenerator_Project2(varargin)
 
 % Edit the above text to modify the response to help SignalGenerator_Project2
 
-% Last Modified by GUIDE v2.5 21-Nov-2019 15:28:33
+% Last Modified by GUIDE v2.5 21-Nov-2019 17:23:39
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -626,5 +626,12 @@ guidata(hObject,handles);
 % --- Executes during object creation, after setting all properties.
 function text5_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to text5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+
+% --- Executes during object creation, after setting all properties.
+function figure1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
