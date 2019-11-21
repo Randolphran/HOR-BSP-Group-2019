@@ -91,7 +91,6 @@ handles.periodcount=periodcount;
 
 set(handles.listbox1,'value',1);
 
-set(handles.listbox1,'value',1);
 set(handles.text_dutycycle,'visible','off');
 set(handles.edit_dutycycle,'visible','off');
 set(handles.text9,'visible','off');
@@ -582,8 +581,8 @@ contiflag=0;
 handles.contiflag=contiflag;
 guidata(hObject,handles);
 
-set(handles.text5,'visible','off');
-set(handles.edit_PeriodNum,'visible','off');
+set(handles.text5,'visible','on');
+set(handles.edit_PeriodNum,'visible','on');
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
 
 
@@ -597,6 +596,6 @@ contiflag=1;
 handles.contiflag=contiflag;
 guidata(hObject,handles);
 
-set(handles.text5,'visible','on');
-set(handles.edit_PeriodNum,'visible','on');
+set(handles.text5,'visible','off');
+set(handles.edit_PeriodNum,'visible','off');
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
