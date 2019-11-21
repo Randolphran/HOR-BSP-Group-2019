@@ -22,7 +22,7 @@ function varargout = UserDefinedFcn(varargin)
 
 % Edit the above text to modify the response to help UserDefinedFcn
 
-% Last Modified by GUIDE v2.5 21-Nov-2019 15:40:35
+% Last Modified by GUIDE v2.5 21-Nov-2019 16:20:07
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,6 +54,14 @@ function UserDefinedFcn_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for UserDefinedFcn
 handles.output = hObject;
+
+handles.mouse_enable = 0;
+handles.mouse_num = 0;
+handles.mouse_p = zeros(1,2);
+
+set(handles.edit1,'Enable','off');
+set(handles.axes3,'Visible','off');
+
 
 % Update handles structure
 guidata(hObject, handles);
@@ -163,5 +171,60 @@ function radiobutton2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 set(handles.radiobutton_input,'value',0);
 set(handles.edit1,'Enable','off');
-set(handles.axes3,'visible','on');
+set(handles.axes3,'Visible','on');
 % Hint: get(hObject,'Value') returns toggle state of radiobutton2
+
+
+% --- Executes on mouse press over axes background.
+function axes3_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to axes3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+mouse_enable = 1;
+mouse_num = 1;
+
+if mouse_enable
+    posi = get(handles.axes3,'CurrentPoint');
+    mouse_p(mouse_num,1) = posi(1);
+    mouse_p(mouse_num,2) = posi(3);
+end
+
+handles.mouse_enable = mouse_enable;
+handles.mouse_p = mouse_p;
+handles.mouse_num = mouse_num;
+
+guidata(hObject,handles);
+
+
+% --- Executes on mouse motion over figure - except title and menu.
+function figure2_WindowButtonMotionFcn(hObject, eventdata, handles)
+% hObject    handle to figure2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+posi = get(handles.axes3,'CurrentPoint');
+mouse_num = handles.mouse_num + 1;
+mouse_p = handles.mouse_p;
+
+if handles.mouse_enable
+    
+    mouse_p(mouse_num,1) = posi(1);
+    mouse_p(mouse_num,2) = posi(3);
+    
+%     h1 = line(handles.axes3,x,y,'EraseMode','xor','LineWidth',1,'color','black');
+    
+end
+
+
+handles.mouse_p = mouse_p;
+handles.mouse_num = mouse_num;
+guidata(hObject,handles);
+
+
+% --- Executes on mouse press over figure background, over a disabled or
+% --- inactive control, or over an axes background.
+function figure2_WindowButtonUpFcn(hObject, eventdata, handles)
+% hObject    handle to figure2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+handles.mouse_enable = 0;
+guidata(hObject,handles);
