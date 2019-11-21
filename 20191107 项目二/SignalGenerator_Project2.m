@@ -569,6 +569,7 @@ function edit_dutycycle_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 dutycycle=str2double(get(handles.edit_dutycycle,'String'));
+dutycycle=dutycycle*0.01;
 handles.dutycycle=dutycycle;
 guidata(hObject,handles);
 
