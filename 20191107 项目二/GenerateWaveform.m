@@ -76,7 +76,7 @@ function waveBuffer = GenerateWaveform(amplitude, offset, dutycycle, ...
 % 'waveBuffer' give in, the Amplitude these waveform
 waveBuffer = zeros(oneWavePointCount,1);
 amplitude=amplitude/2;
-for i = 0:(oneWavePointCount - 1)
+for i = 1:oneWavePointCount
 %     for j = channelStart:(channelStart + channelCount - 1)
         % pay attention to channel rollback(when startChannel+
         % channelCount>chanCountMax)
