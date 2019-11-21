@@ -133,22 +133,13 @@ if i <=oneWavePointCount
             throw (e);
         end
     end
-else if contiflag==1
-    i=0; % constant output mode
-    handles.i=i;
-    else
-    periodcount=handles.periodcount;
-    periodcount=periodcount+1;% x-shot output mode
-    handles.periodcount=periodcount;
-    if periodcount<=periodNum;
-        i=0;
-        handles.i=i;
-    else
-        clear functions;
-        stop(obj);
-        delete(obj);
-    end
-    end
+else if 
+    clear i; % constant output mode
+    % one-shot output mode
+    %     clear functions;
+    %     stop(obj);
+    %     delete(obj);
+    
 %     fprintf('\nStaticAO is completed, and press Enter key to quit!');
 end
 guidata(hObject,handles);
