@@ -74,7 +74,7 @@ function waveBuffer = GenerateWaveform(amplitude, offset, dutycycle, ...
 
 % generate waveform data and put them into the buffer which the parameter
 % 'waveBuffer' give in, the Amplitude these waveform
-waveBuffer = NET.createArray('System.Double', oneWavePointCount);
+waveBuffer = zeros(oneWavePointCount,1);
 amplitude=amplitude/2;
 for i = 0:(oneWavePointCount - 1)
 %     for j = channelStart:(channelStart + channelCount - 1)
@@ -87,35 +87,33 @@ for i = 0:(oneWavePointCount - 1)
 %             ranges.Get(channel).Min) / 2);
         switch style
             case 1
-                waveBuffer.Set(i,...
-                    amplitude * sin(double(i) * 2.0 * pi / ...
-                    double(oneWavePointCount)) + offset);
+                waveBuffer(i)=amplitude * sin(double(i) * 2.0 * pi / ...
+                    double(oneWavePointCount)) + offset;
             case 2
                 if (i >= 0) && (i < (oneWavePointCount / 4.0))
-                    waveBuffer.Set(i,...
-                        amplitude * (double(i) / ...
-                        (double(oneWavePointCount) / 4.0)) + offset);
+                    waveBuffer(i)=amplitude * (double(i) / ...
+                        (double(oneWavePointCount) / 4.0)) + offset;
                 else
                     if (i >= (oneWavePointCount / 4.0)) && ...
                             (i < 3 * (oneWavePointCount / 4.0))
-                        waveBuffer.Set(i, amplitude * ((2.0 * ...
+                        waveBuffer(i)= amplitude * ((2.0 * ...
                             (double(oneWavePointCount) / 4.0) - ...
                             double(i)) / (double(oneWavePointCount) ...
-                            / 4.0)) + offset);
+                            / 4.0)) + offset;
                     else
-                        waveBuffer.Set(i, amplitude * ((double(i) - ...
+                        waveBuffer(i)= amplitude * ((double(i) - ...
                             double(oneWavePointCount)) / ...
-                            (double(oneWavePointCount) / 4.0)) + offset);
+                            (double(oneWavePointCount) / 4.0)) + offset;
                     end
                 end
             case 3
                 if (i >= 0) && (i < (oneWavePointCount*dutycycle))
-                    waveBuffer.Set(i,amplitude * 1.0 + offset);
+                    waveBuffer(i)=amplitude * 1.0 + offset;
                 else
-                     waveBuffer.Set(i,amplitude * (-1.0) + offset);
+                     waveBuffer(i)=amplitude * (-1.0) + offset;
                 end
             case 4
-               waveBuffer.Set(i, amplitude);
+               waveBuffer(i)= amplitude;
         end
     end
 end

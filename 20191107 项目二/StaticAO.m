@@ -149,26 +149,7 @@ else if contiflag==1
         delete(obj);
        fprintf('\nStaticAO is completed, and press Enter key to quit!');
     end
+    end
 end
 guidata(hObject,handles);
 end
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
