@@ -611,10 +611,9 @@ function radiobutton_specified_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 contiflag=0;
 handles.contiflag=contiflag;
+guidata(hObject,handles);
 set(handles.text5,'visible','on');
 set(handles.edit_PeriodNum,'visible','on');
-guidata(hObject,handles);
-
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
 
@@ -625,10 +624,9 @@ function radiobutton_continuous_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 contiflag=1;
 handles.contiflag=contiflag;
+guidata(hObject,handles);
 set(handles.text5,'visible','off');
 set(handles.edit_PeriodNum,'visible','off');
-guidata(hObject,handles);
-
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
 
 % --- Executes during object creation, after setting all properties.
