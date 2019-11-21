@@ -22,7 +22,7 @@ function varargout = SignalGenerator_Project2(varargin)
 
 % Edit the above text to modify the response to help SignalGenerator_Project2
 
-% Last Modified by GUIDE v2.5 14-Nov-2019 16:33:30
+% Last Modified by GUIDE v2.5 21-Nov-2019 13:25:08
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -453,3 +453,25 @@ function edit_dutycycle_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in radiobutton_continuous.
+function radiobutton_continuous_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobutton_continuous (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+contiflag=1;
+handles.contiflag=contiflag;
+guidata(hObject,handles);
+% Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
+
+% --- Executes on button press in radiobutton_specified.
+function radiobutton_specified_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobutton_specified (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+contiflag=0;
+handles.contiflag=contiflag;
+guidata(hObject,handles);
+% Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
+
