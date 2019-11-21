@@ -455,7 +455,7 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in radiobutton_continuous.
+% --- Executes on button press in radiobutton3.
 function radiobutton_continuous_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton_continuous (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -463,15 +463,15 @@ function radiobutton_continuous_Callback(hObject, eventdata, handles)
 contiflag=1;
 handles.contiflag=contiflag;
 guidata(hObject,handles);
-% Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
+% Hint: get(hObject,'Value') returns toggle state of radiobutton3
 
-% --- Executes on button press in radiobutton_specified.
+% --- Executes on button press in radiobutton3.
 function radiobutton_specified_Callback(hObject, eventdata, handles)
-% hObject    handle to radiobutton_specified (see GCBO)
+% hObject    handle to radiobutton3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 contiflag=0;
 handles.contiflag=contiflag;
 guidata(hObject,handles);
-% Hint: get(hObject,'Value') returns toggle state of radiobutton_continuous
+% Hint: get(hObject,'Value') returns toggle state of radiobutton3
 
