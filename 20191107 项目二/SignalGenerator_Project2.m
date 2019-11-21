@@ -147,15 +147,16 @@ offset=handles.offset;
 dutycycle=handles.dutycycle;
 ppp=handles.ppp;
 style=handles.wavechosen;
+frequency=handles.frequency;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
 totallength=2*ppp;
 AxesHandle = handles.axes1;
 AxesHandle.XLim = [0 totallength];
 AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
     AxesHandle.XTickLabel = {'0',...
-        [num2str(round(ppp/2)/(f*2)),' s'],...
-        [num2str(ppp/f),' s'],...
-        [num2str(totallength*2/f),' s']};
+        [num2str(round(ppp/2)/(frequency*2)),' s'],...
+        [num2str(ppp/frequency),' s'],...
+        [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
@@ -188,6 +189,31 @@ function edit_frequency_Callback(hObject, eventdata, handles)
 frequency=str2double(get(handles.edit_frequency,'String'));
 handles.frequency=frequency;
 guidata(hObject,handles);
+
+%在画面上对信号进行两个周期的预览
+amplitude=handles.amplitude;
+offset=handles.offset;
+dutycycle=handles.dutycycle;
+ppp=handles.ppp;
+style=handles.wavechosen;
+dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
+totallength=2*ppp;
+AxesHandle = handles.axes1;
+AxesHandle.XLim = [0 totallength];
+    AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
+    AxesHandle.XTickLabel = {'0',...
+        [num2str(round(ppp/2)/(frequency*2)),' s'],...
+        [num2str(ppp/frequency),' s'],...
+        [num2str(totallength*2/frequency),' s']};
+data_to_plot = zeros(2*ppp,1);
+data_to_plot(1:ppp,1) = dataAO;
+data_to_plot(ppp+1:2*ppp,1) = dataAO;    
+plot(AxesHandle,data_to_plot,'black');
+
+% Hints: get(hObject,'String') returns contents of edit_amplitude as text
+%        str2double(get(hObject,'String')) returns contents of edit_amplitude as a double
+ AxesHandle = handles.axes1;
+ plot(AxesHandle,data_to_plot,'black');
 % Hints: get(hObject,'String') returns contents of edit_frequency as text
 %        str2double(get(hObject,'String')) returns contents of edit_frequency as a double
 
@@ -219,16 +245,16 @@ offset=handles.offset;
 dutycycle=handles.dutycycle;
 ppp=handles.ppp;
 style=handles.wavechosen;
-f=handles.frequency;
+frequency=handles.frequency;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
 totallength=2*ppp;
 AxesHandle = handles.axes1;
 AxesHandle.XLim = [0 totallength];
     AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
     AxesHandle.XTickLabel = {'0',...
-        [num2str(round(ppp/2)/(f*2)),' s'],...
-        [num2str(ppp/f),' s'],...
-        [num2str(totallength*2/f),' s']};
+        [num2str(round(ppp/2)/(frequency*2)),' s'],...
+        [num2str(ppp/frequency),' s'],...
+        [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
@@ -265,15 +291,16 @@ amplitude=handles.amplitude;
 offset=handles.offset;
 dutycycle=handles.dutycycle;
 style=handles.wavechosen;
+frequency=handles.frequency;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
 totallength=2*ppp;
 AxesHandle = handles.axes1;
 AxesHandle.XLim = [0 totallength];
 AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
     AxesHandle.XTickLabel = {'0',...
-        [num2str(round(ppp/2)/(f*2)),' s'],...
-        [num2str(ppp/f),' s'],...
-        [num2str(totallength*2/f),' s']};
+        [num2str(round(ppp/2)/(frequency*2)),' s'],...
+        [num2str(ppp/frequency),' s'],...
+        [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
@@ -439,15 +466,16 @@ amplitude=handles.amplitude;
 dutycycle=handles.dutycycle;
 ppp=handles.ppp;
 style=handles.wavechosen;
+frequency=handles.frequency;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
 totallength=2*ppp;
 AxesHandle = handles.axes1;
 AxesHandle.XLim = [0 totallength];
     AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
     AxesHandle.XTickLabel = {'0',...
-        [num2str(round(ppp/2)/(f*2)),' s'],...
-        [num2str(ppp/f),' s'],...
-        [num2str(totallength*2/f),' s']};
+        [num2str(round(ppp/2)/(frequency*2)),' s'],...
+        [num2str(ppp/frequency),' s'],...
+        [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
@@ -511,15 +539,16 @@ amplitude=handles.amplitude;
 offset=handles.offset;
 ppp=handles.ppp;
 style=handles.wavechosen;
+frequency=handles.frequency;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
 totallength=2*ppp;
 AxesHandle = handles.axes1;
 AxesHandle.XLim = [0 totallength];
     AxesHandle.XTick = [0 round(ppp/2) ppp totallength];
     AxesHandle.XTickLabel = {'0',...
-        [num2str(round(ppp/2)/(f*2)),' s'],...
-        [num2str(ppp/f),' s'],...
-        [num2str(totallength*2/f),' s']};
+        [num2str(round(ppp/2)/(frequency*2)),' s'],...
+        [num2str(ppp/frequency),' s'],...
+        [num2str(totallength*2/frequency),' s']};
 data_to_plot = zeros(2*ppp,1);
 data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;    
