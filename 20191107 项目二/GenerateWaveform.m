@@ -88,31 +88,29 @@ for i = 1:oneWavePointCount
         switch style
             case 1
                 waveBuffer(i)=amplitude * sin(double(i) * 2.0 * pi / ...
-                    double(oneWavePointCount)) + offset + amplitude;
-            case 2 
+                    double(oneWavePointCount)) + offset;
+            case 2
                 if (i >= 0) && (i < (oneWavePointCount / 4.0))
                     waveBuffer(i)=amplitude * (double(i) / ...
-                        (double(oneWavePointCount) / 4.0)) + offset+ ...
-                        amplitude;
+                        (double(oneWavePointCount) / 4.0)) + offset;
                 else
                     if (i >= (oneWavePointCount / 4.0)) && ...
                             (i < 3 * (oneWavePointCount / 4.0))
                         waveBuffer(i)= amplitude * ((2.0 * ...
                             (double(oneWavePointCount) / 4.0) - ...
                             double(i)) / (double(oneWavePointCount) ...
-                            / 4.0)) + offset + amplitude;
+                            / 4.0)) + offset;
                     else
                         waveBuffer(i)= amplitude * ((double(i) - ...
                             double(oneWavePointCount)) / ...
-                            (double(oneWavePointCount) / 4.0)) + offset ...
-                            + amplitude;
+                            (double(oneWavePointCount) / 4.0)) + offset;
                     end
                 end
             case 3
                 if (i >= 0) && (i < (oneWavePointCount*dutycycle))
                     waveBuffer(i)=amplitude * 1.0 + offset;
                 else
-                     waveBuffer(i)=offset; 
+                     waveBuffer(i)=amplitude * (-1.0) + offset;
                 end
             case 4
                waveBuffer(i)= amplitude;
