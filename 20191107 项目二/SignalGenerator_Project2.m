@@ -507,8 +507,11 @@ global t;
 stop(t);
 delete(t);
 clear global t;
-
 uiresume(handles.figure1);
+i=0;
+handles.i=i;
+guidata(hObject,handles);
+end
 
 function edit_offset_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_offset (see GCBO)
