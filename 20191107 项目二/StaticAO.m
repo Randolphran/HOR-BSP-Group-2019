@@ -17,7 +17,7 @@
 % I/O Connections Overview:
 %    Please refer to your hardware reference manual.
 
-function StaticAO()
+function StaticAO(hObject,handles)
 
 % Make Automation.BDaq assembly visible to MATLAB.
 BDaq = NET.addAssembly('Automation.BDaq');
@@ -147,9 +147,8 @@ else if contiflag==1
         clear functions;
         stop(obj);
         delete(obj);
+       fprintf('\nStaticAO is completed, and press Enter key to quit!');
     end
-    end
-%     fprintf('\nStaticAO is completed, and press Enter key to quit!');
 end
 guidata(hObject,handles);
 end

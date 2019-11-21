@@ -456,7 +456,7 @@ function pushbutton_stop_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global t;
 stop(t);
-delete(t)
+delete(t);
 clear global t;
 
 uiresume(handles.figure1);
