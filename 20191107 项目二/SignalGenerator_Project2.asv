@@ -73,10 +73,7 @@ handles.frequency=frequency;
 wavechosen=1;
 handles.wavechosen=wavechosen;
 
-ymax=5;
-handles.ymax=ymax;
-
-dataAO=zeros(100,1);
+dataAO=zeros(512,1);
 handles.dataAO=dataAO;
 guidata(hObject,handles);
 
@@ -522,9 +519,9 @@ data_to_plot(1:ppp,1) = dataAO;
 data_to_plot(ppp+1:2*ppp,1) = dataAO;  
 handles.dataAO=dataAO;
 axes(handles.axes1);
-plot(data_to_plot,'black');
 ymax=amplitude/2+offset;
 handles.ymax=ymax;
+plot(data_to_plot,'black');
 set(handles.axes1,'YLim',[0,ymax]);
 set(handles.axes1,'XLim',[0,totallength]);
 xticks(handles.axes1,[0 totallength/8 totallength/4 totallength*3/8 totallength/2 totallength*5/8 totallength*3/4 totallength*7/8 totallength]);
@@ -589,7 +586,6 @@ offset=handles.offset;
 ppp=handles.ppp;
 style=handles.wavechosen;
 frequency=handles.frequency;
-ymax=handles.ymax;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
 totallength=2*ppp;
 data_to_plot = zeros(2*ppp,1);
@@ -598,7 +594,6 @@ data_to_plot(ppp+1:2*ppp,1) = dataAO;
 handles.dataAO=dataAO;
 axes(handles.axes1);
 plot(data_to_plot,'black');
-set(handles.axes1,'YLim',[0,ymax]);
 set(handles.axes1,'XLim',[0,totallength]);
 xticks(handles.axes1,[0 totallength/8 totallength/4 totallength*3/8 totallength/2 totallength*5/8 totallength*3/4 totallength*7/8 totallength]);
 xticklabels(handles.axes1,{'0',...
