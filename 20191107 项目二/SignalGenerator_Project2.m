@@ -58,7 +58,7 @@ handles.output = hObject;
 amplitude=5;
 handles.amplitude=amplitude;
 
-ppp=512;
+ppp=100;
 handles.ppp=ppp;
 
 offset=2.5;
@@ -67,7 +67,7 @@ handles.offset=offset;
 dutycycle=0.5;
 handles.dutycycle=dutycycle;
 
-frequency=10;
+frequency=1;
 handles.frequency=frequency;
 
 wavechosen=1;
