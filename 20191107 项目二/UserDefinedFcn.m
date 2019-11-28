@@ -346,12 +346,15 @@ x_vector = linspace(x_min,x_max,pointpp);
 y_vector = fcn_calc(x_vector);
 
 flag = 0;
-for i = 1:pointpp % Maximum output voltage is 5, truncate any output to 5 if needed.
+for i = 1:pointpp % Range of output voltage is [0,5], truncate any output to it if needed.
     if y_vector(i) > 5
-        
         y_vector(i) = 5;
         flag = 1;
-        
+    end
+    
+    if y_vector(i) < 0
+        y_vector(i) = 0;
+        flag = 1;
     end
 end
 
@@ -359,7 +362,7 @@ plot(axeshandles,x_vector,y_vector);
 set(axeshandles,'XLim',[x_min x_max]);
 if flag
     % show user a warning
-    text(axeshandles,'String','Warning! Value that exceeds 5 will not be displayed.',...
+    text(axeshandles,'String','Warning! Value not within the range [0,5] will not be displayed.',...
         'Color','red', 'Position',[0 5.5],'FontSize',12);
     set(axeshandles,'YLim',[0 5]); % 5 is the maximum output voltage.
 end
