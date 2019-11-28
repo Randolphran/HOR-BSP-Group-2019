@@ -140,14 +140,22 @@ pointpp = str2double(get(handles.edit5,'String'));
 x_vector = linspace(x_min,x_max,pointpp);
 y_vector = fcn_calc(x_vector);
 
-if 
+for i = 1:pointpp % Maximum output voltage is 5, truncate any output to 5 if needed.
+    if y_vector(i) > 5
+        y_vector(i) = 5;
+        % show user a warning
+         text(axeshandles,'String','Warning! Value that exceeds 5 will not be displayed.',...
+             'Color','red', 'Position',[0 0],'FontSize',12);
+    end
+end
 
 plot(axeshandles,x_vector,y_vector);
 set(axeshandles,'XLim',[x_min x_max]);
 set(axeshandles,'YLim',[0 5]); % 5 is the maximum output voltage.
 
 
-
+handles.dataAO = y_vector;
+handles.ppp = pointpp;
 handles.fcn_calc = fcn_calc;
 handles.fcn_latex = fcn_latex;
 guidata(hObject,handles);
