@@ -39,7 +39,10 @@ period=1/(f*ppp);
 
 periodcount=0;
 handles.periodcount=periodcount;
+t1=clock;
+handles.t1=t1;
 guidata(hObject,handles);
+
 
 % Declare the type of signal. If you want to specify the type of output 
 % signal, please change 'style' parameter in the GenerateWaveform function.
@@ -118,6 +121,17 @@ end
 function TimerCallback(obj, event, instantAoCtrl, oneWavePointCount, ...
     scaleData,channelStart, channelCount, hObject)
 handles = guidata(hObject);
+
+t1=handles.t1;
+t2=clock;
+handles.t2=t2;
+realtime=etime(t2,t1);
+f=1/(realtime*oneWavePointCount);
+% handles.realtime=realtime;
+t1=clock;
+handles.t1=t1;
+
+set(handles.text12,'string',num2str(f));
 
 scaledWaveForm=handles.dataAO;
 contiflag=handles.contiflag;
