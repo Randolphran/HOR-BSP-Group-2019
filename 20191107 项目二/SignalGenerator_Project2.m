@@ -462,8 +462,15 @@ ppp = temp.ppp;
 
 guidata(hObject,handles)
 
-if any(dataAO) %any: if any element in dataAO is nonzero, return 1.
+if any(dataAO) %any: if any element in dataAO is nonzero, return true.
+    set(handles.edit_ppp,'String',num2str(ppp));
+    set(handles.edit_ppp,'Enable','off');
+    set(handles.edit_amplitude,'Enable','off');
+    set(handles.edit_dutycycle,'Enable','off');
     
+    axeshandles = handles.axes1;
+    
+
 end
 
 % --- Executes on button press in pushbutton_run.
