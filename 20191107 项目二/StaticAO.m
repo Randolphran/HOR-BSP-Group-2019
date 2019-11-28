@@ -131,7 +131,15 @@ f=1/(realtime*oneWavePointCount);
 t1=clock;
 handles.t1=t1;
 
+persistent m;
+if isempty(m)
+    m=0;
+end
+m=m+1;
+if m==20
 set(handles.text12,'string',num2str(f));
+clear m;
+end
 
 scaledWaveForm=handles.dataAO;
 contiflag=handles.contiflag;

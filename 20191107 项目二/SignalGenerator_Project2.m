@@ -402,7 +402,7 @@ if ischar(filename)
     period = round(1000/Fs_in); % unit: ms
     totallength = period * dataNum * 2; % display two periods
     flag = 0;
-    for i = 1:pointpp % Range of output voltage is [0,5], truncate any output to it if needed.
+    for i = 1:ppp % Range of output voltage is [0,5], truncate any output to it if needed.
         if dataAO(i) > 5
             dataAO(i) = 5;
             flag = 1;
@@ -416,9 +416,9 @@ if ischar(filename)
     
     if flag
     % show user a warning
-    text(axeshandles,'String','Warning! Value not within the range [0,5] will not be displayed.',...
+    text(AxesHandle,'String','Warning! Value not within the range [0,5] will not be displayed.',...
         'Color','red', 'Position',[0 5.5],'FontSize',12);
-    set(axeshandles,'YLim',[0 5]); % 5 is the maximum output voltage.
+    set(AxesHandle,'YLim',[0 5]); % 5 is the maximum output voltage.
     end
     
     AxesHandle.XLim = [0 totallength];
