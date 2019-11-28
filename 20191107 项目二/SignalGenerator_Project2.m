@@ -76,7 +76,7 @@ handles.wavechosen=wavechosen;
 ymax=5;
 handles.ymax=ymax;
 
-dataAO=zeros(512,1);
+dataAO=zeros(100,1);
 handles.dataAO=dataAO;
 guidata(hObject,handles);
 
