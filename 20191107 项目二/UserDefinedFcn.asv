@@ -140,12 +140,8 @@ pointpp = str2double(get(handles.edit5,'String'));
 x_vector = linspace(x_min,x_max,pointpp);
 y_vector = fcn_calc(x_vector);
 
-if 
-
 plot(axeshandles,x_vector,y_vector);
-set(axeshandles,'XLim',[x_min x_max]);
-set(axeshandles,'YLim',[0 5]); % 5 is the maximum output voltage.
-
+set(axeshandles,'X
 
 
 handles.fcn_calc = fcn_calc;
