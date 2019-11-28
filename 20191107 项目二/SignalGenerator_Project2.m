@@ -467,7 +467,10 @@ function pushbutton_draw_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_draw (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-[figure2,handles] = UserDefinedFcn(handles);
+[figure2,temp] = UserDefinedFcn();
+
+handles.figure2 = temp;
+handles.figure2.hObject = figure2;
 
 guidata(hObject,handles)
 

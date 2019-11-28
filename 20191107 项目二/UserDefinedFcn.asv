@@ -22,7 +22,7 @@ function varargout = UserDefinedFcn(varargin)
 
 % Edit the above text to modify the response to help UserDefinedFcn
 
-% Last Modified by GUIDE v2.5 28-Nov-2019 15:31:06
+% Last Modified by GUIDE v2.5 28-Nov-2019 14:57:47
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -128,13 +128,11 @@ x_min = str2double(get(handles.edit_xmin,'String'));
 x_max = str2double(get(handles.edit_xmax,'String'));
 pointpp = str2double(get(handles.edit5,'String'));
 
-y_vector = displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc);
-handles.y_vector = y_vector;
-guidata(hObject,handles);
+displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc);
 
 
 
-handles.dataAO = y_vector';
+handles.dataAO = y_vector;
 handles.ppp = pointpp;
 handles.fcn_calc = fcn_calc;
 handles.fcn_latex = fcn_latex;
@@ -210,16 +208,12 @@ function edit_xmin_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_xmin (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles = guidata(hObject);
 axeshandles = handles.axes3;
-fcn_calc = handles.fcn_calc;
 x_min = str2double(get(handles.edit_xmin,'String'));
 x_max = str2double(get(handles.edit_xmax,'String'));
 pointpp = str2double(get(handles.edit5,'String'));
 
-y_vector = displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc);
-handles.y_vector = y_vector;
-guidata(hObject,handles);
+displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc);
 
 % Hints: get(hObject,'String') returns contents of edit_xmin as text
 %        str2double(get(hObject,'String')) returns contents of edit_xmin as a double
@@ -243,17 +237,6 @@ function edit_xmax_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_xmax (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles = guidata(hObject);
-axeshandles = handles.axes3;
-fcn_calc = handles.fcn_calc;
-x_min = str2double(get(handles.edit_xmin,'String'));
-x_max = str2double(get(handles.edit_xmax,'String'));
-pointpp = str2double(get(handles.edit5,'String'));
-
-displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc);
-y_vector = displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc);
-handles.y_vector = y_vector;
-guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_xmax as text
 %        str2double(get(hObject,'String')) returns contents of edit_xmax as a double
@@ -277,22 +260,6 @@ function edit5_Callback(hObject, eventdata, handles)
 % hObject    handle to edit5 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles = guidata(hObject);
-axeshandles = handles.axes3;
-fcn_calc = handles.fcn_calc;
-x_min = str2double(get(handles.edit_xmin,'String'));
-x_max = str2double(get(handles.edit_xmax,'String'));
-pointpp = str2double(get(handles.edit5,'String'));
-
-% maximum ppp is 100
-if pointpp > 100
-    set(handles.edit5,'String',100);
-    pointpp = 100;
-end
-
-y_vector = displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc);
-handles.y_vector = y_vector;
-guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit5 as text
 %        str2double(get(hObject,'String')) returns contents of edit5 as a double
@@ -310,9 +277,9 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-function y_vector = displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc)
-cla(axeshandles);
-x_vector = linspace(x_min,x_max,pointpp);
+function displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc)
+    cla(axeshandles);
+    x_vector = linspace(x_min,x_max,pointpp);
 y_vector = fcn_calc(x_vector);
 
 flag = 0;
@@ -335,17 +302,3 @@ if flag
         'Color','red', 'Position',[0 5.5],'FontSize',12);
     set(axeshandles,'YLim',[0 5]); % 5 is the maximum output voltage.
 end
-
-
-% --- Executes on button press in pushbutton1.
-function pushbutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-
-% --- Executes on button press in pushbutton2.
-function pushbutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
