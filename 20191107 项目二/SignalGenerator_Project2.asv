@@ -464,23 +464,21 @@ guidata(hObject,handles)
 
 if any(dataAO) %any: if any element in dataAO is nonzero, return true.
     set(handles.edit_ppp,'String',num2str(ppp));
-    
-    set(handles.edit_offset,'Enable','off');
     set(handles.edit_ppp,'Enable','off');
     set(handles.edit_amplitude,'Enable','off');
     set(handles.edit_dutycycle,'Enable','off');
     
-%     offset = handles.offset;
-%     dutycycle = handles.dutycycle;
+    offset = handles.offset;
+    dutycycle = handles.dutycycle;
 %     ppp = handles.ppp;
-%     style=handles.wavechosen;
-    frequency = handles.frequency;
-%     dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
-    totallength = 2 * ppp;
-    data_to_plot = zeros(2 * ppp,1);
+    style=handles.wavechosen;
+    frequency=handles.frequency;
+    dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
+    totallength=2*ppp;
+    data_to_plot = zeros(2*ppp,1);
     data_to_plot(1:ppp,1) = dataAO;
     data_to_plot(ppp+1:2*ppp,1) = dataAO;
-
+    handles.dataAO=dataAO;
     axes(handles.axes1);
     plot(data_to_plot,'black');
     set(handles.axes1,'XLim',[0,totallength]);
@@ -494,10 +492,9 @@ if any(dataAO) %any: if any element in dataAO is nonzero, return true.
         [num2str(roundn(2/(frequency*3),-2)),' s'],...
         [num2str(roundn(7/(frequency*4),-2)),' s'],...
         [num2str(roundn(2/frequency,-2)),' s']});
-    
-    handles.dataAO = dataAO;
-    handles.ppp = ppp;
     guidata(hObject,handles);
+    
+
 end
 
 % --- Executes on button press in pushbutton_run.

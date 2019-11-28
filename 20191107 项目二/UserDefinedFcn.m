@@ -336,6 +336,7 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 handles.dataAO = zeros(1);
+guidata(hObject,handles);
 uiresume(handles.figure2);
 
 
