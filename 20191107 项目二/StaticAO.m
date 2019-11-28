@@ -36,7 +36,6 @@ channelCount = int32(1);
 ppp=handles.ppp;
 f=handles.frequency;
 period=1/(f*ppp);
-scaledWaveForm=handles.dataAO;
 
 periodcount=0;
 handles.periodcount=periodcount;
@@ -79,9 +78,8 @@ try
 
     % Output data
     scaleData = NET.createArray('System.Double', int32(64));
-    
     t = timer('TimerFcn',{@TimerCallback, instantAoCtrl, ...
-        ppp, scaleData, scaledWaveForm, channelStart, ...
+        ppp, scaleData, channelStart, ...
         channelCount,hObject}, 'period',period, 'executionmode', 'fixedrate', ...
         'StartDelay', 1);
     start(t);
@@ -92,6 +90,7 @@ try
 %     stop(t);
 %     delete(t); 
 %     end
+
 catch e
     % Something is wrong. 
     if BioFailed(errorCode)    
@@ -117,9 +116,10 @@ result =  errorCode < Automation.BDaq.ErrorCode.Success && ...
 end
 
 function TimerCallback(obj, event, instantAoCtrl, oneWavePointCount, ...
-    scaleData, scaledWaveForm, channelStart, channelCount, hObject)
+    scaleData,channelStart, channelCount, hObject)
 handles = guidata(hObject);
 
+scaledWaveForm=handles.dataAO;
 contiflag=handles.contiflag;
 periodNum=handles.periodNum;
 i=handles.i;

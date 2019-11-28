@@ -73,7 +73,7 @@ handles.frequency=frequency;
 wavechosen=1;
 handles.wavechosen=wavechosen;
 
-dataAO=zeros(512,1);
+dataAO=zeros(100,1);
 handles.dataAO=dataAO;
 guidata(hObject,handles);
 
