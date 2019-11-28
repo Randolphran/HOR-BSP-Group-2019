@@ -38,6 +38,10 @@ f=handles.frequency;
 period=1/(f*ppp);
 scaledWaveForm=handles.dataAO;
 
+periodcount=0;
+handles.periodcount=periodcount;
+guidata(hObject,handles);
+
 % Declare the type of signal. If you want to specify the type of output 
 % signal, please change 'style' parameter in the GenerateWaveform function.
 parent_id = H5T.copy('H5T_NATIVE_UINT');
@@ -147,7 +151,7 @@ else if contiflag==1
 %         clear functions;
         stop(obj);
         delete(obj);
-       fprintf('\nStaticAO is completed, and press Enter key to quit!');
+%        fprintf('\nStaticAO is completed, and press Enter key to quit!');
     end
     end
 end
