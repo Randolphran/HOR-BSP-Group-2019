@@ -73,9 +73,6 @@ handles.frequency=frequency;
 wavechosen=1;
 handles.wavechosen=wavechosen;
 
-ymax=5;
-handles.ymax=ymax;
-
 dataAO=zeros(100,1);
 handles.dataAO=dataAO;
 guidata(hObject,handles);
@@ -163,7 +160,6 @@ dutycycle=handles.dutycycle;
 ppp=handles.ppp;
 style=handles.wavechosen;
 frequency=handles.frequency;
-ymax=handles.ymax;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
 totallength=2*ppp;
 data_to_plot = zeros(2*ppp,1);
@@ -172,7 +168,6 @@ data_to_plot(ppp+1:2*ppp,1) = dataAO;
 handles.dataAO=dataAO;
 axes(handles.axes1);
 plot(data_to_plot,'black');
-set(handles.axes1,'YLim',[0,ymax]);
 set(handles.axes1,'XLim',[0,totallength]);
 xticks(handles.axes1,[0 totallength/8 totallength/4 totallength*3/8 totallength/2 totallength*5/8 totallength*3/4 totallength*7/8 totallength]);
 xticklabels(handles.axes1,{'0',...
@@ -271,9 +266,6 @@ data_to_plot(ppp+1:2*ppp,1) = dataAO;
 handles.dataAO=dataAO;
 axes(handles.axes1);
 plot(data_to_plot,'black');
-ymax=amplitude/2+offset;
-handles.ymax=ymax;
-set(handles.axes1,'YLim',[0,ymax]);
 set(handles.axes1,'XLim',[0,totallength]);
 xticks(handles.axes1,[0 totallength/8 totallength/4 totallength*3/8 totallength/2 totallength*5/8 totallength*3/4 totallength*7/8 totallength]);
 xticklabels(handles.axes1,{'0',...
@@ -314,7 +306,6 @@ offset=handles.offset;
 dutycycle=handles.dutycycle;
 style=handles.wavechosen;
 frequency=handles.frequency;
-ymax=handles.ymax;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
 totallength=2*ppp;
 data_to_plot = zeros(2*ppp,1);
@@ -323,7 +314,6 @@ data_to_plot(ppp+1:2*ppp,1) = dataAO;
 handles.dataAO=dataAO;
 axes(handles.axes1);
 plot(data_to_plot,'black');
-set(handles.axes1,'YLim',[0,ymax]);
 set(handles.axes1,'XLim',[0,totallength]);
 xticks(handles.axes1,[0 totallength/8 totallength/4 totallength*3/8 totallength/2 totallength*5/8 totallength*3/4 totallength*7/8 totallength]);
 xticklabels(handles.axes1,{'0',...
@@ -458,15 +448,22 @@ function pushbutton_draw_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_draw (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-[figure2,temp] = UserDefinedFcn();
+[handles.figure2,temp] = UserDefinedFcn(handles.figure1);
 
-handles.figure2 = temp;
-handles.figure2.hObject = figure2;
+dataAO = temp.dataAO;
+ppp = temp.ppp;
 
 guidata(hObject,handles)
 
-if any(dataAO) %any: if any element in dataAO is nonzero, return 1.
+if any(dataAO) %any: if any element in dataAO is nonzero, return true.
+    set(handles.edit_ppp,'String',num2str(ppp));
+    set(handles.edit_ppp,'Enable','off');
+    set(handles.edit_amplitude,'Enable','off');
+    set(handles.edit_dutycycle,'Enable','off');
     
+    axeshandles = handles.axes1;
+    
+
 end
 
 % --- Executes on button press in pushbutton_run.
@@ -517,9 +514,6 @@ data_to_plot(ppp+1:2*ppp,1) = dataAO;
 handles.dataAO=dataAO;
 axes(handles.axes1);
 plot(data_to_plot,'black');
-ymax=amplitude/2+offset;
-handles.ymax=ymax;
-set(handles.axes1,'YLim',[0,ymax]);
 set(handles.axes1,'XLim',[0,totallength]);
 xticks(handles.axes1,[0 totallength/8 totallength/4 totallength*3/8 totallength/2 totallength*5/8 totallength*3/4 totallength*7/8 totallength]);
 xticklabels(handles.axes1,{'0',...
@@ -583,7 +577,6 @@ offset=handles.offset;
 ppp=handles.ppp;
 style=handles.wavechosen;
 frequency=handles.frequency;
-ymax=handles.ymax;
 dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
 totallength=2*ppp;
 data_to_plot = zeros(2*ppp,1);
@@ -592,7 +585,6 @@ data_to_plot(ppp+1:2*ppp,1) = dataAO;
 handles.dataAO=dataAO;
 axes(handles.axes1);
 plot(data_to_plot,'black');
-set(handles.axes1,'YLim',[0,ymax]);
 set(handles.axes1,'XLim',[0,totallength]);
 xticks(handles.axes1,[0 totallength/8 totallength/4 totallength*3/8 totallength/2 totallength*5/8 totallength*3/4 totallength*7/8 totallength]);
 xticklabels(handles.axes1,{'0',...

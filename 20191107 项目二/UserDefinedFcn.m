@@ -55,12 +55,13 @@ function UserDefinedFcn_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for UserDefinedFcn
 % handles = varargin;
 handles.output = hObject;
+handles.fatherfigure = varargin;
 
 % Update handles structure
 guidata(hObject, handles);
 
 % UIWAIT makes UserDefinedFcn wait for user response (see UIRESUME)
-% uiwait(handles.figure2);
+uiwait(handles.figure2);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -73,7 +74,7 @@ function varargout = UserDefinedFcn_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 varargout{2} = handles;
-
+close();
 
 % --- Executes on button press in radiobutton_input.
 function radiobutton_input_Callback(hObject, eventdata, handles)
@@ -137,7 +138,6 @@ guidata(hObject,handles);
 handles.dataAO = y_vector';
 handles.ppp = pointpp;
 handles.fcn_calc = fcn_calc;
-handles.fcn_latex = fcn_latex;
 guidata(hObject,handles);
 
 
@@ -218,7 +218,11 @@ x_max = str2double(get(handles.edit_xmax,'String'));
 pointpp = str2double(get(handles.edit5,'String'));
 
 y_vector = displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc);
-handles.y_vector = y_vector;
+
+handles.dataAO = y_vector';
+handles.ppp = pointpp;
+handles.fcn_calc = fcn_calc;
+guidata(hObject,handles);
 guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_xmin as text
@@ -250,9 +254,11 @@ x_min = str2double(get(handles.edit_xmin,'String'));
 x_max = str2double(get(handles.edit_xmax,'String'));
 pointpp = str2double(get(handles.edit5,'String'));
 
-displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc);
 y_vector = displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc);
-handles.y_vector = y_vector;
+
+handles.dataAO = y_vector';
+handles.ppp = pointpp;
+handles.fcn_calc = fcn_calc;
 guidata(hObject,handles);
 
 % Hints: get(hObject,'String') returns contents of edit_xmax as text
@@ -291,8 +297,12 @@ if pointpp > 100
 end
 
 y_vector = displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc);
-handles.y_vector = y_vector;
+
+handles.dataAO = y_vector';
+handles.ppp = pointpp;
+handles.fcn_calc = fcn_calc;
 guidata(hObject,handles);
+
 
 % Hints: get(hObject,'String') returns contents of edit5 as text
 %        str2double(get(hObject,'String')) returns contents of edit5 as a double
@@ -310,31 +320,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-function y_vector = displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc)
-cla(axeshandles);
-x_vector = linspace(x_min,x_max,pointpp);
-y_vector = fcn_calc(x_vector);
-
-flag = 0;
-for i = 1:pointpp % Maximum output voltage is 5, truncate any output to 5 if needed.
-    if y_vector(i) > 5
-        
-        y_vector(i) = 5;
-        flag = 1;
-        
-    end
-end
-
-
-
-plot(axeshandles,x_vector,y_vector);
-set(axeshandles,'XLim',[x_min x_max]);
-if flag
-    % show user a warning
-    text(axeshandles,'String','Warning! Value that exceeds 5 will not be displayed.',...
-        'Color','red', 'Position',[0 5.5],'FontSize',12);
-    set(axeshandles,'YLim',[0 5]); % 5 is the maximum output voltage.
-end
 
 
 % --- Executes on button press in pushbutton1.
@@ -342,6 +327,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+uiresume(handles.figure2);
 
 
 % --- Executes on button press in pushbutton2.
@@ -349,3 +335,35 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+handles.dataAO = zeros(1);
+uiresume(handles.figure2);
+
+
+
+function y_vector = displaygraph(axeshandles,x_min,x_max,pointpp,fcn_calc)
+cla(axeshandles);
+x_vector = linspace(x_min,x_max,pointpp);
+y_vector = fcn_calc(x_vector);
+
+flag = 0;
+for i = 1:pointpp % Range of output voltage is [0,5], truncate any output to it if needed.
+    if y_vector(i) > 5
+        y_vector(i) = 5;
+        flag = 1;
+    end
+    
+    if y_vector(i) < 0
+        y_vector(i) = 0;
+        flag = 1;
+    end
+end
+
+plot(axeshandles,x_vector,y_vector);
+set(axeshandles,'XLim',[x_min x_max]);
+if flag
+    % show user a warning
+    text(axeshandles,'String','Warning! Value not within the range [0,5] will not be displayed.',...
+        'Color','red', 'Position',[0 5.5],'FontSize',12);
+    set(axeshandles,'YLim',[0 5]); % 5 is the maximum output voltage.
+end
+
