@@ -212,20 +212,11 @@ handles.frequency=frequency;
 guidata(hObject,handles);
 
 %在画面上对信号进行两个周期的预览
-amplitude=handles.amplitude;
-offset=handles.offset;
-dutycycle=handles.dutycycle;
-ppp=handles.ppp;
 ymax=handles.ymax;
-style=handles.wavechosen;
-dataAO=GenerateWaveform(amplitude, offset, dutycycle, ppp, style);
-totallength=2*ppp;
-data_to_plot = zeros(2*ppp,1);
-data_to_plot(1:ppp,1) = dataAO;
-data_to_plot(ppp+1:2*ppp,1) = dataAO;  
-handles.dataAO=dataAO;
+ppp=handles.ppp;
+dataAO=handles.dataAO;
+totallength=2*ppp; 
 axes(handles.axes1);
-plot(data_to_plot,'black');
 set(handles.axes1,'YLim',[0,ymax]);
 set(handles.axes1,'XLim',[0,totallength]);
 xticks(handles.axes1,[0 totallength/8 totallength/4 totallength*3/8 totallength/2 totallength*5/8 totallength*3/4 totallength*7/8 totallength]);
