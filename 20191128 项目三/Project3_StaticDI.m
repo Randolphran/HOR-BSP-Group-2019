@@ -49,7 +49,7 @@ try
         portCount, buffer, hObject}, 'period', 1, 'executionmode', 'fixedrate', ...
         'StartDelay', 1);
     start(t2);
-     fprintf('Reading ports'' status is in progress...');
+%      fprintf('Reading ports'' status is in progress...');
 %     input('Press Enter key to quit!', 's');    
 %     stop(t);
 %     delete(t);
@@ -106,9 +106,9 @@ end
 temp = buffer.Get(0);
 
 DI_Input = dec2bin(temp); % DI_Input is a 1x8(Nx8) char array. 
-enable_DI = bin2dec(DI_Input(1,1));
-amplitude_DI = bin2dec(DI_Input(1,2:3));
-frequency_DI = bin2dec(DI_Input(1,4:8));
+enable_DI = bin2dec(DI_Input(1,8));
+amplitude_DI = bin2dec(DI_Input(1,6:7));
+frequency_DI = bin2dec(DI_Input(1,1:5));
 
 % refresh gui text display.
 set(str_handles,'String',DI_Input(1,:));
@@ -124,18 +124,18 @@ end
 cla(axes_handles);
 if enable_DI
     x = linspace(0,1,1000); % display range: 0~1 second. Pi will be reducted.
-    sqwave = square(2*pi*frequency_DI*x) * Amplitude; %period: a/2*pi. square(a*x + b);
+    sqwave = square(2*pi*frequency_DI*x) * amplitude_DI; %period: a/2*pi. square(a*x + b);
     plot(axes_handles,x,sqwave);
-    set(axes_handles,'Ylim',[Amplitude+0.5 -Amplitude-0.5]);
+    set(axes_handles,'Ylim',[-amplitude_DI-0.5 amplitude_DI+0.5]);
 end
 
     
     
 % upload guidata
 handles.DI_Input = DI_Input;
-handles.Enable_DI = enable_DI;
-handles.Amplitude_DI = amplitude_DI;
-handles.Frequency_DI = frequency_DI;
+handles.enable_DI = enable_DI;
+handles.amplitude_DI = amplitude_DI;
+handles.frequency_DI = frequency_DI;
 guidata(hObject,handles);
 end
 
