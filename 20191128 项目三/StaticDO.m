@@ -27,7 +27,7 @@ BDaq = NET.addAssembly('Automation.BDaq4');
 deviceDescription = 'USB-4704,BID#0'; 
 % startPort = int32(0);
 % portCount = int32(1);
-global t;
+global t1;
 
 contiflag=handles.contiflag;
 period=handles.period;
@@ -51,10 +51,10 @@ try
     
     % Step 3: Write DO ports
     bufferForWriting = NET.createArray('System.Byte', int32(64));
-    t = timer('TimerFcn', {@TimerCallback, instantDoCtrl, ...
+    t1 = timer('TimerFcn', {@TimerCallback_DO, instantDoCtrl, ...
         bufferForWriting, N, contiflag, hObject},'period', period, ...
         'executionmode', 'fixedrate', 'StartDelay', 1);
-    start(t);
+    start(t1);
     uiwait(handles.figure1);
 %     for i = 0:(portCount - 1)
 %         fprintf('Input a hexadecimal number for DO port %d to output', ...
@@ -111,17 +111,15 @@ result =  errorCode < Automation.BDaq.ErrorCode.Success && ...
 
 end
 
-function TimerCallback(obj, event, instantDoCtrl, bufferForWriting, N,...
+function TimerCallback_DO(obj, event, instantDoCtrl, bufferForWriting, N,...
     contiflag,hObject)
 handles = guidata(hObject);
 i=handles.i;
 i=i+1;
 if mod(i,2)==0
     strData = 0;   
-    set(handles.togglebutton2,'backgroundcolor','green');
 else 
     strData = 1;
-    set(handles.togglebutton2,'backgroundcolor','red');
 end
     bufferForWriting.Set(0, strData); 
     errorCode = instantDoCtrl.Write(0, 1 , ...

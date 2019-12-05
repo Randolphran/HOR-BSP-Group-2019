@@ -22,7 +22,7 @@ function varargout = DO_DI_Project3(varargin)
 
 % Edit the above text to modify the response to help DO_DI_Project3
 
-% Last Modified by GUIDE v2.5 05-Dec-2019 16:52:11
+% Last Modified by GUIDE v2.5 05-Dec-2019 16:34:59
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -76,8 +76,17 @@ handles.time=time;
 contiflag=1;
 handles.contiflag=contiflag;
 
+
 % Start DI monitor
 Project3_StaticDI(hObject);
+
+%»­Ô²
+r=2; theta=0:pi/100:2*pi;
+x=r*cos(theta); y=r*sin(theta);
+rho=r*sin(theta);
+plot(handles.axes2,x,y,'-');
+hold on; axis equal;
+fill(handles.axes2,x,y,'red');
 
 % Update handles structure
 guidata(hObject, handles);
@@ -97,27 +106,27 @@ function varargout = DO_DI_Project3_OutputFcn(hObject, eventdata, handles)
 varargout{1} = handles.output;
 
 
-% --- Executes on button press in radiobutton1.
-function radiobutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to radiobutton1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-choose=get(handles.radiobutton1,'value');
-if choose==0
-    set(handles.togglebutton2,'backgroundcolor','red');
-else set(handles.togglebutton2,'backgroundcolor','green');
-end
- 
-%set(handles.togglebutton2,'backgroundcolor','green');
+% % --- Executes on button press in radiobutton1.
+% function radiobutton1_Callback(hObject, eventdata, handles)
+% % hObject    handle to radiobutton1 (see GCBO)
+% % eventdata  reserved - to be defined in a future version of MATLAB
+% % handles    structure with handles and user data (see GUIDATA)
+% choose=get(handles.radiobutton1,'value');
+% if choose==0
+%     set(handles.togglebutton2,'backgroundcolor','red');
+% else set(handles.togglebutton2,'backgroundcolor','green');
+% end
+%  
+% %set(handles.togglebutton2,'backgroundcolor','green');
 
-% Hint: get(hObject,'Value') returns toggle state of radiobutton1
-% --- Executes on button press in togglebutton2.
-function togglebutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to togglebutton2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of togglebutton2
+% % Hint: get(hObject,'Value') returns toggle state of radiobutton1
+% % --- Executes on button press in togglebutton2.
+% function togglebutton2_Callback(hObject, eventdata, handles)
+% % hObject    handle to togglebutton2 (see GCBO)
+% % eventdata  reserved - to be defined in a future version of MATLAB
+% % handles    structure with handles and user data (see GUIDATA)
+% 
+% % Hint: get(hObject,'Value') returns toggle state of togglebutton2
 
 
 % --- Executes on slider movement.
@@ -162,18 +171,18 @@ function pushbutton_pause_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_pause (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global t;
-stop(t);
+global t1;
+stop(t1);
 
 % --- Executes on button press in pushbutton_stop.
 function pushbutton_stop_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_stop (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global t;
-stop(t);
-delete(t);
-clear global t;
+global t1;
+stop(t1);
+delete(t1);
+clear global t1;
 
 uiresume(handles.figure1);
 
@@ -265,6 +274,12 @@ set(handles.text13,'visible','off');
 handles.contiflag=contiflag;
 guidata(hObject,handles);
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_continue
+
+% % --- Executes during object creation, after setting all properties.
+% function togglebutton2_CreateFcn(hObject, eventdata, handles)
+% % hObject    handle to togglebutton2 (see GCBO)
+% % eventdata  reserved - to be defined in a future version of MATLAB
+% % handles    empty - handles not created until after all CreateFcns called
 
 
 % --- Executes during object deletion, before destroying properties.
