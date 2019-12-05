@@ -384,36 +384,45 @@ if ischar(filename)
     
     fclose(fid);
     
-    % check for import compatibility.
-    ppp = handles.ppp;
+    % Set controller accessibility.    
     dataAO_temp = Signalread(file);
     dataAO = dataAO_temp(:,1);
     dataNum = length(dataAO(:,1));
-    
-    if dataNum > ppp
-        fprintf('Warning! Import data size exceeds the numner of Point Per Period. Margin data will be discarded');
-        dataNum = ppp;
-        temp = dataAO;
-        clear dataAO
-        dataAO = temp(1:dataNum,4);        
-    else
-        ppp = dataNum;
-        set(handles.edit_ppp,'string',num2str(ppp));
-    end
-    
-     set(handles.edit_ppp,'enable','off');
-     set(handles.edit_amplitude,'enable','off');
-     set(handles.edit_dutycycle,'enable','off');
+    ppp = dataNum;
+   
+    set(handles.edit_ppp,'String',num2str(ppp));
+    set(handles.edit_offset,'Enable','off');
+    set(handles.edit_ppp,'Enable','off');
+    set(handles.edit_amplitude,'Enable','off');
+    set(handles.edit_dutycycle,'Enable','off');
 % % % % % % % % % data import complete % % % % % % % % % % % % % % % % % %
     % start ploting. The first channel data in dataImport is seen as one
     % period integratedly. Two periods will be displayed in axes1 zone.
-    
+    AxesHandle = handles.axes1;
     period = round(1000/Fs_in); % unit: ms
     totallength = period * dataNum * 2; % display two periods
+    flag = 0;
+    for i = 1:ppp % Range of output voltage is [0,5], truncate any output to it if needed.
+        if dataAO(i) > 5
+            dataAO(i) = 5;
+            flag = 1;
+        end
+        
+        if dataAO(i) < 0
+            dataAO(i) = 0;
+            flag = 1;
+        end
+    end
     
-    AxesHandle = handles.axes1;
+    if flag
+    % show user a warning
+    text(AxesHandle,'String','Warning! Value not within the range [0,5] will not be displayed.',...
+        'Color','red', 'Position',[0 5.5],'FontSize',12);
+    set(AxesHandle,'YLim',[0 5]); % 5 is the maximum output voltage.
+    end
+    
     AxesHandle.XLim = [0 totallength];
-    AxesHandle.YLim = [0 inf];
+    AxesHandle.YLim = [0 5];
     AxesHandle.XTick = [0 round(dataNum/2) dataNum totallength];
     AxesHandle.XTickLabel = {'0',...
         [num2str(round(dataNum/2)),' ms'],...
