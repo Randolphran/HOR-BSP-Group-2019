@@ -22,7 +22,7 @@ function varargout = DO_DI_Project3(varargin)
 
 % Edit the above text to modify the response to help DO_DI_Project3
 
-% Last Modified by GUIDE v2.5 05-Dec-2019 14:30:07
+% Last Modified by GUIDE v2.5 05-Dec-2019 14:45:26
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -55,9 +55,15 @@ function DO_DI_Project3_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for DO_DI_Project3
 handles.output = hObject;
 
-set(handles.slider_frequency,'min',0);
+set(handles.slider_frequency,'min',1);
 set(handles.slider_frequency,'max',50);
 set(handles.slider_frequency,'value',25);
+
+fvalue=25;
+handles.fvalue=fvalue;
+
+period=0.04;
+handles.period=period;
 
 % Update handles structure
 guidata(hObject, handles);
@@ -108,7 +114,12 @@ function slider_frequency_Callback(hObject, eventdata, handles)
 % hObject    handle to slider_frequency (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+fvalue=get(handles.slider_frequency,'value');
+set(handles.edit_fvalue,'string',roundn(fvalue));
+period=roundn(1/fvalue,-2);
+handles.fvalue=fvalue;
+handles.period=period;
+guidata(hObject,handles);
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
@@ -159,6 +170,34 @@ function edit_time_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function edit_time_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to edit_time (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit_fvalue_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_fvalue (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+fvalue=str2double(get(handles.edit_fvalue,'string'));
+set(handles.slider_frequency,'value',fvalue);
+period=roundn(1/fvalue,-2);
+handles.fvalue=fvalue;
+handles.period=period;
+guidata(hObject,handles);
+% Hints: get(hObject,'String') returns contents of edit_fvalue as text
+%        str2double(get(hObject,'String')) returns contents of edit_fvalue as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit_fvalue_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_fvalue (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
