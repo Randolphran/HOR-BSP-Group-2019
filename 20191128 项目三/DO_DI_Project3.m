@@ -149,22 +149,27 @@ function pushbutton_start_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_start (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+StaticDO(handles.figure1,handles);
 
 % --- Executes on button press in pushbutton_pause.
 function pushbutton_pause_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_pause (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+global t;
+stop(t);
 
 % --- Executes on button press in pushbutton_stop.
 function pushbutton_stop_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_stop (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global t;
+stop(t);
+delete(t);
+clear global t;
 
-
+uiresume(handles.figure1);
 
 function edit_time_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_time (see GCBO)
