@@ -65,6 +65,9 @@ handles.fvalue=fvalue;
 period=0.04;
 handles.period=period;
 
+time=3;
+handles.time=time;
+
 % Update handles structure
 guidata(hObject, handles);
 
@@ -96,10 +99,7 @@ end
  
 %set(handles.togglebutton2,'backgroundcolor','green');
 
-
 % Hint: get(hObject,'Value') returns toggle state of radiobutton1
-
-
 % --- Executes on button press in togglebutton2.
 function togglebutton2_Callback(hObject, eventdata, handles)
 % hObject    handle to togglebutton2 (see GCBO)
@@ -115,7 +115,7 @@ function slider_frequency_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 fvalue=get(handles.slider_frequency,'value');
-set(handles.edit_fvalue,'string',roundn(fvalue));
+set(handles.edit_fvalue,'string',round(fvalue));
 period=roundn(1/fvalue,-2);
 handles.fvalue=fvalue;
 handles.period=period;
@@ -162,7 +162,9 @@ function edit_time_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_time (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+time=str2double(get(handles.edit_time,'value'));
+handles.time=time;
+guidata(hObject,handles);
 % Hints: get(hObject,'String') returns contents of edit_time as text
 %        str2double(get(hObject,'String')) returns contents of edit_time as a double
 
