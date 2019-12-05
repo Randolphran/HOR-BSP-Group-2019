@@ -106,9 +106,9 @@ end
 temp = buffer.Get(0);
 
 DI_Input = dec2bin(temp); % DI_Input is a 1x8(Nx8) char array. 
-Enable_DI = bin2dec(DI_Input(1,1));
-Amplitude_DI = bin2dec(DI_Input(1,2:3));
-Frequency_DI = bin2dec(DI_Input(1,4:8));
+enable_DI = bin2dec(DI_Input(1,1));
+amplitude_DI = bin2dec(DI_Input(1,2:3));
+frequency_DI = bin2dec(DI_Input(1,4:8));
 
 % refresh gui text display.
 set(str_handles,'String',DI_Input(1,:));
@@ -124,7 +124,7 @@ end
 cla(axes_handles);
 if enable_DI
     x = linspace(0,1,1000); % display range: 0~1 second. Pi will be reducted.
-    sqwave = square(2*pi*Frequency_DI*x) * Amplitude; %period: a/2*pi. square(a*x + b);
+    sqwave = square(2*pi*frequency_DI*x) * Amplitude; %period: a/2*pi. square(a*x + b);
     plot(axes_handles,x,sqwave);
     set(axes_handles,'Ylim',[Amplitude+0.5 -Amplitude-0.5]);
 end
@@ -133,9 +133,9 @@ end
     
 % upload guidata
 handles.DI_Input = DI_Input;
-handles.Enable_DI = Enable_DI;
-handles.Amplitude_DI = Amplitude_DI;
-handles.Frequency_DI = Frequency_DI;
+handles.Enable_DI = enable_DI;
+handles.Amplitude_DI = amplitude_DI;
+handles.Frequency_DI = frequency_DI;
 guidata(hObject,handles);
 end
 
