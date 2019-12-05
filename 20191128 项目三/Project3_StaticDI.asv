@@ -16,7 +16,7 @@
 % I/O Connections Overview:
 %    Please refer to your hardware reference manual.
 
-function StaticDI()
+function Project3_StaticDI(hObject)
 
 % Make Automation.BDaq assembly visible to MATLAB.
 BDaq = NET.addAssembly('Automation.BDaq');
@@ -30,7 +30,10 @@ portCount = int32(1);
 errorCode = Automation.BDaq.ErrorCode.Success;
 
 % Step 1: Create a 'InstantDiCtrl' for DI function.
+% and initialize from guidata.
 instantDiCtrl = Automation.BDaq.InstantDiCtrl();
+
+handles = guidata(hObject);
 
 try
     % Step 2: Select a device by device number or device description and 
@@ -43,13 +46,16 @@ try
     % Step 3: read DI ports' status and show.
     buffer = NET.createArray('System.Byte', int32(64));
     t = timer('TimerFcn', {@TimerCallback, instantDiCtrl, startPort, ...
-        portCount, buffer}, 'period', 1, 'executionmode', 'fixedrate', ...
+        portCount, buffer, hObject}, 'period', 1, 'executionmode', 'fixedrate', ...
         'StartDelay', 1);
     start(t);
-    fprintf('Reading ports'' status is in progress...');
-    input('Press Enter key to quit!', 's');    
-    stop(t);
-    delete(t);
+     fprintf('Reading ports'' status is in progress...');
+%     input('Press Enter key to quit!', 's');    
+%     stop(t);
+%     delete(t);
+    
+    uiwait(handles.figure1);
+
 catch e
     % Something is wrong. 
     if BioFailed(errorCode)    
@@ -74,7 +80,11 @@ result =  errorCode < Automation.BDaq.ErrorCode.Success && ...
 end
 
 function TimerCallback(obj, event, instantDiCtrl, startPort, ...
-    portCount, buffer)
+    portCount, buffer, hObject)
+% Initialize from guidata.
+handles = guidata(hObject);
+
+
 
 errorCode = instantDiCtrl.Read(startPort, portCount, buffer); 
 if BioFailed(errorCode)
