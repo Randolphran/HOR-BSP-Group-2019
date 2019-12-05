@@ -127,15 +127,12 @@ end
     if BioFailed(errorCode)
         throw  Exception();
     end
-    
-if contiflag==1
+
    if i==N
        clear i;
        stop(obj);
        delete(obj);
    end
-end
-
 end
 
 
