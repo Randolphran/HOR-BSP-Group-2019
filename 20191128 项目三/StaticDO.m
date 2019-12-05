@@ -133,6 +133,7 @@ if contiflag==1
        clear i;
        stop(obj);
        delete(obj);
+       uiresume(handles.figure1);
    end
 end
 
