@@ -28,7 +28,10 @@ deviceDescription = 'USB-4704,BID#0';
 % startPort = int32(0);
 % portCount = int32(1);
 global t;
+
+contiflag=handles.contiflag;
 period=handles.period;
+period=period/2;
 f=handles.fvalue;
 time=handles.time;
 N=time*f;
@@ -49,7 +52,7 @@ try
     % Step 3: Write DO ports
     bufferForWriting = NET.createArray('System.Byte', int32(64));
     t = timer('TimerFcn', {@TimerCallback, instantDoCtrl, ...
-        bufferForWriting, N, contiflag},'period', period, ...
+        bufferForWriting, N, contiflag, hObject},'period', period, ...
         'executionmode', 'fixedrate', 'StartDelay', 1);
     start(t);
     uiwait(handles.figure1);
@@ -109,33 +112,34 @@ result =  errorCode < Automation.BDaq.ErrorCode.Success && ...
 end
 
 function TimerCallback(obj, event, instantDoCtrl, bufferForWriting, N,...
-    contiflag)
-
-persistent i;
-if isempty(i)
-    i=0;
-end
+    contiflag,hObject)
+handles = guidata(hObject);
+i=handles.i;
 i=i+1;
 if mod(i,2)==0
     strData = 0;   
+    set(handles.togglebutton2,'backgroundcolor','green');
 else 
     strData = 1;
+    set(handles.togglebutton2,'backgroundcolor','red');
 end
     bufferForWriting.Set(0, strData); 
-    errorCode = instantDoCtrl.Write(startPort, portCount, ...
+    errorCode = instantDoCtrl.Write(0, 1 , ...
         bufferForWriting);
     if BioFailed(errorCode)
         throw  Exception();
     end
     
-if contiflag==1
+if contiflag==0
    if i==N
-       clear i;
+       i=0;
        stop(obj);
        delete(obj);
+       uiresume(handles.figure1);
    end
 end
-
+handles.i=i;
+guidata(hObject,handles);
 end
 
 
