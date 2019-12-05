@@ -22,7 +22,7 @@ function varargout = DO_DI_Project3(varargin)
 
 % Edit the above text to modify the response to help DO_DI_Project3
 
-% Last Modified by GUIDE v2.5 05-Dec-2019 14:45:26
+% Last Modified by GUIDE v2.5 05-Dec-2019 15:30:25
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -58,6 +58,11 @@ handles.output = hObject;
 set(handles.slider_frequency,'min',1);
 set(handles.slider_frequency,'max',50);
 set(handles.slider_frequency,'value',25);
+set(handles.text3,'visible','off');
+set(handles.edit_time,'visible','off');
+set(handles.text13,'visible','off');
+
+set(handles.radiobutton_continue,'value',1);
 
 fvalue=25;
 handles.fvalue=fvalue;
@@ -67,6 +72,9 @@ handles.period=period;
 
 time=3;
 handles.time=time;
+
+contiflag=1;
+handles.contiflag=contiflag;
 
 % Update handles structure
 guidata(hObject, handles);
@@ -218,3 +226,33 @@ function edit_fvalue_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in radiobutton_fixtime.
+function radiobutton_fixtime_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobutton_fixtime (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+contiflag=0;
+set(handles.togglebutton2,'backgroundcolor','red');
+set(handles.text3,'visible','on');
+set(handles.edit_time,'visible','on');
+set(handles.text13,'visible','on');
+handles.contiflag=contiflag;
+guidata(hObject,handles);
+% Hint: get(hObject,'Value') returns toggle state of radiobutton_fixtime
+
+
+% --- Executes on button press in radiobutton_continue.
+function radiobutton_continue_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobutton_continue (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+contiflag=1;
+set(handles.togglebutton2,'backgroundcolor','green');
+set(handles.text3,'visible','off');
+set(handles.edit_time,'visible','off');
+set(handles.text13,'visible','off');
+handles.contiflag=contiflag;
+guidata(hObject,handles);
+% Hint: get(hObject,'Value') returns toggle state of radiobutton_continue
