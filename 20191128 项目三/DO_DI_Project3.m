@@ -276,3 +276,17 @@ guidata(hObject,handles);
 % % hObject    handle to togglebutton2 (see GCBO)
 % % eventdata  reserved - to be defined in a future version of MATLAB
 % % handles    empty - handles not created until after all CreateFcns called
+
+
+% --- Executes during object deletion, before destroying properties.
+function figure1_DeleteFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global t2
+uiresume(handles.figure1);
+stop(t2);
+delete(t2);
+
+clear global t2;
+
