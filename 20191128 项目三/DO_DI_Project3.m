@@ -114,8 +114,8 @@ function slider_frequency_Callback(hObject, eventdata, handles)
 % hObject    handle to slider_frequency (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-fvalue=get(handles.slider_frequency,'value');
-set(handles.edit_fvalue,'string',round(fvalue));
+fvalue=round(get(handles.slider_frequency,'value'));
+set(handles.edit_fvalue,'string',fvalue);
 period=roundn(1/fvalue,-2);
 handles.fvalue=fvalue;
 handles.period=period;
@@ -187,11 +187,21 @@ function edit_fvalue_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_fvalue (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-fvalue=str2double(get(handles.edit_fvalue,'string'));
-set(handles.slider_frequency,'value',fvalue);
-period=roundn(1/fvalue,-2);
-handles.fvalue=fvalue;
-handles.period=period;
+fvalue1=str2double(get(handles.edit_fvalue,'string'));
+if (fvalue1-round(fvalue1) ~= 0)
+    errordlg('请输入整数');
+else if fvalue1>50
+        errordlg('请输入不超过50的整数');
+    else if fvalue1<1
+            errordlg('请输入大于1的整数');
+        else fvalue=fvalue1;
+            set(handles.slider_frequency,'value',fvalue);
+            period=roundn(1/fvalue,-2);
+            handles.fvalue=fvalue;
+            handles.period=period;
+        end
+    end
+end
 guidata(hObject,handles);
 % Hints: get(hObject,'String') returns contents of edit_fvalue as text
 %        str2double(get(hObject,'String')) returns contents of edit_fvalue as a double
