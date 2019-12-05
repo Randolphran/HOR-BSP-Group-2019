@@ -28,7 +28,9 @@ deviceDescription = 'USB-4704,BID#0';
 % startPort = int32(0);
 % portCount = int32(1);
 global t;
+contiflag=handles.contiflag;
 period=handles.period;
+period=period/2;
 f=handles.fvalue;
 time=handles.time;
 N=time*f;
@@ -122,13 +124,13 @@ else
     strData = 1;
 end
     bufferForWriting.Set(0, strData); 
-    errorCode = instantDoCtrl.Write(startPort, portCount, ...
+    errorCode = instantDoCtrl.Write(0, 1 , ...
         bufferForWriting);
     if BioFailed(errorCode)
         throw  Exception();
     end
     
-if contiflag==1
+if contiflag==0
    if i==N
        clear i;
        stop(obj);
