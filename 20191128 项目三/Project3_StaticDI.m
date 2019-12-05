@@ -105,7 +105,7 @@ end
 
 temp = buffer.Get(0);
 
-DI_Input = dec2bin(temp); % DI_Input is a 1x8(Nx8) char array. 
+DI_Input = dec2bin(temp,8); % DI_Input is a 1x8(Nx8) char array. 
 enable_DI = bin2dec(DI_Input(1,8));
 amplitude_DI = bin2dec(DI_Input(1,6:7));
 frequency_DI = bin2dec(DI_Input(1,1:5));
@@ -138,25 +138,3 @@ handles.amplitude_DI = amplitude_DI;
 handles.frequency_DI = frequency_DI;
 guidata(hObject,handles);
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
