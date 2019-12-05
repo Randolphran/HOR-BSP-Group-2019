@@ -76,6 +76,9 @@ handles.time=time;
 contiflag=1;
 handles.contiflag=contiflag;
 
+% Start DI monitor
+Project3_StaticDI(hObject);
+
 % Update handles structure
 guidata(hObject, handles);
 
