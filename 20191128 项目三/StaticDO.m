@@ -118,8 +118,10 @@ i=handles.i;
 i=i+1;
 if mod(i,2)==0
     strData = 0;   
+    set(handles.togglebutton2,'backgroundcolor','green');
 else 
     strData = 1;
+    set(handles.togglebutton2,'backgroundcolor','red');
 end
     bufferForWriting.Set(0, strData); 
     errorCode = instantDoCtrl.Write(0, 1 , ...

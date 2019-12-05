@@ -242,7 +242,6 @@ function radiobutton_fixtime_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 contiflag=0;
-set(handles.togglebutton2,'backgroundcolor','red');
 set(handles.text3,'visible','on');
 set(handles.edit_time,'visible','on');
 set(handles.text13,'visible','on');
@@ -257,7 +256,6 @@ function radiobutton_continue_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 contiflag=1;
-set(handles.togglebutton2,'backgroundcolor','green');
 set(handles.text3,'visible','off');
 set(handles.edit_time,'visible','off');
 set(handles.text13,'visible','off');
