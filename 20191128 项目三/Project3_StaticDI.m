@@ -17,7 +17,7 @@
 %    Please refer to your hardware reference manual.
 
 function Project3_StaticDI(hObject)
-
+global t2;
 % Make Automation.BDaq assembly visible to MATLAB.
 BDaq = NET.addAssembly('Automation.BDaq');
 
@@ -45,10 +45,10 @@ try
     
     % Step 3: read DI ports' status and show.
     buffer = NET.createArray('System.Byte', int32(64));
-    t = timer('TimerFcn', {@TimerCallback, instantDiCtrl, startPort, ...
+    t2 = timer('TimerFcn', {@TimerCallback, instantDiCtrl, startPort, ...
         portCount, buffer, hObject}, 'period', 1, 'executionmode', 'fixedrate', ...
         'StartDelay', 1);
-    start(t);
+    start(t2);
      fprintf('Reading ports'' status is in progress...');
 %     input('Press Enter key to quit!', 's');    
 %     stop(t);
@@ -84,28 +84,58 @@ function TimerCallback(obj, event, instantDiCtrl, startPort, ...
 % Initialize from guidata.
 handles = guidata(hObject);
 
-Enable_DI = 0;
-Amplitude_DI = 0;
-Freqency_DI = 0;
+str_handles = handles.text_input;
+enable_handles = handles.text_onoff;
+amplitude_handles = handles.text_amplitude;
+frequency_handles = handles.text_frequency;
+axes_handles = handles.axes1;
 
 
 errorCode = instantDiCtrl.Read(startPort, portCount, buffer); 
 if BioFailed(errorCode)
     throw Exception();
 end
-temp = zeros(4,1);
-for i=0:(portCount - 1)
-    temp(i) = buffer.Get(i);
-    fprintf('\nDI port %d status : 0x%X', startPort + i, ...
-       temp(i));
+% USB-4704 only support one port DI input(portCount always =1), so for loop is unecessart here.
+% temp = zeros(4,1);
+% for i=0:(portCount - 1)
+%     temp(i) = buffer.Get(i);
+%     fprintf('\nDI port %d status : 0x%X', startPort + i, ...
+%        temp(i));
+% end
+
+temp = buffer.Get(0);
+
+DI_Input = dec2bin(temp); % DI_Input is a 1x8(Nx8) char array. 
+Enable_DI = bin2dec(DI_Input(1,1));
+Amplitude_DI = bin2dec(DI_Input(1,2:3));
+Frequency_DI = bin2dec(DI_Input(1,4:8));
+
+% refresh gui text display.
+set(str_handles,'String',DI_Input(1,:));
+set(amplitude_handles,'String',num2str(amplitude_DI));
+set(frequency_handles,'String',num2str(frequency_DI));
+if enable_DI
+    set(enable_handles,'String','¿ªÊ¼');
+else
+    set(enable_handles,'String','Í£Ö¹');
 end
 
-buffer;
+% refresh axes graphic display
+cla(axes_handles);
+if enable_DI
+    x = linspace(0,1,1000); % display range: 0~1 second. Pi will be reducted.
+    sqwave = square(2*pi*Frequency_DI*x) * Amplitude; %period: a/2*pi. square(a*x + b);
+    plot(axes_handles,x,sqwave);
+    set(axes_handles,'Ylim',[Amplitude+0.5 -Amplitude-0.5]);
+end
 
+    
+    
 % upload guidata
+handles.DI_Input = DI_Input;
 handles.Enable_DI = Enable_DI;
-handles.Amplitude.DI = Amplitude.DI;
-handles.Freqency_DI = 0;
+handles.Amplitude_DI = Amplitude_DI;
+handles.Frequency_DI = Frequency_DI;
 guidata(hObject,handles);
 end
 
