@@ -22,7 +22,7 @@ function varargout = DO_DI_Project3(varargin)
 
 % Edit the above text to modify the response to help DO_DI_Project3
 
-% Last Modified by GUIDE v2.5 28-Nov-2019 17:45:12
+% Last Modified by GUIDE v2.5 05-Dec-2019 14:30:07
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -100,8 +100,8 @@ function togglebutton2_Callback(hObject, eventdata, handles)
 
 
 % --- Executes on slider movement.
-function slider1_Callback(hObject, eventdata, handles)
-% hObject    handle to slider1 (see GCBO)
+function slider_frequency_Callback(hObject, eventdata, handles)
+% hObject    handle to slider_frequency (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -110,12 +110,56 @@ function slider1_Callback(hObject, eventdata, handles)
 
 
 % --- Executes during object creation, after setting all properties.
-function slider1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider1 (see GCBO)
+function slider_frequency_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slider_frequency (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
 % Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on button press in pushbutton_start.
+function pushbutton_start_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_start (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in pushbutton_pause.
+function pushbutton_pause_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_pause (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in pushbutton_stop.
+function pushbutton_stop_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_stop (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+
+function edit_time_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_time (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit_time as text
+%        str2double(get(hObject,'String')) returns contents of edit_time as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit_time_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_time (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
 end
