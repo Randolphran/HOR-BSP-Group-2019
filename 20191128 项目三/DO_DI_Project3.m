@@ -55,6 +55,10 @@ function DO_DI_Project3_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for DO_DI_Project3
 handles.output = hObject;
 
+set(handles.slider_frequency,'min',0);
+set(handles.slider_frequency,'max',50);
+set(handles.slider_frequency,'value',25);
+
 % Update handles structure
 guidata(hObject, handles);
 
