@@ -71,14 +71,14 @@ period=0.04;
 handles.period=period;
 
 time=1;
-handles.time=time;d
+handles.time=time;
 
 contiflag=1;
 handles.contiflag=contiflag;
 
 
 % Start DI monitor
-Project3_StaticDI(hObject);
+
 xlabel(handles.axes1,'time /sec');
 ylabel(handles.axes1,'voltage /V');
 
@@ -93,6 +93,8 @@ ylabel(handles.axes1,'voltage /V');
 
 % Update handles structure
 guidata(hObject, handles);
+
+Project3_StaticDI(hObject);
 
 % UIWAIT makes DO_DI_Project3 wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
