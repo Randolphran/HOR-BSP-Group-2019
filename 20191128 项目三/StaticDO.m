@@ -97,9 +97,9 @@ try
 %     end
 %     disp(errStr);
 end   
-% 
-% % Step 4: Close device and release any allocated resource.
-% instantDoCtrl.Dispose();
+uiwait(handles.figure1);
+% Step 4: Close device and release any allocated resource.
+instantDoCtrl.Dispose();
 
 end
 
