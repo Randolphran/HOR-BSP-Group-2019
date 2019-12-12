@@ -61,6 +61,8 @@ set(handles.slider_frequency,'value',25);
 set(handles.text3,'visible','off');
 set(handles.edit_time,'visible','off');
 set(handles.text13,'visible','off');
+set(handles.pushbutton_pause,'Enable','on');
+set(handles.pushbutton_stop,'Enable','on');
 
 set(handles.radiobutton_continue,'value',1);
 
@@ -111,7 +113,8 @@ function varargout = DO_DI_Project3_OutputFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Get default command line output from handles structure
-varargout{1} = handles.output;
+
+% varargout{1} = handles.output;
 
 
 % % --- Executes on button press in radiobutton1.
@@ -148,6 +151,19 @@ period=roundn(1/fvalue,-2);
 handles.fvalue=fvalue;
 handles.period=period;
 guidata(hObject,handles);
+
+if i!=0
+global t1;
+stop(t1);
+delete(t1);
+clear global t1;
+% i=0;
+% handles.i=i;
+% guidata(hObject,handles);
+StaticDO(handles.figure1,handles);
+
+
+
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
@@ -265,6 +281,8 @@ contiflag=0;
 set(handles.text3,'visible','on');
 set(handles.edit_time,'visible','on');
 set(handles.text13,'visible','on');
+set(handles.pushbutton_pause,'Enable','off');
+set(handles.pushbutton_stop,'Enable','off');
 handles.contiflag=contiflag;
 guidata(hObject,handles);
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_fixtime
@@ -279,6 +297,8 @@ contiflag=1;
 set(handles.text3,'visible','off');
 set(handles.edit_time,'visible','off');
 set(handles.text13,'visible','off');
+set(handles.pushbutton_pause,'Enable','on');
+set(handles.pushbutton_stop,'Enable','on');
 handles.contiflag=contiflag;
 guidata(hObject,handles);
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_continue
@@ -310,7 +330,7 @@ delete(t2);
 clear global t2;
 
 uiresume(handles.figure1);
-disp('closerequestfcn');
+% disp('closerequestfcn');
 
 % Hint: delete(hObject) closes the figure
 delete(hObject);

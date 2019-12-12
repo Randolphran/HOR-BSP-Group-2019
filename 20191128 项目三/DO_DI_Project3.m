@@ -78,6 +78,9 @@ handles.time=time;
 contiflag=1;
 handles.contiflag=contiflag;
 
+i=0;
+handles.i=i;
+
 % Update handles structure
 guidata(hObject, handles);
 
@@ -151,6 +154,21 @@ period=roundn(1/fvalue,-2);
 handles.fvalue=fvalue;
 handles.period=period;
 guidata(hObject,handles);
+
+i=handles.i;
+if i~=0
+global t1;
+stop(t1);
+delete(t1);
+clear global t1;
+% i=0;
+% handles.i=i;
+% guidata(hObject,handles);
+StaticDO(handles.figure1,handles);
+end
+
+
+
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
@@ -172,9 +190,7 @@ function pushbutton_start_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_start (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-i=0;
-handles.i=i;
-guidata(hObject,handles);
+
 StaticDO(handles.figure1,handles);
 
 % --- Executes on button press in pushbutton_pause.
@@ -194,6 +210,9 @@ global t1;
 stop(t1);
 delete(t1);
 clear global t1;
+i=0;
+handles.i=i;
+guidata(hObject,handles);
 
 % uiresume(handles.figure1);
 
@@ -242,6 +261,18 @@ else if fvalue1>50
     end
 end
 guidata(hObject,handles);
+
+i=handles.i;
+if i~=0
+global t1;
+stop(t1);
+delete(t1);
+clear global t1;
+% i=0;
+% handles.i=i;
+% guidata(hObject,handles);
+StaticDO(handles.figure1,handles);
+end
 % Hints: get(hObject,'String') returns contents of edit_fvalue as text
 %        str2double(get(hObject,'String')) returns contents of edit_fvalue as a double
 
