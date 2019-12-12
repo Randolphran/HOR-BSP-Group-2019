@@ -155,16 +155,11 @@ handles.fvalue=fvalue;
 handles.period=period;
 guidata(hObject,handles);
 
-i=handles.i;
-if i~=0
 global t1;
-stop(t1);
-delete(t1);
-clear global t1;
-% i=0;
-% handles.i=i;
-% guidata(hObject,handles);
-StaticDO(handles.figure1,handles);
+if ~isempty(t1)
+    stop(t1);
+    set(t1,'period', period/2);
+    start(t1);
 end
 
 
@@ -262,16 +257,11 @@ else if fvalue1>50
 end
 guidata(hObject,handles);
 
-i=handles.i;
-if i~=0
 global t1;
-stop(t1);
-delete(t1);
-clear global t1;
-% i=0;
-% handles.i=i;
-% guidata(hObject,handles);
-StaticDO(handles.figure1,handles);
+if ~isempty(t1)
+    stop(t1);
+    set(t1,'period', period/2);
+    start(t1);
 end
 % Hints: get(hObject,'String') returns contents of edit_fvalue as text
 %        str2double(get(hObject,'String')) returns contents of edit_fvalue as a double
