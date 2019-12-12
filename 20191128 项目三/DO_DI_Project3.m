@@ -79,6 +79,9 @@ handles.contiflag=contiflag;
 
 % Start DI monitor
 Project3_StaticDI(hObject);
+xlabel(handles.axes1,'time /sec');
+ylabel(handles.axes1,'voltage /V');
+
 
 % %»­Ô²
 % r=2; theta=0:pi/100:2*pi;
