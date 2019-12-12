@@ -3,15 +3,15 @@
     <param.appname>SignalGenerator_Project2</param.appname>
     <param.icon />
     <param.icons />
-    <param.version>1.0</param.version>
-    <param.authnamewatermark>HOR</param.authnamewatermark>
+    <param.version>2.0</param.version>
+    <param.authnamewatermark />
     <param.email />
-    <param.company>SJTU BME</param.company>
+    <param.company />
     <param.summary />
-    <param.description />
+    <param.description>Since original code has been modified, complied file should follow.</param.description>
     <param.screenshot />
     <param.guid />
-    <param.installpath.string>\SJTU BME\SignalGenerator_Project2\</param.installpath.string>
+    <param.installpath.string>\SignalGenerator_Project2\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
     <param.logo />
     <param.install.notes />
@@ -40,10 +40,10 @@
     <unset>
       <param.icon />
       <param.icons />
-      <param.version />
+      <param.authnamewatermark />
       <param.email />
+      <param.company />
       <param.summary />
-      <param.description />
       <param.screenshot />
       <param.guid />
       <param.installpath.string />
@@ -77,17 +77,16 @@
       <file>${PROJECT_ROOT}\SignalGenerator_Project2.m</file>
     </fileset.main>
     <fileset.resources>
-      <file>${PROJECT_ROOT}\GenerateWaveform.m</file>
       <file>${PROJECT_ROOT}\SignalGenerator_Project2.fig</file>
-      <file>${PROJECT_ROOT}\SignalGenerator_Project2.m</file>
-      <file>${PROJECT_ROOT}\Signalread.m</file>
-      <file>${PROJECT_ROOT}\StaticAO.m</file>
-      <file>${PROJECT_ROOT}\StreamingAO.m</file>
       <file>${PROJECT_ROOT}\UserDefinedFcn.fig</file>
-      <file>${PROJECT_ROOT}\UserDefinedFcn.m</file>
     </fileset.resources>
     <fileset.package />
-    <fileset.depfun />
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}\GenerateWaveform.m</file>
+      <file>${PROJECT_ROOT}\Signalread.m</file>
+      <file>${PROJECT_ROOT}\StaticAO.m</file>
+      <file>${PROJECT_ROOT}\UserDefinedFcn.m</file>
+    </fileset.depfun>
     <build-deliverables>
       <file location="${PROJECT_ROOT}\SignalGenerator_Project2\for_testing" name="SignalGenerator_Project2.exe" optional="false">C:\Users\RanYC\Documents\GitHub\HOR-BSP-Group-2019\20191107 项目二\SignalGenerator_Project2\for_testing\SignalGenerator_Project2.exe</file>
       <file location="${PROJECT_ROOT}\SignalGenerator_Project2\for_testing" name="splash.png" optional="false">C:\Users\RanYC\Documents\GitHub\HOR-BSP-Group-2019\20191107 项目二\SignalGenerator_Project2\for_testing\splash.png</file>
