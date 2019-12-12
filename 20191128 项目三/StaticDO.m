@@ -55,7 +55,6 @@ try
         bufferForWriting, N, contiflag, hObject},'period', period, ...
         'executionmode', 'fixedrate', 'StartDelay', 1);
     start(t1);
-    uiwait(handles.figure1);
 %     for i = 0:(portCount - 1)
 %         fprintf('Input a hexadecimal number for DO port %d to output', ...
 %             startPort + i);
@@ -88,19 +87,19 @@ try
 %        fprintf('Now, DO port %d status is:  0x%X\n', i, ...
 %             bufferForReading.Get(i - startPort));
 %     end
-catch e
-    % Something is wrong. 
-    if BioFailed(errorCode)    
-        errStr = 'Some error occurred. And the last error code is ' ... 
-            + errorCode.ToString();
-    else
-        errStr = e.message;
-    end
-    disp(errStr);
+% catch e
+%     % Something is wrong. 
+%     if BioFailed(errorCode)    
+%         errStr = 'Some error occurred. And the last error code is ' ... 
+%             + errorCode.ToString();
+%     else
+%         errStr = e.message;
+%     end
+%     disp(errStr);
 end   
-
-% Step 4: Close device and release any allocated resource.
-instantDoCtrl.Dispose();
+% 
+% % Step 4: Close device and release any allocated resource.
+% instantDoCtrl.Dispose();
 
 end
 
@@ -135,7 +134,7 @@ if contiflag==0
        delete(obj);
        time=1;
        handles.time=time;
-       uiresume(handles.figure1);
+%        uiresume(handles.figure1);
    end
 end
 handles.i=i;
