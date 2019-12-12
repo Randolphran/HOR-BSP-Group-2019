@@ -50,7 +50,7 @@ try
         deviceDescription);
     
     % Step 3: Write DO ports
-    tic;
+%     tic;
     bufferForWriting = NET.createArray('System.Byte', int32(64));
     t1 = timer('TimerFcn', {@TimerCallback_DO, instantDoCtrl, ...
         bufferForWriting, N, contiflag, hObject},'period', period, ...
@@ -113,8 +113,8 @@ end
 
 function TimerCallback_DO(obj, event, instantDoCtrl, bufferForWriting, N,...
     contiflag,hObject)
-toc;
-tic;
+% toc;
+% tic;
 handles = guidata(hObject);
 i=handles.i;
 i=i+1;
