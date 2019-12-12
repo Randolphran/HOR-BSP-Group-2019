@@ -76,11 +76,16 @@ handles.time=time;
 contiflag=1;
 handles.contiflag=contiflag;
 
+% Update handles structure
+guidata(hObject, handles);
 
-% Start DI monitor
+% Start DI monitor, UIWAIT exists in this fcn, UIRESUME is located in
+% deletfcn.
+Project3_StaticDI(hObject);
 
-xlabel(handles.axes1,'time /sec');
-ylabel(handles.axes1,'voltage /V');
+
+% xlabel(handles.axes1,'time /sec');
+% ylabel(handles.axes1,'voltage /V');
 
 
 % %»­Ô²
@@ -91,10 +96,8 @@ ylabel(handles.axes1,'voltage /V');
 % hold on; axis equal;
 % fill(handles.axes2,x,y,'red');
 
-% Update handles structure
-guidata(hObject, handles);
 
-Project3_StaticDI(hObject);
+
 
 % UIWAIT makes DO_DI_Project3 wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
