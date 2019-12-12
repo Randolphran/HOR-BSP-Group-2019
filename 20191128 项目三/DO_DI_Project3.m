@@ -80,13 +80,13 @@ handles.contiflag=contiflag;
 % Start DI monitor
 Project3_StaticDI(hObject);
 
-%»­Ô²
-r=2; theta=0:pi/100:2*pi;
-x=r*cos(theta); y=r*sin(theta);
-rho=r*sin(theta);
-plot(handles.axes2,x,y,'-');
-hold on; axis equal;
-fill(handles.axes2,x,y,'red');
+% %»­Ô²
+% r=2; theta=0:pi/100:2*pi;
+% x=r*cos(theta); y=r*sin(theta);
+% rho=r*sin(theta);
+% plot(handles.axes2,x,y,'-');
+% hold on; axis equal;
+% fill(handles.axes2,x,y,'red');
 
 % Update handles structure
 guidata(hObject, handles);
