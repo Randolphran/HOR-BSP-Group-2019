@@ -317,7 +317,7 @@ delete(t2);
 clear global t2;
 
 uiresume(handles.figure1);
-disp('closerequestfcn');
+% disp('closerequestfcn');
 
 % Hint: delete(hObject) closes the figure
 delete(hObject);
