@@ -35,6 +35,10 @@ instantDiCtrl = Automation.BDaq.InstantDiCtrl();
 
 handles = guidata(hObject);
 
+%set axis labels
+xlabel(handles.axes1,'time /sec');
+ylabel(handles.axes1,'voltage /V');
+
 try
     % Step 2: Select a device by device number or device description and 
     % specify the access mode. In this example we use 
