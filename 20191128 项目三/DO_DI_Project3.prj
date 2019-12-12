@@ -80,10 +80,10 @@
     </fileset.main>
     <fileset.resources>
       <file>${PROJECT_ROOT}\DO_DI_Project3.fig</file>
-      <file>${PROJECT_ROOT}\Project3_StaticDI.m</file>
     </fileset.resources>
     <fileset.package />
     <fileset.depfun>
+      <file>${PROJECT_ROOT}\Project3_StaticDI.m</file>
       <file>${PROJECT_ROOT}\StaticDO.m</file>
     </fileset.depfun>
     <build-deliverables>
