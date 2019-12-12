@@ -35,9 +35,6 @@ instantDiCtrl = Automation.BDaq.InstantDiCtrl();
 
 handles = guidata(hObject);
 
-%set axis labels
-xlabel(handles.axes1,'time /sec');
-ylabel(handles.axes1,'voltage /V');
 
 try
     % Step 2: Select a device by device number or device description and 
@@ -126,6 +123,10 @@ end
 
 % refresh axes graphic display
 cla(axes_handles);
+%set axis labels
+xlabel(handles.axes1,'time /sec');
+ylabel(handles.axes1,'voltage /V');
+
 if enable_DI
     x = linspace(0,1,1000); % display range: 0~1 second. Pi will be reducted.
     sqwave = square(2*pi*frequency_DI*x) * amplitude_DI; %period: a/2*pi. square(a*x + b);
