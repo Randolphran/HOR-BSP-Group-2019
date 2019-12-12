@@ -70,8 +70,8 @@ handles.fvalue=fvalue;
 period=0.04;
 handles.period=period;
 
-time=3;
-handles.time=time;
+time=1;
+handles.time=time;d
 
 contiflag=1;
 handles.contiflag=contiflag;

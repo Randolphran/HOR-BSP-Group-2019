@@ -133,6 +133,8 @@ if contiflag==0
        i=0;
        stop(obj);
        delete(obj);
+       time=1;
+       handles.time=time;
        uiresume(handles.figure1);
    end
 end
