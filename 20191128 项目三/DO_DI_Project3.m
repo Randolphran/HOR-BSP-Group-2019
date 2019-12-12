@@ -192,7 +192,7 @@ stop(t1);
 delete(t1);
 clear global t1;
 
-uiresume(handles.figure1);
+% uiresume(handles.figure1);
 
 function edit_time_Callback(hObject, eventdata, handles)
 % hObject    handle to edit_time (see GCBO)
