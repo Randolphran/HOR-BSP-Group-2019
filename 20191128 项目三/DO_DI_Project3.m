@@ -150,7 +150,7 @@ function slider_frequency_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 fvalue=round(get(handles.slider_frequency,'value'));
 set(handles.edit_fvalue,'string',fvalue);
-period=roundn(1/fvalue,-2);
+period=roundn(1/fvalue,-3);
 handles.fvalue=fvalue;
 handles.period=period;
 guidata(hObject,handles);
@@ -158,7 +158,7 @@ guidata(hObject,handles);
 global t1;
 if ~isempty(t1)
     stop(t1);
-    set(t1,'period', period/2);
+    set(t1,'period', roundn(period/2,-3));
     start(t1);
 end
 
@@ -249,7 +249,7 @@ else if fvalue1>50
             errordlg('请输入大于1的整数');
         else fvalue=fvalue1;
             set(handles.slider_frequency,'value',fvalue);
-            period=roundn(1/fvalue,-2);
+            period=roundn(1/fvalue,-3);
             handles.fvalue=fvalue;
             handles.period=period;
         end
@@ -260,7 +260,7 @@ guidata(hObject,handles);
 global t1;
 if ~isempty(t1)
     stop(t1);
-    set(t1,'period', period/2);
+    set(t1,'period', roundn(period/2,-3));
     start(t1);
 end
 % Hints: get(hObject,'String') returns contents of edit_fvalue as text

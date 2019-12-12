@@ -31,7 +31,7 @@ global t1;
 
 contiflag=handles.contiflag;
 period=handles.period;
-period=period/2;
+period=roundn(period/2,-3);
 f=handles.fvalue;
 time=handles.time;
 N=time*f;
