@@ -56,9 +56,7 @@ try
 %      fprintf('Reading ports'' status is in progress...');
 %     input('Press Enter key to quit!', 's');    
 %     stop(t);
-%     delete(t);
-    
-    uiwait(handles.figure1);
+%     delete(t); 
 
 catch e
     % Something is wrong. 
@@ -71,6 +69,8 @@ catch e
     disp(errStr);
 end   
 
+
+uiwait(handles.figure1);
 % Step 4: Close device and release any allocated resource.
 instantDiCtrl.Dispose();
 

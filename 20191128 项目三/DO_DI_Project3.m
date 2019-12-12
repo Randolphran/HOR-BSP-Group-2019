@@ -79,7 +79,8 @@ handles.contiflag=contiflag;
 % Update handles structure
 guidata(hObject, handles);
 
-% Start DI monitor
+% Start DI monitor, UIWAIT exists in this fcn, UIRESUME is located in
+% deletfcn.
 Project3_StaticDI(hObject);
 
 
