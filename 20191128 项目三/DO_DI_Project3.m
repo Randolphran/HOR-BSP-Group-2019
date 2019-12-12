@@ -61,6 +61,8 @@ set(handles.slider_frequency,'value',25);
 set(handles.text3,'visible','off');
 set(handles.edit_time,'visible','off');
 set(handles.text13,'visible','off');
+set(handles.pushbutton_pause,'Enable','on');
+set(handles.pushbutton_stop,'Enable','on');
 
 set(handles.radiobutton_continue,'value',1);
 
@@ -265,6 +267,8 @@ contiflag=0;
 set(handles.text3,'visible','on');
 set(handles.edit_time,'visible','on');
 set(handles.text13,'visible','on');
+set(handles.pushbutton_pause,'Enable','off');
+set(handles.pushbutton_stop,'Enable','off');
 handles.contiflag=contiflag;
 guidata(hObject,handles);
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_fixtime
@@ -279,6 +283,8 @@ contiflag=1;
 set(handles.text3,'visible','off');
 set(handles.edit_time,'visible','off');
 set(handles.text13,'visible','off');
+set(handles.pushbutton_pause,'Enable','on');
+set(handles.pushbutton_stop,'Enable','on');
 handles.contiflag=contiflag;
 guidata(hObject,handles);
 % Hint: get(hObject,'Value') returns toggle state of radiobutton_continue
