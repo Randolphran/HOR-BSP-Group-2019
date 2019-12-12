@@ -300,5 +300,7 @@ uiresume(handles.figure1);
 stop(t2);
 delete(t2);
 
+disp('over');
+
 clear global t2;
 

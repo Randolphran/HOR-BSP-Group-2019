@@ -132,6 +132,9 @@ if enable_DI
     sqwave = square(2*pi*frequency_DI*x) * amplitude_DI; %period: a/2*pi. square(a*x + b);
     plot(axes_handles,x,sqwave);
     set(axes_handles,'Ylim',[-amplitude_DI-0.5 amplitude_DI+0.5]);
+    %set axis labels
+    xlabel(handles.axes1,'time /sec');
+    ylabel(handles.axes1,'voltage /V');
 end
 
     
