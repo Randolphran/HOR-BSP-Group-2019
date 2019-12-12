@@ -22,7 +22,7 @@ function varargout = DO_DI_Project3(varargin)
 
 % Edit the above text to modify the response to help DO_DI_Project3
 
-% Last Modified by GUIDE v2.5 05-Dec-2019 16:34:59
+% Last Modified by GUIDE v2.5 12-Dec-2019 15:05:06
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -295,10 +295,22 @@ function figure1_DeleteFcn(hObject, eventdata, handles)
 % hObject    handle to figure1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+disp('deletefcn');
+
+
+
+% --- Executes when user attempts to close figure1.
+function figure1_CloseRequestFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
 global t2
 uiresume(handles.figure1);
 stop(t2);
 delete(t2);
 
-clear global t2;
+disp('closerequestfcn');
 
+clear global t2;
+% Hint: delete(hObject) closes the figure
+delete(hObject);
