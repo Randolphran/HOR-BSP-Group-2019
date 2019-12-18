@@ -22,7 +22,7 @@ function varargout = Integrate_HOR(varargin)
 
 % Edit the above text to modify the response to help Integrate_HOR
 
-% Last Modified by GUIDE v2.5 18-Dec-2019 22:39:13
+% Last Modified by GUIDE v2.5 18-Dec-2019 23:25:29
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -55,11 +55,11 @@ function Integrate_HOR_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for Integrate_HOR
 handles.output = hObject;
 a1=imread('Oscilloscope1.jpg');
-set(handles.pushbutton1,'cData',a1);
+set(handles.pushbutton_p1,'cData',a1);
 b1=imread('SignalGenerator1.jpg');
-set(handles.pushbutton2,'cData',b1);
+set(handles.pushbutton_p2,'cData',b1);
 c1=imread('DO_DI1.jpg');
-set(handles.pushbutton3,'cData',c1);
+set(handles.pushbutton_p3,'cData',c1);
 % Update handles structure
 guidata(hObject, handles);
 
@@ -78,37 +78,37 @@ function varargout = Integrate_HOR_OutputFcn(hObject, eventdata, handles)
 varargout{1} = handles.output;
 
 
-% --- Executes on button press in pushbutton1.
-function pushbutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
+% --- Executes on button press in pushbutton_p1.
+function pushbutton_p1_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_p1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 a2=imread('Oscilloscope2.jpg');
-set(handles.pushbutton1,'cData',a2);
+set(handles.pushbutton_p1,'cData',a2);
 pause(0.1);
 a1=imread('Oscilloscope1.jpg');
-set(handles.pushbutton1,'cData',a1);
+set(handles.pushbutton_p1,'cData',a1);
 Oscilloscope_Project1;
 
-% --- Executes on button press in pushbutton2.
-function pushbutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton2 (see GCBO)
+% --- Executes on button press in pushbutton_p2.
+function pushbutton_p2_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_p2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 b2=imread('SignalGenerator2.jpg');
-set(handles.pushbutton2,'cData',b2);
+set(handles.pushbutton_p2,'cData',b2);
 pause(0.1);
 b1=imread('SignalGenerator1.jpg');
-set(handles.pushbutton2,'cData',b1);
+set(handles.pushbutton_p2,'cData',b1);
 
 
-% --- Executes on button press in pushbutton3.
-function pushbutton3_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton3 (see GCBO)
+% --- Executes on button press in pushbutton_p3.
+function pushbutton_p3_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton_p3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 c2=imread('DO_DI2.jpg');
-set(handles.pushbutton3,'cData',c2);
+set(handles.pushbutton_p3,'cData',c2);
 pause(0.1);
 c1=imread('DO_DI1.jpg');
-set(handles.pushbutton3,'cData',c1);
+set(handles.pushbutton_p3,'cData',c1);
