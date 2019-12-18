@@ -88,6 +88,7 @@ set(handles.pushbutton1,'cData',a2);
 pause(0.1);
 a1=imread('Oscilloscope1.jpg');
 set(handles.pushbutton1,'cData',a1);
+Oscilloscope_Project1;
 
 % --- Executes on button press in pushbutton2.
 function pushbutton2_Callback(hObject, eventdata, handles)
