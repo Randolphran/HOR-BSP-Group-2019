@@ -85,6 +85,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 a2=imread('Oscilloscope2.jpg');
 set(handles.pushbutton1,'cData',a2);
+pause(0.1);
+a1=imread('Oscilloscope1.jpg');
+set(handles.pushbutton1,'cData',a1);
 
 % --- Executes on button press in pushbutton2.
 function pushbutton2_Callback(hObject, eventdata, handles)
@@ -93,6 +96,10 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 b2=imread('SignalGenerator2.jpg');
 set(handles.pushbutton2,'cData',b2);
+pause(0.1);
+b1=imread('SignalGenerator1.jpg');
+set(handles.pushbutton2,'cData',b1);
+
 
 % --- Executes on button press in pushbutton3.
 function pushbutton3_Callback(hObject, eventdata, handles)
@@ -101,3 +108,6 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 c2=imread('DO_DI2.jpg');
 set(handles.pushbutton3,'cData',c2);
+pause(0.1);
+c1=imread('DO_DI1.jpg');
+set(handles.pushbutton3,'cData',c1);
