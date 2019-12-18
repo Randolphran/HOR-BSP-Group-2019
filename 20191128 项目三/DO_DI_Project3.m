@@ -78,6 +78,9 @@ handles.time=time;
 contiflag=1;
 handles.contiflag=contiflag;
 
+i=0;
+handles.i=i;
+
 % Update handles structure
 guidata(hObject, handles);
 
@@ -147,10 +150,20 @@ function slider_frequency_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 fvalue=round(get(handles.slider_frequency,'value'));
 set(handles.edit_fvalue,'string',fvalue);
-period=roundn(1/fvalue,-2);
+period=roundn(1/fvalue,-3);
 handles.fvalue=fvalue;
 handles.period=period;
 guidata(hObject,handles);
+
+global t1;
+if ~isempty(t1)
+    stop(t1);
+    set(t1,'period', roundn(period/2,-3));
+    start(t1);
+end
+
+
+
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
@@ -172,9 +185,7 @@ function pushbutton_start_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_start (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-i=0;
-handles.i=i;
-guidata(hObject,handles);
+
 StaticDO(handles.figure1,handles);
 
 % --- Executes on button press in pushbutton_pause.
@@ -194,6 +205,9 @@ global t1;
 stop(t1);
 delete(t1);
 clear global t1;
+i=0;
+handles.i=i;
+guidata(hObject,handles);
 
 % uiresume(handles.figure1);
 
@@ -235,13 +249,20 @@ else if fvalue1>50
             errordlg('请输入大于1的整数');
         else fvalue=fvalue1;
             set(handles.slider_frequency,'value',fvalue);
-            period=roundn(1/fvalue,-2);
+            period=roundn(1/fvalue,-3);
             handles.fvalue=fvalue;
             handles.period=period;
         end
     end
 end
 guidata(hObject,handles);
+
+global t1;
+if ~isempty(t1)
+    stop(t1);
+    set(t1,'period', roundn(period/2,-3));
+    start(t1);
+end
 % Hints: get(hObject,'String') returns contents of edit_fvalue as text
 %        str2double(get(hObject,'String')) returns contents of edit_fvalue as a double
 
