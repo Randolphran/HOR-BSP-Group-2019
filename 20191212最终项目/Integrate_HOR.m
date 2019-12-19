@@ -115,7 +115,8 @@ pause(0.1);
 b1=imread([handles.pathstr,'\source','\SignalGenerator1.jpg']);
 set(handles.pushbutton_p2,'cData',b1);
 set(Integrate_HOR,'visible','off');
-SignalGenerator_Project2;
+
+SignalGenerator_Project4(handles.figure1);
 
 % --- Executes on button press in pushbutton_p3.
 function pushbutton_p3_Callback(hObject, eventdata, handles)
