@@ -23,7 +23,7 @@ function varargout = Oscilloscope_Project1(varargin)
 
 % Edit the above text to modify the response to help Oscilloscope_Project1
 
-% Last Modified by GUIDE v2.5 19-Dec-2019 12:28:58
+% Last Modified by GUIDE v2.5 31-Oct-2019 00:05:45
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -1211,12 +1211,3 @@ handles.ChannelSelect(4) = flag;
 guidata(hObject,handles);
 end
 % Hint: get(hObject,'Value') returns toggle state of checkbox_Ch3
-
-
-% --- Executes during object creation, after setting all properties.
-function axes5_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to axes5 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: place code in OpeningFcn to populate axes5
