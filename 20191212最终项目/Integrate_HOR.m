@@ -103,6 +103,7 @@ set(handles.pushbutton_p1,'cData',a1);
 
 Oscilloscope_Project4(handles.figure1);
 
+
 % --- Executes on button press in pushbutton_p2.
 function pushbutton_p2_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_p2 (see GCBO)
@@ -113,7 +114,8 @@ set(handles.pushbutton_p2,'cData',b2);
 pause(0.1);
 b1=imread([handles.pathstr,'\source','\SignalGenerator1.jpg']);
 set(handles.pushbutton_p2,'cData',b1);
-
+set(Integrate_HOR,'visible','off');
+SignalGenerator_Project2;
 
 % --- Executes on button press in pushbutton_p3.
 function pushbutton_p3_Callback(hObject, eventdata, handles)
@@ -125,3 +127,5 @@ set(handles.pushbutton_p3,'cData',c2);
 pause(0.1);
 c1=imread([handles.pathstr,'\source','\DO_DI1.jpg']);
 set(handles.pushbutton_p3,'cData',c1);
+set(Integrate_HOR,'visible','off');
+DO_DI_Project3;
