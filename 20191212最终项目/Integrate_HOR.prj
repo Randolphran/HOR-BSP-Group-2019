@@ -1,0 +1,135 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration file="C:\Users\RanYC\Documents\GitHub\HOR-BSP-Group-2019\20191212最终项目\Integrate_HOR.prj" location="C:\Users\RanYC\Documents\GitHub\HOR-BSP-Group-2019\20191212最终项目" name="Integrate_HOR" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>Integrate_HOR</param.appname>
+    <param.icon />
+    <param.icons />
+    <param.version>1.0</param.version>
+    <param.authnamewatermark />
+    <param.email />
+    <param.company />
+    <param.summary />
+    <param.description />
+    <param.screenshot>${PROJECT_ROOT}\source\icon.jpg</param.screenshot>
+    <param.guid />
+    <param.installpath.string>\Integrate_HOR\</param.installpath.string>
+    <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
+    <param.logo />
+    <param.install.notes />
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}\Integrate_HOR\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\Integrate_HOR\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\Integrate_HOR\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\Integrate_HOR</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages />
+    <param.web.mcr>true</param.web.mcr>
+    <param.package.mcr>false</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>true</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <param.native.matlab>false</param.native.matlab>
+    <param.checkbox>false</param.checkbox>
+    <param.example />
+    <param.help.text />
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.version />
+      <param.authnamewatermark />
+      <param.email />
+      <param.company />
+      <param.summary />
+      <param.description />
+      <param.guid />
+      <param.installpath.string />
+      <param.installpath.combo />
+      <param.logo />
+      <param.install.notes />
+      <param.target.install.notes />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.target.type />
+      <param.support.packages />
+      <param.web.mcr />
+      <param.package.mcr />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+      <param.create.log />
+      <param.log.file />
+      <param.native.matlab />
+      <param.checkbox />
+      <param.example />
+      <param.help.text />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\Integrate_HOR.m</file>
+    </fileset.main>
+    <fileset.resources>
+      <file>${PROJECT_ROOT}\bin\subfunction1\filter_highpass.m</file>
+      <file>${PROJECT_ROOT}\bin\subfunction1\filter_lowpass.m</file>
+      <file>${PROJECT_ROOT}\bin\subfunction1\InstantAI_Project1.m</file>
+      <file>${PROJECT_ROOT}\bin\subfunction1\Oscilloscope_Project4.fig</file>
+      <file>${PROJECT_ROOT}\bin\subfunction1\Oscilloscope_Project4.m</file>
+      <file>${PROJECT_ROOT}\bin\subfunction1\signal_fft.m</file>
+      <file>${PROJECT_ROOT}\bin\subfunction1\Signalread.m</file>
+      <file>${PROJECT_ROOT}\bin\subfunction1\Signalwrite.m</file>
+      <file>${PROJECT_ROOT}\bin\subfunction2\GenerateWaveform.m</file>
+      <file>${PROJECT_ROOT}\bin\subfunction2\SignalGenerator_Project4.fig</file>
+      <file>${PROJECT_ROOT}\bin\subfunction2\SignalGenerator_Project4.m</file>
+      <file>${PROJECT_ROOT}\bin\subfunction2\Signalread.m</file>
+      <file>${PROJECT_ROOT}\bin\subfunction2\StaticAO.m</file>
+      <file>${PROJECT_ROOT}\bin\subfunction2\UserDefinedFcn.fig</file>
+      <file>${PROJECT_ROOT}\bin\subfunction2\UserDefinedFcn.m</file>
+      <file>${PROJECT_ROOT}\bin\subfunction3\DO_DI_Project4.fig</file>
+      <file>${PROJECT_ROOT}\bin\subfunction3\DO_DI_Project4.m</file>
+      <file>${PROJECT_ROOT}\bin\subfunction3\Project3_StaticDI.m</file>
+      <file>${PROJECT_ROOT}\bin\subfunction3\StaticDO.m</file>
+      <file>${PROJECT_ROOT}\source\DO_DI1.jpg</file>
+      <file>${PROJECT_ROOT}\source\DO_DI2.jpg</file>
+      <file>${PROJECT_ROOT}\source\Oscilloscope1.jpg</file>
+      <file>${PROJECT_ROOT}\source\Oscilloscope2.jpg</file>
+      <file>${PROJECT_ROOT}\source\SignalGenerator1.jpg</file>
+      <file>${PROJECT_ROOT}\source\SignalGenerator2.jpg</file>
+    </fileset.resources>
+    <fileset.package />
+    <fileset.depfun />
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\Integrate_HOR\for_testing" name="readme.txt" optional="true">C:\Users\RanYC\Documents\GitHub\HOR-BSP-Group-2019\20191212最终项目\Integrate_HOR\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\Integrate_HOR\for_testing" name="Integrate_HOR.exe" optional="false">C:\Users\RanYC\Documents\GitHub\HOR-BSP-Group-2019\20191212最终项目\Integrate_HOR\for_testing\Integrate_HOR.exe</file>
+      <file location="${PROJECT_ROOT}\Integrate_HOR\for_testing" name="splash.png" optional="false">C:\Users\RanYC\Documents\GitHub\HOR-BSP-Group-2019\20191212最终项目\Integrate_HOR\for_testing\splash.png</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>D:\Matlab</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
