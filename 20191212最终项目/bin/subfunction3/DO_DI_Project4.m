@@ -341,7 +341,7 @@ function figure1_CloseRequestFcn(hObject, eventdata, handles)
 global t2
 stop(t2);
 delete(t2);
-clear global t2;
+clear global;
 
 uiresume(handles.figure1);
 % disp('closerequestfcn');

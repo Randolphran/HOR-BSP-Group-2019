@@ -35,7 +35,8 @@ channelStart = int32(0);
 channelCount = int32(1);
 ppp=handles.ppp;
 f=handles.frequency;
-period=1/(f*ppp);
+period=roundn(1/(f*ppp),-3);
+
 
 periodcount=0;
 handles.periodcount=periodcount;

@@ -129,4 +129,4 @@ pause(0.1);
 c1=imread([handles.pathstr,'\source','\DO_DI1.jpg']);
 set(handles.pushbutton_p3,'cData',c1);
 set(Integrate_HOR,'visible','off');
-DO_DI_Project3;
+DO_DI_Project4(handles.figure1);

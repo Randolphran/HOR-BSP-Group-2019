@@ -1225,5 +1225,6 @@ function figure1_CloseRequestFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 set(handles.main_figure_handle,'visible','on');
 % Hint: delete(hObject) closes the figure
+clear global;
 delete(hObject);
 end

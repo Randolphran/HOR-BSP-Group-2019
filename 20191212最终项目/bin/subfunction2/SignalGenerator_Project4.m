@@ -709,6 +709,6 @@ function figure1_CloseRequestFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 set(handles.main_figure_handle,'visible','on');
-
+clear global;
 % Hint: delete(hObject) closes the figure
 delete(hObject);
