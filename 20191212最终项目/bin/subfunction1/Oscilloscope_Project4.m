@@ -23,7 +23,7 @@ function varargout = Oscilloscope_Project4(varargin)
 
 % Edit the above text to modify the response to help Oscilloscope_Project4
 
-% Last Modified by GUIDE v2.5 19-Dec-2019 15:05:08
+% Last Modified by GUIDE v2.5 19-Dec-2019 15:14:58
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
