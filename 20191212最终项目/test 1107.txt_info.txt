@@ -1,0 +1,3 @@
+time:	2019-11-07 15:08:16
+ChannelCount:	1
+SamplingRate:	100
